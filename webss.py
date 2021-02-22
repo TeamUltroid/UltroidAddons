@@ -1,6 +1,6 @@
-# Credits @UsergeTeam
+# Credits @UsergeTeam < https://github.com/UsergeTeam >, Ported by @DevilMinati7
 # Ported from Userge-X < https://github.com/code-rgb/USERGE-X >
-# Ported for Ultroid < https://github.com/TeamUltroid/Ultroid >   
+# Ported for Ultroid < https://github.com/TeamUltroid/Ultroid >
 
 import asyncio
 import os
