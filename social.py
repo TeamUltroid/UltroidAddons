@@ -32,7 +32,7 @@ from telethon.errors import ChatSendInlineForbiddenError, ChatSendStickersForbid
 
 @ultroid_cmd(pattern="tweet ?(.*)")
 async def tweet(e):
-    wait = eor(e,"processing...")
+    wai = await eor(e,"processing...")
     text = e.pattern_match.group(1)
     try:
         results = await ultroid_bot.inline_query(
@@ -43,11 +43,11 @@ async def tweet(e):
             silent=True,
             hide_via=True,
         )
-        await wait.delete()
+        await wai.delete()
     except ChatSendInlineForbiddenError:
-        await wait.edit("`Boss ! I cant use inline things here...`")
+        await wai.edit("`Boss ! I cant use inline things here...`")
     except ChatSendStickersForbiddenError:
-        await wait.edit("Sorry boss, I can't send Sticker Here !!")
+        await wai.edit("Sorry boss, I can't send Sticker Here !!")
 
 
 @ultroid_cmd(pattern="youtube")
@@ -56,15 +56,13 @@ async def yutup(event):
         return await eor(event, "**Reply to a message!**")
     if not event.text:
         return await eor(event, "**Please reply to a Text Message!**")
+    if len(event.text) > 30:
+        return await eor(event,"`Thats Really a Long Text, Try with smaller...`")
     msg = await eor(event, "`Commenting On Youtube \nwait a while....`")
     reply = await event.get_reply_message()
     foto = await ultroid_bot.download_profile_photo(reply.sender_id)
     whyu = await ultroid_bot(GetFullUserRequest(reply.sender_id))
-    username = None
-    if whyu.user.username:
-        username = whyu.user.username
-    else:
-        username = whyu.user.first_name
+    username = whyu.user.first_name
     username = username.replace(" ","%20")
     plun=""
     if foto is None:
