@@ -55,7 +55,7 @@ async def yutup(event):
     if not event.is_reply:
         return await eor(event, "**Reply to a message!**")
     if not event.text:
-        return await eor(event, "**Please reply to a message!**")
+        return await eor(event, "**Please reply to a Text Message!**")
     msg = await eor(event, "`Commenting On Youtube \nwait a while....`")
     reply = await event.get_reply_message()
     foto = await ultroid_bot.download_profile_photo(reply.sender_id)
@@ -80,7 +80,7 @@ async def yutup(event):
         "youtube.png",
         reply_to=reply,
     )
-    await event.delete()
+    await msg.delete()
     remove(foto)
     remove("youtube.png")
 
