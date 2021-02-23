@@ -7,12 +7,25 @@
 
 # .tweet made for ultroid
 
+# .youtube orginally by Fusuf and small edits by @KarbonCopy
+# Coded by t.me/Fusuf #
+# 2020 @AsenaUserBot #
+
 
 """
 ✘ Commands Available -
+
 • `{i}tweet`
     make twitter posts.
+
+• `{i}youtube`
+    cpmment on video.
 """
+
+from urllib.parse import quote
+from requests import get
+from telegraph import upload_file
+from telethon.tl.functions.users import GetFullUserRequest
 
 @ultroid_cmd(pattern="tweet ?(.*)")
 async def tweet(e):
@@ -32,5 +45,41 @@ async def tweet(e):
         await wait.edit("`Boss ! I cant use inline things here...`")
     except ChatSendStickersForbiddenError:
         await wait.edit("Sorry boss, I can't send Sticker Here !!")
-        
+
+
+@ultroid_cmd(pattern="youtube")
+async def yutup(event):
+    if not event.is_reply:
+        return await eor(event, "**Reply to a message!**")
+    if not event.text:
+        return await eor(event, "**Please reply to a message!**")
+    msg = await eor(event, "`Commenting On Youtube \nwait a while....`")
+    reply = await event.get_reply_message()
+    foto = await ultroid_bot.download_profile_photo(reply.sender_id)
+    whyu = await ultroid_bot(GetFullUserRequest(reply.sender_id))
+    username = None
+    if whyu.user.username:
+        username = whyu.user.username
+    else:
+        username = whyu.user.first_name
+    username = username.replace(" ","%20")
+    plun=""
+    if foto is None:
+        plun= "https://logodownload.org/wp-content/uploads/2014/09/twitter-logo-1-1.png"
+    else:
+        avatar = upload_file(foto)
+        plun = f"https://telegra.ph{avatar[0]}"
+    json = f"https://some-random-api.ml/canvas/youtube-comment?avatar={plun}&comment={quote(reply.message)}&username={username}"
+    r = get(json, allow_redirects=True)
+    open("youtube.png", "wb").write(r.content)
+    await ultroid_bot.send_file(
+        event.chat_id,
+        "youtube.png",
+        reply_to=reply,
+    )
+    await event.delete()
+    remove(foto)
+    remove("youtube.png")
+
+
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
