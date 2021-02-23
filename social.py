@@ -68,7 +68,7 @@ async def yutup(event):
     username = username.replace(" ","%20")
     plun=""
     if foto is None:
-        plun= "https://logodownload.org/wp-content/uploads/2014/09/twitter-logo-1-1.png"
+        plun= "https://www.cybersmile.org/wp-content/plugins/cybersmile-forum//style/default-avatar.png"
     else:
         avatar = upload_file(foto)
         plun = f"https://telegra.ph{avatar[0]}"
