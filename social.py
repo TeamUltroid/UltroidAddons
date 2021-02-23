@@ -19,13 +19,16 @@
     make twitter posts.
 
 • `{i}youtube`
-    cpmment on video.
+    comment on video.
 """
 
+from . import *
 from urllib.parse import quote
 from requests import get
 from telegraph import upload_file
 from telethon.tl.functions.users import GetFullUserRequest
+from telethon.errors import ChatSendInlineForbiddenError, ChatSendStickersForbiddenError
+
 
 @ultroid_cmd(pattern="tweet ?(.*)")
 async def tweet(e):
