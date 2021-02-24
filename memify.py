@@ -67,9 +67,10 @@ async def ultd(event):
     try: 
         os.remove(ultt)
         os.remove(file)
+        os.remove(stick)
     except BaseException:
         pass
-    os.remove(pic)
+    
 
 
 async def draw_meme_text(image_path, msg):
