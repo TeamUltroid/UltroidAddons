@@ -15,7 +15,7 @@ If you want to contribute to this repository (adding your plugins/porting from o
    
 Kindly do not steal others works without credits.   
 
-<details><summary>Example Code</summary>
+<details><h1><summary>Example Code</h1></summary>
 <br>
 Required Import are Automatically Done !!
 
@@ -24,6 +24,6 @@ Required Import are Automatically Done !!
 async def hello_world(event):
     await event.reply("Hello World")
 ```
-</details>
+</details><br>
 
 > Made with 💕 by [@TeamUltroid](https://t.me/TeamUltroid).
