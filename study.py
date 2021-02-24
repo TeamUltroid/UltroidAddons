@@ -147,7 +147,7 @@ async def on_night(event):
             f"My Master Has Been Gone For {night_since}\nWhere He Is: **Studing** "
             + f"\n\n__ I'll back in a few Light years__\n**"
             if reason
-            else f"**Important Notice**\n\n[{DEFAULTUSER} Is Studying And Also Pdhaii Likhai Karo Jao...](https://telegra.ph/file/2512147bc1e2d4ae27922.mp4) "
+            else f"**Important Notice**\n\n[{DEFAULTUSER} Is Studying And Also Pdhaii Likhai Karo Jao...](https://telegra.ph/file/1f67404dc3a5a1ddf53a8.jpg) "
         )
         msg = await event.reply(message_to_reply)
         await asyncio.sleep(5)
