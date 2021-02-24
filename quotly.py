@@ -1,8 +1,14 @@
 # credits @telebot and @maxprogrammer007 for editing
 # ported from <https://github.com/xditya/TeleBot/blob/master/telebot/plugins/quotly.py>
 # Ported for Ultroid < https://github.com/TeamUltroid/Ultroid >   
-"""QuotLy: Avaible commands: .qbot
+
+
+"""Available commands: 
+
+   .quotly - sticker conversion by @QuotlyBot
+   
 """
+
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
@@ -38,4 +44,4 @@ async def _(event):
             await ultroid_bot.send_message(event.chat_id, response.message)
 
 
-HELP.update({"quotly": ".qbot <reply to message>\nUse - To make a quote."})
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
