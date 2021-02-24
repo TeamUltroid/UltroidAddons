@@ -15,4 +15,14 @@ If you want to contribute to this repository (adding your plugins/porting from o
    
 Kindly do not steal others works without credits.   
 
+<details><summary>Example Code</summary>
+<br>
+Required Import are Automatically Done !!
+   ```python3
+@ultroid_cmd(pattern="hi")
+async def hello_world(event):
+    await event.reply("Hello World")
+```
+</details>
+
 > Made with 💕 by [@TeamUltroid](https://t.me/TeamUltroid).
