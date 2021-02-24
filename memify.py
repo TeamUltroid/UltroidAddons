@@ -13,11 +13,11 @@
 
 • `{i}mmf <upper text> ; <lower text> <reply to media>`
     To create memes as sticker,
-    for tyring different fonts use (.mmf <text>_2)(u can use 1 to 5).
+    for tyring different fonts use (.mmf <text>_1)(u can use 1 to 10).
 
 • `{i}mms <upper text> ; <lower text> <reply to media>`
     To create memes as pic,
-    for tyring different fonts use (.mms <text>_2)(u can use 1 to 5).
+    for tyring different fonts use (.mms <text>_1)(u can use 1 to 10).
 
 """
 
