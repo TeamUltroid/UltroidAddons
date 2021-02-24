@@ -45,6 +45,10 @@ async def ultd(event):
         stdout, stderr = await process.communicate()
         stderr.decode().strip()
         stdout.decode().strip()
+    elif ultt.endswith((".webp",".png")):
+        im = Image.open(ultt)
+        im.save("ult.png", format="PNG", optimize=True)
+        file = "ult.png"
     else:
         xx = await eor(event, "`Processing`")
         img = cv2.VideoCapture(ultt)
@@ -56,7 +60,6 @@ async def ultd(event):
         event.chat_id, stick, force_document=False, reply_to=event.reply_to_msg_id
     )
     await xx.delete()
-    os.remove(file)
     os.remove(stick)
 
 
@@ -188,6 +191,10 @@ async def ultd(event):
         stdout, stderr = await process.communicate()
         stderr.decode().strip()
         stdout.decode().strip()
+    elif ultt.endswith((".webp",".png")):
+        im = Image.open(ultt)
+        im.save("ult.png", format="PNG", optimize=True)
+        file = "ult.png"
     else:
         xx = await eor(event, "`Processing`")
         img = cv2.VideoCapture(ultt)
@@ -199,7 +206,6 @@ async def ultd(event):
         event.chat_id, pic, force_document=False, reply_to=event.reply_to_msg_id
         )
     await xx.delete()
-    os.remove(file)
     os.remove(pic)
 
 
