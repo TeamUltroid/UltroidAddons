@@ -3,10 +3,12 @@
 # Ported for Ultroid < https://github.com/TeamUltroid/Ultroid >   
 
 
-"""Available commands: 
+"""
+✘ Commands Available -
 
-   .quotly - sticker conversion by @QuotlyBot
-   
+• `{i}quotly <replaying a message>`
+    send stickers to current chat with @QuotlyBot.
+    
 """
 
 from telethon import events
