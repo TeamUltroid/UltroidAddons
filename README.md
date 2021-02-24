@@ -15,9 +15,8 @@ If you want to contribute to this repository (adding your plugins/porting from o
    
 Kindly do not steal others works without credits.<br>
 
-<details><summary><b>Example Plugin</b></summary>
-   Required Import are Automatically Done.<br>
-
+# <details><summary>Example Plugin</summary>
+   Required Import are Automatically Done.<br><br>
 ```python3
 @ultroid_cmd(pattern="hi")
    async def hello_world(event):
