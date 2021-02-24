@@ -139,6 +139,7 @@ By - {}
             )
         ],
     )
+    await x.delete()
     os.remove(f"{rip_data['id']}.mp3")
 
 
@@ -214,7 +215,6 @@ By - {}
     )
     os.remove(f"{rip_data['id']}.mp4")
     await x.delete()
-
 
 
 @ultroid_cmd(pattern=r"lyrics ?(.*)")

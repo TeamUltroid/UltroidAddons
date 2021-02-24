@@ -6,7 +6,7 @@
 """
 ✘ Commands Available -
 
-• `{i}quotly | {i}qbot <replaying a message>`
+• `{i}quotly | {i}qbot <replying a message>`
     send stickers to current chat with @QuotlyBot.
     
 """
