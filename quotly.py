@@ -22,8 +22,6 @@ async def _(event):
     if not event.reply_to_msg_id:
         return await eor(event, "```Reply to any user message.```")
     reply_message = await event.get_reply_message()
-    if not reply_message.text:
-        return await eor(event, "```Reply to text message```")
     chat = "@QuotLyBot"
     reply_message.sender
     ac = await eor(event, "```Making a Quote```")
