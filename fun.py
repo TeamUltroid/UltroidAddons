@@ -78,6 +78,7 @@ async def gifs(ult):
     if not get:
        await ult.edit("`.gif <query>`")
        return
+    await ult.edit("`Searching gif ...`")
     gifs = await ultroid_bot.inline_query("gif", f"{get}")
     await gifs[0].click(ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True ,hide_via=True)
     await ult.delete()    
@@ -85,7 +86,9 @@ async def gifs(ult):
 @ultroid_cmd(pattern="vtog$")
 async def vtog(ult):
     reply = await ult.get_reply_message()
-    xx = eor(ult, "`Processing Takes Time...`")
+    if reply is None:
+        return await ult.edit("`Reply to any Video`")
+    xx = await eor(ult, "`Processing Takes Time...`")
     lol = await ultroid_bot.download_media(reply.media)
     file_name = "ultroid.gif"
     clip = (m.VideoFileClip(lol).subclip((4.3),(5.8)).resize(0.3))
