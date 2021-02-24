@@ -16,25 +16,31 @@
 
 # by @its_xditya
 
+
+"""
+✘ Commands Available -
+
+• `{i}rex <lang code> <code> -`
+   `Run code of any Language on telegram.`
+
+"""
+
 from rextester_py import rexec
 
-from . import CMD_HELP
+from . import *
 
 
-@ultroid.on(admin_cmd(pattern="rex"))
+@ultroid_cmd(pattern="rex")
 async def _(event):
-    if event.fwd_from:
-        return
-    await event.edit("Processing ...")
+    x = await eor(event,"Processing ...")
     evtxt = event.text.split(" ", maxsplit=1)[1]
     try:
         lang = evtxt.split("//", maxsplit=1)[0]
         cmd = evtxt.split("//", maxsplit=1)[1]
     except BaseException:
-        return await event.edit(
-            f"Syntax - \n`{Var.CMD_HNDLR}rex language//code`\nLanguages can be found [here](https://github.com/nitanmarcel/rextester_py#languages)."
+        return await eor(event,
+            f"Syntax - \n`{Var.HNDLR}rex language//code`\nLanguages can be found [here](https://github.com/nitanmarcel/rextester_py#languages)."
         )
-
     try:
         res = rexec(lang, cmd, None).results
         err = rexec(lang, cmd, None).errors
@@ -42,10 +48,10 @@ async def _(event):
         # statt = rexec(lang, cmd, None).stats
     except Exception as e:
         if str(e) == "Unknown language":
-            return await event.edit(
+            return await x.edit(
                 "ERROR:\n`Unknown Language!!\nCheck available languages `[here](https://github.com/nitanmarcel/rextester_py#languages)"
             )
-        return await event.edit(f"ERROR:**\n`{str(e)}`")
+        return await x.edit(f"ERROR:**\n`{str(e)}`")
     out = f"- Rextester**\n\n**Language: `{lang}`\n**Code: `{cmd}\n\n**Output:** {res}`\n\n"
     if err is not None:
         out += f"Error: `{err}`\n\n"
@@ -53,13 +59,7 @@ async def _(event):
         out += f"Warnings: `{wrns}`\n\n"
     # reducing time taken...
     # out += f"Stats: {statt}"
+    await x.edit(out)
 
-    await event.edit(out)
 
-
-CMD_HELP.update(
-    {
-        "rextester": ".rex <language>//<codes>\
-        \nUse - Run codes of any language inside telegram. Available languages can be found [here](https://github.com/nitanmarcel/rextester_py#languages)."
-    }
-)
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
