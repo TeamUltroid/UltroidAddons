@@ -18,7 +18,8 @@ Kindly do not steal others works without credits.
 <details><summary>Example Code</summary>
 <br>
 Required Import are Automatically Done !!
-   ```python3
+
+```python3
 @ultroid_cmd(pattern="hi")
 async def hello_world(event):
     await event.reply("Hello World")
