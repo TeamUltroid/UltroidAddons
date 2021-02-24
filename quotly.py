@@ -6,7 +6,7 @@
 """
 ✘ Commands Available -
 
-• `{i}quotly <replaying a message>`
+• `{i}quotly | {i}qbot <replaying a message>`
     send stickers to current chat with @QuotlyBot.
     
 """
@@ -17,7 +17,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from . import *
 
 
-@ultroid_cmd(pattern="quotly")
+@ultroid_cmd(pattern="(quotly|qbot)$")
 async def _(event):
     if not event.reply_to_msg_id:
         return await eor(event, "```Reply to any user message.```")
