@@ -5,11 +5,18 @@
 
 # Google Reverse Search
 
+"""
+✘ Commands Available 
 
+• `{i}grs`
+   ` Google reverse search.`
+"""
+
+from . import *
 import requests
 from bs4 import BeautifulSoup
 
-@ultroid_cmd(pattern="egrs")
+@ultroid_cmd(pattern="grs$")
 async def grs(e):
     if not e.is_reply:
         return await eor(e,'Reply to a Message')
@@ -43,3 +50,5 @@ async def grs(e):
 <b>Possible Related Search</b> : <a href="{prs_url}">{prs_text}</a>
 <b>More Info</b>: Open this <a href="{location}">Link</a> ."""
     await a.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
+    
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
