@@ -13,11 +13,11 @@
 
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-
+import asyncio
 from . import *
 
 
-@ultroid_cmd(pattern="(quotly|qbot)( ?(.*)|)$")
+@ultroid_cmd(pattern="(quotly|qbot)( ?(.*)|)")
 async def _(event):
     if not event.reply_to_msg_id:
         return await eor(event, "```Reply to any user message.```")
@@ -31,9 +31,10 @@ async def _(event):
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=1031952739)
             )
-            if col is not None:
-                await conv.send_message(f'/qcolour {col}')
-            await ultroid_bot.forward_messages(chat, reply_message)
+            er = await ultroid_bot.forward_messages(chat, reply_message)
+            if not len(col)==0: # Bad way 
+                await asyncio.sleep(3)
+                await er.reply(f'/q {col}')
             response = await response
         except YouBlockedUserError:
             return await event.reply("```Please unblock @QuotLyBot and try again```")
