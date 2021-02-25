@@ -17,7 +17,7 @@ import asyncio
 from . import *
 
 
-@ultroid_cmd(pattern="(quotly|qbot)( ?(.*)|)")
+@ultroid_cmd(pattern="(quotly|qbot)( ?(.*)|$)")
 async def _(event):
     if not event.reply_to_msg_id:
         return await eor(event, "```Reply to any user message.```")
