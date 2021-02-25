@@ -18,6 +18,7 @@
 from . import *
 from telethon.errors import ChatSendInlineForbiddenError, ChatSendStickersForbiddenError
 
+
 @ultroid_cmd(pattern="tweet ?(.*)")
 async def tweet(e):
     wai = await eor(e,"processing...")
