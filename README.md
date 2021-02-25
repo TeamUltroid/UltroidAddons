@@ -20,8 +20,8 @@ Kindly do not steal others works without credits.<br>
    
 ```python3
 @ultroid_cmd(pattern="hi")
-   async def hello_world(event):
-       await event.reply("Hello World")
+async def hello_world(event):
+    await event.reply("Hello World")
 ```
 
 <br>
