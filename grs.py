@@ -1,7 +1,7 @@
 # Ultroid Userbot 
 # Copyright 2020 (c)
 
-# ported for ultroid from @userbotplugin
+# ported for ultroid from @userbotplugins
 
 # Google Reverse Search
 
