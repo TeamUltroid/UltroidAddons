@@ -45,7 +45,7 @@ async def _(event):
         res = rexec(lang, cmd, None).results
         err = rexec(lang, cmd, None).errors
         wrns = rexec(lang, cmd, None).warnings
-        # statt = rexec(lang, cmd, None).stats
+        # statt = rexec(lang, cmd, None).stats 
     except Exception as e:
         if str(e) == "Unknown language":
             return await x.edit(
