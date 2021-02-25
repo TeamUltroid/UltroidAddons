@@ -15,7 +15,7 @@ If you want to contribute to this repository (adding your plugins/porting from o
    
 Kindly do not steal others works without credits.<br>
 
-# <details><summary>Example Plugin</summary>
+# Example Plugin
    Required Import are Automatically Done.<br><br>
 ```python3
 @ultroid_cmd(pattern="hi")
@@ -23,6 +23,6 @@ Kindly do not steal others works without credits.<br>
        await event.reply("Hello World")
 ```
 
-</details><br>
+<br>
 
 > Made with 💕 by [@TeamUltroid](https://t.me/TeamUltroid).
