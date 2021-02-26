@@ -36,7 +36,8 @@ async def imdb(e):
     page1 = requests.get(mov_link)
     soup = bs4.BeautifulSoup(page1.content,'lxml')
     if soup.find('div','poster'):
-    	poster = soup.find('div','poster').img['src']    else:
+    	poster = soup.find('div','poster').img['src']    
+    else:
     	poster = ''
     if soup.find('div','title_wrapper'):
     	pg = soup.find('div','title_wrapper').findNext('div').text
