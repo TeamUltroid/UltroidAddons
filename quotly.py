@@ -6,7 +6,7 @@
 """
 ✘ Commands Available -
 
-• `{i}quotly | {i}qbot <replying a message>`
+• `{i}quotly <replying a message>`
     send stickers to current chat with @QuotlyBot.
     
 """
@@ -17,7 +17,7 @@ import asyncio
 from . import *
 
 
-@ultroid_cmd(pattern="(quotly|qbot)( ?(.*)|$)")
+@ultroid_cmd(pattern="quotly ?(.*)")
 async def _(event):
     if not event.reply_to_msg_id:
         return await eor(event, "```Reply to any user message.```")
