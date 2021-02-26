@@ -15,6 +15,7 @@ import asyncio
 import os
 import re
 import time
+from . import HELP
 
 langi = "en"
 
@@ -98,3 +99,5 @@ async def imdb(e):
     			)
  except IndexError:
      await a.edit("Pleaseenter **Valid movie name**")
+
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
