@@ -55,7 +55,7 @@ async def rm_deletedacc(show):
                 await sleep(1)
         if del_u > 0:
             del_status = f"`Found` {del_u} `ghost/deleted/zombie account(s) in this group,\
-            \nClean them by using` `zombies clean`"
+            \nClean them by using` `{Var.HNDLR}zombies clean`"
         await eh.edit(del_status)
         return
     chat = await show.get_chat()
