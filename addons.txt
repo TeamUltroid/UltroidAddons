@@ -1,4 +1,4 @@
 pokedex.py
 pyfiglet
 pyjokes
-lyrics_extractor
+lyrics_extractor==3.0.1
