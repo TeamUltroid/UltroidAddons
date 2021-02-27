@@ -34,7 +34,7 @@ async def tmeme(e):
         await e.respond(letter)
     await e.delete()
 
-@ultroid_cmd(pattern=f"mspam")
+@ultroid_cmd(pattern=f"spam")
 async def spammer(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text

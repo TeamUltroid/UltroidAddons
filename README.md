@@ -13,6 +13,17 @@ If you want to contribute to this repository (adding your plugins/porting from o
 # Ported for Ultroid < https://github.com/TeamUltroid/Ultroid >   
 ```
    
-Kindly do not steal others works without credits.   
+Kindly do not steal others works without credits.<br>
+
+# Example Plugin
+   Required Import are Automatically Done.
+   
+```python3
+@ultroid_cmd(pattern="hi")
+async def hello_world(event):
+    await event.reply("Hello World")
+```
+
+<br>
 
 > Made with 💕 by [@TeamUltroid](https://t.me/TeamUltroid).

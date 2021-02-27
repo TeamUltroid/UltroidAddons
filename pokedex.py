@@ -47,7 +47,10 @@ async def pokedex(event):
     height=a['height']
     weight=a['weight']
     esatge=r.json()['family']['evolutionStage']
-    weaknesses=lol['cards'][0]['weaknesses'][0]['type']
+    try:
+        weaknesses=lol['cards'][0]['weaknesses'][0]['type']
+    except BaseException:
+        weaknesses=None
     l=r.json()['family']['evolutionLine']
     if not l:
         line = 'None'

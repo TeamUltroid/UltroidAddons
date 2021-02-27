@@ -12,10 +12,13 @@
 ✘ Commands Available -
 
 • `{i}mmf <upper text> ; <lower text> <reply to media>`
-    To create memes as sticker.
+    To create memes as sticker,
+    for tyring different fonts use (.mmf <text>_1)(u can use 1 to 10).
 
 • `{i}mms <upper text> ; <lower text> <reply to media>`
-    To create memes as pic.
+    To create memes as pic,
+    for tyring different fonts use (.mms <text>_1)(u can use 1 to 10).
+
 """
 
 import cv2
@@ -45,6 +48,11 @@ async def ultd(event):
         stdout, stderr = await process.communicate()
         stderr.decode().strip()
         stdout.decode().strip()
+    elif ultt.endswith((".webp",".png")):
+        xx = await eor(event, "`Processing`")
+        im = Image.open(ultt)
+        im.save("ult.png", format="PNG", optimize=True)
+        file = "ult.png"
     else:
         xx = await eor(event, "`Processing`")
         img = cv2.VideoCapture(ultt)
@@ -56,8 +64,13 @@ async def ultd(event):
         event.chat_id, stick, force_document=False, reply_to=event.reply_to_msg_id
     )
     await xx.delete()
-    os.remove(file)
-    os.remove(stick)
+    try: 
+        os.remove(ultt)
+        os.remove(file)
+        os.remove(stick)
+    except BaseException:
+        pass
+    
 
 
 async def draw_meme_text(image_path, msg):
@@ -188,6 +201,11 @@ async def ultd(event):
         stdout, stderr = await process.communicate()
         stderr.decode().strip()
         stdout.decode().strip()
+    elif ultt.endswith((".webp",".png")):
+        xx = await eor(event, "`Processing`")
+        im = Image.open(ultt)
+        im.save("ult.png", format="PNG", optimize=True)
+        file = "ult.png"
     else:
         xx = await eor(event, "`Processing`")
         img = cv2.VideoCapture(ultt)
@@ -199,7 +217,11 @@ async def ultd(event):
         event.chat_id, pic, force_document=False, reply_to=event.reply_to_msg_id
         )
     await xx.delete()
-    os.remove(file)
+    try: 
+        os.remove(ultt)
+        os.remove(file)
+    except BaseException:
+        pass
     os.remove(pic)
 
 
