@@ -73,7 +73,7 @@ async def download_video(ult):
             "format": "bestaudio",
             "addmetadata": True,
             "key": "FFmpegMetadata",
-            "write_thumbnail": True,
+            "writethumbnail": True,
             "prefer_ffmpeg": True,
             "nocheckcertificate": True,
             "postprocessors": [
