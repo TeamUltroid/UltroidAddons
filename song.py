@@ -118,10 +118,10 @@ async def download_video(ult):
     except Exception as e:
         return await x.edit(f"{str(type(e)): {str(e)}}")
     dir = os.listdir()
-    if "{rip_data['id']}.mp3.jpg" in dir:
-        thumb = "{rip_data['id']}.mp3.jpg"
-    elif "{rip_data['id']}.mp3.webp" in dir:
-        thumb = "{rip_data['id']}.mp3.webp"
+    if f"{rip_data['id']}.mp3.jpg" in dir:
+        thumb = f"{rip_data['id']}.mp3.jpg"
+    elif f"{rip_data['id']}.mp3.webp" in dir:
+        thumb = f"{rip_data['id']}.mp3.webp"
     else:
         thumb = None
     upteload = """
