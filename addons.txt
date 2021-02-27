@@ -1,4 +1,5 @@
 pokedex.py
 pyfiglet
 pyjokes
+rextester-py
 lyrics_extractor==3.0.1
