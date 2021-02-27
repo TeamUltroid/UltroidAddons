@@ -57,3 +57,6 @@ async def _(ult):
         	
         await asyncio.sleep(animation_interval)
         await ult.edit(animation_chars[i % 36])
+        
+
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
