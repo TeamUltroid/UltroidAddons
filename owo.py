@@ -1,45 +1,38 @@
+#Made By @senkiu_ishigamiii FaceS Took From Google
+"""
+✘ Commands Available
+• `{i}owo`
+    Gives owo face (RePly to a msg)
+"""
+
 import random
 import re
+from . import HELP
 
 
-UWUS = [
+uwus = [
     "(・`ω´・)",
-    ";;w;;",
-    "ult",
     "UwU",
-    ">w<",
-    "^w^",
-    r"\(^o\) (/o^)/",
-    "( ^ _ ^)∠☆",
+    "uwu",
+    "OwO",
+    "owo",
+    "(●__●)",
+    "(゜o゜;",
+    "⊙.☉",
     "(ô_ô)",
     "~:o",
-    ";-;",
+    "¶-¶",
     "(*^*)",
-    "(>_",
-    "(♥_♥)",
+    "(•_•)",
+    "(⑉⊙ȏ⊙)",
     "*(^O^)*",
-    "((+_+))",
+    "(°_°)",
 ]
 
-@ultroid_cmd( pattern="owo(?: |$)(.*)")
+@ultroid_cmd( pattern="owo")
 async def faces(ult):
-    """ UwU """
-    if not ult.text[0].isalpha() and ult.text[0] not in ("/", "#", "@", "!"):
-        textx = await ult.get_reply_message()
-        message = ult.pattern_match.group(1)
-        if message:
-            pass
-        elif textx:
-            message = textx.text
-        else:
-            await ult.edit("` UwU no text given! `")
-            return
-
-        reply_text = re.sub(r"(r|l)", "w", message)
-        reply_text = re.sub(r"(R|L)", "W", reply_text)
-        reply_text = re.sub(r"n([aeiou])", r"ny\1", reply_text)
-        reply_text = re.sub(r"N([aeiouAEIOU])", r"Ny\1", reply_text)
-        reply_text = re.sub(r"\!+", " " + random.choice(UWUS), reply_text)
-        reply_text = reply_text.replace("ove", "uv")
-        reply_text += " " + random.choice(UWUS)
-        await ult.edit(reply_text)
+    uff = random.choice(uwus)
+    return await ult.edit(f"{uff}")
+    
+    
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
