@@ -73,9 +73,7 @@ async def download_video(ult):
             "format": "bestaudio",
             "addmetadata": True,
             "key": "FFmpegMetadata",
-            "writethumbnail": True,
             "prefer_ffmpeg": True,
-            "geo_bypass": True,
             "nocheckcertificate": True,
             "postprocessors": [
                 {
@@ -118,6 +116,13 @@ async def download_video(ult):
         return await x.edit("`There was an error during info extraction.`")
     except Exception as e:
         return await x.edit(f"{str(type(e)): {str(e)}}")
+    dir = os.listdir()
+    if "{rip_data['id']}.mp3.jpg" in dir:
+        thumb = "{rip_data['id']}.mp3.jpg"
+    elif "{rip_data['id']}.mp3.webp" in dir:
+        thumb = "{rip_data['id']}.mp3.webp"
+    else:
+        thumb = None
     upteload = """
 Uploading...
 Song name - {}
@@ -129,6 +134,7 @@ By - {}
     await ultroid_bot.send_file(
         ult.chat_id,
         f"{rip_data['id']}.mp3",
+        thumb=thumb,
         supports_streaming=True,
         caption=f"⫸ Song - {rip_data['title']}\n⫸ By - {rip_data['uploader']}\n",
         attributes=[
@@ -141,6 +147,7 @@ By - {}
     )
     await x.delete()
     os.remove(f"{rip_data['id']}.mp3")
+    os.remove(thumb)
 
 
 @ultroid_cmd(pattern="vsong (.*)")
