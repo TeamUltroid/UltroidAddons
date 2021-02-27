@@ -1,5 +1,13 @@
 #Written By @senku_ishigamiii and inspiried from DarkCobra Wala Plugin
+
+"""
+✘ Commands Available
+• `{i}pprank`
+    Show Fake Promotion
+"""
+
 import asyncio
+from . import HELP
 
 @ultroid_cmd(pattern="pprank")
 async def pprank(ult):
@@ -11,3 +19,5 @@ async def pprank(ult):
         await ult.edit("**GIVING RIGHTS**")
         await asyncio.sleep(1)
         await ult.edit("**PROMOTED USER SUCCESSFULLY**")
+        
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
