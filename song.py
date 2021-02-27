@@ -73,6 +73,7 @@ async def download_video(ult):
             "format": "bestaudio",
             "addmetadata": True,
             "key": "FFmpegMetadata",
+            "write_thumbnail": True,
             "prefer_ffmpeg": True,
             "nocheckcertificate": True,
             "postprocessors": [
@@ -147,7 +148,10 @@ By - {}
     )
     await x.delete()
     os.remove(f"{rip_data['id']}.mp3")
-    os.remove(thumb)
+    try:
+        os.remove(thumb)
+    except:
+        pass
 
 
 @ultroid_cmd(pattern="vsong (.*)")
