@@ -40,7 +40,7 @@ import moviepy.editor as m
 
 
 
-@ultroid_cmd(pattern="joke")
+@ultroid_cmd(pattern="joke$")
 async def _(ult): 
     await eor(ult, get_joke()) 
 
@@ -61,6 +61,7 @@ async def _(event):
                  
 @ultroid_cmd(pattern="decide$")
 async def _(event):
+    hm = await eor(event,"`Deciding`")
     message_id = event.message.id
     if event.reply_to_msg_id:
         message_id = event.reply_to_msg_id
@@ -68,6 +69,7 @@ async def _(event):
     try:
         await ultroid_bot.send_message(
         event.chat_id, r["answer"], reply_to=message_id, file=r["image"])
+        await hm.delete()
     except ChatSendMediaForbiddenError:
         await eor(event,r['answer'])
 
