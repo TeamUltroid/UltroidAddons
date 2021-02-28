@@ -1,5 +1,19 @@
+# Ultroid Userbot
 
+# made by member of TeamUltroid
 
+# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
+# PLease read the GNU Affero General Public License in
+# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+
+"""
+
+✘ Commands Available -
+
+• `{i}wiki <search query>``
+    Wikipedia search from telegram.
+
+"""
 
 from bs4 import BeautifulSoup as bs
 import requests
@@ -26,3 +40,7 @@ async def a(e):
     img = "https:"+ am[0].findNext()['src']
     msg = f"**Title** - `{title}`\n\n**Image** - [Click Here]({img})\n\n**Summary** - `{text}`\n\n**Page Link** - {wiki}"
     await bot.send_message(e.chat_id,msg,link_preview=True)
+    if e.sender_id==ultroid_bot.uid:
+        await e.delete()
+
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
