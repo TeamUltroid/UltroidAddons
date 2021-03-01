@@ -3,7 +3,7 @@
 
 import pyshorteners
 
-from . import *
+from . import HELP
 
 @ultroid_cmd(pattern="shorturl ?(.*)")
 async def vom(event):
@@ -22,8 +22,8 @@ async def vom(event):
 
 HELP.update(
     {
-        "urlshortner": "UrlShortner\
-\n\nSyntax : .shorturl <link>\
+        "urlshortner": f"UrlShortner\
+\n\nSyntax : {Var.HNDLR}shorturl <link>\
 \nUsage : Shortens Your Url"
     }
 )
