@@ -23,7 +23,7 @@ async def vom(event):
 HELP.update(
     {
         "urlshortner": "UrlShortner\
-\n\nSyntax : .urlshort <link>\
+\n\nSyntax : .shorturl <link>\
 \nUsage : Shortens Your Url"
     }
 )
