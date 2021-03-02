@@ -17,7 +17,7 @@
 
 from bs4 import BeautifulSoup as bs
 import requests
-
+from . import *
 
 @ultroid_cmd(pattern="wiki ?(.*)")
 async def a(e):
