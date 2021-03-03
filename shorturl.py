@@ -20,12 +20,12 @@ async def vom(event):
             ok = txt.tinyurl.short(link)
             eu = "Shortned"
         short = (
-            f"**Url {eu}**\n**Given Link** ➠ {link}</code>\n"
+            f"**Url {eu}**\n**Given Link** ➠ {link}\n"
             f"**{eu} Link** ➠ [{eu} Link]({ok})"
         )
         await a.edit(short)
     except Exception as e:
-        await a.edit("SomeThing Went Wrong. \nError : " + e)
+        await a.edit("SomeThing Went Wrong. \n**ERROR** : " + str(e))
 
 
 HELP.update(
