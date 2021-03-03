@@ -10,6 +10,8 @@ async def vom(event):
     a = await eor(event,"`Processing...`")
     try:
         link = event.pattern_match.group(1)
+        if not link:
+            return await a.edit("`Please Give me a Link to Shorten`")
         txt = pyshorteners.Shortener()
         if "http://tinyurl.com" in link.lower():
             ok = txt.tinyurl.expand(link)
