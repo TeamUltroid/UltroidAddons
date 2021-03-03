@@ -1,4 +1,5 @@
 #Made By @senkiu_ishigamiii FaceS Took From Google
+
 """
 ✘ Commands Available
 • `{i}owo`
@@ -32,7 +33,7 @@ uwus = [
 @ultroid_cmd( pattern="owo")
 async def faces(ult):
     uff = random.choice(uwus)
-    return await ult.edit(f"{uff}")
+    return await eor(ult,f"{uff}")
     
     
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
