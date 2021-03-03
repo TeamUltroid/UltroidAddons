@@ -36,13 +36,13 @@ async def sticklet(event):
     image = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
     fontsize = 230
-    font_file_ = await client.get_messages(
+    font_file_ = await ultroid_bot.get_messages(
       entity="@fonthub",
       filter=InputMessagesFilterDocument,
       limit=None
     )
     nfont = random.choice(font_file_)
-    FONT_FILE = await client.download_media(nfont)
+    FONT_FILE = await ultroid_bot.download_media(nfont)
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
     while draw.multiline_textsize(sticktext, font=font) > (512, 512):
         fontsize = 3
