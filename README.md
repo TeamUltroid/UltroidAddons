@@ -25,6 +25,6 @@ async def hello_world(event):
 ```
 
 <br>
-    if Your plugin need any additional requirements, it can be added to [addons.txt](https://github.com/TeamUltroid/UltroidAddons/blob/main/addons.txt)
+    if Your plugin need any additional requirements, it can be added to <a href="https://github.com/TeamUltroid/UltroidAddons/blob/main/addons.txt">Addons.txt</a>
 
 > Made with 💕 by [@TeamUltroid](https://t.me/TeamUltroid).
