@@ -7,6 +7,7 @@ from . import HELP
 
 @ultroid_cmd(pattern="shorturl ?(.*)")
 async def vom(event):
+    a = await eor(event,"`Processing...`")
     try:
         link = event.pattern_match.group(1)
         txt = pyshorteners.Shortener()
@@ -15,9 +16,9 @@ async def vom(event):
             f"<b>Url Shortened</b> \n<b><u>Given Link</u></b> ➠ <code>{link}</code> \n"
             f"<b><u>Shortened Link</u></b> ➠ <a href='{ok}'>Short Link</a>"
         )
-        await event.edit(short, parse_mode="HTML")
+        await a.edit(short, parse_mode="HTML")
     except Exception as e:
-        await event.edit("SomeThing Went Wrong. \nError : " + e)
+        await a.edit("SomeThing Went Wrong. \nError : " + e)
 
 
 HELP.update(
