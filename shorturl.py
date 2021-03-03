@@ -11,10 +11,15 @@ async def vom(event):
     try:
         link = event.pattern_match.group(1)
         txt = pyshorteners.Shortener()
-        ok = txt.tinyurl.short(link)
+        if "http://tinyurl.com" in link.lower():
+            ok = txt.tinyurl.expand(link)
+            eu = "Expanded"
+        else:
+            ok = txt.tinyurl.short(link)
+            eu = "Shortned"
         short = (
-            f"<b>Url Shortened</b> \n<b><u>Given Link</u></b> ➠ <code>{link}</code> \n"
-            f"<b><u>Shortened Link</u></b> ➠ <a href='{ok}'>Short Link</a>"
+            f"<b>Url {eu}</b> \n<b><u>Given Link</u></b> ➠ <code>{link}</code> \n"
+            f"<b><u>{eu} Link</u></b> ➠ <a href='{ok}'>Short Link</a>"
         )
         await a.edit(short, parse_mode="HTML")
     except Exception as e:
@@ -25,6 +30,7 @@ HELP.update(
     {
         "shorturl": f"UrlShortner\
 \n\nSyntax : {Var.HNDLR}shorturl <link>\
-\nUsage : Shortens Your Url"
+\nUsage : Shortens Your Url\
+if used shorten link, it will be expanded"
     }
 )
