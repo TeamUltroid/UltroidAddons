@@ -20,4 +20,4 @@ async def pprank(ult):
         await asyncio.sleep(1)
         await ult.edit("**PROMOTED USER SUCCESSFULLY**")
         
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

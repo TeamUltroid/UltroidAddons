@@ -124,4 +124,4 @@ async def pokedex(event):
         await eor(event, "`Be sure To give correct Name`")
         return
 
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
