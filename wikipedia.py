@@ -43,4 +43,4 @@ async def a(e):
     if e.sender_id==ultroid_bot.uid:
         await e.delete()
 
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
