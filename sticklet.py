@@ -36,7 +36,6 @@ async def sticklet(event):
     image = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
     fontsize = 230
-    font_file_ = await client.get_messages(
     font_file_ = await ultroid_bot.get_messages(
       entity="@fonthub",
       filter=InputMessagesFilterDocument,
