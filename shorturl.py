@@ -31,7 +31,7 @@ async def vom(event):
 HELP.update(
     {
         "shorturl": f"UrlShortner\
-\n\nSyntax : {Var.HNDLR}shorturl <link>\
+\n\nSyntax : {HNDLR}shorturl <link>\
 \nUsage : Shortens Your Url\
 if used shorten link, it will be expanded"
     }
