@@ -8,7 +8,7 @@
 
 import random
 import re
-from . import HELP
+from . import *
 
 
 uwus = [
