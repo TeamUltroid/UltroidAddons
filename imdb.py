@@ -16,7 +16,7 @@ import asyncio
 import os
 import re
 import time
-from . import HELP
+from . import *
 
 langi = "en"
 
