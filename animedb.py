@@ -11,7 +11,7 @@ Search animes and manga from anilist.co using @animedb_bot
     To get manga info
 """
 
-from . import HELP
+from . import *
 from telethon.errors import ChatSendInlineForbiddenError
 
 @ultroid_cmd(
