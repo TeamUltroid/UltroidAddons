@@ -3,7 +3,7 @@
 
 import pyshorteners
 
-from . import HELP
+from . import *
 
 @ultroid_cmd(pattern="shorturl ?(.*)")
 async def vom(event):
