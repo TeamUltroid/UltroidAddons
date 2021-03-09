@@ -7,7 +7,7 @@
     Remove the deleted accounts if the user is admin.
 """
 
-from asyncio import sleep
+import asyncio
 from telethon.errors import ChatAdminRequiredError, UserAdminInvalidError
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
@@ -52,10 +52,10 @@ async def rm_deletedacc(show):
         async for user in ultroid_bot.iter_participants(show.chat_id):
             if user.deleted:
                 del_u += 1
-                await sleep(1)
+                await asyncio.sleep(1)
         if del_u > 0:
             del_status = f"`Found` {del_u} `ghost/deleted/zombie account(s) in this group,\
-            \nClean them by using` `zombies clean`"
+            \nClean them by using` `{HNDLR}zombies clean`"
         await eh.edit(del_status)
         return
     chat = await show.get_chat()
@@ -100,7 +100,7 @@ async def rm_deletedacc(show):
         del_status = f"Cleaned **{del_u}** deleted account(s) \
         \n**{del_a}** deleted admin accounts are not removed"
     await ehh.edit(del_status)
-    await sleep(2)
+    await asyncio.sleep(2)
     await show.delete()
     
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

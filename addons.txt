@@ -1,5 +1,7 @@
 pokedex.py
+pyshorteners
 pyfiglet
 pyjokes
-lyrics_extractor
 wikipedia
+rextester-py
+lyrics_extractor==3.0.1

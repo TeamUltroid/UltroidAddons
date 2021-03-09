@@ -75,7 +75,6 @@ async def download_video(ult):
             "key": "FFmpegMetadata",
             "writethumbnail": True,
             "prefer_ffmpeg": True,
-            "geo_bypass": True,
             "nocheckcertificate": True,
             "postprocessors": [
                 {
@@ -118,6 +117,13 @@ async def download_video(ult):
         return await x.edit("`There was an error during info extraction.`")
     except Exception as e:
         return await x.edit(f"{str(type(e)): {str(e)}}")
+    dir = os.listdir()
+    if f"{rip_data['id']}.mp3.jpg" in dir:
+        thumb = f"{rip_data['id']}.mp3.jpg"
+    elif f"{rip_data['id']}.mp3.webp" in dir:
+        thumb = f"{rip_data['id']}.mp3.webp"
+    else:
+        thumb = None
     upteload = """
 Uploading...
 Song name - {}
@@ -129,6 +135,7 @@ By - {}
     await ultroid_bot.send_file(
         ult.chat_id,
         f"{rip_data['id']}.mp3",
+        thumb=thumb,
         supports_streaming=True,
         caption=f"⫸ Song - {rip_data['title']}\n⫸ By - {rip_data['uploader']}\n",
         attributes=[
@@ -141,6 +148,10 @@ By - {}
     )
     await x.delete()
     os.remove(f"{rip_data['id']}.mp3")
+    try:
+        os.remove(thumb)
+    except:
+        pass
 
 
 @ultroid_cmd(pattern="vsong (.*)")
@@ -260,4 +271,4 @@ async def _(event):
              return await eor(event,"`Song not found.`")
 
 
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

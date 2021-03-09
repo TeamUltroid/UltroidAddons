@@ -17,7 +17,7 @@ import asyncio
 from . import *
 
 
-@ultroid_cmd(pattern="(quotly|qbot)( ?(.*)|$)")
+@ultroid_cmd(pattern="(quotly|qbot) ?(.*)")
 async def _(event):
     if not event.reply_to_msg_id:
         return await eor(event, "```Reply to any user message.```")
@@ -25,7 +25,7 @@ async def _(event):
     chat = "@QuotLyBot"
     reply_message.sender
     ac = await eor(event, "```Making a Quote```")
-    col = event.pattern_match.group(1)
+    col = event.pattern_match.group(2)
     async with ultroid_bot.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -48,4 +48,4 @@ async def _(event):
             await ultroid_bot.send_message(event.chat_id, response.message)
 
 
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
