@@ -15,32 +15,21 @@
 
 """
 
-from bs4 import BeautifulSoup as bs
-import requests
+import wikipedia
 from . import *
 
 @ultroid_cmd(pattern="wiki ?(.*)")
-async def a(e):
-    query = e.pattern_match.group(1)
-    if not query:
-        return await eor(e,'What you want to search ?')
-    query = query.replace(' ','%20')
-    link = f"https://en.m.wikipedia.org/wiki/{query}"
-    gli = requests.get(link)
-    mag = bs(gli.content,'html.parser',from_encoding='utf-8')
-    fin = mag.find_all('p')
+async def wiki(e):
+    srch = e.pattern_match.group(1)
+    if not srch:
+        return await eor(e,"`Give some text to search on wikipedia !`")
+    msg = await eor(e,f"`Searching {srch} on wikipedia..`")
     try:
-        text = fin[1].text
-    except:
-        return await eor(e,'No results found')
-    am = mag.find_all('a','image')
-    t = mag.find_all('div','page-heading')
-    title= t[0].findNext().text
-    wiki = mag.find_all('link',rel='canonical')[0]['href']
-    img = "https:"+ am[0].findNext()['src']
-    msg = f"**Title** - `{title}`\n\n**Image** - [Click Here]({img})\n\n**Summary** - `{text}`\n\n**Page Link** - {wiki}"
-    await bot.send_message(e.chat_id,msg,link_preview=True)
-    if e.sender_id==ultroid_bot.uid:
-        await e.delete()
+        mk = wikipedia.summary(srch)
+        te = f"**Search Query :** {srch}\n\n**Results :** {mk}"
+        await msg.edit(te)
+    except Exception as e:
+        await msg.edit(f"**ERROR** : {str(e)}")
 
+    
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
