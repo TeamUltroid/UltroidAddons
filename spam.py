@@ -21,7 +21,7 @@
 
 """
 
-from asyncio import wait, sleep
+import asyncio
 import os
 from . import *
 
@@ -40,7 +40,7 @@ async def spammer(e):
         message = e.text
         counter = int(message[6:8])
         spam_message = str(e.text[8:])
-        await wait([e.respond(spam_message) for i in range(counter)])
+        await asyncio.wait([e.respond(spam_message) for i in range(counter)])
         await e.delete()
                                
 @ultroid_cmd(pattern=f"bigspam")
@@ -75,6 +75,6 @@ async def spammer(e):
     await e.delete()
     for i in range(1, counter):
         await e.respond(spam_message)
-        await sleep(spamDelay)
+        await asyncio.sleep(spamDelay)
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
