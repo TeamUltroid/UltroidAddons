@@ -6,11 +6,21 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
+"""
+✘ Commands Available
+
+• `{i}make <keyword>`
+    Make Qr codes of Keyword used.
+    
+• `{i}gtext <replying to Qr Code>`
+    Extract/read text of Qr Codes.
+"""
 
 import os
 import requests
 import urllib
 import json
+from . import *
 from telegraph import upload_file
 
 
@@ -46,4 +56,4 @@ async def textify(ult):
   await msg.edit(ret)
   
 
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=Var.HNDLR)}"})
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
