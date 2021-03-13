@@ -7,8 +7,8 @@ from . import HELP
 import requests
 
 @ultroid_cmd(pattern="aniquote")
-async def _(u):
-  await u.edit("...")
+async def _(ult):
+  u = await eor(ult,"...")
   try:
     resp = requests.get("https://animechan.vercel.app/api/random").json()
     return await u.edit(f"**{resp['quote']}**\n — __{resp['character']} ({resp['anime']})__")
