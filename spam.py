@@ -87,12 +87,12 @@ async def spammer(e):
         return
 
     await e.delete()
-
     try:
         for i in range(count):
             await e.respond(msg)
             await asyncio.sleep(delay)
     except Exception as u:
         await e.respond(f"**Error :** `{u}`")
+
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

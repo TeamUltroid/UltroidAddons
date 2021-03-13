@@ -7,7 +7,7 @@
 """
 
 import asyncio
-from . import HELP
+from . import *
 
 @ultroid_cmd(pattern="pprank")
 async def pprank(ult):

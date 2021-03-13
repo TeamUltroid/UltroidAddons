@@ -1,4 +1,4 @@
-from pyUltroid.dB.core import *
+"""from pyUltroid.dB.core import *
 from rextester_py import rexec_aio
 from support import *
 from telethon import events
@@ -58,3 +58,4 @@ async def omkkkk(event):
           text="c#, vb.net, f#, java, python, c (gcc), \nc++ (gcc), php, pascal, objective-c, haskell, \nruby, perl, lua, nasm, sql server, javascript, lisp, prolog, go, scala, \nscheme, node.js, python 3, octave, c (clang), \nc++ (clang), c++ (vc++), c (vc), d, r, tcl, mysql, postgresql, oracle, swift, \nbash, ada, erlang, elixir, ocaml, \nkotlin, brainfuck, fortran",
       )
       await event.answer([resultm])
+"""
