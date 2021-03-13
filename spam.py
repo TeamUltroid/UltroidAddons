@@ -21,7 +21,7 @@
 
 """
 
-from asyncio import wait, sleep
+import asyncio
 import os
 from . import *
 
@@ -34,15 +34,17 @@ async def tmeme(e):
         await e.respond(letter)
     await e.delete()
 
+
 @ultroid_cmd(pattern=f"spam")
 async def spammer(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text
         counter = int(message[6:8])
         spam_message = str(e.text[8:])
-        await wait([e.respond(spam_message) for i in range(counter)])
+        await asyncio.wait([e.respond(spam_message) for i in range(counter)])
         await e.delete()
-                               
+
+
 @ultroid_cmd(pattern=f"bigspam")
 async def bigspam(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -52,8 +54,8 @@ async def bigspam(e):
         for i in range(1, counter):
             await e.respond(spam_message)
         await e.delete()
-        
-        
+
+
 @ultroid_cmd(pattern=f"picspam")
 async def tiny_pic_spam(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -66,15 +68,31 @@ async def tiny_pic_spam(e):
             await e.client.send_file(e.chat_id, media)
         os.remove(media)
         await e.delete()
-        
-@ultroid_cmd(pattern=f"delayspam (.*)")
+
+
+@ultroid_cmd(pattern="delayspam ?(.*)")
 async def spammer(e):
-    spamDelay = float(e.pattern_match.group(1).split(' ', 2)[0])
-    counter = int(e.pattern_match.group(1).split(' ', 2)[1])
-    spam_message = str(e.pattern_match.group(1).split(' ', 2)[2])
+    args = e.pattern_match.group(1)
+    print(args)
+
+    try:
+        args = args.split(" ", 2)
+        delay = float(args[0])
+        count = int(args[1])
+        msg = str(args[2])
+    except:
+        return await e.edit(f"**Usage :** {HNDLR}delayspam <delay time> <count> <msg>")
+
+    if not msg[0].isalpha() and msg[0] in ("/", "#", "@", "!"):
+        return
+
     await e.delete()
-    for i in range(1, counter):
-        await e.respond(spam_message)
-        await sleep(spamDelay)
+    try:
+        for i in range(count):
+            await e.respond(msg)
+            await asyncio.sleep(delay)
+    except Exception as u:
+        await e.respond(f"**Error :** `{u}`")
+
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
