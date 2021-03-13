@@ -33,7 +33,7 @@ async def ocrify(ult):
     li = "https://telegra.ph" + tt[0]
     gr = r.get(f"https://api.ocr.space/parse/imageurl?apikey={OAPI}{atr}url={li}").json()
     trt = gr["ParsedResults"][0]["ParsedText"]
-    await msg.edit(f"**✍️ OCR PORTAL\n\nRESULTS ~ ** `{trt}`")
+    await msg.edit(f"**🎉 OCR PORTAL\n\nRESULTS ~ ** `{trt}`")
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
