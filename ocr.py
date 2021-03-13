@@ -28,7 +28,7 @@ async def ocrify(ult):
     if pat:
         atr = f"&language={pat}&"
     else:
-        art = "&"
+        atr = "&"
     tt = uf(dl)
     li = "https://telegra.ph" + tt[0]
     gr = r.get(f"https://api.ocr.space/parse/imageurl?apikey={OAPI}{atr}url={li}").json()
