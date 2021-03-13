@@ -6,6 +6,14 @@
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 #
 
+"""
+✘ Commands Available -
+
+• `{i}ocr <language code><reply to a photo>`
+    text recognition service.
+
+"""
+
 from . import *
 from telegraph import upload_file as uf
 import requests as r
