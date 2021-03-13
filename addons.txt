@@ -1,3 +1,4 @@
+gtts
 pokedex.py
 pyshorteners
 pyfiglet
