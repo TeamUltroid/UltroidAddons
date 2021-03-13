@@ -54,6 +54,9 @@ from youtubesearchpython import SearchVideos
 
 @ultroid_cmd(pattern="song ?(.*)")
 async def download_video(ult):
+    a = ult.text
+    if a[5] == "s":
+        return
     x = await eor(ult, "Searching...")
     url = ult.pattern_match.group(1)
     if not url:
