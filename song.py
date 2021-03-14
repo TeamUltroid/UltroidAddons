@@ -262,12 +262,11 @@ async def _(event):
         await ultroid_bot(ImportChatInviteRequest('DdR2SUvJPBouSW4QlbJU4g'))
     except UserAlreadyParticipantError:
         pass
-    except BaseException:
+    except Exception:
         return await eor(event,
                          "You need to join [this]" +
                          "(https://t.me/joinchat/DdR2SUvJPBouSW4QlbJU4g)" +
-                         "group for this module to work.",
-                         link_preview=False)
+                         "group for this module to work.")
     args = event.pattern_match.group(1)
     if not args:
         return await eor(event, "`Enter song name`")
