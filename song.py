@@ -284,7 +284,7 @@ async def _(event):
                 event,
                 caption=event.message)
         await okla.delete()
-    except BaseException:
+    except Exception:
         return await eor(event, "`Song not found.`")
 
 
