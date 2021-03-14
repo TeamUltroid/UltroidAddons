@@ -17,8 +17,8 @@ async def _(ult):
     u = await eor(ult, "...")
     try:
         resp = requests.get("https://animechan.vercel.app/api/random").json()
-        results = (f"**{resp['quote']}**\n",
-                   f" — __{resp['character']} ({resp['anime']})__")
+        results = f"**{resp['quote']}**\n"
+        results += f" — __{resp['character']} ({resp['anime']})__"
         return await u.edit(results)
     except Exception:
         await u.edit("`Something went wrong LOL ...`")
