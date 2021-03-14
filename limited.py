@@ -27,6 +27,7 @@ async def demn(ult):
             )
             await conv.send_message("/start")
             response = await response
+            await ultroid_bot.send_read_acknowledge(chat)
         except YouBlockedUserError:
             await msg.edit("Boss! Please Unblock @SpamBot ")
             return
