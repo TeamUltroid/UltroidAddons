@@ -30,6 +30,7 @@ from telethon.errors import (
     )
 from plugins.stickertools import deEmojify
 
+
 @ultroid_cmd(pattern="tweet ?(.*)")
 async def tweet(e):
     wai = await eor(e, "`Processing...`")
@@ -96,6 +97,7 @@ async def nope(doit):
         await a.delete()
     except ChatSendInlineForbiddenError:
         await eor(doit, "`Boss ! I cant use inline things here...`")
+
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

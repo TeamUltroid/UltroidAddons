@@ -12,6 +12,7 @@
 • `{i}make <keyword>`
     Make Qr codes of Keyword used.
 
+
 • `{i}read <replying to Qr Code>`
     Extract/read text of Qr Codes.
 """
