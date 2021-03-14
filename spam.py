@@ -35,7 +35,7 @@ async def tmeme(e):
     await e.delete()
 
 
-@ultroid_cmd(pattern=f"spam")
+@ultroid_cmd(pattern="spam")
 async def spammer(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text
@@ -45,7 +45,7 @@ async def spammer(e):
         await e.delete()
 
 
-@ultroid_cmd(pattern=f"bigspam")
+@ultroid_cmd(pattern="bigspam")
 async def bigspam(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text
@@ -56,7 +56,7 @@ async def bigspam(e):
         await e.delete()
 
 
-@ultroid_cmd(pattern=f"picspam")
+@ultroid_cmd(pattern="picspam")
 async def tiny_pic_spam(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         reply = await e.get_reply_message()
@@ -71,7 +71,7 @@ async def tiny_pic_spam(e):
 
 
 @ultroid_cmd(pattern="delayspam ?(.*)")
-async def spammer(e):
+async def delayspammer(e):
     args = e.pattern_match.group(1)
     print(args)
 
@@ -80,8 +80,10 @@ async def spammer(e):
         delay = float(args[0])
         count = int(args[1])
         msg = str(args[2])
-    except:
-        return await e.edit(f"**Usage :** {HNDLR}delayspam <delay time> <count> <msg>")
+    except BaseException:
+        return await e.edit(
+            f"**Usage :** {HNDLR}delayspam <delay time> <count> <msg>"
+            )
 
     if not msg[0].isalpha() and msg[0] in ("/", "#", "@", "!"):
         return

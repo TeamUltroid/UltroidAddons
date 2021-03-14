@@ -1,8 +1,14 @@
-"""
-✘ Commands Available
+# Ultroid Userbot
+#
+# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
+# PLease read the GNU Affero General Public License in
+# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+
+
+"""✘ Commands Available
 • `{i}zombies`
     Gives the Number of Deleted Accounts.
-    
+
 • `{i}zombies clean`
     Remove the deleted accounts if the user is admin.
 """
@@ -48,7 +54,8 @@ async def rm_deletedacc(show):
     del_u = 0
     del_status = "`No deleted accounts found, Group is clean`"
     if con != "clean":
-        eh = await eor(show, "`Searching for ghost/deleted/zombie accounts...`")
+        eh = await eor(show,
+                       "`Searching for ghost/deleted/zombie accounts...`")
         async for user in ultroid_bot.iter_participants(show.chat_id):
             if user.deleted:
                 del_u += 1
@@ -92,7 +99,10 @@ async def rm_deletedacc(show):
             except UserAdminInvalidError:
                 del_u -= 1
                 del_a += 1
-            await ultroid_bot(EditBannedRequest(show.chat_id, user.id, UNBAN_RIGHTS))
+            await ultroid_bot(EditBannedRequest(
+                show.chat_id,
+                user.id,
+                UNBAN_RIGHTS))
             del_u += 1
     if del_u > 0:
         del_status = f"Cleaned **{del_u}** deleted account(s)"
@@ -102,5 +112,5 @@ async def rm_deletedacc(show):
     await ehh.edit(del_status)
     await asyncio.sleep(2)
     await show.delete()
-    
+
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

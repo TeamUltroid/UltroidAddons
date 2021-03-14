@@ -1,13 +1,21 @@
 # from Freaky Userbot
-# Add pyshorteners in requirements.txt
+# Ported for Ultroid Userbot
+
+"""
+✘ Commands Available -
+
+• `{i}shorturl <url>`
+   Get the shorted form of given url.
+
+"""
 
 import pyshorteners
-
 from . import *
+
 
 @ultroid_cmd(pattern="shorturl ?(.*)")
 async def vom(event):
-    a = await eor(event,"`Processing...`")
+    a = await eor(event, "`Processing...`")
     try:
         link = event.pattern_match.group(1)
         if not link:
@@ -28,11 +36,4 @@ async def vom(event):
         await a.edit("SomeThing Went Wrong. \n**ERROR** : " + str(e))
 
 
-HELP.update(
-    {
-        "shorturl": f"UrlShortner\
-\n\nSyntax : {HNDLR}shorturl <link>\
-\nUsage : Shortens Your Url\
-if used shorten link, it will be expanded"
-    }
-)
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

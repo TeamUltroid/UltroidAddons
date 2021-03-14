@@ -20,11 +20,12 @@ import requests as r
 
 TE = "`OCR_API` not found, Please get it from Ocr.Space and set it in Redis"
 
+
 @ultroid_cmd(pattern="ocr ?(.*)")
 async def ocrify(ult):
     if not ult.is_reply:
-        return await eor(ult,"`Reply to Photo...`")
-    msg = await eor(ult,"`Processing..`")
+        return await eor(ult, "`Reply to Photo...`")
+    msg = await eor(ult, "`Processing..`")
     OAPI = udB.get("OCR_API")
     if not OAPI:
         return await msg.edit(TE)
@@ -39,7 +40,9 @@ async def ocrify(ult):
         atr = "&"
     tt = uf(dl)
     li = "https://telegra.ph" + tt[0]
-    gr = r.get(f"https://api.ocr.space/parse/imageurl?apikey={OAPI}{atr}url={li}").json()
+    gr = r.get(
+        f"https://api.ocr.space/parse/imageurl?apikey={OAPI}{atr}url={li}"
+        ).json()
     trt = gr["ParsedResults"][0]["ParsedText"]
     await msg.edit(f"**🎉 OCR PORTAL\n\nRESULTS ~ ** `{trt}`")
 

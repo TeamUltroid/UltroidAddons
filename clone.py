@@ -5,22 +5,32 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
+"""
+✘ Commands Available
+
+• `{i}clone <reply/username>`
+    clone the identity of user.
+
+• `{i}revert`
+    Revert to your original identity
+
+"""
+
 import html
 from telethon.tl import functions
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from . import *
-from userbot import CMD_HELP
+
 
 @ultroid_cmd(pattern="clone ?(.*)")
 async def _(event):
-    if event.fwd_from:
-        return
+    eve = await eor(event, "`Processing...`")
     reply_message = await event.get_reply_message()
     replied_user, error_i_a = await get_full_user(event)
     if replied_user is None:
-        await event.edit(str(error_i_a))
-        return False
+        await eve.edit(str(error_i_a))
+        return
     user_id = replied_user.user.id
     profile_pic = await event.client.download_profile_photo(
         user_id)
@@ -36,21 +46,24 @@ async def _(event):
     user_bio = replied_user.about
     if user_bio is not None:
         user_bio = replied_user.about
-    await ultroid_bot(functions.account.UpdateProfileRequest(first_name=first_name))
-    await ultroid_bot(functions.account.UpdateProfileRequest(last_name=last_name))
-    await ultroid_bot(functions.account.UpdateProfileRequest(about=user_bio))
+    await ultroid_bot(functions.account.UpdateProfileRequest(
+        first_name=first_name))
+    await ultroid_bot(functions.account.UpdateProfileRequest(
+        last_name=last_name)
+    )
+    await ultroid_bot(functions.account.UpdateProfileRequest(
+        about=user_bio)
+    )
     pfile = await ultroid_bot.upload_file(profile_pic)  # pylint:disable=E060
-    await ultroid_bot(functions.photos.UploadProfilePhotoRequest(pfile))  # pylint:disable=E0602
-    await event.delete()
+    await ultroid_bot(functions.photos.UploadProfilePhotoRequest(pfile))
+    await eve.delete()
     await ultroid_bot.send_message(
         event.chat_id, "**Hello!! Guys..**", reply_to=reply_message
     )
-    
 
-@ultroid_cmd(pattern="revert")
+
+@ultroid_cmd(pattern="revert$")
 async def _(event):
-    if event.fwd_from:
-        return
     name = OWNER_NAME
     ok = ""
     bio = "Error : Bio Lost"
@@ -64,7 +77,7 @@ async def _(event):
     await ultroid_bot(functions.account.UpdateProfileRequest(first_name=name))
     await ultroid_bot(functions.account.UpdateProfileRequest(last_name=ok))
     await eor(event, "succesfully reverted to your account back")
-    
+
 
 async def get_full_user(event):
     if event.reply_to_msg_id:
@@ -91,7 +104,8 @@ async def get_full_user(event):
         if event.message.entities is not None:
             mention_entity = event.message.entities
             probable_user_mention_entity = mention_entity[0]
-            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+            if isinstance(probable_user_mention_entity,
+                          MessageEntityMentionName):
                 user_id = probable_user_mention_entity.user_id
                 replied_user = await event.client(GetFullUserRequest(user_id))
                 return replied_user, None
@@ -99,7 +113,9 @@ async def get_full_user(event):
                 try:
                     user_object = await event.client.get_entity(input_str)
                     user_id = user_object.id
-                    replied_user = await event.client(GetFullUserRequest(user_id))
+                    replied_user = await event.client(
+                        GetFullUserRequest(user_id)
+                    )
                     return replied_user, None
                 except Exception as e:
                     return None, e
@@ -119,10 +135,4 @@ async def get_full_user(event):
             except Exception as e:
                 return None, e
 
-CMD_HELP.update({
-    "clone":
-    ".clone <username/reply>\
-\nUsage: steals others profile including dp, name.\
-\n\n.revert\
-\nUsage: To back to your profile but it'll show ALIVE_NAME instead of your current name and DEFAULT_BIO instead of your current bio\
-"})
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

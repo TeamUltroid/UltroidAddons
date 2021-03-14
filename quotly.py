@@ -11,13 +11,14 @@
 
 • `{i}quotly | {i}qbot <colour name/code><replying a message>`
     send stickers to current chat with @QuotlyBot.
-    
+
 """
 
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 import asyncio
 from . import *
+ERR = "`Can you kindly disable your forward privacy settings for good?`"
 
 
 @ultroid_cmd(pattern="(quotly|qbot) ?(.*)")
@@ -35,17 +36,19 @@ async def _(event):
                 events.NewMessage(incoming=True, from_users=1031952739)
             )
             er = await ultroid_bot.forward_messages(chat, reply_message)
-            if not len(col)==0: # Bad way 
+            if not len(col) == 0:  # Bad way
                 await asyncio.sleep(3)
                 await er.reply(f'/q {col}')
             response = await response
             await ultroid_bot.send_read_acknowledge(chat)
         except YouBlockedUserError:
-            return await event.reply("```Please unblock @QuotLyBot and try again```")
+            return await event.reply(
+                "```Please unblock @QuotLyBot and try again```"
+                )
         if response.text.startswith("Hi!"):
             await eor(
                 event,
-                "```Can you kindly disable your forward privacy settings for good?```",
+                ERR
             )
         else:
             await ac.delete()

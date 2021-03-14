@@ -13,17 +13,14 @@
     Test Ur Heroku Server Speed.
 
 """
-from telethon import events
+
 from datetime import datetime
-import io
 import speedtest
 from . import *
 
 
 @ultroid_cmd(pattern="test ?(.*)")
 async def _(event):
-    if event.fwd_from:
-        return
     input_str = event.pattern_match.group(1)
     as_text = True
     as_document = False
@@ -33,12 +30,14 @@ async def _(event):
         as_document = True
     elif input_str == "text":
         as_text = True
-    xx = await eor(event, "`Calculating ur Ultroid Server Speed. Please wait!`")
+    xx = await eor(event,
+                   "`Calculating ur Ultroid Server Speed. Please wait!`"
+                   )
     start = datetime.now()
     s = speedtest.Speedtest()
     s.get_best_server()
     s.download()
-    s.upload()#dchehe
+    s.upload()  # dchehe
     end = datetime.now()
     ms = (end - start).seconds
     response = s.results.dict()
@@ -51,7 +50,7 @@ async def _(event):
     reply_msg_id = event.message.id
     if event.reply_to_msg_id:
         reply_msg_id = event.reply_to_msg_id
-    try:#heheh
+    try:  # heheh
         response = s.results.share()
         speedtest_image = response
         if as_text:
@@ -61,18 +60,22 @@ async def _(event):
 `Upload: {}`
 `Ping: {}`
 `Internet Service Provider: {}`
-`ISP Rating: {}`""".format(ms, convert_from_bytes(download_speed), convert_from_bytes(upload_speed), ping_time, i_s_p, i_s_p_rating))
+`ISP Rating: {}`""".format(ms,
+                           convert_from_bytes(download_speed),
+                           convert_from_bytes(upload_speed),
+                           ping_time, i_s_p,
+                           i_s_p_rating))
         else:
             await event.client.send_file(
                 event.chat_id,
-                speedtest_image,#heeehe
+                speedtest_image,  # heeehe
                 caption="**SpeedTest** completed in {} seconds".format(ms),
                 force_document=as_document,
                 reply_to=reply_msg_id,
                 allow_cache=False
             )
             await event.delete()
-    except Exception as exc:#dc
+    except Exception as exc:  # dc
         await xx.edit("""**SpeedTest** completed in {} seconds
 Download: {}
 Upload: {}
@@ -80,7 +83,8 @@ Ping: {}
 
 
 __With the Following ERRORs__
-{}""".format(ms, convert_from_bytes(download_speed), convert_from_bytes(upload_speed), ping_time, str(exc)))
+{}""".format(ms, convert_from_bytes(download_speed),
+             convert_from_bytes(upload_speed), ping_time, str(exc)))
 
 
 def convert_from_bytes(size):
@@ -97,5 +101,6 @@ def convert_from_bytes(size):
         size /= power
         n += 1
     return f"{round(size, 2)} {units[n]}"
+
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
