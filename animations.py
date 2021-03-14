@@ -1,19 +1,27 @@
-# Ultroid Userbot 
+# Ultroid Userbot
 # 2020 Copyright (c)
 
-# Animation Plugin 
+# Animation Plugin
 
 """
+  Animation Plugin
+
+✘ Commands Available
+
+• `{i}kill`
+• `{i}fp`
+
 """
 
 import asyncio
-from . import HELP 
+from . import HELP
+
 
 @ultroid_cmd(pattern="kill$")
 async def _(event):
     animation_interval = 0.7
     animation_ttl = range(0, 12)
-    a=await eor(event,"`ready to die dude.....`")
+    a = await eor(event, "`ready to die dude.....`")
     animation_chars = [
         "Ｆｉｉｉｉｉｒｅ",
         "(　･ิω･ิ)︻デ═一-->",
@@ -26,14 +34,16 @@ async def _(event):
         "------------------>",
         "------>;(^。^)ノ",
         "(￣ー￣) DEAD",
-        "`Targeted user killed by Headshot 😈.😈.😈.😈.😈.😈.😈......`\n '#Sad_Reacts_Offline`\n",
+        """`Targeted user killed by Headshot😈.😈.😈.😈.😈.😈.😈......`
+        `#Sad_Reacts_Offline`\n""",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await a.edit(animation_chars[i % 12])
-        
-        
+
+
 @ultroid_cmd(pattern="fp$")
 async def a(e):
-  await eor(e,'🤦‍♂')
-  
+    await eor(e, '🤦‍♂')
+
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

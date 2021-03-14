@@ -7,35 +7,34 @@
 
 """
 ✘ Commands Available
+
 • `{i}hack`
     Do a Prank With Replied user.
+
 """
-from telethon import events
+
 import asyncio
-import os
-import sys
 import random
 from . import *
 
+
 @ultroid_cmd(pattern="hack")
 async def _(event):
-    if event.fwd_from:
-        return
     animation_interval = 0.7
     animation_ttl = range(0, 11)
     xx = await eor(event, "Installing..")
     animation_chars = [
-            "`Installing Files To Hacked Private Server...`",
-             "`Target Selected.`",
-              "`Installing... 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-               "`Installing... 4%\n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-                "`Installing... 8%\n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",    
-                 "`lnstallig... 20%\n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-                  "`Installing... 36%\n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-                   "`Installing... 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `",
-                    "`Installing... 84%\n█████████████████████▒▒▒▒ `",
-                     "`Installing... 100%\n████████Installed██████████ `",
-                      "`Target files Uploading...\n\nDirecting To Remote  server to hack..`"]
+        "`Installing Files To Hacked Private Server...`",
+        "`Target Selected.`",
+        "`Installing... 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
+        "`Installing... 4%\n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
+        "`Installing... 8%\n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
+        "`lnstallig... 20%\n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
+        "`Installing... 36%\n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
+        "`Installing... 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `",
+        "`Installing... 84%\n█████████████████████▒▒▒▒ `",
+        "`Installing... 100%\n████████Installed██████████ `",
+        "`Target files Uploading...\n\nDirecting To Remote  server to hack..`"]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await xx.edit(animation_chars[i % 11])
@@ -45,21 +44,21 @@ async def _(event):
     await xx.edit("Connecting nd getting combined token from my.telegram.org ")
     await asyncio.sleep(1)
     animation_chars = [
-            "`root@anon:~#` ",
-             "`root@anon:~# ls`",
-              "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~#`",
-               "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...`",
-                "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# `",
-                 "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py`",
-                  "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...`",
-                   "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...`",
-                    "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami`",
-                     "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami\n\nwhoami=user`",
-                      "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami\n\nwhoami=user\nboost_trap on force ...`",
-                       "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami\n\nwhoami=user\nboost_trap on force ...\nvictim detected in ghost ...`",
-                        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami\n\nwhoami=user\nboost_trap on force ...\nvictim detected in ghost ...\n\nAll Done!`",
-                         "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami\n\nwhoami=user\nboost_trap on force ...\nvictim detected  in ghost ...\n\nAll Done!\nInstalling Token!\nToken=`DJ65gulO90P90nlkm65dRfc8I`",]
-    for i in animation_ttl:  
+        "`root@anon:~#` ",
+        "`root@anon:~# ls`",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~#`",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...`",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# `",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py`",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...`",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...`",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami`",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami\n\nwhoami=user`",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami\n\nwhoami=user\nboost_trap on force ...`",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami\n\nwhoami=user\nboost_trap on force ...\nvictim detected in ghost ...`",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami\n\nwhoami=user\nboost_trap on force ...\nvictim detected in ghost ...\n\nAll Done!`",
+        "`root@anon:~# ls\n\n  usr  ghost  codes  \n\nroot@aono:~# # So Let's Hack it ...\nroot@anon:~# touch setup.py\n\nsetup.py deployed ...\nAuto CMD deployed ...\n\nroot@anon:~# trap whoami\n\nwhoami=user\nboost_trap on force ...\nvictim detected  in ghost ...\n\nAll Done!\nInstalling Token!\nToken=`DJ65gulO90P90nlkm65dRfc8I`", ]
+    for i in animation_ttl:
         await asyncio.sleep(animation_interval)
         await xx.edit(animation_chars[i % 14])
     await asyncio.sleep(2)
@@ -93,16 +92,16 @@ async def _(event):
     await asyncio.sleep(2)
     await xx.edit("`accoount hacked\n collecting all data\n converting data into pdf`")
     await asyncio.sleep(1)
-    x=(random.randrange(1,5)) 
-    if x==1:
-        await xx.edit("`pdf created click link below to download data\n\n😂 Don't worry only i can open this 😎😎.. If u don't Believe try to download` 🙂\n\nhttps://drive.google.com/file/d/1EHJSkt64RZEw7a2h8xkRqZSv_4dWhB02/view?usp=sharing")
-    if x==2:
-        await xx.edit("`pdf created click link below to download data\n\n😂 Don't worry only i can open this 😎😎.. If u don't Believe try to download` 🙂\n\nhttps://drive.google.com/file/d/1YaUfNVrHU7zSolTuFN3HyHJuTWQtdL2r/view?usp=sharing")
-    if x==3:
-        await xx.edit("`pdf created click link below to download data\n\n😂 Don't worry only i can open this 😎😎.. If u don't Believe try to download` 🙂\n\nhttps://drive.google.com/file/d/1o2wXirqy1RZqnUMgsoM8qX4j4iyse26X/view?usp=sharing")
-    if x==4:
-        await xx.edit("`pdf created click link below to download data\n\n😂 Don't worry only i can open this 😎😎.. If u don't Believe try to download` 🙂\n\nhttps://drive.google.com/file/d/15-zZVyEkCFA14mFfD-2DKN-by1YOWf49/view?usp=sharing")
-    if x==5:
-        await xx.edit("`pdf created click link below to download data\n\n😂 Don't worry only i can open this 😎😎.. If u don't Believe try to download` 🙂\n\nhttps://drive.google.com/file/d/1hPUfr27UtU0XjtC20lXjY9G3D9jR5imj/view?usp=sharing")
- 
+    sub = "https://drive.google.com/file/d/"
+    LINKS = ["1EHJSkt64RZEw7a2h8xkRqZSv_4dWhB02/view?usp=sharing",
+             "1YaUfNVrHU7zSolTuFN3HyHJuTWQtdL2r/view?usp=sharing",
+             "1hPUfr27UtU0XjtC20lXjY9G3D9jR5imj/view?usp=sharing",
+             "1o2wXirqy1RZqnUMgsoM8qX4j4iyse26X/view?usp=sharing",
+             "15-zZVyEkCFA14mFfD-2DKN-by1YOWf49/view?usp=sharing"]
+    ME = sub + LINKS[random.randrange(0, len(LINKS))]
+    await xx.edit(f"""`pdf created click link below to download data\n\n
+                  😂 Don't worry only i can open this 😎😎.. If u don't
+                  Believe try to download` 🙂\n\n{ME}""")
+
+
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

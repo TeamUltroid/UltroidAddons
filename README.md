@@ -24,7 +24,7 @@ async def hello_world(event):
     await event.reply("Hello World")
 ```
 
-if Your plugin need any additional requirements, it can be added to <a href="https://github.com/TeamUltroid/UltroidAddons/blob/main/addons.txt">addons.txt</a><br>
+if Your plugin need any additional requirements, it can be added to <a href="https://github.com/TeamUltroid/UltroidAddons/blob/main/addons.txt">addons.txt</a><br><br>
 
 
 > Made with 💕 by [@TeamUltroid](https://t.me/TeamUltroid).

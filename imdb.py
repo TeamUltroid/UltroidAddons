@@ -12,10 +12,7 @@ Search movie details from IMDB
 
 import bs4
 import requests
-import asyncio
-import os
 import re
-import time
 from . import *
 
 langi = "en"
@@ -27,14 +24,12 @@ async def imdb(e):
     movie_name = e.pattern_match.group(1)
     if not movie_name:
         return await eor(e, "`Provide a movie name too`")
-
     try:
         await eor(e, '`Processing...`')
         remove_space = movie_name.split(' ')
         final_name = '+'.join(remove_space)
         page = requests.get(
             "https://www.imdb.com/find?ref_=nv_sr_fn&q="+final_name+"&s=all")
-        lnk = str(page.status_code)
         soup = bs4.BeautifulSoup(page.content, 'lxml')
         odds = soup.findAll("tr", "odd")
         mov_title = odds[0].findNext('td').findNext('td').text
@@ -42,10 +37,6 @@ async def imdb(e):
             odds[0].findNext('td').findNext('td').a['href']
         page1 = requests.get(mov_link)
         soup = bs4.BeautifulSoup(page1.content, 'lxml')
-        if soup.find('div', 'poster'):
-            poster = soup.find('div', 'poster').img['src']
-        else:
-            poster = ''
         if soup.find('div', 'title_wrapper'):
             pg = soup.find('div', 'title_wrapper').findNext('div').text
             mov_details = re.sub(r'\s+', ' ', pg)

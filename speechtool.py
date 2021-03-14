@@ -8,7 +8,7 @@
 # Ported from Telebot
 
 
-""" 
+"""
 ✘ Commands Available -
 
 • {i}tts LanguageCode <reply to a message>
@@ -44,7 +44,7 @@ async def _(event):
     lan = lan.strip()
     if not os.path.isdir('downloads/'):
         os.makedirs('downloads/')
-    required_file_name =  "downloads/voice.ogg"
+    required_file_name = "downloads/voice.ogg"
     try:
         tts = gTTS(text, lang=lan)
         tts.save(required_file_name)
@@ -63,26 +63,29 @@ async def _(event):
             required_file_name + ".opus",
         ]
         try:
-            t_response = subprocess.check_output(
+            subprocess.check_output(
                 command_to_execute, stderr=subprocess.STDOUT
             )
-        except (subprocess.CalledProcessError, NameError, FileNotFoundError) as exc:
+        except (subprocess.CalledProcessError,
+                NameError,
+                FileNotFoundError) as exc:
             await eor(event, str(exc))
         else:
             os.remove(required_file_name)
             required_file_name = required_file_name + ".opus"
         end = datetime.now()
         ms = (end - start).seconds
-        await borg.send_file(
+        await ultroid_bot.send_file(
             event.chat_id,
             required_file_name,
-            # caption="Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms),
             reply_to=event.message.reply_to_msg_id,
             allow_cache=False,
             voice_note=True,
         )
         os.remove(required_file_name)
-        await eor(event, "Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
+        await eor(event,
+                  "Processed {} ({}) in {} seconds!".format(text[0:97],
+                                                            lan, ms))
         await asyncio.sleep(5)
         await event.delete()
     except Exception as e:
