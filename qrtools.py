@@ -12,7 +12,8 @@
 • `{i}make <keyword>`
     Make Qr codes of Keyword used.
 
-• `{i}gtext <replying to Qr Code>`
+
+• `{i}read <replying to Qr Code>`
     Extract/read text of Qr Codes.
 """
 
@@ -39,7 +40,7 @@ async def makeqr(e):
     await er.delete()
 
 
-@ultroid_cmd(pattern="gtext$")
+@ultroid_cmd(pattern="read$")
 async def textify(ult):
     if not ult.is_reply:
         await eor(ult, "`Reply to a Photo...`")

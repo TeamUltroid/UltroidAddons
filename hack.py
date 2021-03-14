@@ -99,9 +99,10 @@ async def _(event):
              "1o2wXirqy1RZqnUMgsoM8qX4j4iyse26X/view?usp=sharing",
              "15-zZVyEkCFA14mFfD-2DKN-by1YOWf49/view?usp=sharing"]
     ME = sub + LINKS[random.randrange(0, len(LINKS))]
-    await xx.edit(f"""`pdf created click link below to download data\n\n
-                  😂 Don't worry only i can open this 😎😎.. If u don't
-                  Believe try to download` 🙂\n\n{ME}""")
+    MSG = "`pdf created click link below to download data\n\n"
+    MSG += "😂 Don't worry only i can open this 😎😎.. If u don't"
+    MSG += f"Believe try to download` 🙂\n\n{ME}""")
+    await xx.edit(MSG)
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
