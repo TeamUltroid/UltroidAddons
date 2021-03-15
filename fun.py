@@ -30,6 +30,7 @@
 import os
 from pyjokes import get_joke
 import requests
+import random
 from . import *
 from telethon.errors import ChatSendMediaForbiddenError
 import moviepy.editor as m
@@ -113,7 +114,7 @@ async def vtog(ult):
 @ultroid_cmd(pattern="xo$")
 async def xo(ult):
     xox = await ultroid_bot.inline_query("xobot", "play")
-    await xox[0].click(
+    await xox[random.randrange(0, len(xox)-1)].click(
         ult.chat.id,
         reply_to=ult.reply_to_msg_id,
         silent=True,
