@@ -14,10 +14,13 @@
 • `{i}uta <search query>`
     Inline song search and downloader.
 
-• `{i}tweet`
+• `{i}honka <text>`
+    make stickers with @honka_says_bot.
+
+• `{i}tweet <text>`
     make twitter posts.
 
-• `{i}quote`
+• `{i}quote <search query>`
     quote search via @GoodQuoteBot.
 
 """
@@ -42,6 +45,30 @@ async def tweet(e):
             "twitterstatusbot", text
         )
         await results[0].click(
+            e.chat_id,
+            silent=True,
+            hide_via=True,
+        )
+        await wai.delete()
+    except ChatSendInlineForbiddenError:
+        await wai.edit("`Boss ! I cant use inline things here...`")
+    except ChatSendStickersForbiddenError:
+        await wai.edit("Sorry boss, I can't send Sticker Here !!")
+
+
+@ultroid_cmd(pattern="honka ?(.*)")
+async def honkasays(e):
+    wai = await eor(e, "`Processing...`")
+    text = e.pattern_match.group(1)
+    if not text:
+        return await wai.edit('`Give Me Some Text !`')
+    try:
+        if not text.endswith("."):
+            text = text + "."
+        results = await ultroid_bot.inline_query(
+            "honka_says_bot", text
+        )
+        await results[2].click(
             e.chat_id,
             silent=True,
             hide_via=True,
