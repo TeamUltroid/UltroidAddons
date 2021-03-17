@@ -28,7 +28,7 @@ async def _(event):
     eve = await eor(event, "`Processing...`")
     reply_message = await event.get_reply_message()
     whoiam = await ultroid_bot(GetFullUserRequest(ultroid_bot.uid))
-    if whoiam.user.about:
+    if whoiam.about:
         udB.set("MINEBIO",whoiam.user.about) # saving bio for revert
     replied_user, error_i_a = await get_full_user(event)
     if replied_user is None:
