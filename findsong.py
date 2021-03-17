@@ -1,19 +1,27 @@
+# Ultroid Userbot
+# Made by senku
+
+"""
+✘ Commands Available
+
+• `{i}findsong <reply to song>`
+   Identify the song name
+"""
+
 import requests
 from telethon import events
+from . import *
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 
-@ultroid_cmd(pattern="findsong$", outgoing=True)
+@ultroid_cmd(pattern="findsong$")
 async def _(event):
-    if event.fwd_from:
-        return
     if not event.reply_to_msg_id:
-        await edit_delete(event, "Reply to an audio message.")
-        return
+        return await eor(event, "Reply to an audio message.")
     reply_message = await event.get_reply_message()
     chat = "@auddbot"
-    snku = await edit_or_reply(event, "Identifying the song")
-    async with event.client.conversation(chat) as conv:
+    snku = await eor(event, "Identifying the song")
+    async with ultroid_bot.conversation(chat) as conv:
         try:
             start_msg = await conv.send_message("/start")
             await conv.get_response()
@@ -30,3 +38,6 @@ async def _(event):
     namem = f"**Song Name : **{result.text.splitlines()[0]}\
         \n\n**Details : **__{result.text.splitlines()[2]}__"
     await snku.edit(namem)
+    
+
+HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
