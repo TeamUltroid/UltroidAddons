@@ -27,6 +27,9 @@ from . import *
 async def _(event):
     eve = await eor(event, "`Processing...`")
     reply_message = await event.get_reply_message()
+    whoiam = await ultroid_bot(GetFullUserRequest(ultroid_bot.uid))
+    if whoiam.user.about:
+        udB.set("MINEBIO",whoiam.user.about) # saving bio for revert
     replied_user, error_i_a = await get_full_user(event)
     if replied_user is None:
         await eve.edit(str(error_i_a))
@@ -67,6 +70,9 @@ async def _(event):
     name = OWNER_NAME
     ok = ""
     bio = "Error : Bio Lost"
+    chc = udB.get("MINEBOI")
+    if chc:
+        bio = chc
     n = 1
     await ultroid_bot(
         functions.photos.DeletePhotosRequest(
