@@ -71,7 +71,7 @@ async def _(event):
     name = OWNER_NAME
     ok = ""
     bio = "Error : Bio Lost"
-    chc = udB.get("MINEBOI")
+    chc = udB.get("MINEBIO")
     if chc:
         bio = chc
     n = 1
