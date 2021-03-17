@@ -5,6 +5,7 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
+
 """
 ✘ Commands Available
 
@@ -29,7 +30,7 @@ async def _(event):
     reply_message = await event.get_reply_message()
     whoiam = await ultroid_bot(GetFullUserRequest(ultroid_bot.uid))
     if whoiam.about:
-        udB.set("MINEBIO",whoiam.user.about) # saving bio for revert
+        udB.set("MINEBIO",whoiam.about) # saving bio for revert
     replied_user, error_i_a = await get_full_user(event)
     if replied_user is None:
         await eve.edit(str(error_i_a))
