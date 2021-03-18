@@ -21,7 +21,7 @@ async def webshot(ult):
     cl = ult.pattern_match.group(1)
     if not cl:
         return await eor(ult, "Give a Url Please to Perform this Task !")
-    msg = await eor("`Performing a Web-Shot...\nKeep Patience !`")
+    msg = await eor(ult, "`Performing a Web-Shot...\nKeep Patience !`")
     SHOTAPI = udB.get("WEBSHOTAPI")
     PR = urllib.parse.quote(cl)
     LINK = f"https://screenshotapi.net/api/v1/screenshot?url={PR}&token="
