@@ -30,7 +30,11 @@ async def _(event):
     reply_message = await event.get_reply_message()
     whoiam = await ultroid_bot(GetFullUserRequest(ultroid_bot.uid))
     if whoiam.about:
-        udB.set("MINEBIO",whoiam.about) # saving bio for revert
+        mybio = str(ultroid_bot.me.id) + '01'
+        udB.set(f"{mybio}",whoiam.about) # saving bio for revert
+    udB.set(f"{ultroidbot.uid}02",whoiam.user.first_name)
+    if whoiam.user.last_name :
+        udB.set(f"{ultroid_bot.uid}03",whoiam.user.last_name)
     replied_user, error_i_a = await get_full_user(event)
     if replied_user is None:
         await eve.edit(str(error_i_a))
@@ -70,10 +74,17 @@ async def _(event):
 async def _(event):
     name = OWNER_NAME
     ok = ""
+    mybio = str(ultroid_bot.me.id) + '01'
     bio = "Error : Bio Lost"
-    chc = udB.get("MINEBOI")
+    chc = udB.get(mybio)
     if chc:
-        bio = chc
+        bio = mybio
+    fname = udB.get(f"{ultroid_bot.uid}02")
+    lname = udB.get(f"{ultroid_bot.uid}03")
+    if fname:
+        name = fname
+    if lname:
+        ok = lname
     n = 1
     await ultroid_bot(
         functions.photos.DeletePhotosRequest(
@@ -83,8 +94,10 @@ async def _(event):
     await ultroid_bot(functions.account.UpdateProfileRequest(about=bio))
     await ultroid_bot(functions.account.UpdateProfileRequest(first_name=name))
     await ultroid_bot(functions.account.UpdateProfileRequest(last_name=ok))
-    await eor(event, "succesfully reverted to your account back")
-
+    await eor(event, "Succesfully reverted to your account back !")
+    udB.delete(f"{ultroid_bot.uid}01")
+    udB.delete(f"{ultroid_bot.uid}02")
+    udB.delete(f"{ultroid_bot.uid}03")
 
 async def get_full_user(event):
     if event.reply_to_msg_id:
