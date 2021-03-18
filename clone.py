@@ -30,7 +30,8 @@ async def _(event):
     reply_message = await event.get_reply_message()
     whoiam = await ultroid_bot(GetFullUserRequest(ultroid_bot.uid))
     if whoiam.about:
-        udB.set("MINEBIO",whoiam.about) # saving bio for revert
+        mybio = str(ultroid_bot.me.id) + '01'
+        udB.set(f"{mybio}",whoiam.about) # saving bio for revert
     replied_user, error_i_a = await get_full_user(event)
     if replied_user is None:
         await eve.edit(str(error_i_a))
@@ -70,10 +71,11 @@ async def _(event):
 async def _(event):
     name = OWNER_NAME
     ok = ""
+    mybio = str(ultroid_bot.me.id) + '01'
     bio = "Error : Bio Lost"
-    chc = udB.get("MINEBIO")
+    chc = mybio
     if chc:
-        bio = chc
+        bio = mybio
     n = 1
     await ultroid_bot(
         functions.photos.DeletePhotosRequest(
