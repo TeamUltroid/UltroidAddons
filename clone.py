@@ -32,7 +32,7 @@ async def _(event):
     if whoiam.about:
         mybio = str(ultroid_bot.me.id) + '01'
         udB.set(f"{mybio}",whoiam.about) # saving bio for revert
-    udB.set(f"{ultroidbot.uid}02",whoiam.user.first_name)
+    udB.set(f"{ultroid_bot.uid}02",whoiam.user.first_name)
     if whoiam.user.last_name :
         udB.set(f"{ultroid_bot.uid}03",whoiam.user.last_name)
     replied_user, error_i_a = await get_full_user(event)
