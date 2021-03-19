@@ -45,7 +45,7 @@ async def sticklet(event):
     FONT_FILE = await ultroid_bot.download_media(nfont)
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
     while draw.multiline_textsize(sticktext, font=font) > (512, 512):
-        fontsize = 15
+        fontsize = 100
         font = ImageFont.truetype(FONT_FILE, size=fontsize)
     width, height = draw.multiline_textsize(sticktext, font=font)
     draw.multiline_text(((512-width)/2, (512-height)/2),
