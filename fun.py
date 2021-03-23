@@ -33,6 +33,7 @@ import requests
 import random
 from . import *
 from telethon.errors import ChatSendMediaForbiddenError
+from telethon.errors.rpcerrorlist import ChatSendGifsForbiddenError
 import moviepy.editor as m
 
 
@@ -56,7 +57,7 @@ async def _(event):
                       input_str)
                   )
     else:
-        await eor(event, "Something went wrong. Please try again Later.")
+        await eor(event, "`Something went wrong. Please try again Later.`")
 
 
 @ultroid_cmd(pattern="decide$")
@@ -84,11 +85,14 @@ async def gifs(ult):
         return await eor(ult, "`.gif <query>`")
     m = await eor(ult, "`Searching gif ...`")
     gifs = await ultroid_bot.inline_query("gif", f"{get}")
-    await gifs[0].click(ult.chat.id,
+    try:
+        await gifs[0].click(ult.chat.id,
                         reply_to=ult.reply_to_msg_id,
                         silent=True,
                         hide_via=True)
-    await m.delete()
+        await m.delete()
+    except ChatSendGifsForbiddenError:
+        await m.edit("`Sending Gif is Restricted in this Chat !!`")
 
 
 @ultroid_cmd(pattern="vtog$")
@@ -137,7 +141,7 @@ async def word(ult):
 async def map(ult):
     get = ult.pattern_match.group(1)
     if not get:
-        return await eor(ult, "`.gps <query>`")
+        return await eor(ult, "Use this command as `.gps <query>`")
     gps = await ultroid_bot.inline_query("openmap_bot", f"{get}")
     await gps[0].click(
         ult.chat.id,
