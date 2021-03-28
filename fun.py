@@ -10,6 +10,9 @@
 • `{i}decide`
     Decide something.
 
+• `{i}echo <reply to a message>`
+    echo the replied message.
+
 • `{i}gif <your query>`
     Sends the desired gif related to your query.
 
@@ -127,6 +130,19 @@ async def xo(ult):
     await ult.delete()
 
 
+@ultroid_cmd(pattern="echo")
+async def echoify(e):
+    if not e.is_reply:
+        return await eor(e, "Reply to a Message !")
+    gt = await e.get_reply_message()
+    if gt.text and not gt.media:
+        await eor(e, gt.text)
+    else:
+        await gt.reply(gt)
+        if e.sender_id == ultroid_bot.uid:
+            await e.delete()
+            
+            
 @ultroid_cmd(pattern="wordi$")
 async def word(ult):
     game = await ultroid_bot.inline_query("wordibot", "play")
