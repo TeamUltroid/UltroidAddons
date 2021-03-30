@@ -1,3 +1,4 @@
+covid
 gtts
 pokedex.py
 pyshorteners
