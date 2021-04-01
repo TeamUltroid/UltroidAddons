@@ -8,6 +8,7 @@
 """
 
 import asyncio
+
 from . import *
 
 
@@ -21,5 +22,6 @@ async def pprank(ult):
         await msg.edit("**GIVING RIGHTS**")
         await asyncio.sleep(1)
         await msg.edit("**PROMOTED USER SUCCESSFULLY**")
+
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

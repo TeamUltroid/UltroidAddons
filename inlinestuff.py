@@ -6,7 +6,7 @@
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 # .tweet made for ultroid
 
-# .uta ported from Dark-Cobra 
+# .uta ported from Dark-Cobra
 
 """
 ✘ Commands Available -
@@ -26,12 +26,11 @@
 """
 
 import random
-from . import *
-from telethon.errors import (
-    ChatSendInlineForbiddenError,
-    ChatSendStickersForbiddenError
-    )
+
 from plugins.stickertools import deEmojify
+from telethon.errors import ChatSendInlineForbiddenError, ChatSendStickersForbiddenError
+
+from . import *
 
 
 @ultroid_cmd(pattern="tweet ?(.*)")
@@ -39,11 +38,9 @@ async def tweet(e):
     wai = await eor(e, "`Processing...`")
     text = e.pattern_match.group(1)
     if text is None:
-        return await wai.edit('`Give me Some Text !`')
+        return await wai.edit("`Give me Some Text !`")
     try:
-        results = await ultroid_bot.inline_query(
-            "twitterstatusbot", text
-        )
+        results = await ultroid_bot.inline_query("twitterstatusbot", text)
         await results[0].click(
             e.chat_id,
             silent=True,
@@ -61,13 +58,11 @@ async def honkasays(e):
     wai = await eor(e, "`Processing...`")
     text = e.pattern_match.group(1)
     if not text:
-        return await wai.edit('`Give Me Some Text !`')
+        return await wai.edit("`Give Me Some Text !`")
     try:
         if not text.endswith("."):
             text = text + "."
-        results = await ultroid_bot.inline_query(
-            "honka_says_bot", text
-        )
+        results = await ultroid_bot.inline_query("honka_says_bot", text)
         await results[2].click(
             e.chat_id,
             silent=True,
@@ -85,14 +80,11 @@ async def quote(e):
     wai = await eor(e, "`Processing...`")
     text = e.pattern_match.group(1)
     try:
-        results = await ultroid_bot.inline_query(
-            "goodquotebot",
-            text
-        )
+        results = await ultroid_bot.inline_query("goodquotebot", text)
         if len(results) == 1:
             num = 0
         else:
-            num = random.randrange(0, len(results)-1)
+            num = random.randrange(0, len(results) - 1)
         await results[num].click(
             e.chat_id,
             silent=True,
@@ -111,20 +103,23 @@ async def nope(doit):
     a = await eor(doit, "`Processing...`")
     if not ok:
         if doit.is_reply:
-            what = (await doit.get_reply_message()).message
+            (await doit.get_reply_message()).message
         else:
-            return await eor(doit, "`Sir please give some query to search and download it for you..!`")
-    sticcers = await ultroid_bot.inline_query(
-        "Lybot", f"{(deEmojify(ok))}")
+            return await eor(
+                doit,
+                "`Sir please give some query to search and download it for you..!`",
+            )
+    sticcers = await ultroid_bot.inline_query("Lybot", f"{(deEmojify(ok))}")
     try:
-        await sticcers[0].click(doit.chat_id,
-                            reply_to=doit.reply_to_msg_id,
-                            silent=True if doit.is_reply else False,
-                            hide_via=True)
+        await sticcers[0].click(
+            doit.chat_id,
+            reply_to=doit.reply_to_msg_id,
+            silent=True if doit.is_reply else False,
+            hide_via=True,
+        )
         await a.delete()
     except ChatSendInlineForbiddenError:
         await eor(doit, "`Boss ! I cant use inline things here...`")
-
 
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

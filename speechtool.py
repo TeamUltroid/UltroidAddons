@@ -21,8 +21,10 @@ import asyncio
 import os
 import subprocess
 from datetime import datetime
-from . import *
+
 from gtts import gTTS
+
+from . import *
 
 
 @ultroid_cmd(
@@ -42,8 +44,8 @@ async def _(event):
         return
     text = text.strip()
     lan = lan.strip()
-    if not os.path.isdir('downloads/'):
-        os.makedirs('downloads/')
+    if not os.path.isdir("downloads/"):
+        os.makedirs("downloads/")
     required_file_name = "downloads/voice.ogg"
     try:
         tts = gTTS(text, lang=lan)
@@ -63,12 +65,8 @@ async def _(event):
             required_file_name + ".opus",
         ]
         try:
-            subprocess.check_output(
-                command_to_execute, stderr=subprocess.STDOUT
-            )
-        except (subprocess.CalledProcessError,
-                NameError,
-                FileNotFoundError) as exc:
+            subprocess.check_output(command_to_execute, stderr=subprocess.STDOUT)
+        except (subprocess.CalledProcessError, NameError, FileNotFoundError) as exc:
             await eor(event, str(exc))
         else:
             os.remove(required_file_name)
@@ -83,12 +81,11 @@ async def _(event):
             voice_note=True,
         )
         os.remove(required_file_name)
-        await eor(event,
-                  "Processed {} ({}) in {} seconds!".format(text[0:97],
-                                                            lan, ms))
+        await eor(event, "Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
         await asyncio.sleep(5)
         await event.delete()
     except Exception as e:
         await eor(event, str(e))
+
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

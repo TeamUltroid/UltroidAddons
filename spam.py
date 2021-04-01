@@ -23,6 +23,7 @@
 
 import asyncio
 import os
+
 from . import *
 
 
@@ -81,9 +82,7 @@ async def delayspammer(e):
         count = int(args[1])
         msg = str(args[2])
     except BaseException:
-        return await e.edit(
-            f"**Usage :** {HNDLR}delayspam <delay time> <count> <msg>"
-            )
+        return await e.edit(f"**Usage :** {HNDLR}delayspam <delay time> <count> <msg>")
 
     if not msg[0].isalpha() and msg[0] in ("/", "#", "@", "!"):
         return

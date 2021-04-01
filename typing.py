@@ -15,6 +15,7 @@
 """
 
 import asyncio
+
 from . import *
 
 
@@ -22,7 +23,7 @@ from . import *
 async def _(event):
     input_str = event.pattern_match.group(1)
     if not input_str:
-        return await eor(event, 'Give me something to type !')
+        return await eor(event, "Give me something to type !")
     shiiinabot = "\u2060"
     for i in range(601):
         shiiinabot += "\u2060"
@@ -41,13 +42,11 @@ async def _(event):
             await okla.edit(typing_text)
         except Exception as e:
             print(str(e))
-            pass
         await asyncio.sleep(0.4)
         try:
             await okla.edit(previous_text)
         except Exception as e:
             print(e)
-            pass
         await asyncio.sleep(0.4)
 
 
