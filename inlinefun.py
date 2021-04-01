@@ -14,14 +14,14 @@
 • `{i}uta <search query>`
     Inline song search and downloader.
 
-• `{i}honka <text>`
-    make stickers with @honka_says_bot.
+• `{i}frog <text>`
+    make text stickers.
 
 • `{i}tweet <text>`
     make twitter posts.
 
 • `{i}quote <search query>`
-    quote search via @GoodQuoteBot.
+    quote search via inline.
 
 """
 
@@ -53,7 +53,7 @@ async def tweet(e):
         await wai.edit("Sorry boss, I can't send Sticker Here !!")
 
 
-@ultroid_cmd(pattern="honka ?(.*)")
+@ultroid_cmd(pattern="frog ?(.*)")
 async def honkasays(e):
     wai = await eor(e, "`Processing...`")
     text = e.pattern_match.group(1)
@@ -62,12 +62,27 @@ async def honkasays(e):
     try:
         if not text.endswith("."):
             text = text + "."
-        results = await ultroid_bot.inline_query("honka_says_bot", text)
-        await results[2].click(
-            e.chat_id,
-            silent=True,
-            hide_via=True,
-        )
+        if len(text)<=9:
+            results = await ultroid_bot.inline_query("honka_says_bot", text)
+            await results[2].click(
+                e.chat_id,
+                silent=True,
+                hide_via=True,
+            )
+        elif len(text)>=14:
+            results = await ultroid_bot.inline_query("honka_says_bot", text)
+            await results[0].click(
+                e.chat_id,
+                silent=True,
+                hide_via=True,
+            )
+        else:
+            results = await ultroid_bot.inline_query("honka_says_bot", text)
+            await results[1].click(
+                e.chat_id,
+                silent=True,
+                hide_via=True,
+            )
         await wai.delete()
     except ChatSendInlineForbiddenError:
         await wai.edit("`Boss ! I cant use inline things here...`")
