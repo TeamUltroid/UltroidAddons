@@ -21,11 +21,13 @@
 
 """
 
-import cv2
-import os
 import asyncio
+import os
 import textwrap
+
+import cv2
 from PIL import Image, ImageDraw, ImageFont
+
 from . import *
 
 
@@ -45,7 +47,7 @@ async def ultd(event):
         cmd = ["lottie_convert.py", ultt, "ult.png"]
         file = "ult.png"
         process = await asyncio.create_subprocess_exec(
-           *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+            *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
         )
         stdout, stderr = await process.communicate()
         stderr.decode().strip()
@@ -63,10 +65,7 @@ async def ultd(event):
         file = "ult.png"
     stick = await draw_meme_text(file, msg)
     await ultroid_bot.send_file(
-        event.chat_id,
-        stick,
-        force_document=False,
-        reply_to=event.reply_to_msg_id
+        event.chat_id, stick, force_document=False, reply_to=event.reply_to_msg_id
     )
     await xx.delete()
     try:
@@ -100,29 +99,25 @@ async def draw_meme_text(image_path, msg):
         for u_text in textwrap.wrap(upper_text, width=15):
             u_width, u_height = draw.textsize(u_text, font=m_font)
             draw.text(
-                xy=(((i_width - u_width) / 2) - 1,
-                    int((current_h / 640) * i_width)),
+                xy=(((i_width - u_width) / 2) - 1, int((current_h / 640) * i_width)),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
             )
             draw.text(
-                xy=(((i_width - u_width) / 2) + 1,
-                    int((current_h / 640) * i_width)),
+                xy=(((i_width - u_width) / 2) + 1, int((current_h / 640) * i_width)),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
             )
             draw.text(
-                xy=((i_width - u_width) / 2,
-                    int(((current_h / 640) * i_width)) - 1),
+                xy=((i_width - u_width) / 2, int(((current_h / 640) * i_width)) - 1),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
             )
             draw.text(
-                xy=(((i_width - u_width) / 2),
-                    int(((current_h / 640) * i_width)) + 1),
+                xy=(((i_width - u_width) / 2), int(((current_h / 640) * i_width)) + 1),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
@@ -204,7 +199,7 @@ async def mms(event):
         cmd = ["lottie_convert.py", ultt, "ult.png"]
         file = "ult.png"
         process = await asyncio.create_subprocess_exec(
-           *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+            *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
         )
         stdout, stderr = await process.communicate()
         stderr.decode().strip()
@@ -222,10 +217,7 @@ async def mms(event):
         file = "ult.png"
     pic = await draw_meme(file, msg)
     await event.client.send_file(
-        event.chat_id,
-        pic,
-        force_document=False,
-        reply_to=event.reply_to_msg_id
+        event.chat_id, pic, force_document=False, reply_to=event.reply_to_msg_id
     )
     await xx.delete()
     try:
@@ -259,29 +251,25 @@ async def draw_meme(image_path, msg):
         for u_text in textwrap.wrap(upper_text, width=15):
             u_width, u_height = draw.textsize(u_text, font=m_font)
             draw.text(
-                xy=(((i_width - u_width) / 2) - 1,
-                    int((current_h / 640) * i_width)),
+                xy=(((i_width - u_width) / 2) - 1, int((current_h / 640) * i_width)),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
             )
             draw.text(
-                xy=(((i_width - u_width) / 2) + 1,
-                    int((current_h / 640) * i_width)),
+                xy=(((i_width - u_width) / 2) + 1, int((current_h / 640) * i_width)),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
             )
             draw.text(
-                xy=((i_width - u_width) / 2,
-                    int(((current_h / 640) * i_width)) - 1),
+                xy=((i_width - u_width) / 2, int(((current_h / 640) * i_width)) - 1),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
             )
             draw.text(
-                xy=(((i_width - u_width) / 2),
-                    int(((current_h / 640) * i_width)) + 1),
+                xy=(((i_width - u_width) / 2), int(((current_h / 640) * i_width)) + 1),
                 text=u_text,
                 font=m_font,
                 fill=(0, 0, 0),
@@ -345,5 +333,6 @@ async def draw_meme(image_path, msg):
     pics = "ultt.png"
     img.save(pics, "png")
     return pics
+
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

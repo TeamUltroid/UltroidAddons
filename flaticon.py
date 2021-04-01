@@ -17,8 +17,10 @@
 import os
 import random
 import urllib
+
 import requests
 from bs4 import BeautifulSoup as bs
+
 from . import *
 
 
@@ -34,8 +36,8 @@ async def www(e):
         ge = requests.get(link).content
         cl = bs(ge, "lxml", from_encoding="utf-8")
         results = cl.find_all(
-            "img",
-            src="https://media.flaticon.com/dist/min/img/loader.gif")
+            "img", src="https://media.flaticon.com/dist/min/img/loader.gif"
+        )
         dome = results[random.randrange(0, len(results) - 1)]["data-src"]
         urllib.request.urlretrieve(dome, "sticker.webp")
         await ultroid_bot.send_file(e.chat.id, "sticker.webp")

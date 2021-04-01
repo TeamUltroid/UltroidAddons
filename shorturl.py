@@ -10,6 +10,7 @@
 """
 
 import pyshorteners
+
 from . import *
 
 

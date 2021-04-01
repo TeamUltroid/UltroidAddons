@@ -12,8 +12,9 @@ Search animes and manga from anilist.co using @animedb_bot
     To get manga info
 """
 
-from . import *
 from telethon.errors import ChatSendInlineForbiddenError
+
+from . import *
 
 INLOCK = "`Seems like inline messages aren't allowed here`"
 
@@ -50,10 +51,7 @@ async def manga(ult):
     if keyword is None:
         return await msg.edit("`Provide a Keyword to search`")
     try:
-        animes = await ultroid_bot.inline_query(
-            "animedb_bot",
-            f"<m> {keyword}"
-        )
+        animes = await ultroid_bot.inline_query("animedb_bot", f"<m> {keyword}")
         await animes[0].click(
             ult.chat_id,
             reply_to=ult.reply_to_msg_id,

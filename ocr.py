@@ -16,9 +16,10 @@
 """
 
 
-from . import *
-from telegraph import upload_file as uf
 import requests as r
+from telegraph import upload_file as uf
+
+from . import *
 
 TE = "`OCR_API` not found, Please get it from Ocr.Space and set it in Redis"
 
@@ -44,7 +45,7 @@ async def ocrify(ult):
     li = "https://telegra.ph" + tt[0]
     gr = r.get(
         f"https://api.ocr.space/parse/imageurl?apikey={OAPI}{atr}url={li}"
-        ).json()
+    ).json()
     trt = gr["ParsedResults"][0]["ParsedText"]
     await msg.edit(f"**🎉 OCR PORTAL\n\nRESULTS ~ ** `{trt}`")
 

@@ -1,4 +1,3 @@
-
 #
 # Ultroid - UserBot
 #
@@ -17,12 +16,14 @@
     Extract/read text of Qr Codes.
 """
 
-import os
-import requests
-import urllib
 import json
-from . import *
+import os
+import urllib
+
+import requests
 from telegraph import upload_file
+
+from . import *
 
 
 @ultroid_cmd(pattern="make ?(.*)")
@@ -33,8 +34,8 @@ async def makeqr(e):
     er = await eor(e, "`Making QR Code...`")
     text = urllib.parse.quote(query)
     urllib.request.urlretrieve(
-      f"https://api.qrserver.com/v1/create-qr-code/?size=350&data={text}",
-      "qr.png")
+        f"https://api.qrserver.com/v1/create-qr-code/?size=350&data={text}", "qr.png"
+    )
     await ultroid_bot.send_file(e.chat_id, "qr.png")
     os.remove("qr.png")
     await er.delete()
@@ -51,8 +52,8 @@ async def textify(ult):
     sin = "https://telegra.ph" + up[0]
     link = urllib.parse.quote(sin)
     getc = requests.get(
-      f"http://api.qrserver.com/v1/read-qr-code/?fileurl={link}"
-      ).content
+        f"http://api.qrserver.com/v1/read-qr-code/?fileurl={link}"
+    ).content
     rt = json.loads(getc.decode("utf-8"))
     if not rt[0]["type"] == "qrcode":
         return await msg.edit("Not a Valid Qr-Code")

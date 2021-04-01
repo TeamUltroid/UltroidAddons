@@ -14,9 +14,11 @@
 """
 
 import asyncio
+
 from telethon.errors import ChatAdminRequiredError, UserAdminInvalidError
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
+
 from . import *
 
 BANNED_RIGHTS = ChatBannedRights(
@@ -48,14 +50,13 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 # ================================================
 
 
-@ultroid_cmd(pattern='zombies ?(.*)')
+@ultroid_cmd(pattern="zombies ?(.*)")
 async def rm_deletedacc(show):
     con = show.pattern_match.group(1).lower()
     del_u = 0
     del_status = "`No deleted accounts found, Group is clean`"
     if con != "clean":
-        eh = await eor(show,
-                       "`Searching for ghost/deleted/zombie accounts...`")
+        eh = await eor(show, "`Searching for ghost/deleted/zombie accounts...`")
         async for user in ultroid_bot.iter_participants(show.chat_id):
             if user.deleted:
                 del_u += 1
@@ -99,10 +100,7 @@ async def rm_deletedacc(show):
             except UserAdminInvalidError:
                 del_u -= 1
                 del_a += 1
-            await ultroid_bot(EditBannedRequest(
-                show.chat_id,
-                user.id,
-                UNBAN_RIGHTS))
+            await ultroid_bot(EditBannedRequest(show.chat_id, user.id, UNBAN_RIGHTS))
             del_u += 1
     if del_u > 0:
         del_status = f"Cleaned **{del_u}** deleted account(s)"
@@ -112,5 +110,6 @@ async def rm_deletedacc(show):
     await ehh.edit(del_status)
     await asyncio.sleep(2)
     await show.delete()
+
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

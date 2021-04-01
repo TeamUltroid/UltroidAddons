@@ -16,8 +16,10 @@
     Send Card of Pokemon.
 """
 
-from pokedex import pokedex as badhiya
 import requests
+
+from pokedex import pokedex as badhiya
+
 from . import *
 
 
@@ -28,72 +30,72 @@ async def pokedex(event):
         await eor(event, "`Give a Pokemon Name`")
         return
     xx = await eor(event, "`Booting up the pokedex.......`")
-    move = requests.get(f'https://pokeapi.co/api/v2/pokemon/{pokemon}')
+    move = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon}")
     rw = f"https://some-random-api.ml/pokedex?pokemon={pokemon}"
     w = requests.get(f"https://api.pokemontcg.io/v1/cards?name={pokemon}")
     lol = w.json()
     r = requests.get(rw)
     a = r.json()
     try:
-        name = a['name']
+        name = a["name"]
     except Exception:
         await eor(event, "`Be sure To give correct Name`")
         return
-    typ = a['type']
-    species = a['species']
-    abilities = a['abilities']
-    height = a['height']
-    weight = a['weight']
-    esatge = r.json()['family']['evolutionStage']
+    typ = a["type"]
+    species = a["species"]
+    abilities = a["abilities"]
+    height = a["height"]
+    weight = a["weight"]
+    esatge = r.json()["family"]["evolutionStage"]
     try:
-        weaknesses = lol['cards'][0]['weaknesses'][0]['type']
+        weaknesses = lol["cards"][0]["weaknesses"][0]["type"]
     except BaseException:
         weaknesses = None
-    l = r.json()['family']['evolutionLine']
+    l = r.json()["family"]["evolutionLine"]
     # ambiguous variable name 'l' flake8(E741)
     if not l:
-        line = 'None'
+        line = "None"
     else:
-        line = ', '.join(map(str, l))
-    gen = a['generation']
+        line = ", ".join(map(str, l))
+    gen = a["generation"]
     try:
-        move1 = move.json()["moves"][0]['move']['name']
+        move1 = move.json()["moves"][0]["move"]["name"]
     except IndexError:
         move1 = None
     try:
-        move2 = move.json()["moves"][1]['move']['name']
+        move2 = move.json()["moves"][1]["move"]["name"]
     except IndexError:
         move2 = None
     try:
-        move3 = move.json()["moves"][2]['move']['name']
+        move3 = move.json()["moves"][2]["move"]["name"]
     except IndexError:
         move3 = None
     try:
-        move4 = move.json()["moves"][3]['move']['name']
+        move4 = move.json()["moves"][3]["move"]["name"]
     except IndexError:
         move4 = None
     try:
-        move5 = move.json()["moves"][4]['move']['name']
+        move5 = move.json()["moves"][4]["move"]["name"]
     except IndexError:
         move5 = None
     try:
-        move6 = move.json()["moves"][5]['move']['name']
+        move6 = move.json()["moves"][5]["move"]["name"]
     except IndexError:
         move6 = None
     try:
-        move7 = move.json()["moves"][6]['move']['name']
+        move7 = move.json()["moves"][6]["move"]["name"]
     except IndexError:
         move7 = None
-    description = a['description']
-    typ = ', '.join(map(str, typ))
-    Stats = a['stats']
-    species = ', '.join(map(str, species))
-    abilities = ', '.join(map(str, abilities))
+    description = a["description"]
+    typ = ", ".join(map(str, typ))
+    Stats = a["stats"]
+    species = ", ".join(map(str, species))
+    abilities = ", ".join(map(str, abilities))
     poli = badhiya.Pokedex()
     pname = poli.get_pokemon_by_name(pokemon)
     pokemon = pname[0]
     lst = pokemon.get("sprite")
-    cap = f'''
+    cap = f"""
 
 **NAME** : `{name}`
 **TYPE** : `{typ}`
@@ -115,7 +117,7 @@ async def pokedex(event):
 **Speed**   : `{Stats['speed']}`            `(6){move6}`
 **Total**   : `{Stats['total']}`            `(7){move7}`
 **DESCRIPTION** : `{description}`
-  '''
+  """
     await ultroid_bot.send_file(event.chat_id, lst, caption=cap)
     await xx.delete()
 
@@ -130,14 +132,14 @@ async def pokecard(event):
     r = requests.get(rw)
     a = r.json()
     try:
-        o = a['cards'][0]['imageUrlHiRes']
+        o = a["cards"][0]["imageUrlHiRes"]
         await event.client.send_file(
-            await event.client.get_input_entity(event.chat_id),
-            o
+            await event.client.get_input_entity(event.chat_id), o
         )
         await event.delete()
     except BaseException:
         await eor(event, "`Be sure To give correct Name`")
         return
+
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
