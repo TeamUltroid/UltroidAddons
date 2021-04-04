@@ -1370,7 +1370,7 @@ async def snku(ult):
         await asyncio.sleep(animation_interval)
         await ult.edit(animation_chars[i % 5])
 
-@ultroid_cmd("bigoof")
+@ultroid_cmd(pattern="bigoof")
 async def _(event):
     if event.fwd_from:
         return
