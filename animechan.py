@@ -3,14 +3,14 @@
 # This file is a part of < https://github.com/TeamUltroid/UltroidAddons/>
 
 """
-Fetch Random anime quotes from [AnimeChan](https://animechan.vercel.app)
+Fetch Random anime quotes
 
-Command : {i}aniquote
+Command : `{i}aniquote`
 """
 
 import requests
 
-from . import HELP
+from . import *
 
 
 @ultroid_cmd(pattern="aniquote")
