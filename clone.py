@@ -17,11 +17,11 @@
 
 """
 
+from . import *
 from telethon.tl import functions
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from . import *
 import html
 
 @ultroid_cmd(pattern="clone ?(.*)")
