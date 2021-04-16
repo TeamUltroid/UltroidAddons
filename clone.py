@@ -18,10 +18,10 @@
 """
 
 from . import *
-from telethon.tl import functions
 from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.functions.account import UpdateProfileRequest
 from telethon.tl.types import MessageEntityMentionName
-
+from telethon.tl.functions.photos import UploadProfilePhotoRequest, DeletePhotosRequest
 import html
 
 @ultroid_cmd(pattern="clone ?(.*)")
@@ -53,14 +53,14 @@ async def _(event):
     user_bio = replied_user.about
     if user_bio is not None:
         user_bio = replied_user.about
-    await ultroid_bot(functions.account.UpdateProfileRequest(first_name=first_name))
-    await ultroid_bot(functions.account.UpdateProfileRequest(last_name=last_name))
-    await ultroid_bot(functions.account.UpdateProfileRequest(about=user_bio))
+    await ultroid_bot(UpdateProfileRequest(first_name=first_name))
+    await ultroid_bot(UpdateProfileRequest(last_name=last_name))
+    await ultroid_bot(UpdateProfileRequest(about=user_bio))
     pfile = await ultroid_bot.upload_file(profile_pic)  # pylint:disable=E060
-    await ultroid_bot(functions.photos.UploadProfilePhotoRequest(pfile))
+    await ultroid_bot(UploadProfilePhotoRequest(pfile))
     await eve.delete()
     await ultroid_bot.send_message(
-        event.chat_id, "**Hello!! Guys..**", reply_to=reply_message
+        event.chat_id, f"**I am `{first_name}` from now...**", reply_to=reply_message
     )
 
 
@@ -81,13 +81,13 @@ async def _(event):
         ok = lname
     n = 1
     await ultroid_bot(
-        functions.photos.DeletePhotosRequest(
+        DeletePhotosRequest(
             await event.client.get_profile_photos("me", limit=n)
         )
     )
-    await ultroid_bot(functions.account.UpdateProfileRequest(about=bio))
-    await ultroid_bot(functions.account.UpdateProfileRequest(first_name=name))
-    await ultroid_bot(functions.account.UpdateProfileRequest(last_name=ok))
+    await ultroid_bot(UpdateProfileRequest(about=bio))
+    await ultroid_bot(UpdateProfileRequest(first_name=name))
+    await ultroid_bot(UpdateProfileRequest(last_name=ok))
     await eor(event, "Succesfully reverted to your account back !")
     udB.delete(f"{ultroid_bot.uid}01")
     udB.delete(f"{ultroid_bot.uid}02")
