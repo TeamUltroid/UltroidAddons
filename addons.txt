@@ -5,5 +5,4 @@ pyshorteners
 pyfiglet
 pyjokes
 wikipedia
-rextester-py
 lyrics_extractor==3.0.1
