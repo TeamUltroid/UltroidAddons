@@ -9,7 +9,7 @@
 """
 ✘ Commands Available
 
-• `{i}flaticon <query>`
+• `{i}icon <query>`
     Icon search from flaticon.com and uploading as sticker.
 
 """
@@ -24,7 +24,7 @@ from bs4 import BeautifulSoup as bs
 from . import *
 
 
-@ultroid_cmd(pattern="flaticon ?(.*)")
+@ultroid_cmd(pattern="icon ?(.*)")
 async def www(e):
     a = e.pattern_match.group(1)
     if not a:
