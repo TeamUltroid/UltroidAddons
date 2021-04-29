@@ -6,3 +6,5 @@ pyfiglet
 pyjokes
 wikipedia
 lyrics_extractor==3.0.1
+beautifulsoup4
+requests
