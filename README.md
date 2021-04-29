@@ -41,6 +41,7 @@ async def hello_world_example(event):
 If Your plugin need any additional requirements, it can be added to <a href="https://github.com/TeamUltroid/UltroidAddons/blob/main/addons.txt">addons.txt</a><br><br>
 
 <br>
+
 > For More Information See [The Pypi Page](https://pypi.org/project/py-Ultroid).
-> 
+
 > Made with 💕 by [@TeamUltroid](https://t.me/TeamUltroid).
