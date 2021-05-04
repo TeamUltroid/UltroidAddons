@@ -14,7 +14,7 @@
 """
 
 from telethon.tl.functions.messages import GetStickerSetRequest
-from telethon.tl.types import InputStickerSetID
+from telethon.tl.types import InputStickerSetID, InputStickerSetShortName
 from telethon import events, types, functions, utils
 from . import *
 
@@ -27,7 +27,7 @@ async def _(e):
     sset= await ultroid_bot(GetStickerSetRequest(InputStickerSetID(id=set.stickerset.id,access_hash=set.stickerset.access_hash,)))
     pack = (sset.set.short_name)   
     docs = [utils.get_input_document(x)
-            for x in (await bot(functions.messages.GetStickerSetRequest(types.InputStickerSetShortName(pack)))).documents
+            for x in (await bot(GetStickerSetRequest(InputStickerSetShortName(pack)))).documents
             ]
     for xx in docs:
         await e.respond(file=(xx))
