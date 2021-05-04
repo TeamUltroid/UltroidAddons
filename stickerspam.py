@@ -16,6 +16,7 @@
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetID
 from telethon import events, types, functions, utils
+from . import *
 
 @ultroid_cmd(pattern="sspam$")
 async def _(e):
