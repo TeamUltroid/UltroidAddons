@@ -1,4 +1,3 @@
-  
 # Ultroid Userbot
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -6,6 +5,7 @@
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from . import *
+
 
 @ultroid_cmd(pattern="tscan ?(.*)")
 async def tscan(e):
@@ -22,4 +22,9 @@ async def tscan(e):
     await eor(e, a.message)
     await ultroid_bot.send_read_acknowledge(chat)
 
-HELP.update({"tscan":f"`{HNDLR}tscan` - Get The channel/groups user is in.\nReply to Message or give username/id"})
+
+HELP.update(
+    {
+        "tscan": f"`{HNDLR}tscan` - Get The channel/groups user is in.\nReply to Message or give username/id"
+    }
+)

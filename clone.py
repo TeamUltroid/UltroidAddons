@@ -17,12 +17,15 @@
 
 """
 
-from . import *
-from telethon.tl.functions.users import GetFullUserRequest
-from telethon.tl.functions.account import UpdateProfileRequest
-from telethon.tl.types import MessageEntityMentionName
-from telethon.tl.functions.photos import UploadProfilePhotoRequest, DeletePhotosRequest
 import html
+
+from telethon.tl.functions.account import UpdateProfileRequest
+from telethon.tl.functions.photos import DeletePhotosRequest, UploadProfilePhotoRequest
+from telethon.tl.functions.users import GetFullUserRequest
+from telethon.tl.types import MessageEntityMentionName
+
+from . import *
+
 
 @ultroid_cmd(pattern="clone ?(.*)")
 async def _(event):
@@ -81,9 +84,7 @@ async def _(event):
         ok = lname
     n = 1
     await ultroid_bot(
-        DeletePhotosRequest(
-            await event.client.get_profile_photos("me", limit=n)
-        )
+        DeletePhotosRequest(await event.client.get_profile_photos("me", limit=n))
     )
     await ultroid_bot(UpdateProfileRequest(about=bio))
     await ultroid_bot(UpdateProfileRequest(first_name=name))
