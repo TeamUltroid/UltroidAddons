@@ -62,14 +62,14 @@ async def honkasays(e):
     try:
         if not text.endswith("."):
             text = text + "."
-        if len(text)<=9:
+        if len(text) <= 9:
             results = await ultroid_bot.inline_query("honka_says_bot", text)
             await results[2].click(
                 e.chat_id,
                 silent=True,
                 hide_via=True,
             )
-        elif len(text)>=14:
+        elif len(text) >= 14:
             results = await ultroid_bot.inline_query("honka_says_bot", text)
             await results[0].click(
                 e.chat_id,
