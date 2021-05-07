@@ -29,6 +29,7 @@
 import json
 import os
 import random
+import time
 
 from lyrics_extractor import SongLyrics as sl
 from telethon.errors.rpcerrorlist import UserAlreadyParticipantError
@@ -127,18 +128,12 @@ async def download_video(ult):
         thumb = f"{rip_data['id']}.mp3.webp"
     else:
         thumb = None
-    upteload = """
-Uploading...
-Song name - {}
-By - {}
-""".format(
-        rip_data["title"], rip_data["uploader"]
-    )
-    await x.edit(f"`{upteload}`")
+    tail = time.time()
+    ttt = await uploader(rip_data['title']+".mp3", rip_data['title']+".mp3", tail, x, "Uploading " + rip_data['title'])
     CAPT = f"⫸ Song - {rip_data['title']}\n⫸ By - {rip_data['uploader']}\n"
     await ultroid_bot.send_file(
         ult.chat_id,
-        f"{rip_data['id']}.mp3",
+        ttt,
         thumb=thumb,
         supports_streaming=True,
         caption=CAPT,
@@ -214,18 +209,12 @@ async def download_vsong(ult):
         return await x.edit("`There was an error during info extraction.`")
     except Exception as e:
         return await x.edit(f"{str(type(e)): {str(e)}}")
-    upteload = """
-Uploading...
-Song name - {}
-By - {}
-""".format(
-        rip_data["title"], rip_data["uploader"]
-    )
-    await x.edit(f"`{upteload}`")
+    tail = time.time()
+    ttt = await uploader(rip_data['title']+".mp4", rip_data['title']+".mp4", tail, x, "Uploading " + rip_data['title'])
     CAPT = f"⫸ Song - {rip_data['title']}\n⫸ By - {rip_data['uploader']}\n"
     await ultroid_bot.send_file(
         ult.chat_id,
-        f"{rip_data['id']}.mp4",
+        ttt,
         supports_streaming=True,
         caption=CAPT,
     )
