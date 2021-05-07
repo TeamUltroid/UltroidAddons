@@ -60,7 +60,6 @@ async def rm_deletedacc(show):
         async for user in ultroid_bot.iter_participants(show.chat_id):
             if user.deleted:
                 del_u += 1
-                await asyncio.sleep(1)
         if del_u > 0:
             del_status = f"`Found` {del_u} `ghost/deleted/zombie account(s) in this group,\
             \nClean them by using` `{HNDLR}zombies clean`"
