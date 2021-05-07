@@ -4,6 +4,9 @@
 • `{i}joke`
     To get joke.
 
+• `{i}insult`
+    Insult someone..
+
 • `{i}url <long url>`
     To get a shorten link of long link.
 
@@ -32,6 +35,7 @@
 
 import os
 import random
+from bs4 import BeautifulSoup as bs
 
 import moviepy.editor as m
 import requests
@@ -46,6 +50,15 @@ from . import *
 async def _(ult):
     await eor(ult, get_joke())
 
+
+@ultroid_cmd(pattern="insult$")
+async def gtruth(ult): 
+    m = await eor(ult, 'Generating...') 
+    nl = 'https://fungenerators.com/random/insult/new-age-insult/' 
+    ct = requests.get(nl).content 
+    bsc = bs(ct, 'html.parser', from_encoding='utf-8') 
+    cm = bsc.find_all('h2')[0].text  
+    await m.edit(f'{cm}')
 
 @ultroid_cmd(pattern="url ?(.*)")
 async def _(event):
