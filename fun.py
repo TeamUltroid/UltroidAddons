@@ -4,6 +4,9 @@
 • `{i}joke`
     To get joke.
 
+• `{i}insult`
+    Insult someone..
+
 • `{i}url <long url>`
     To get a shorten link of long link.
 
@@ -32,6 +35,7 @@
 
 import os
 import random
+from bs4 import BeautifulSoup as bs
 
 import moviepy.editor as m
 import requests
@@ -46,6 +50,15 @@ from . import *
 async def _(ult):
     await eor(ult, get_joke())
 
+
+@ultroid_cmd(pattern="insult$")
+async def gtruth(ult): 
+    m = await eor(ult, 'Generating...') 
+    nl = 'https://fungenerators.com/random/insult/new-age-insult/' 
+    ct = requests.get(nl).content 
+    bsc = bs(ct, 'html.parser', from_encoding='utf-8') 
+    cm = bsc.find_all('h2')[0].text  
+    await m.edit(f'{cm}')
 
 @ultroid_cmd(pattern="url ?(.*)")
 async def _(event):
@@ -84,6 +97,8 @@ async def _(event):
 
 @ultroid_cmd(pattern="gif ?(.*)")
 async def gifs(ult):
+    if BOT_MODE:
+        return await eor(ult, "You cant use this Command in BOT MODE")
     get = ult.pattern_match.group(1)
     if not get:
         return await eor(ult, "`.gif <query>`")
@@ -116,6 +131,8 @@ async def vtog(ult):
 
 @ultroid_cmd(pattern="xo$")
 async def xo(ult):
+    if BOT_MODE:
+        return await eor(ult, "You cant use this command in BOT MODE.")
     xox = await ultroid_bot.inline_query("xobot", "play")
     await xox[random.randrange(0, len(xox) - 1)].click(
         ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
@@ -138,6 +155,8 @@ async def echoify(e):
 
 @ultroid_cmd(pattern="wordi$")
 async def word(ult):
+    if BOT_MODE:
+        return await eor(ult, "You cant use this Command in BOT MODE.")
     game = await ultroid_bot.inline_query("wordibot", "play")
     await game[0].click(
         ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
@@ -147,6 +166,8 @@ async def word(ult):
 
 @ultroid_cmd(pattern="gps (.*)")
 async def map(ult):
+    if BOT_MODE:
+        return await eor(ult, "You cant use this Command in BOT MODE.")
     get = ult.pattern_match.group(1)
     if not get:
         return await eor(ult, "Use this command as `.gps <query>`")
