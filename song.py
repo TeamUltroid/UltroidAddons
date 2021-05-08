@@ -129,7 +129,7 @@ async def download_video(ult):
     else:
         thumb = None
     tail = time.time()
-    ttt = await uploader(rip_data['title']+".mp3", rip_data['title']+".mp3", tail, x, "Uploading " + rip_data['title'])
+    ttt = await uploader(rip_data['id']+".mp3", rip_data['title']+".mp3", tail, x, "Uploading " + rip_data['title'])
     CAPT = f"⫸ Song - {rip_data['title']}\n⫸ By - {rip_data['uploader']}\n"
     await ultroid_bot.send_file(
         ult.chat_id,
@@ -210,7 +210,7 @@ async def download_vsong(ult):
     except Exception as e:
         return await x.edit(f"{str(type(e)): {str(e)}}")
     tail = time.time()
-    ttt = await uploader(rip_data['title']+".mp4", rip_data['title']+".mp4", tail, x, "Uploading " + rip_data['title'])
+    ttt = await uploader(rip_data['id']+".mp4", rip_data['title']+".mp4", tail, x, "Uploading " + rip_data['title'])
     CAPT = f"⫸ Song - {rip_data['title']}\n⫸ By - {rip_data['uploader']}\n"
     await ultroid_bot.send_file(
         ult.chat_id,
