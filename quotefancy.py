@@ -25,6 +25,7 @@ async def quotefancy(e):
     try:
         await ultroid_bot.send_file(e.chat_id, img)
         os.remove(img)
+        await mes.delete()
     except ChatSendMediaForbiddenError:
         quote = get_quote("text")
         await eor(e,f"`{quote}`")
