@@ -19,9 +19,6 @@
 • `{i}gif <your query>`
     Sends the desired gif related to your query.
 
-• `{i}vtog <in reply to a video>`
-    Converts any video to a gif with low time limit(takes time).
-
 • `{i}xo`
     Opens tic tac game only where using inline mode is allowed.
 
@@ -37,7 +34,6 @@ import os
 import random
 from bs4 import BeautifulSoup as bs
 
-import moviepy.editor as m
 import requests
 from pyjokes import get_joke
 from telethon.errors import ChatSendMediaForbiddenError
@@ -93,40 +89,6 @@ async def _(event):
         await hm.delete()
     except ChatSendMediaForbiddenError:
         await eor(event, r["answer"])
-
-
-@ultroid_cmd(pattern="gif ?(.*)")
-async def gifs(ult):
-    if BOT_MODE:
-        return await eor(ult, "You cant use this Command in BOT MODE")
-    get = ult.pattern_match.group(1)
-    if not get:
-        return await eor(ult, "`.gif <query>`")
-    m = await eor(ult, "`Searching gif ...`")
-    gifs = await ultroid_bot.inline_query("gif", f"{get}")
-    try:
-        await gifs[0].click(
-            ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
-        )
-        await m.delete()
-    except ChatSendGifsForbiddenError:
-        await m.edit("`Sending Gif is Restricted in this Chat !!`")
-
-
-@ultroid_cmd(pattern="vtog$")
-async def vtog(ult):
-    reply = await ult.get_reply_message()
-    if reply is None:
-        return await ult.edit("`Reply to any Video`")
-    xx = await eor(ult, "`Processing Takes Time...`")
-    lol = await ultroid_bot.download_media(reply.media)
-    file_name = "ultroid.gif"
-    clip = m.VideoFileClip(lol).subclip((4.3), (5.8)).resize(0.3)
-    clip.write_gif(file_name)
-    await ultroid_bot.send_file(ult.chat_id, file_name, reply_to=ult.reply_to_msg_id)
-    os.remove(lol)
-    os.remove(file_name)
-    await xx.delete()
 
 
 @ultroid_cmd(pattern="xo$")
