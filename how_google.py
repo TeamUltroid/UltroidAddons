@@ -21,7 +21,7 @@ from . import *
 
 @ultroid_cmd("htg ?(.*)")
 async def _(e):
-    text = event.pattern_match.group(1)
+    text = e.pattern_match.group(1)
     if not text:
         return await eod(e, "`Give some text`")
     url = "https://da.gd/s?url=https://lmgtfy.com/?q={}%26iie=1".format(
