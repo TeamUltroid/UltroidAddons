@@ -13,9 +13,6 @@
 • `{i}decide`
     Decide something.
 
-• `{i}gif <your query>`
-    Sends the desired gif related to your query.
-
 • `{i}xo`
     Opens tic tac game only where using inline mode is allowed.
 
