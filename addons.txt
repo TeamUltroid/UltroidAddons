@@ -1,3 +1,4 @@
+fonttools
 covid
 gtts
 pokedex.py
