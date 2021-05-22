@@ -19,7 +19,7 @@ import requests
 from . import *
 
 
-@ultroid_cmd("htg ?(.*)")
+@ultroid_cmd(pattern="htg ?(.*)")
 async def _(e):
     text = e.pattern_match.group(1)
     if not text:
