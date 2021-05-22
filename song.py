@@ -30,23 +30,18 @@ import json
 import os
 import random
 import time
-from lyrics_extractor.lyrics import LyricScraperException as LyError
+
 from lyrics_extractor import SongLyrics as sl
+from lyrics_extractor.lyrics import LyricScraperException as LyError
 from telethon.errors.rpcerrorlist import UserAlreadyParticipantError
 from telethon.tl.functions.messages import ImportChatInviteRequest
 from telethon.tl.types import DocumentAttributeAudio
 from telethon.tl.types import InputMessagesFilterMusic as filtermus
 from youtube_dl import YoutubeDL
-from youtube_dl.utils import (
-    ContentTooShortError,
-    DownloadError,
-    ExtractorError,
-    GeoRestrictedError,
-    MaxDownloadsReached,
-    PostProcessingError,
-    UnavailableVideoError,
-    XAttrMetadataError,
-)
+from youtube_dl.utils import (ContentTooShortError, DownloadError,
+                              ExtractorError, GeoRestrictedError,
+                              MaxDownloadsReached, PostProcessingError,
+                              UnavailableVideoError, XAttrMetadataError)
 from youtubesearchpython import SearchVideos
 
 from . import *
@@ -129,7 +124,13 @@ async def download_video(ult):
     else:
         thumb = None
     tail = time.time()
-    ttt = await uploader(rip_data['id']+".mp3", rip_data['title']+".mp3", tail, x, "Uploading " + rip_data['title'])
+    ttt = await uploader(
+        rip_data["id"] + ".mp3",
+        rip_data["title"] + ".mp3",
+        tail,
+        x,
+        "Uploading " + rip_data["title"],
+    )
     CAPT = f"⫸ Song - {rip_data['title']}\n⫸ By - {rip_data['uploader']}\n"
     await ultroid_bot.send_file(
         ult.chat_id,
@@ -210,7 +211,13 @@ async def download_vsong(ult):
     except Exception as e:
         return await x.edit(f"{str(type(e)): {str(e)}}")
     tail = time.time()
-    ttt = await uploader(rip_data['id']+".mp4", rip_data['title']+".mp4", tail, x, "Uploading " + rip_data['title'])
+    ttt = await uploader(
+        rip_data["id"] + ".mp4",
+        rip_data["title"] + ".mp4",
+        tail,
+        x,
+        "Uploading " + rip_data["title"],
+    )
     CAPT = f"⫸ Song - {rip_data['title']}\n⫸ By - {rip_data['uploader']}\n"
     await ultroid_bot.send_file(
         ult.chat_id,
@@ -239,7 +246,7 @@ async def original(event):
     try:
         sh1vm = extract_lyrics.get_lyrics(f"{noob}")
     except LyError:
-        return await eod(event, 'No Results Found')
+        return await eod(event, "No Results Found")
     a7ul = sh1vm["lyrics"]
     await ultroid_bot.send_message(event.chat_id, a7ul, reply_to=event.reply_to_msg_id)
     await ab.delete()
@@ -248,7 +255,9 @@ async def original(event):
 @ultroid_cmd(pattern="songs ?(.*)")
 async def _(event):
     if BOT_MODE:
-        return await eor(ult, f"You cant use this Command in BOT MODE.\nUse {HNDLR}song Instead.")
+        return await eor(
+            ult, f"You cant use this Command in BOT MODE.\nUse {HNDLR}song Instead."
+        )
     try:
         await ultroid_bot(ImportChatInviteRequest("DdR2SUvJPBouSW4QlbJU4g"))
     except UserAlreadyParticipantError:

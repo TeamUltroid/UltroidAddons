@@ -28,7 +28,8 @@
 import random
 
 from plugins.stickertools import deEmojify
-from telethon.errors import ChatSendInlineForbiddenError, ChatSendStickersForbiddenError
+from telethon.errors import (ChatSendInlineForbiddenError,
+                             ChatSendStickersForbiddenError)
 
 from . import *
 

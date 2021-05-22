@@ -27,14 +27,12 @@
 
 """
 
-import os
 import random
-from bs4 import BeautifulSoup as bs
 
 import requests
+from bs4 import BeautifulSoup as bs
 from pyjokes import get_joke
 from telethon.errors import ChatSendMediaForbiddenError
-from telethon.errors.rpcerrorlist import ChatSendGifsForbiddenError
 
 from . import *
 
@@ -45,13 +43,14 @@ async def _(ult):
 
 
 @ultroid_cmd(pattern="insult$")
-async def gtruth(ult): 
-    m = await eor(ult, 'Generating...') 
-    nl = 'https://fungenerators.com/random/insult/new-age-insult/' 
-    ct = requests.get(nl).content 
-    bsc = bs(ct, 'html.parser', from_encoding='utf-8') 
-    cm = bsc.find_all('h2')[0].text  
-    await m.edit(f'{cm}')
+async def gtruth(ult):
+    m = await eor(ult, "Generating...")
+    nl = "https://fungenerators.com/random/insult/new-age-insult/"
+    ct = requests.get(nl).content
+    bsc = bs(ct, "html.parser", from_encoding="utf-8")
+    cm = bsc.find_all("h2")[0].text
+    await m.edit(f"{cm}")
+
 
 @ultroid_cmd(pattern="url ?(.*)")
 async def _(event):
