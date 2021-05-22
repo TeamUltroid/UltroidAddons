@@ -447,6 +447,7 @@ async def _(event):
     )
     os.remove("sticker.webp")
 
+
 import asyncio
 
 from telethon import events
@@ -484,5 +485,6 @@ async def _(event):
         else:
             await ac.delete()
             await ultroid_bot.send_message(event.chat_id, response.message)
+
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
