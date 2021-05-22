@@ -18,8 +18,8 @@ jobs:
           pip install black isort autoflake
       - name: lint with isort and black
         run: |
-          black *
-          isort *
+          black *py
+          isort *py
           autoflake --in-place --recursive --remove-all-unused-imports --remove-unused-variables --ignore-init-module-imports *
       # commit changes
       - uses: stefanzweifel/git-auto-commit-action@v4
