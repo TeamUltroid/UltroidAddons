@@ -495,4 +495,5 @@ async def _(event):
     )
     os.remove("sticker.webp")
 
+
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
