@@ -21,7 +21,7 @@ async def _(e):
   if not u:
     u = "me"
   a = await ultroid_bot.get_messages(e.chat_id, 0, from_user=u)
-  await eor(e, f'Total msgs of {u} here = {a.total}")
+  await eor(e, f"Total msgs of {u} here = {a.total}")
   
 
 HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})  
