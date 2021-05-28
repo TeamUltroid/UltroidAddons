@@ -9,7 +9,7 @@ Plugins repository for [@TheUltroid](https://github.com/TeamUltroid/Ultroid).
 If you want to contribute to this repository (adding your plugins/porting from other bots), use the format given below and create a pull request.   
 ⚠️ First check whether the stuff you push works. Also, if the pull request doesn't follow the below format, it will be closed without prior notice.
 
-```dart
+```python
 # Credits @username (creator of plugin and who ported)   
    
 # Ported from (if ported else skip)   
