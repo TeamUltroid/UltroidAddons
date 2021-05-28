@@ -51,6 +51,3 @@ async def encod(e):
         await eor(e, f"**=>> Decoded Text :** `{match}`\n\n**=>> OUTPUT :**\n`{atc}`")
     except Exception as p:
         await eor(e, "**ERROR :** " + str(p))
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

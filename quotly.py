@@ -494,6 +494,3 @@ async def _(event):
         event.chat_id, "sticker.webp", reply_to=event.reply_to_msg_id
     )
     os.remove("sticker.webp")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

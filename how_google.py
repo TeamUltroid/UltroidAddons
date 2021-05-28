@@ -32,6 +32,3 @@ async def _(e):
         await eor(e, "[{}]({})\n`Thank me Later 🙃` ".format(text, response.rstrip()))
     else:
         await eod(e, "`something is wrong. please try again later.`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

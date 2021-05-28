@@ -63,6 +63,3 @@ async def manga(ult):
         return await msg.edit(INLOCK)
     except Exception:
         return await msg.edit("`No Results Found ...`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

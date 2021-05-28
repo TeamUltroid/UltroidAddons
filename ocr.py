@@ -48,6 +48,3 @@ async def ocrify(ult):
     ).json()
     trt = gr["ParsedResults"][0]["ParsedText"]
     await msg.edit(f"**🎉 OCR PORTAL\n\nRESULTS ~ ** `{trt}`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

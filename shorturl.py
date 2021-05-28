@@ -35,6 +35,3 @@ async def vom(event):
         await a.edit(short)
     except Exception as e:
         await a.edit("SomeThing Went Wrong. \n**ERROR** : " + str(e))
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

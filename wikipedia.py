@@ -30,6 +30,3 @@ async def wiki(e):
         await msg.edit(te)
     except Exception as e:
         await msg.edit(f"**ERROR** : {str(e)}")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

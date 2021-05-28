@@ -38,10 +38,16 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 from telethon.tl.types import DocumentAttributeAudio
 from telethon.tl.types import InputMessagesFilterMusic as filtermus
 from youtube_dl import YoutubeDL
-from youtube_dl.utils import (ContentTooShortError, DownloadError,
-                              ExtractorError, GeoRestrictedError,
-                              MaxDownloadsReached, PostProcessingError,
-                              UnavailableVideoError, XAttrMetadataError)
+from youtube_dl.utils import (
+    ContentTooShortError,
+    DownloadError,
+    ExtractorError,
+    GeoRestrictedError,
+    MaxDownloadsReached,
+    PostProcessingError,
+    UnavailableVideoError,
+    XAttrMetadataError,
+)
 from youtubesearchpython import SearchVideos
 
 from . import *
@@ -283,6 +289,3 @@ async def _(event):
         await okla.delete()
     except Exception:
         return await eor(event, "`Song not found.`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

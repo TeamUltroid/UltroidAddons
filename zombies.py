@@ -109,6 +109,3 @@ async def rm_deletedacc(show):
     await ehh.edit(del_status)
     await asyncio.sleep(2)
     await show.delete()
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

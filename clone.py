@@ -20,8 +20,7 @@
 import html
 
 from telethon.tl.functions.account import UpdateProfileRequest
-from telethon.tl.functions.photos import (DeletePhotosRequest,
-                                          UploadProfilePhotoRequest)
+from telethon.tl.functions.photos import DeletePhotosRequest, UploadProfilePhotoRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
@@ -148,6 +147,3 @@ async def get_full_user(event):
                 return replied_user, None
             except Exception as e:
                 return None, e
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

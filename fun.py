@@ -118,6 +118,3 @@ async def map(ult):
         ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
     )
     await ult.delete()
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

@@ -28,8 +28,7 @@
 import random
 
 from plugins.stickertools import deEmojify
-from telethon.errors import (ChatSendInlineForbiddenError,
-                             ChatSendStickersForbiddenError)
+from telethon.errors import ChatSendInlineForbiddenError, ChatSendStickersForbiddenError
 
 from . import *
 
@@ -136,6 +135,3 @@ async def nope(doit):
         await a.delete()
     except ChatSendInlineForbiddenError:
         await eor(doit, "`Boss ! I cant use inline things here...`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
