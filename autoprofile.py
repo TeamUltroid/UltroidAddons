@@ -10,14 +10,21 @@
 """
 ✘ Commands Available -
 
-• `{i}autoname` - Starts AUTONAME.
-• `{i}stopname` - Stops AUTONAME.
+• `{i}autoname`
+   `Starts AUTONAME`.
 
-• `{i}autobio` - Starts AUTOBIO.
-• `{i}stopbio` - Stops AUTOBIO.
+• `{i}stopname`
+   `Stops AUTONAME.`
+
+• `{i}autobio`
+   `Starts AUTOBIO.`
+
+• `{i}stopbio`
+   `Stops AUTOBIO.`
 """
 
 from . import *
+import random
 from telethon.tl.functions.account import UpdateProfileRequest
 
 
@@ -29,6 +36,7 @@ async def autoname_(event):
       await eor(event, "`AUTONAME has been Stopped !`")
       return
     udB.set("AUTONAME", "True")
+    await eod(event, "`Started AUTONAME`")
     while True:
         getn = udB.get("AUTONAME")
         if not getn:
@@ -42,7 +50,6 @@ async def autoname_(event):
                 )
             )
         await asyncio.sleep(1000)
-    await eor(event, "`AutoName has Been Started`")
 
 
 @ultroid_cmd(pattern="(auto|stop)bio$")
@@ -53,6 +60,7 @@ async def autoname_(event):
       await eor(event, "`AUTOBIO has been Stopped !`")
       return
     udB.set("AUTOBIO", "True")
+    await eod(event, "`Started AUTONAME`")
     BIOS = ["Busy Today !",
             "ULTROID USER",
             "Enjoying Life!",
@@ -66,11 +74,10 @@ async def autoname_(event):
         BIOMSG = random.choice(BIOS)
         DM = time.strftime("%d-%m-%y")
         HM = time.strftime("%H:%M")
-        name = f"📅{DMY} | {BIOMSG} | ⌚️{HM}"
+        name = f"📅{DM} | {BIOMSG} | ⌚️{HM}"
         await ultroid_bot(
                 UpdateProfileRequest( 
-                    about=bio,
+                    about=name,
                 )
             )
         await asyncio.sleep(1000)
-    await eor(event, "`AUTOBIO has Been Started`")
