@@ -4,9 +4,8 @@
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
-# .tweet made for ultroid
 
-# .uta ported from Dark-Cobra
+# Ported Plugin
 
 """
 ✘ Commands Available -
@@ -14,6 +13,8 @@
 • `{i}autoname` - Starts AUTONAME.
 • `{i}stopname` - Stops AUTONAME.
 
+• `{i}autobio` - Starts AUTOBIO.
+• `{i}stopbio` - Stops AUTOBIO.
 """
 
 from . import *
@@ -43,3 +44,33 @@ async def autoname_(event):
         await asyncio.sleep(1000)
     await eor(event, "`AutoName has Been Started`")
 
+
+@ultroid_cmd(pattern="(auto|stop)bio$")
+async def autoname_(event):
+    match = event.pattern_match.group(1)
+    if match == "stop":
+      udB.delete("AUTOBIO")
+      await eor(event, "`AUTOBIO has been Stopped !`")
+      return
+    udB.set("AUTOBIO", "True")
+    BIOS = ["Busy Today !",
+            "ULTROID USER",
+            "Enjoying Life!",
+            "Unique as Always!"
+            "Sprinkling a bit of magic",
+            "Intelligent !"]
+    while True:
+        getn = udB.get("AUTOBIO")
+        if not getn:
+            return
+        BIOMSG = random.choice(BIOS)
+        DM = time.strftime("%d-%m-%y")
+        HM = time.strftime("%H:%M")
+        name = f"📅{DMY} | {BIOMSG} | ⌚️{HM}"
+        await ultroid_bot(
+                UpdateProfileRequest( 
+                    about=bio,
+                )
+            )
+        await asyncio.sleep(1000)
+    await eor(event, "`AUTOBIO has Been Started`")
