@@ -1,7 +1,6 @@
-# Credits @Dappzx
-# Ported from Userge
+# Credits @Dappzx & Ported by Eris
+# Base on Userge
 # Ported for Ultroid < https://github.com/TeamUltroid/Ultroid >   
-# Ported to Ultroid by eris
 
 from asyncio import TimeoutError
 from telethon import events
