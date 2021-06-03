@@ -38,6 +38,9 @@ async def gen(e):
             return await eris.edit(f"Error: `{ex}`")
 
         msg = response.message.message
+        if "Satisfied with the result" in msg:
+           msg = msg.replace("Satisfied with the result? Follow us!","").replace("🌐 BOT CHANNEL: @hctoolschannel","").replace("🌐 BOT GROUP: @hctools","").replace("💻 SOURCE CODE: https://github.com/hctools/hcdrill-tg","")
+           msg = f"Dec by: @{uname}\n\n{msg}".replace("[>]","[•]")
         await eris.respond(msg, link_preview=False)
         await eris.delete()
         await ultroid_bot.send_read_acknowledge(chat.id)
