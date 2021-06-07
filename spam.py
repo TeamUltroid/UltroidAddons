@@ -73,20 +73,13 @@ async def tiny_pic_spam(e):
 
 @ultroid_cmd(pattern="delayspam ?(.*)")
 async def delayspammer(e):
-    args = e.pattern_match.group(1)
-    print(args)
-
     try:
-        args = args.split(" ", 2)
-        delay = float(args[0])
-        count = int(args[1])
-        msg = str(args[2])
+        args = e.text.split(" ", 3)
+        delay = float(args[1])
+        count = int(args[2])
+        msg = str(args[3])
     except BaseException:
         return await e.edit(f"**Usage :** {HNDLR}delayspam <delay time> <count> <msg>")
-
-    if not msg[0].isalpha() and msg[0] in ("/", "#", "@", "!"):
-        return
-
     await e.delete()
     try:
         for i in range(count):
