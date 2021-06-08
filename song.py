@@ -56,7 +56,7 @@ from . import *
 @ultroid_cmd(pattern="song ?(.*)")
 async def download_video(ult):
     a = ult.text
-    if a[5] == "s":
+    if len(a) >= 5 and a[5] == "s":
         return
     x = await eor(ult, "Searching...")
     url = ult.pattern_match.group(1)
@@ -260,10 +260,6 @@ async def original(event):
 
 @ultroid_cmd(pattern="songs ?(.*)")
 async def _(event):
-    if BOT_MODE:
-        return await eor(
-            ult, f"You cant use this Command in BOT MODE.\nUse {HNDLR}song Instead."
-        )
     try:
         await ultroid_bot(ImportChatInviteRequest("DdR2SUvJPBouSW4QlbJU4g"))
     except UserAlreadyParticipantError:
