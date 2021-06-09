@@ -2,6 +2,10 @@
 # Ported to ultroid by eris 
 # Ported for Ultroid < https://github.com/TeamUltroid/Ultroid >
 
+✘ Commands Available -
+• `{i}sniff <upper text> ; <lower text> <reply to File>`
+    To Decrypt Config,
+
 from asyncio import TimeoutError
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
