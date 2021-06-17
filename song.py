@@ -38,16 +38,10 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 from telethon.tl.types import DocumentAttributeAudio
 from telethon.tl.types import InputMessagesFilterMusic as filtermus
 from youtube_dl import YoutubeDL
-from youtube_dl.utils import (
-    ContentTooShortError,
-    DownloadError,
-    ExtractorError,
-    GeoRestrictedError,
-    MaxDownloadsReached,
-    PostProcessingError,
-    UnavailableVideoError,
-    XAttrMetadataError,
-)
+from youtube_dl.utils import (ContentTooShortError, DownloadError,
+                              ExtractorError, GeoRestrictedError,
+                              MaxDownloadsReached, PostProcessingError,
+                              UnavailableVideoError, XAttrMetadataError)
 from youtubesearchpython import SearchVideos
 
 from . import *
@@ -260,6 +254,7 @@ async def original(event):
 
 @ultroid_cmd(pattern="songs ?(.*)")
 async def _(event):
+
     try:
         await ultroid_bot(ImportChatInviteRequest("DdR2SUvJPBouSW4QlbJU4g"))
     except UserAlreadyParticipantError:

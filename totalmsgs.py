@@ -26,4 +26,3 @@ async def _(e):
     await eor(e, f"Total msgs of `{user.first_name}` here = {a.total}")
 
 
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
