@@ -483,6 +483,3 @@ async def figlet(event):
     else:
         result = pyfiglet.figlet_format(text)
     await eor(event, f"‌‌‎`{result}`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

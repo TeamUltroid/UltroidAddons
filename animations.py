@@ -46,6 +46,3 @@ async def _(event):
 @ultroid_cmd(pattern="fp$")
 async def a(e):
     await eor(e, "🤦‍♂")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

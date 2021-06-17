@@ -48,6 +48,3 @@ async def _(event):
         except Exception as e:
             print(e)
         await asyncio.sleep(0.4)
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

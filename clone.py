@@ -148,6 +148,3 @@ async def get_full_user(event):
                 return replied_user, None
             except Exception as e:
                 return None, e
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

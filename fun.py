@@ -86,8 +86,6 @@ async def _(event):
 
 @ultroid_cmd(pattern="xo$")
 async def xo(ult):
-    if BOT_MODE:
-        return await eor(ult, "You cant use this command in BOT MODE.")
     xox = await ultroid_bot.inline_query("xobot", "play")
     await xox[random.randrange(0, len(xox) - 1)].click(
         ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
@@ -97,8 +95,6 @@ async def xo(ult):
 
 @ultroid_cmd(pattern="wordi$")
 async def word(ult):
-    if BOT_MODE:
-        return await eor(ult, "You cant use this Command in BOT MODE.")
     game = await ultroid_bot.inline_query("wordibot", "play")
     await game[0].click(
         ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
@@ -108,8 +104,6 @@ async def word(ult):
 
 @ultroid_cmd(pattern="gps (.*)")
 async def map(ult):
-    if BOT_MODE:
-        return await eor(ult, "You cant use this Command in BOT MODE.")
     get = ult.pattern_match.group(1)
     if not get:
         return await eor(ult, "Use this command as `.gps <query>`")
@@ -118,6 +112,3 @@ async def map(ult):
         ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
     )
     await ult.delete()
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

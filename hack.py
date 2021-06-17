@@ -135,6 +135,3 @@ async def _(event):
     MSG += "😂 Don't worry only i can open this 😎😎.. If u don't"
     MSG += f"Believe try to download` 🙂\n\n{ME}"
     await xx.edit(MSG)
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

@@ -140,6 +140,3 @@ async def pokecard(event):
     except BaseException:
         await eor(event, "`Be sure To give correct Name`")
         return
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

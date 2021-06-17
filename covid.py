@@ -34,6 +34,3 @@ async def coronish(event):
         )
     except ValueError:
         await eor(event, f"It seems that Country {country} is invalid!")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

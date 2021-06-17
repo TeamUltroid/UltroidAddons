@@ -14,6 +14,9 @@
 • `{i}uta <search query>`
     Inline song search and downloader.
 
+• `{i}stic <emoji>`
+    Get random stickers from emoji.
+
 • `{i}frog <text>`
     make text stickers.
 
@@ -43,6 +46,27 @@ async def tweet(e):
     try:
         results = await ultroid_bot.inline_query("twitterstatusbot", text)
         await results[0].click(
+            e.chat_id,
+            silent=True,
+            hide_via=True,
+        )
+        await wai.delete()
+    except ChatSendInlineForbiddenError:
+        await wai.edit("`Boss ! I cant use inline things here...`")
+    except ChatSendStickersForbiddenError:
+        await wai.edit("Sorry boss, I can't send Sticker Here !!")
+
+
+@ultroid_cmd(pattern="stic ?(.*)")
+async def tweet(e):
+    wai = await eor(e, "`Processing...`")
+    text = e.pattern_match.group(1)
+    if text is None:
+        return await wai.edit("`Give me Some Emoji !`")
+    try:
+        results = await ultroid_bot.inline_query("sticker", text)
+        num = random.randrange(0, len(results) -1)
+        await results[num].click(
             e.chat_id,
             silent=True,
             hide_via=True,
@@ -136,6 +160,3 @@ async def nope(doit):
         await a.delete()
     except ChatSendInlineForbiddenError:
         await eor(doit, "`Boss ! I cant use inline things here...`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

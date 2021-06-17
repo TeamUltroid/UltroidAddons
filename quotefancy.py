@@ -33,6 +33,3 @@ async def quotefancy(e):
         await eor(e, f"`{quote}`")
     except Exception as e:
         await eor(e, f"**ERROR** - {str(e)}")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

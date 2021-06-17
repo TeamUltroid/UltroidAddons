@@ -23,6 +23,3 @@ async def _(ult):
         return await u.edit(results)
     except Exception:
         await u.edit("`Something went wrong LOL ...`")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

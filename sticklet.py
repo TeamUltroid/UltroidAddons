@@ -63,6 +63,3 @@ async def sticklet(event):
         reply_to=event.message.reply_to_msg_id,
     )
     os.remove(FONT_FILE)
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
