@@ -59,6 +59,8 @@ async def tweet(e):
 
 @ultroid_cmd(pattern="stic ?(.*)")
 async def tweet(e):
+    if len(e.text) > 5 and e.text[5] != " ":
+        return
     wai = await eor(e, "`Processing...`")
     text = e.pattern_match.group(1)
     if text is None:
