@@ -50,7 +50,7 @@ from . import *
 @ultroid_cmd(pattern="song ?(.*)")
 async def download_video(ult):
     a = ult.text
-    if len(a) >= 5 and a[5] == "s":
+    if len(a) <= 5 and a[5] == "s":
         return
     x = await eor(ult, "Searching...")
     url = ult.pattern_match.group(1)
