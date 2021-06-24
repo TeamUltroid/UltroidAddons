@@ -6,6 +6,12 @@
 
 from . import *
 
+"""
+✘ Commands Available
+
+•`{i}tscan`
+   Get The channel/groups user is in.\nReply to Message or give username/id"
+"""
 
 @ultroid_cmd(pattern="tscan ?(.*)")
 async def tscan(e):
@@ -21,10 +27,3 @@ async def tscan(e):
         a = await bot.get_response()
     await eor(e, a.message)
     await ultroid_bot.send_read_acknowledge(chat)
-
-
-HELP.update(
-    {
-        "tscan": f"`{HNDLR}tscan` - Get The channel/groups user is in.\nReply to Message or give username/id"
-    }
-)
