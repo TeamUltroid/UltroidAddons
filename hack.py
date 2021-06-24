@@ -124,11 +124,8 @@ async def _(event):
     await asyncio.sleep(1)
     sub = "https://drive.google.com/file/d/"
     LINKS = [
-        "1EHJSkt64RZEw7a2h8xkRqZSv_4dWhB02/view?usp=sharing",
-        "1YaUfNVrHU7zSolTuFN3HyHJuTWQtdL2r/view?usp=sharing",
-        "1hPUfr27UtU0XjtC20lXjY9G3D9jR5imj/view?usp=sharing",
-        "1o2wXirqy1RZqnUMgsoM8qX4j4iyse26X/view?usp=sharing",
-        "15-zZVyEkCFA14mFfD-2DKN-by1YOWf49/view?usp=sharing",
+        "1JNA0HY1v8ClBDU9PhmyQ-z8KuLgvteT5/view?usp=sharing",
+        "1HXclQumyRIRy9STTiHcTAHpSMM2mj5ZF/view?usp=sharing",
     ]
     ME = sub + LINKS[random.randrange(0, len(LINKS))]
     MSG = "`pdf created click link below to download data\n\n"
