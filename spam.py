@@ -38,7 +38,6 @@ async def tmeme(e):
 
 @ultroid_cmd(pattern="spam")
 async def spammer(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text
         counter = int(message[6:8])
         spam_message = str(e.text[8:])
@@ -48,7 +47,6 @@ async def spammer(e):
 
 @ultroid_cmd(pattern="bigspam")
 async def bigspam(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         message = e.text
         counter = int(message[9:13])
         spam_message = str(e.text[13:])
