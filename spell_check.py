@@ -17,7 +17,7 @@ from . import *
 
 @ultroid_cmd(pattern="spcheck ?(.*)")
 async def spellchk(event):
-    to_check = event.pattern_to_check.group(1)
+    to_check = event.pattern_match.group(1)
     if not to_check and event.is_reply:
         reply = await event.get_reply_message()
         if reply.text:
