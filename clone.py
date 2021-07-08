@@ -32,7 +32,7 @@ from . import *
 async def _(event):
     eve = await eor(event, "`Processing...`")
     reply_message = await event.get_reply_message()
-    whoiam = await ultroid_bot(GetFullUserRequest(ultroid_bot.uid))
+    whoiam = await event.client(GetFullUserRequest(ultroid_bot.uid))
     if whoiam.about:
         mybio = str(ultroid_bot.me.id) + "01"
         udB.set(f"{mybio}", whoiam.about)  # saving bio for revert
@@ -57,13 +57,13 @@ async def _(event):
     user_bio = replied_user.about
     if user_bio is not None:
         user_bio = replied_user.about
-    await ultroid_bot(UpdateProfileRequest(first_name=first_name))
-    await ultroid_bot(UpdateProfileRequest(last_name=last_name))
-    await ultroid_bot(UpdateProfileRequest(about=user_bio))
-    pfile = await ultroid_bot.upload_file(profile_pic)  # pylint:disable=E060
-    await ultroid_bot(UploadProfilePhotoRequest(pfile))
+    await event.client(UpdateProfileRequest(first_name=first_name))
+    await event.client(UpdateProfileRequest(last_name=last_name))
+    await event.client(UpdateProfileRequest(about=user_bio))
+    pfile = await event.client.upload_file(profile_pic)  # pylint:disable=E060
+    await event.client(UploadProfilePhotoRequest(pfile))
     await eve.delete()
-    await ultroid_bot.send_message(
+    await event.client.send_message(
         event.chat_id, f"**I am `{first_name}` from now...**", reply_to=reply_message
     )
 
@@ -84,12 +84,13 @@ async def _(event):
     if lname:
         ok = lname
     n = 1
-    await ultroid_bot(
+    client = event.client
+    await client(
         DeletePhotosRequest(await event.client.get_profile_photos("me", limit=n))
     )
-    await ultroid_bot(UpdateProfileRequest(about=bio))
-    await ultroid_bot(UpdateProfileRequest(first_name=name))
-    await ultroid_bot(UpdateProfileRequest(last_name=ok))
+    await client(UpdateProfileRequest(about=bio))
+    await client(UpdateProfileRequest(first_name=name))
+    await client(UpdateProfileRequest(last_name=ok))
     await eor(event, "Succesfully reverted to your account back !")
     udB.delete(f"{ultroid_bot.uid}01")
     udB.delete(f"{ultroid_bot.uid}02")
