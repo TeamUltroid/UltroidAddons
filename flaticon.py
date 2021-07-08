@@ -39,8 +39,8 @@ async def www(e):
             "img", src="https://media.flaticon.com/dist/min/img/loader.gif"
         )
         dome = results[random.randrange(0, len(results) - 1)]["data-src"]
-        urllib.request.urlretrieve(dome, "sticker.webp")
-        await ultroid_bot.send_file(e.chat.id, "sticker.webp")
+        await download_file(dome, "sticker.webp")
+        await e.reply(file="sticker.webp")
         os.remove("sticker.webp")
         await tt.delete()
     except Exception:
