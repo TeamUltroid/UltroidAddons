@@ -44,7 +44,7 @@ async def autoname_(event):
         DM = time.strftime("%d-%m-%y")
         HM = time.strftime("%H:%M")
         name = f"🕒{HM} ⚡{OWNER_NAME}⚡ {DM} 🗓️"
-        await ultroid_bot(
+        await event.client(
                 UpdateProfileRequest( 
                     first_name=name
                 )
@@ -75,7 +75,7 @@ async def autoname_(event):
         DM = time.strftime("%d-%m-%y")
         HM = time.strftime("%H:%M")
         name = f"📅{DM} | {BIOMSG} | ⌚️{HM}"
-        await ultroid_bot(
+        await event.client(
                 UpdateProfileRequest( 
                     about=name,
                 )
