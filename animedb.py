@@ -24,7 +24,7 @@ async def manga(ult):
     if keyword is None:
         return await msg.edit("`Provide a Keyword to search`")
     try:
-        animes = await ultroid_bot.inline_query("animedb_bot", f"<m> {keyword}")
+        animes = await ult.client.inline_query("animedb_bot", f"<m> {keyword}")
         await animes[0].click(
             ult.chat_id,
             reply_to=ult.reply_to_msg_id,
@@ -32,7 +32,5 @@ async def manga(ult):
             hide_via=True,
         )
         return await msg.delete()
-    except ChatSendInlineForbiddenError:
-        return await msg.edit(INLOCK)
     except Exception:
         return await msg.edit("`No Results Found ...`")
