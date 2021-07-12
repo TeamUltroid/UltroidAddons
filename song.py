@@ -132,7 +132,7 @@ async def download_video(ult):
         "Uploading " + rip_data["title"],
     )
     CAPT = f"⫸ Song - {rip_data['title']}\n⫸ By - {rip_data['uploader']}\n"
-    await ultroid_bot.send_file(
+    await ult.client.send_file(
         ult.chat_id,
         ttt,
         thumb=thumb,
@@ -219,7 +219,7 @@ async def download_vsong(ult):
         "Uploading " + rip_data["title"],
     )
     CAPT = f"⫸ Song - {rip_data['title']}\n⫸ By - {rip_data['uploader']}\n"
-    await ultroid_bot.send_file(
+    await ult.client.send_file(
         ult.chat_id,
         ttt,
         supports_streaming=True,
@@ -248,13 +248,13 @@ async def original(event):
     except LyError:
         return await eod(event, "No Results Found")
     a7ul = sh1vm["lyrics"]
-    await ultroid_bot.send_message(event.chat_id, a7ul, reply_to=event.reply_to_msg_id)
+    await event.client.send_message(event.chat_id, a7ul, reply_to=event.reply_to_msg_id)
     await ab.delete()
 
 
 @ultroid_cmd(pattern="songs ?(.*)")
 async def _(event):
-
+    ultroid_bot = event.client
     try:
         await ultroid_bot(ImportChatInviteRequest("DdR2SUvJPBouSW4QlbJU4g"))
     except UserAlreadyParticipantError:

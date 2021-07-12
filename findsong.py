@@ -20,7 +20,7 @@ async def _(event):
     reply_message = await event.get_reply_message()
     chat = "@auddbot"
     snku = await eor(event, "Identifying the song")
-    async with ultroid_bot.conversation(chat) as conv:
+    async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message("/start")
             await conv.get_response()

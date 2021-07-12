@@ -34,12 +34,12 @@ async def _(event):
     reply_message.sender
     ac = await eor(event, "```Making a Quote```")
     col = event.pattern_match.group(2)
-    async with ultroid_bot.conversation(chat) as conv:
+    async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=1031952739)
             )
-            er = await ultroid_bot.forward_messages(chat, reply_message)
+            er = await event.client.forward_messages(chat, reply_message)
             if not len(col) == 0:  # Bad way
                 await asyncio.sleep(3)
                 await er.reply(f"/q {col}")
@@ -51,7 +51,7 @@ async def _(event):
             await eor(event, ERR)
         else:
             await ac.delete()
-            await ultroid_bot.send_message(event.chat_id, response.message)
+            await event.client.send_message(event.chat_id, response.message)
 
 
 # Oringinal Source from Nicegrill: https://github.com/erenmetesar/NiceGrill/

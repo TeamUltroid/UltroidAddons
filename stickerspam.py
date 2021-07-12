@@ -26,7 +26,7 @@ async def _(e):
     if not (x and x.media and hasattr(x.media, "document")):
         return await eod(e, "`Reply To Sticker Only`")
     set = x.document.attributes[1]
-    sset = await ultroid_bot(
+    sset = await e.client(
         GetStickerSetRequest(
             InputStickerSetID(
                 id=set.stickerset.id,
@@ -38,7 +38,7 @@ async def _(e):
     docs = [
         utils.get_input_document(x)
         for x in (
-            await bot(GetStickerSetRequest(InputStickerSetShortName(pack)))
+            await e.client(GetStickerSetRequest(InputStickerSetShortName(pack)))
         ).documents
     ]
     for xx in docs:
