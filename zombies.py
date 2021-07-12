@@ -52,6 +52,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 @ultroid_cmd(pattern="zombies ?(.*)")
 async def rm_deletedacc(show):
+    ultroid_bot = show.client
     con = show.pattern_match.group(1).lower()
     del_u = 0
     del_status = "`No deleted accounts found, Group is clean`"
@@ -68,7 +69,6 @@ async def rm_deletedacc(show):
     chat = await show.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
-    # Well
     if not admin and not creator:
         await eor(show, "`I am not an admin here!`")
         return
