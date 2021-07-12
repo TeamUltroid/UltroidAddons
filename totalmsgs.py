@@ -21,8 +21,8 @@ async def _(e):
         user = (await e.get_reply_message()).sender_id
     else:
         user = "me"
-    a = await ultroid_bot.get_messages(e.chat_id, 0, from_user=user)
-    user = await ultroid_bot.get_entity(user)
+    a = await e.client.get_messages(e.chat_id, 0, from_user=user)
+    user = await e.client.get_entity(user)
     await eor(e, f"Total msgs of `{user.first_name}` here = {a.total}")
 
 
