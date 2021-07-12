@@ -64,7 +64,7 @@ async def ultd(event):
         cv2.imwrite("ult.png", lol)
         file = "ult.png"
     stick = await draw_meme_text(file, msg)
-    await ultroid_bot.send_file(
+    await event.client.send_file(
         event.chat_id, stick, force_document=False, reply_to=event.reply_to_msg_id
     )
     await xx.delete()
