@@ -118,7 +118,7 @@ async def pokedex(event):
 **Total**   : `{Stats['total']}`            `(7){move7}`
 **DESCRIPTION** : `{description}`
   """
-    await ultroid_bot.send_file(event.chat_id, lst, caption=cap)
+    await event.client.send_file(event.chat_id, lst, caption=cap)
     await xx.delete()
 
 
