@@ -26,4 +26,4 @@ async def tscan(e):
         await bot.send_message(str(mat))
         a = await bot.get_response()
     await eor(e, a.message)
-    await ultroid_bot.send_read_acknowledge(chat)
+    await e.client.send_read_acknowledge(chat)
