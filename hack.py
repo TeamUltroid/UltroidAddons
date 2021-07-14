@@ -120,7 +120,7 @@ async def _(event):
         "`100%\n█████████HACKED███████████ `\n\n\n  TERMINAL:\nDownloading Bruteforce-Telegram-0.1.tar.gz (9.3 kB)\nCollecting Data Package\n  Downloading Telegram-Data-Sniffer-7.1.1-py2.py3-none-any.whl (82 kB)\nBuilding wheel for Tg-Bruteforcing (setup.py): finished with status 'done'\nCreated wheel for telegram: filename=Telegram-Data-Sniffer-0.0.1-py3-none-any.whl size=1306 sha256=cb224caad7fe01a6649188c62303cd4697c1869fa12d280570bb6ac6a88e6b7e\n  Stored in directory: `"
     )
     await asyncio.sleep(2)
-    await xx.edit("`accoount hacked\n collecting all data\n converting data into pdf`")
+    await xx.edit("`account hacked\n collecting all data\n converting data into pdf`")
     await asyncio.sleep(1)
     sub = "https://drive.google.com/file/d/"
     LINKS = [
@@ -129,6 +129,6 @@ async def _(event):
     ]
     ME = sub + LINKS[random.randrange(0, len(LINKS))]
     MSG = "`pdf created click link below to download data\n\n"
-    MSG += "😂 Don't worry only i can open this 😎😎.. If u don't"
-    MSG += f" Believe try to download` 🙂\n\n{ME}"
+    MSG += " Don't worry only i can open this 😎😎.. If u don't"
+    MSG += f" Believe me, try to download` 🙂\n\n{ME}"
     await xx.edit(MSG)
