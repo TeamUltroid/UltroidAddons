@@ -38,11 +38,11 @@ async def sticklet(event):
     image = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
     fontsize = 230
-    font_file_ = await ultroid_bot.get_messages(
+    font_file_ = await event.client.get_messages(
         entity="@fonthub", filter=InputMessagesFilterDocument, limit=None
     )
     nfont = random.choice(font_file_)
-    FONT_FILE = await ultroid_bot.download_media(nfont)
+    FONT_FILE = await event.client.download_media(nfont)
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
     while draw.multiline_textsize(sticktext, font=font) > (512, 512):
         fontsize = 100
@@ -56,7 +56,7 @@ async def sticklet(event):
     image.save(image_stream, "WebP")
     image_stream.seek(0)
     await a.delete()
-    await ultroid_bot.send_message(
+    await event.client.send_message(
         event.chat_id,
         "{}".format(sticktext),
         file=image_stream,

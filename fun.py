@@ -76,8 +76,8 @@ async def _(event):
         message_id = event.reply_to_msg_id
     r = requests.get("https://yesno.wtf/api").json()
     try:
-        await ultroid_bot.send_message(
-            event.chat_id, r["answer"], reply_to=message_id, file=r["image"]
+        await event.reply(
+            r["answer"], file=r["image"]
         )
         await hm.delete()
     except ChatSendMediaForbiddenError:
@@ -86,7 +86,7 @@ async def _(event):
 
 @ultroid_cmd(pattern="xo$")
 async def xo(ult):
-    xox = await ultroid_bot.inline_query("xobot", "play")
+    xox = await ult.client.inline_query("xobot", "play")
     await xox[random.randrange(0, len(xox) - 1)].click(
         ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
     )
@@ -95,7 +95,7 @@ async def xo(ult):
 
 @ultroid_cmd(pattern="wordi$")
 async def word(ult):
-    game = await ultroid_bot.inline_query("wordibot", "play")
+    game = await ult.client.inline_query("wordibot", "play")
     await game[0].click(
         ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
     )
@@ -107,7 +107,7 @@ async def map(ult):
     get = ult.pattern_match.group(1)
     if not get:
         return await eor(ult, "Use this command as `.gps <query>`")
-    gps = await ultroid_bot.inline_query("openmap_bot", f"{get}")
+    gps = await ult.client.inline_query("openmap_bot", f"{get}")
     await gps[0].click(
         ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
     )

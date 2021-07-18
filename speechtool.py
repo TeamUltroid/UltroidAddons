@@ -73,10 +73,8 @@ async def _(event):
             required_file_name = required_file_name + ".opus"
         end = datetime.now()
         ms = (end - start).seconds
-        await ultroid_bot.send_file(
-            event.chat_id,
-            required_file_name,
-            reply_to=event.message.reply_to_msg_id,
+        await event.reply(
+            file=required_file_name,
             allow_cache=False,
             voice_note=True,
         )

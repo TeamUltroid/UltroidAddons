@@ -40,18 +40,17 @@ async def tweet(e):
     if text is None:
         return await wai.edit("`Give me Some Text !`")
     try:
-        results = await ultroid_bot.inline_query("twitterstatusbot", text)
+        results = await e.client.inline_query("twitterstatusbot", text)
         await results[0].click(
             e.chat_id,
             silent=True,
             hide_via=True,
         )
         await wai.delete()
-    except ChatSendInlineForbiddenError:
-        await wai.edit("`Boss ! I cant use inline things here...`")
     except ChatSendStickersForbiddenError:
         await wai.edit("Sorry boss, I can't send Sticker Here !!")
-
+    except Exception as m:
+        await eor(e, str(m))
 
 @ultroid_cmd(pattern="stic ?(.*)")
 async def tweet(e):
@@ -62,7 +61,7 @@ async def tweet(e):
     if text is None:
         return await wai.edit("`Give me Some Emoji !`")
     try:
-        results = await ultroid_bot.inline_query("sticker", text)
+        results = await e.client.inline_query("sticker", text)
         num = random.randrange(0, len(results) -1)
         await results[num].click(
             e.chat_id,
@@ -70,8 +69,6 @@ async def tweet(e):
             hide_via=True,
         )
         await wai.delete()
-    except ChatSendInlineForbiddenError:
-        await wai.edit("`Boss ! I cant use inline things here...`")
     except ChatSendStickersForbiddenError:
         await wai.edit("Sorry boss, I can't send Sticker Here !!")
 
@@ -86,29 +83,27 @@ async def honkasays(e):
         if not text.endswith("."):
             text = text + "."
         if len(text) <= 9:
-            results = await ultroid_bot.inline_query("honka_says_bot", text)
+            results = await e.client.inline_query("honka_says_bot", text)
             await results[2].click(
                 e.chat_id,
                 silent=True,
                 hide_via=True,
             )
         elif len(text) >= 14:
-            results = await ultroid_bot.inline_query("honka_says_bot", text)
+            results = await e.client.inline_query("honka_says_bot", text)
             await results[0].click(
                 e.chat_id,
                 silent=True,
                 hide_via=True,
             )
         else:
-            results = await ultroid_bot.inline_query("honka_says_bot", text)
+            results = await e.client.inline_query("honka_says_bot", text)
             await results[1].click(
                 e.chat_id,
                 silent=True,
                 hide_via=True,
             )
         await wai.delete()
-    except ChatSendInlineForbiddenError:
-        await wai.edit("`Boss ! I cant use inline things here...`")
     except ChatSendStickersForbiddenError:
         await wai.edit("Sorry boss, I can't send Sticker Here !!")
 
@@ -125,14 +120,11 @@ async def nope(doit):
                 doit,
                 "`Sir please give some query to search and download it for you..!`",
             )
-    sticcers = await ultroid_bot.inline_query("Lybot", f"{(deEmojify(ok))}")
-    try:
-        await sticcers[0].click(
+    sticcers = await doit.client.inline_query("Lybot", f"{(deEmojify(ok))}")
+    await sticcers[0].click(
             doit.chat_id,
             reply_to=doit.reply_to_msg_id,
             silent=True if doit.is_reply else False,
             hide_via=True,
         )
-        await a.delete()
-    except ChatSendInlineForbiddenError:
-        await eor(doit, "`Boss ! I cant use inline things here...`")
+    await a.delete()
