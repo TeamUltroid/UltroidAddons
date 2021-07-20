@@ -75,12 +75,8 @@ async def _(event):
         ms = (end - start).seconds
         await event.reply(
             file=required_file_name,
-            allow_cache=False,
-            voice_note=True,
-        )
+       )
         os.remove(required_file_name)
-        await eor(event, "Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
-        await asyncio.sleep(5)
-        await event.delete()
+        await eod(event, "Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
     except Exception as e:
         await eor(event, str(e))
