@@ -1,16 +1,15 @@
-#credits to @Harpia-Vieillot
-#For @TeamUltroid
-
+# credits to @Harpia-Vieillot
+# For @TeamUltroid
 """
 ✘ Commands Available
 
 • `{i}wreplace <count> <old word>;<new word>`
     Note : Don't use brackets
 
-    Ex. :
-    {i}replace 10;Hi;Hello
+  Ex. :
+   `{i}replace 10;Hi;Hello`
 
-   Use: It replaces a perticular word by new word (only in your msgs.) In many msgs at a time
+  Use: It replaces a perticular word by new word (only in your msgs.) In many msgs at a time
 """
 
 import asyncio
@@ -23,16 +22,15 @@ async def harpia(e):
         sed = str(e.text[10:])
         lst = sed.split(" ", 1)
         lmt = int(lst[0]) + 1
-        s = lst[1]
-        pist = s.split(";")
+        pist = lst[1].split(";")
         pist[1]
     except IndexError:
         return eod(e, f"Check Example : `{HNDLR}help {wreplace}`")
     async for x in e.client.iter_messages(e.chat_id, limit=lmt, from_user="me"):
-  	    msg = x.text
-  	    if pist[0] in msg:
-  	        m = msg.replace(pist[0], pist[1])
-  	        await x.edit(m)
+        msg = x.text
+        if pist[0] in msg:
+            m = msg.replace(pist[0], pist[1])
+            await x.edit(m)
             await asyncio.sleep(1)
     await eod(e, "Finished...")
 
