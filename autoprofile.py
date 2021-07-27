@@ -49,7 +49,7 @@ async def autoname_(event):
                     first_name=name
                 )
             )
-        await asyncio.sleep(1000)
+        await asyncio.sleep(1111)
 
 
 @ultroid_cmd(pattern="(auto|stop)bio$")
@@ -60,7 +60,7 @@ async def autoname_(event):
       await eor(event, "`AUTOBIO has been Stopped !`")
       return
     udB.set("AUTOBIO", "True")
-    await eod(event, "`Started AUTONAME`")
+    await eod(event, "`Started AUTOBIO`")
     BIOS = ["Busy Today !",
             "ULTROID USER",
             "Enjoying Life!",
@@ -80,4 +80,4 @@ async def autoname_(event):
                     about=name,
                 )
             )
-        await asyncio.sleep(1000)
+        await asyncio.sleep(1111)
