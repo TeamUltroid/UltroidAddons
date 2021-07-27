@@ -75,7 +75,7 @@ async def _(event):
         ms = (end - start).seconds
         await event.reply(
             file=required_file_name,
-       )
+        )
         os.remove(required_file_name)
         await eod(event, "Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
     except Exception as e:

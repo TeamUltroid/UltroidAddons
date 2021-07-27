@@ -494,4 +494,3 @@ async def _(event):
         event.chat_id, "sticker.webp", reply_to=event.reply_to_msg_id
     )
     os.remove("sticker.webp")
-

@@ -11,9 +11,6 @@
 •`{i}htg <text>`
    How To Google.
    Some peoples don't know how to google so help them 🙃🙂.
-
-•`{i}doodle`
-   Get Today's Google Doodle.
 """
 
 

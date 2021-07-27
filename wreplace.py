@@ -13,6 +13,7 @@
 """
 
 import asyncio
+
 from . import *
 
 
@@ -33,6 +34,3 @@ async def harpia(e):
             await x.edit(m)
             await asyncio.sleep(1)
     await eod(e, "Finished...")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})

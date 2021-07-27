@@ -15,6 +15,7 @@ from . import *
 
 INLOCK = "`Seems like inline messages aren't allowed here`"
 
+
 @ultroid_cmd(
     pattern="manga ?(.*)",
 )

@@ -76,9 +76,7 @@ async def _(event):
         message_id = event.reply_to_msg_id
     r = requests.get("https://yesno.wtf/api").json()
     try:
-        await event.reply(
-            r["answer"], file=r["image"]
-        )
+        await event.reply(r["answer"], file=r["image"])
         await hm.delete()
     except ChatSendMediaForbiddenError:
         await eor(event, r["answer"])
