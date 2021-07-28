@@ -7,7 +7,7 @@
     Note : Don't use brackets
 
   Ex. :
-   `{i}replace 10;Hi;Hello`
+   `{i}replace 10 Hi;Hello`
 
   Use: It replaces a perticular word by new word (only in your msgs.) In many msgs at a time
 """
@@ -26,13 +26,9 @@ async def harpia(e):
         pist[1]
     except IndexError:
         return eod(e, f"Check Example : `{HNDLR}help {wreplace}`")
-    async for x in e.client.iter_messages(e.chat_id, limit=lmt, from_user="me"):
+    async for x in e.client.iter_messages(e.chat_id, search=pist[0], limit=lmt, from_user="me"):
         msg = x.text
-        if pist[0] in msg:
-            m = msg.replace(pist[0], pist[1])
-            await x.edit(m)
-            await asyncio.sleep(1)
+        m = msg.replace(pist[0], pist[1])
+        await x.edit(m)
+        await asyncio.sleep(1)
     await eod(e, "Finished...")
-
-
-HELP.update({f"{__name__.split('.')[1]}": f"{__doc__.format(i=HNDLR)}"})
