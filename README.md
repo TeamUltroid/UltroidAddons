@@ -26,8 +26,7 @@ Kindly do not **steal** others works without credits.<br>
 ```python
 @ultroid_cmd(pattern="hoi")
 async def hello_world_example(event):
-    # As telethon is an asyncio based lib, you will have to use `await`.
-    # The Default Parse Mode Is MarkDown V2
+    # As telethon is an asyncio based lib, you will have to use `async`/`await` Syntax.
     await event.reply("Hello **World**.")
 ```
 
