@@ -7,7 +7,7 @@
     Note : Don't use brackets
 
   Ex. :
-   `{i}replace 10;Hi;Hello`
+   `{i}replace 10 Hi;Hello`
 
   Use: It replaces a perticular word by new word (only in your msgs.) In many msgs at a time
 """
