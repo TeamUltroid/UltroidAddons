@@ -22,7 +22,7 @@ def remove_emoji(string):
     return emoji.get_emoji_regexp().sub(u'', string)
 
 
-@ultroid_cmd(pattern="t2g")
+@ultroid_cmd(pattern="t2g ?(.*)")
 async def t2g(e):
     eris = await eor(e, "`...`")
     input_args = e.pattern_match.group(1) 
@@ -41,6 +41,7 @@ async def t2g(e):
             )
             os.remove(file)
         except AttributeError:
+            # for files, without write Method
             done = await doc.click(
                 e.chat_id,
                 reply_to=e.reply_to_msg_id)
