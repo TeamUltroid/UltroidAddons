@@ -8,13 +8,10 @@
 
 """
 ✘ Commands Available
-
 • `{i}clone <reply/username>`
     clone the identity of user.
-
 • `{i}revert`
     Revert to your original identity
-
 """
 
 import html
@@ -70,19 +67,13 @@ async def _(event):
 
 @ultroid_cmd(pattern="revert$")
 async def _(event):
-    name = OWNER_NAME
-    ok = ""
     mybio = str(ultroid_bot.me.id) + "01"
-    bio = "Error : Bio Lost"
     chc = udB.get(mybio)
-    if chc:
-        bio = chc
+    bio = chc or "Error : Bio Lost"
     fname = udB.get(f"{ultroid_bot.uid}02")
     lname = udB.get(f"{ultroid_bot.uid}03")
-    if fname:
-        name = fname
-    if lname:
-        ok = lname
+    name = fname or OWNER_NAME
+    ok = lname or ""
     n = 1
     client = event.client
     await client(
@@ -107,12 +98,11 @@ async def get_full_user(event):
                     or previous_message.forward.channel_id
                 )
             )
-            return replied_user, None
         else:
             replied_user = await event.client(
                 GetFullUserRequest(previous_message.sender_id)
             )
-            return replied_user, None
+        return replied_user, None
     else:
         input_str = None
         try:
