@@ -3,7 +3,6 @@
 
 """
 Search animes and manga from anilist.co using @animedb_bot
-
 ✘ Commands Available
 • `{i}manga <keyword>`
     To get manga info
@@ -28,9 +27,10 @@ async def manga(ult):
         await animes[0].click(
             ult.chat_id,
             reply_to=ult.reply_to_msg_id,
-            silent=True if ult.is_reply else False,
+            silent=bool(ult.is_reply),
             hide_via=True,
         )
+
         return await msg.delete()
     except Exception:
         return await msg.edit("`No Results Found ...`")
