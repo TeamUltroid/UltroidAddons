@@ -5,12 +5,9 @@
 
 """
   Animation Plugin
-
 ✘ Commands Available
-
 • `{i}kill`
 • `{i}fp`
-
 """
 
 import asyncio
@@ -21,7 +18,7 @@ from . import HELP
 @ultroid_cmd(pattern="kill$")
 async def _(event):
     animation_interval = 0.7
-    animation_ttl = range(0, 12)
+    animation_ttl = range(12)
     a = await eor(event, "`ready to die dude.....`")
     animation_chars = [
         "Ｆｉｉｉｉｉｒｅ",
