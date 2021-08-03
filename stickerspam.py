@@ -13,7 +13,7 @@
 
 """
 
-from telethon import utils
+from telethon.utils import get_input_document
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetID, InputStickerSetShortName
 
@@ -36,7 +36,7 @@ async def _(e):
     )
     pack = sset.set.short_name
     docs = [
-        utils.get_input_document(x)
+        get_input_document(x)
         for x in (
             await e.client(GetStickerSetRequest(InputStickerSetShortName(pack)))
         ).documents
