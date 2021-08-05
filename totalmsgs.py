@@ -10,6 +10,7 @@
 """
 
 from . import *
+from telethon.utils import get_display_name
 
 
 @ultroid_cmd(pattern="totalmsgs ?(.*)")
@@ -23,6 +24,6 @@ async def _(e):
         user = "me"
     a = await e.client.get_messages(e.chat_id, 0, from_user=user)
     user = await e.client.get_entity(user)
-    await eor(e, f"Total msgs of `{user.first_name}` here = {a.total}")
+    await eor(e, f"Total msgs of `{get_display_name(user)}` here = {a.total}")
 
 
