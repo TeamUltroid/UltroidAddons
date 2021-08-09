@@ -88,7 +88,7 @@ async def _(event):
 async def xo(ult):
     xox = await ult.client.inline_query("xobot", "play")
     await xox[random.randrange(0, len(xox) - 1)].click(
-        ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
+        ult.chat_id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
     )
     await ult.delete()
 
@@ -97,7 +97,7 @@ async def xo(ult):
 async def word(ult):
     game = await ult.client.inline_query("wordibot", "play")
     await game[0].click(
-        ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
+        ult.chat_id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
     )
     await ult.delete()
 
@@ -109,6 +109,6 @@ async def map(ult):
         return await eor(ult, "Use this command as `.gps <query>`")
     gps = await ult.client.inline_query("openmap_bot", f"{get}")
     await gps[0].click(
-        ult.chat.id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
+        ult.chat_id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
     )
     await ult.delete()
