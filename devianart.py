@@ -24,11 +24,11 @@ async def downakd(e):
     match = e.pattern_match.group(1)
     if not match:
         return await eor(e, "`Give Query to Search...`")
-    random = False
+    Random = False
     if ";" in match:
         num = int(match.split(";")[1])
         if num == 1:
-            random = True
+            Random = True
         match = match.split(";")[0]
     else:
         num = 5
@@ -38,7 +38,7 @@ async def downakd(e):
     ct = requests.get(link).content
     st = bs(ct, "html.parser", from_encoding="utf-8")
     res = st.find_all("img", loading="lazy", src=re.compile("https://images-wixmp"))[:num]
-    if random:
+    if Random:
         res = [random.choice(res)]
     out = []
     num = 0
