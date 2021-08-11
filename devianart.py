@@ -36,7 +36,7 @@ async def downakd(e):
     match = match.replace(" ", "+")
     link = "https://www.deviantart.com/search?q=" + match
     ct = requests.get(link).content
-    st = bs(s, "html.parser", from_encoding="utf-8")
+    st = bs(ct, "html.parser", from_encoding="utf-8")
     res = st.find_all("img", loading="lazy", src=re.compile("https://images-wixmp"))[:num]
     if random:
         res = [random.choice(res)]
