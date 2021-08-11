@@ -41,8 +41,11 @@ async def downakd(e):
     if random:
         res = [random.choice(res)]
     out = []
+    num = 0
     for on in res:
-        out.append(on["src"])
+        img = await download_file(on["src"], f"resources/downloads/{match}-{num}.jpg")
+        num += 1
+        out.append(img)
     if len(out) == 0:
         return await xd.edit("`No Results Found!`")
     await e.client.send_file(
