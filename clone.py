@@ -60,8 +60,9 @@ async def _(event):
     await event.client(UpdateProfileRequest(first_name=first_name))
     await event.client(UpdateProfileRequest(last_name=last_name))
     await event.client(UpdateProfileRequest(about=user_bio))
-    pfile = await event.client.upload_file(profile_pic)  # pylint:disable=E060
-    await event.client(UploadProfilePhotoRequest(pfile))
+    if profile_pic:
+        pfile = await event.client.upload_file(profile_pic)  # pylint:disable=E060
+        await event.client(UploadProfilePhotoRequest(pfile))
     await eve.delete()
     await event.client.send_message(
         event.chat_id, f"**I am `{first_name}` from now...**", reply_to=reply_message
