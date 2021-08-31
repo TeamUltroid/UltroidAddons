@@ -14,6 +14,9 @@
 • `{i}uta <search query>`
     Inline song search and downloader.
 
+• `{i}doge <search query>`
+    Create a doge meme sticker.
+
 • `{i}stic <emoji>`
     Get random stickers from emoji.
 
@@ -71,6 +74,26 @@ async def tweet(e):
         await wai.delete()
     except ChatSendStickersForbiddenError:
         await wai.edit("Sorry boss, I can't send Sticker Here !!")
+
+
+@ultroid_cmd(pattern="doge ?(.*)")
+async def doge_sticker(e):
+    wai = await eor(e, "`Processing...`")
+    text = e.pattern_match.group(1)
+    if text is None:
+        return await wai.edit("`Give me Some Text !`")
+    try:
+        results = await e.client.inline_query("dogestickerbot", text)
+        await results[0].click(
+            e.chat_id,
+            silent=True,
+            hide_via=True,
+        )
+        await wai.delete()
+    except ChatSendStickersForbiddenError:
+        await wai.edit("Sorry boss, I can't send Sticker Here !!")
+    except Exception as m:
+        await eor(e, str(m))
 
 
 @ultroid_cmd(pattern="frog ?(.*)")
