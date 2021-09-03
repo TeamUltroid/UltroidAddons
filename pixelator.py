@@ -1,32 +1,39 @@
-# 2020 @FUSUF #
-# @ASENAUSERBOT #
-# https://t.me/asenaplugin/228
+# Ultroid - UserBot
+# Copyright (C) 2021 TeamUltroid
+#
+# This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
+# PLease read the GNU Affero General Public License in
+# <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
-# Ported for Ultroid
+# Pixelator Plugin
+# https://stackoverflow.com/questions/55508615/how-to-pixelate-image-using-opencv-in-python
 
+"""
+✘ Commands Available -
 
+• `{i}pixelator <reply image>`
+    Create a Pixelated Image..
+"""
+
+import cv2
 from . import *
-from telethon.errors.rpcerrorlist import YouBlockedUserError
+import os
 
 
-@ultroid_cmd(pattern="pixelator")
+@ultroid_cmd(pattern="pixelator ?(.*)")
 async def pixelator(event):
     reply_message = await event.get_reply_message() 
-    if not (reply_message and reply_message.media):
-        await eor(event, "`Reply to a photo`")
-        return
-    chat = "@pixelatorbot"
-    msg = await eor(event, "`Processing...`")
-    async with event.client.conversation(chat) as conv:
-        try:     
-            await event.client.send_message(chat, reply_message)
-        except YouBlockedUserError:
-            await msg.edit(f"`Unblock` {chat} `and try again...`")
-            return
-        response = await conv.wait_event(events.NewMessage(incoming=True, from_users="@PixelatorBot"))
-        await event.client.send_read_acknowledge("@PixelAtorBot")
-        if response.text.startswith("Looks"):
-            await msg.edit("`I cant pixel this..!`")
-        else:
-            await msg.respond("`Pixelated !`", file=response.media)
-            await msg.delete()
+    if not (reply_message and reply_message.photo):
+        return await eor(event, "`Reply to a photo`")
+    try:
+        hw = int(event.pattern_match.group(1))
+    except (ValueError, TypeError):
+        hw = 50
+    input_ = cv2.imread('images/paddington.png')
+    height, width = input.shape[:2]
+    w, h = (hw, hw)
+    temp = cv2.resize(input, (w, h), interpolation=cv2.INTER_LINEAR)
+    output = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
+    cv2.imwrite("output.jpg", output)
+    await eor(event, "• Pixelated by Ultroid", file="output.jpg")
+    os.remove("output.jpg")
