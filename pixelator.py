@@ -30,7 +30,7 @@ async def pixelator(event):
     except (ValueError, TypeError):
         hw = 50
     input_ = cv2.imread('images/paddington.png')
-    height, width = input.shape[:2]
+    height, width = input_.shape[:2]
     w, h = (hw, hw)
     temp = cv2.resize(input, (w, h), interpolation=cv2.INTER_LINEAR)
     output = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
