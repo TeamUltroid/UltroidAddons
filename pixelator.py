@@ -30,6 +30,7 @@ async def pixelator(event):
         hw = int(event.pattern_match.group(1))
     except (ValueError, TypeError):
         pass
+    msg = await eor(event, "`Processing...`")
     image = await reply_message.download_media()
     input_ = cv2.imread(image)
     height, width = input_.shape[:2]
@@ -37,6 +38,7 @@ async def pixelator(event):
     temp = cv2.resize(input_, (w, h), interpolation=cv2.INTER_LINEAR)
     output = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
     cv2.imwrite("output.jpg", output)
-    await eor(event, "• Pixelated by Ultroid", file="output.jpg")
+    await msg.respond("• Pixelated by Ultroid", file="output.jpg")
+    await msg.delete()
     os.remove("output.jpg")
     os.remove(image)
