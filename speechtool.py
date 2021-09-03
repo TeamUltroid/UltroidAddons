@@ -5,7 +5,7 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 #
-# Ported from Telebot
+# tts- Ported from Telebot
 
 
 """
@@ -97,7 +97,10 @@ async def speec_(e):
     await bash(f'ffmpeg -i "{re}" -vn "{fn}"')
     with sr.AudioFile(fn) as source:
         audio = reco.record(source)
-    text = reco.recognize_google(audio, language="en-IN")
+    try:
+        text = reco.recognize_google(audio, language="en-IN")
+    except Exception as er:
+        return await eor(e, er)
     out = "**Extracted Text :**\n `" + text + "`"
     await eor(e, out)
     os.remove(fn)
