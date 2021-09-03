@@ -97,7 +97,7 @@ async def speec_(e):
     await bash(f'ffmpeg -i "{re}" -vn "{fn}"')
     with sr.AudioFile(fn) as source:
         audio = reco.record(source)
-    text = reco.recognize_google(audio)
+    text = reco.recognize_google(audio, language="en-IN")
     out = "**Extracted Text :**\n `" + text + "`"
     await eor(e, out)
     os.remove(fn)
