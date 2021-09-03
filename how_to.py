@@ -42,7 +42,7 @@ async def _(e):
     text = e.pattern_match.group(1)
     if not text:
         return await eod(e, "`Give some text`")
-    url = "https://da.gd/s?url=https://lmddgtfy.net/?q={}%26iie=1".format(
+    url = "https://da.gd/s?url=https://lmddgtfy.net/?q={}".format(
         text.replace(" ", "+")
     )
     response = requests.get(url).text
