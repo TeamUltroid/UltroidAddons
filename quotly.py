@@ -481,11 +481,7 @@ async def _(event):
     reply = await event.get_reply_message()
     msg = reply.message
     repliedreply = await reply.get_reply_message()
-    user = (
-        await event.client.get_entity(reply.forward.sender)
-        if reply.fwd_from
-        else reply.sender
-    )
+    user = await reply.get_sender()
     res, canvas = await process(msg, user, event.client, reply, repliedreply)
     if not res:
         return

@@ -21,7 +21,11 @@ async def coronish(event):
     covid = Covid()
     text = event.text
     okie = text.split(" ", maxsplit=1)
-    country = okie[1]
+    try:
+        country = okie[1]
+    except IndexError:
+        await eor(event, "Give a country name to Search for it's Covid Cases!")
+        return
     try:
         cases = covid.get_status_by_country_name((country).lower())
         act = cases["active"]

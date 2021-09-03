@@ -25,7 +25,7 @@ from . import *
 
 @ultroid_cmd(pattern="pokemon ?(.*)")
 async def pokedex(event):
-    pokemon = event.pattern_match.group(1)
+    pokemon = event.pattern_match.group(1).lower()
     if not pokemon:
         await eor(event, "`Give a Pokemon Name`")
         return
@@ -124,7 +124,7 @@ async def pokedex(event):
 
 @ultroid_cmd(pattern="pokecard ?(.*)")
 async def pokecard(event):
-    pokename = event.pattern_match.group(1)
+    pokename = event.pattern_match.group(1).lower()
     if not pokename:
         await eor(event, "`Give A Pokemon name`")
         return
