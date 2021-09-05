@@ -46,10 +46,11 @@ async def spammer(e):
         counter = int(message[6:8]) 
         spam_message = str(e.text[8:])
     except (ValueError, IndexError):
-        if counter and e.is_reply:
-            spam_message = await e.get_reply_message()
-        else:
-            return await eor(e, f"`Reply to a Message or Give some Text..`")
+        pass
+    if counter and e.is_reply and not spam_message:
+        spam_message = await e.get_reply_message()
+    else:
+        return await eor(e, f"`Reply to a Message or Give some Text..`")
     await asyncio.wait([e.respond(spam_message) for i in range(counter)])
     await e.delete()
 
@@ -61,10 +62,11 @@ async def bigspam(e):
         counter = int(message[9:13])
         spam_message = str(e.text[13:])
     except (ValueError, IndexError):
-        if counter and e.is_reply:
-            spam_message = await e.get_reply_message()
-        else:
-            return await eod(e, "Invalid Input Given, or Value is below 101")
+        pass
+    if counter and e.is_reply and not spam_message:
+        spam_message = await e.get_reply_message()
+    else:
+        return await eod(e, "Invalid Input Given, or Value is below 101")
     for i in range(1, counter):
         await e.respond(spam_message)
     await e.delete()
