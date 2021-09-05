@@ -22,8 +22,11 @@ async def aposj(e):
     C = r.get(link).content
     m = bs(C, "html.parser", from_encoding="utf-8")
     try:
-        img = m.find_all("img")[0]["src"]
-        img = link + img
+        try:
+            img = m.find_all("img")[0]["src"]
+            img = link + img
+        except IndexError:
+            img = None
         expla = b.find_all("p")[2].text.replace("\n", " ")
         expla = expla.split("     ")[0]
         expla = "__" + expla + "__"
