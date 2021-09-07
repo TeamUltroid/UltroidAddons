@@ -49,6 +49,8 @@ async def spammer(e):
         pass
     if counter and e.is_reply and not spam_message:
         spam_message = await e.get_reply_message()
+    elif counter and spam_message:
+        pass
     else:
         return await eor(e, f"`Reply to a Message or Give some Text..`")
     await asyncio.wait([e.respond(spam_message) for i in range(counter)])
@@ -65,6 +67,8 @@ async def bigspam(e):
         pass
     if counter and e.is_reply and not spam_message:
         spam_message = await e.get_reply_message()
+    elif counter and spam_message:
+        pass
     else:
         return await eod(e, "Invalid Input Given, or Value is below 101")
     for i in range(1, counter):
