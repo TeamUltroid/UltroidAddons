@@ -40,6 +40,7 @@ async def tmeme(e):
 @ultroid_cmd(pattern="spam")
 async def spammer(e):
     message = e.text
+    counter, spam_message = None, None
     if not len(message) > 5:
         return await eod(e, "`Use in Proper Format`")
     try:
@@ -60,6 +61,7 @@ async def spammer(e):
 @ultroid_cmd(pattern="bigspam", fullsudo=True)
 async def bigspam(e):
     message = e.text
+    counter, spam_message = None, None
     try:
         counter = int(message[9:13])
         spam_message = str(e.text[13:])
