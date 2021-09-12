@@ -55,8 +55,6 @@ async def _(event):
     if last_name is None:
         last_name = "⁪⁬⁮⁮⁮"
     user_bio = replied_user.about
-    if user_bio is not None:
-        user_bio = replied_user.about
     await event.client(UpdateProfileRequest(first_name=first_name))
     await event.client(UpdateProfileRequest(last_name=last_name))
     await event.client(UpdateProfileRequest(about=user_bio))

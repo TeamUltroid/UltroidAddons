@@ -9,6 +9,8 @@
     Returns total msg count of user in current chat
 """
 
+from telethon.utils import get_display_name
+
 from . import *
 from telethon.utils import get_display_name
 

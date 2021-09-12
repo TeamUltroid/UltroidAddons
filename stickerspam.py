@@ -13,9 +13,9 @@
 
 """
 
-from telethon.utils import get_input_document
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetID, InputStickerSetShortName
+from telethon.utils import get_input_document
 
 from . import *
 

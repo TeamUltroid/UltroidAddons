@@ -13,7 +13,9 @@
 """
 
 from textblob import TextBlob
+
 from . import *
+
 
 @ultroid_cmd(pattern="spcheck ?(.*)")
 async def spellchk(event):
@@ -26,4 +28,6 @@ async def spellchk(event):
         return await eor(event, "`Give me some text/sentence to check its spelling!.`")
     check = TextBlob(to_check)
     correct = check.correct()
-    await eor(event, f"**Given Phrase:** `{to_check}`\n**Corrected Phrase:** `{correct}`")
+    await eor(
+        event, f"**Given Phrase:** `{to_check}`\n**Corrected Phrase:** `{correct}`"
+    )

@@ -55,6 +55,7 @@ async def tweet(e):
     except Exception as m:
         await eor(e, str(m))
 
+
 @ultroid_cmd(pattern="stic ?(.*)")
 async def tweet(e):
     if len(e.text) > 5 and e.text[5] != " ":
@@ -65,7 +66,7 @@ async def tweet(e):
         return await wai.edit("`Give me Some Emoji !`")
     try:
         results = await e.client.inline_query("sticker", text)
-        num = random.randrange(0, len(results) -1)
+        num = random.randrange(0, len(results) - 1)
         await results[num].click(
             e.chat_id,
             silent=True,
@@ -145,9 +146,9 @@ async def nope(doit):
             )
     sticcers = await doit.client.inline_query("Lybot", f"{(deEmojify(ok))}")
     await sticcers[0].click(
-            doit.chat_id,
-            reply_to=doit.reply_to_msg_id,
-            silent=True if doit.is_reply else False,
-            hide_via=True,
-        )
+        doit.chat_id,
+        reply_to=doit.reply_to_msg_id,
+        silent=True if doit.is_reply else False,
+        hide_via=True,
+    )
     await a.delete()

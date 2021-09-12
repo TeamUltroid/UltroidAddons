@@ -13,6 +13,7 @@
 """
 
 import asyncio
+
 from . import *
 
 
@@ -26,7 +27,9 @@ async def harpia(e):
         pist[1]
     except IndexError:
         return eod(e, f"Check Example : `{HNDLR}help {wreplace}`")
-    async for x in e.client.iter_messages(e.chat_id, search=pist[0], limit=lmt, from_user="me"):
+    async for x in e.client.iter_messages(
+        e.chat_id, search=pist[0], limit=lmt, from_user="me"
+    ):
         msg = x.text
         m = msg.replace(pist[0], pist[1])
         await x.edit(m)

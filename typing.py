@@ -19,12 +19,12 @@ import asyncio
 from . import *
 
 
-@ultroid_cmd(pattern="type ?(.*)")
+@ultroid_cmd(pattern="type ?(.*)", fullsudo=True)
 async def _(event):
     input_str = event.pattern_match.group(1)
     if not input_str:
         return await eor(event, "Give me something to type !")
-    shiiinabot = "\u2060"*602
+    shiiinabot = "\u2060" * 602
     okla = await eor(event, shiiinabot)
     typing_symbol = "|"
     previous_text = ""

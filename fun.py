@@ -78,14 +78,9 @@ async def _(event):
 @ultroid_cmd(pattern="decide$")
 async def _(event):
     hm = await eor(event, "`Deciding`")
-    message_id = event.message.id
-    if event.reply_to_msg_id:
-        message_id = event.reply_to_msg_id
     r = requests.get("https://yesno.wtf/api").json()
     try:
-        await event.reply(
-            r["answer"], file=r["image"]
-        )
+        await event.reply(r["answer"], file=r["image"])
         await hm.delete()
     except ChatSendMediaForbiddenError:
         await eor(event, r["answer"])

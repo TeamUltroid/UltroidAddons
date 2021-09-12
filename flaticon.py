@@ -16,7 +16,6 @@
 
 import os
 import random
-import urllib
 
 import requests
 from bs4 import BeautifulSoup as bs
@@ -43,5 +42,6 @@ async def www(e):
         await e.reply(file="sticker.webp")
         os.remove("sticker.webp")
         await tt.delete()
-    except Exception:
+    except Exception as E:
+        LOGS.info(E)
         await tt.edit("`No Results Found`")

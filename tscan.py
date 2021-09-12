@@ -13,6 +13,7 @@ from . import *
    Get The channel/groups user is in.\nReply to Message or give username/id"
 """
 
+
 @ultroid_cmd(pattern="tscan ?(.*)")
 async def tscan(e):
     mat = e.pattern_match.group(1)

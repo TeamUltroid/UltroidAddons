@@ -8,17 +8,18 @@
 """
 ✘ Commands Available -
 • `{i}spam <no of msgs> <your msg>`
+  `{i}spam <no of msgs> <reply message>`
     spams chat, the current limit for this is from 1 to 99.
 
 • `{i}bigspam <no of msgs> <your msg>`
+  `{i}bigspam <no of msgs> <reply message>`
     Spams chat, the current limit is above 100.
 
-• `{i}picspam <no of spam> <reply to media>`
-    Spam media.
-
 • `{i}delayspam <delay time> <count> <msg>`
-    Spam chat.
+    Spam chat with delays..
 
+• `{tspam} <text>`
+    Spam Chat with One-One Character..
 """
 
 import asyncio
@@ -38,39 +39,42 @@ async def tmeme(e):
 
 @ultroid_cmd(pattern="spam")
 async def spammer(e):
-        message = e.text
-        if not len(message) > 5:
-            return await eod(e, "`Use in Proper Format`")
+    message = e.text
+    counter, spam_message = None, None
+    if not len(message) > 5:
+        return await eod(e, "`Use in Proper Format`")
+    try:
         counter = int(message[6:8])
         spam_message = str(e.text[8:])
-        await asyncio.wait([e.respond(spam_message) for i in range(counter)])
-        await e.delete()
+    except (ValueError, IndexError):
+        pass
+    if counter and e.is_reply and not spam_message:
+        spam_message = await e.get_reply_message()
+    elif counter and spam_message:
+        pass
+    else:
+        return await eor(e, f"`Reply to a Message or Give some Text..`")
+    await asyncio.wait([e.respond(spam_message) for i in range(counter)])
+    await e.delete()
 
 
-@ultroid_cmd(pattern="bigspam")
+@ultroid_cmd(pattern="bigspam", fullsudo=True)
 async def bigspam(e):
-        message = e.text
-        try:
-            counter = int(message[9:13])
-        except (ValueError, IndexError):
-            return await eod(e,
-                "Invalid Input Given, or Value is below 101"
-            )
+    message = e.text
+    counter, spam_message = None, None
+    try:
+        counter = int(message[9:13])
         spam_message = str(e.text[13:])
-        for i in range(1, counter):
-            await e.respond(spam_message)
-        await e.delete()
-
-
-@ultroid_cmd(pattern="picspam")
-async def tiny_pic_spam(e):
-    reply = await e.get_reply_message()
-    text = e.text.split()
-    counter = int(text[1])
-    media = await e.client.download_media(reply)
+    except (ValueError, IndexError):
+        pass
+    if counter and e.is_reply and not spam_message:
+        spam_message = await e.get_reply_message()
+    elif counter and spam_message:
+        pass
+    else:
+        return await eod(e, "Invalid Input Given, or Value is below 101")
     for i in range(1, counter):
-        await e.client.send_file(e.chat_id, media)
-    os.remove(media)
+        await e.respond(spam_message)
     await e.delete()
 
 

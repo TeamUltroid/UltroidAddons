@@ -47,7 +47,6 @@ CMD_SET = {
     "atcg": "atc_gran",
     "avatar": "avatar",
     "bm200": "b_m__200",
-    "banner": "banner",
     "banner3": "banner3",
     "banner4": "banner4",
     "barb": "barbwire",
