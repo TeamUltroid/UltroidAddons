@@ -12,10 +12,12 @@
     Devian-Art Image Search.
 """
 
-import re
-import requests
 import random
+import re
+
+import requests
 from bs4 import BeautifulSoup as bs
+
 from . import *
 
 
@@ -37,7 +39,9 @@ async def downakd(e):
     link = "https://www.deviantart.com/search?q=" + match
     ct = requests.get(link).content
     st = bs(ct, "html.parser", from_encoding="utf-8")
-    res = st.find_all("img", loading="lazy", src=re.compile("https://images-wixmp"))[:num]
+    res = st.find_all("img", loading="lazy", src=re.compile("https://images-wixmp"))[
+        :num
+    ]
     if Random:
         res = [random.choice(res)]
     out = []

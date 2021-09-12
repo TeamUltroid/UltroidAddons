@@ -24,8 +24,9 @@ import os
 import subprocess
 from datetime import datetime
 
-from gtts import gTTS
 import speech_recognition as sr
+from gtts import gTTS
+
 from . import *
 
 reco = sr.Recognizer()
@@ -90,7 +91,7 @@ async def _(event):
 async def speec_(e):
     reply = await e.get_reply_message()
     if not (reply and reply.media):
-      return await eod(e, "`Reply to Audio-File..`")
+        return await eod(e, "`Reply to Audio-File..`")
     # Not Hard Checking File Types
     re = await reply.download_media()
     fn = re + ".wav"

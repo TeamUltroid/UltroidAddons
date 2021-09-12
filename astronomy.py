@@ -12,8 +12,9 @@
 """
 
 import requests as r
-from . import *
 from bs4 import BeautifulSoup as ba
+
+from . import *
 
 
 @ultroid_cmd(pattern="apod$")

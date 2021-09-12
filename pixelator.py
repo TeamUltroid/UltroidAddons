@@ -15,14 +15,16 @@
     Create a Pixelated Image..
 """
 
-import cv2
-from . import *
 import os
+
+import cv2
+
+from . import *
 
 
 @ultroid_cmd(pattern="pixelator ?(.*)")
 async def pixelator(event):
-    reply_message = await event.get_reply_message() 
+    reply_message = await event.get_reply_message()
     if not (reply_message and reply_message.photo):
         return await eor(event, "`Reply to a photo`")
     hw = 50

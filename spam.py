@@ -44,7 +44,7 @@ async def spammer(e):
     if not len(message) > 5:
         return await eod(e, "`Use in Proper Format`")
     try:
-        counter = int(message[6:8]) 
+        counter = int(message[6:8])
         spam_message = str(e.text[8:])
     except (ValueError, IndexError):
         pass

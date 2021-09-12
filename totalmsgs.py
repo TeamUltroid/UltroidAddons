@@ -9,8 +9,9 @@
     Returns total msg count of user in current chat
 """
 
-from . import *
 from telethon.utils import get_display_name
+
+from . import *
 
 
 @ultroid_cmd(pattern="totalmsgs ?(.*)")
