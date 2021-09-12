@@ -12,6 +12,7 @@
 from telethon.utils import get_display_name
 
 from . import *
+from telethon.utils import get_display_name
 
 
 @ultroid_cmd(pattern="totalmsgs ?(.*)")
