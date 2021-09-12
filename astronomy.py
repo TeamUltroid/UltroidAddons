@@ -27,7 +27,7 @@ async def aposj(e):
             img = link + img
         except IndexError:
             img = None
-        expla = b.find_all("p")[2].text.replace("\n", " ")
+        expla = m.find_all("p")[2].text.replace("\n", " ")
         expla = expla.split("     ")[0]
         expla = "__" + expla + "__"
         await e.reply(expla, file=img)
