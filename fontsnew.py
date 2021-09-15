@@ -4,6 +4,30 @@
 # Ported for Ultroid < https://github.com/TeamUltroid/Ultroid >   
 #
 
+"""
+✘ Commands Available -
+• `{i}weeb <text>` 
+    turns text to 山乇乇乃 font
+• `{i}tantext <text>` 
+    turns text to ᎿᎯᏁᎿᏋﾒᎿ font
+• `{i}linetext <text>`
+    turns text to 𝕃𝕀ℕ𝔼𝕋𝔼𝕏𝕋
+• `{i}boxtext <text>`
+    turns text to 🄱🄾🅇🅃🄴🅇🅃
+• `{i}bubbletext <text>`
+    turns text to ⒷⓊⒷⒷⓁⒺⓉⒺⓍⓉ
+• `{i}cursive <text>`
+    turns text to 𝓬𝓾𝓻𝓼𝓲𝓿𝓮 font
+• `{i}greekify <text>`
+    turns text to ϑгεεκιғψ font
+• `{i}sorcify <text>`
+    turns text to ֆօʀƈɛʀɛʀ font
+• `{i}fraktify <text>`
+    turns text to 𝖋𝖗𝖆𝖐𝖙𝖚𝖗𝖊 font
+• `{i}rusify <text>`
+    turns text to яц$їfч font
+"""
+
 
 normiefont = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 weebyfont = ['卂','乃','匚','刀','乇','下','厶','卄','工','丁','长','乚','从','𠘨','口','尸','㔿','尺','丂','丅','凵','リ','山','乂','丫','乙']
