@@ -121,7 +121,7 @@ async def cursive(ult):
     for normiecharacter in string:
         if normiecharacter in normiefont:
             cursivecharacter = cursivefont[normiefont.index(normiecharacter)]
-            string = string.replace(normiecharacter, weebycharacter)
+            string = string.replace(normiecharacter, cursivecharacter)
     await ult.edit(string)
         
 @ultroid_cmd(pattern="greekify ?(.*)")
@@ -137,7 +137,7 @@ async def greektext(ult):
     string = ''.join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
-            greekcharacter = greektextfont[normiefont.index(normiecharacter)]
+            greekcharacter = greekfont[normiefont.index(normiecharacter)]
             string = string.replace(normiecharacter, greekcharacter)
     await ult.edit(string)
     
