@@ -1,5 +1,5 @@
 #
-#Credits @chewmo
+# Credits @chewmo
 #
 # Ported for Ultroid < https://github.com/TeamUltroid/Ultroid >   
 #
