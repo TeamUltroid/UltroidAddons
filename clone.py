@@ -26,7 +26,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
 from . import *
-
+from pyUltroid import udB
 
 @ultroid_cmd(pattern="clone ?(.*)")
 async def _(event):
