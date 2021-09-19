@@ -17,6 +17,9 @@
 • `{i}doge <search query>`
     Create a doge meme sticker.
 
+• `{i}gglax <query>`
+    Create google search sticker with text.
+
 • `{i}stic <emoji>`
     Get random stickers from emoji.
 
@@ -40,7 +43,7 @@ from . import *
 async def tweet(e):
     wai = await eor(e, "`Processing...`")
     text = e.pattern_match.group(1)
-    if text is None:
+    if not text:
         return await wai.edit("`Give me Some Text !`")
     try:
         results = await e.client.inline_query("twitterstatusbot", text)
@@ -62,7 +65,7 @@ async def tweet(e):
         return
     wai = await eor(e, "`Processing...`")
     text = e.pattern_match.group(1)
-    if text is None:
+    if not text:
         return await wai.edit("`Give me Some Emoji !`")
     try:
         results = await e.client.inline_query("sticker", text)
@@ -81,10 +84,30 @@ async def tweet(e):
 async def doge_sticker(e):
     wai = await eor(e, "`Processing...`")
     text = e.pattern_match.group(1)
-    if text is None:
+    if not text:
         return await wai.edit("`Give me Some Text !`")
     try:
         results = await e.client.inline_query("dogestickerbot", text)
+        await results[0].click(
+            e.chat_id,
+            silent=True,
+            hide_via=True,
+        )
+        await wai.delete()
+    except ChatSendStickersForbiddenError:
+        await wai.edit("Sorry boss, I can't send Sticker Here !!")
+    except Exception as m:
+        await eor(e, str(m))
+
+
+@ultroid_cmd(pattern="gglax ?(.*)")
+async def gglax_sticker(e):
+    wai = await eor(e, "`Processing...`")
+    text = e.pattern_match.group(1)
+    if not text:
+        return await wai.edit("`Give me Some Text !`")
+    try:
+        results = await e.client.inline_query("googlaxbot", text)
         await results[0].click(
             e.chat_id,
             silent=True,
