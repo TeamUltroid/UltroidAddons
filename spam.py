@@ -18,7 +18,7 @@
 • `{i}delayspam <delay time> <count> <msg>`
     Spam chat with delays..
 
-• `{tspam} <text>`
+• `{i}tspam <text>`
     Spam Chat with One-One Character..
 """
 
