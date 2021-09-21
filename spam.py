@@ -40,20 +40,21 @@ async def tmeme(e):
 @ultroid_cmd(pattern="spam")
 async def spammer(e):
     message = e.text
-    counter, spam_message = None, None
-    if not len(message) > 5:
-        return await eod(e, "`Use in Proper Format`")
-    try:
-        counter = int(message[6:8])
-        spam_message = str(e.text[8:])
-    except (ValueError, IndexError):
-        pass
-    if counter and e.is_reply and not spam_message:
+    if e.reply_to:
+        if not len(message.split()) >= 2:
+            return await eod(e, "`Use in Proper Format`")
         spam_message = await e.get_reply_message()
-    elif counter and spam_message:
-        pass
     else:
-        return await eor(e, f"`Reply to a Message or Give some Text..`")
+        if not len(message.split()) >= 3:
+            return await eod(e, "`Reply to a Message or Give some Text..`")
+        spam_message = message.split(maxsplit=2)[2]
+    counter = message.split()[1]
+    try:
+        counter = int(counter)
+        if counter >= 100:
+            return await eod(e, "`Use bigspam cmd`")
+    except BaseException:
+        return await eod(e, "`Use in Proper Format`")
     await asyncio.wait([e.respond(spam_message) for i in range(counter)])
     await e.delete()
 
@@ -61,20 +62,20 @@ async def spammer(e):
 @ultroid_cmd(pattern="bigspam", fullsudo=True)
 async def bigspam(e):
     message = e.text
-    counter, spam_message = None, None
-    try:
-        counter = int(message[9:13])
-        spam_message = str(e.text[13:])
-    except (ValueError, IndexError):
-        pass
-    if counter and e.is_reply and not spam_message:
+    if e.reply_to:
+        if not len(message.split()) >= 2:
+            return await eod(e, "`Use in Proper Format`")
         spam_message = await e.get_reply_message()
-    elif counter and spam_message:
-        pass
     else:
-        return await eod(e, "Invalid Input Given, or Value is below 101")
-    for i in range(1, counter):
-        await e.respond(spam_message)
+        if not len(message.split()) >= 3:
+            return await eod(e, "`Reply to a Message or Give some Text..`")
+        spam_message = message.split(maxsplit=2)[2]
+    counter = message.split()[1]
+    try:
+        counter = int(counter)
+    except BaseException:
+        return await eod(e, "`Use in Proper Format`")
+    await asyncio.wait([e.respond(spam_message) for i in range(counter)])
     await e.delete()
 
 
