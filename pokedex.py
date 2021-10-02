@@ -17,7 +17,6 @@
 """
 
 import requests
-
 from pokedex import pokedex as badhiya
 
 from . import *

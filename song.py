@@ -32,6 +32,7 @@ from telethon.tl.types import InputMessagesFilterMusic as filtermus
 
 from . import *
 
+
 @ultroid_cmd(pattern=r"lyrics ?(.*)")
 async def original(event):
     if not event.pattern_match.group(1):

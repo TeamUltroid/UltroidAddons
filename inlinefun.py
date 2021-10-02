@@ -31,9 +31,10 @@
 """
 
 from random import choice
-from plugins.stickertools import deEmojify
+
 from telethon.errors import ChatSendInlineForbiddenError
 
+from plugins.stickertools import deEmojify
 
 from . import *
 
@@ -114,9 +115,9 @@ async def nope(doit):
         ok = replied.message
     else:
         return await eor(
-                doit,
-                "`Sir please give some query to search and download it for you..!`",
-    )
+            doit,
+            "`Sir please give some query to search and download it for you..!`",
+        )
     sticcers = await doit.client.inline_query("Lybot", f"{(deEmojify(ok))}")
     await doit.reply(file=sticcers[0].document)
     await a.delete()
