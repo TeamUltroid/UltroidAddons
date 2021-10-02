@@ -133,4 +133,4 @@ async def quote_(event):
         await event.reply(file=choice(RE_ZK).document)
     except Exception as U_TG:
         return await eor(EI_IR, str(U_TG))
-    await ER_IR.delete()
+    await EI_IR.delete()
