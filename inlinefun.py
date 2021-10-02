@@ -127,9 +127,10 @@ async def quote_(event):
     IFUZI = event.pattern_match.group(1)
     if not IFUZI:
         return await eor(event, "`Give some text to make Quote..`")
+    EI_IR = await eor(event, "`Processing...`")
     try:
         RE_ZK = await event.client.inline_query("@QuotAfBot", IFUZI)
         await event.reply(file=choice(RE_ZK).document)
     except Exception as U_TG:
-        await eor(event, str(U_TG))
-    await event.delete()
+        return await eor(EI_IR, str(U_TG))
+    await ER_IR.delete()
