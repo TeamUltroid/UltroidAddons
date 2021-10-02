@@ -128,7 +128,7 @@ async def quote_(event):
     if not IFUZI:
         return await eor(event, "`Give some text to make Quote..`")
     try:
-        RE_ZK = await event.inline_query("@QuotAfBot", IFUZI)
+        RE_ZK = await event.client.inline_query("@QuotAfBot", IFUZI)
         await event.reply(file=choice(RE_ZK).document)
     except Exception as U_TG:
         await eor(event, str(U_TG))
