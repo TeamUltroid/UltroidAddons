@@ -30,8 +30,8 @@ API_LIST = {"cat":"https://aws.random.cat/meow", "dog":"https://random.dog/woof.
 @ultroid_cmd(pattern="random ?(.*)")
 async def random_magic(event):
    match = event.pattern_match.group(1)
-   if not (match or (match not in API_LIST.keys())):
-       return await eor(event, f"`Input Missing or Wrong..`\n`{HNDLR}help random`")
+   if not (match and match in API_LIST.keys()):
+       return await eor(event, f"`Input Missing/Wrong..`\n`{HNDLR}help random`")
    text, file = None, None
    try:
        req = await async_searcher(API_LIST[match], re_json=True)
@@ -42,7 +42,7 @@ async def random_magic(event):
    elif match in ["dog", "duck"]:
        file = req["url"]
    elif match == "fox":
-       file = req["link"]
+       file = req["image"]
    elif match == "funfact":
        text = req["data"]["fact"]
    await event.reply(text, file=file)
