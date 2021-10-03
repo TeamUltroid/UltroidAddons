@@ -45,4 +45,8 @@ async def random_magic(event):
        file = req["image"]
    elif match == "funfact":
        text = req["data"]["fact"]
-   await event.reply(text, file=file)
+   if text and not file:
+       return await eor(event, text)
+   else:
+       await event.reply(text, file=file)
+       await event.delete()
