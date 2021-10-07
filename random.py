@@ -29,7 +29,7 @@ API_LIST = {
     "duck": "https://random-d.uk/api/random",
     "fox": "https://randomfox.ca/floof/",
     "funfact": "https://asli-fun-fact-api.herokuapp.com/",
-    "quote":" https://api.themotivate365.com/stoic-quote"
+    "quote":"https://api.themotivate365.com/stoic-quote"
 }
 
 
