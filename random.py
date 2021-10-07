@@ -33,6 +33,8 @@ API_LIST = {
 
 @ultroid_cmd(pattern="random ?(.*)")
 async def random_magic(event):
+    if "randomuser" in event.text:
+        return
     match = event.pattern_match.group(1)
     if not (match and match in API_LIST.keys()):
         return await eor(event, f"`Input Missing/Wrong..`\n`{HNDLR}help random`")
