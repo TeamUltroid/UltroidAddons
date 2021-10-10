@@ -25,12 +25,16 @@
 
 • `{i}tweet <text>`
     make twitter posts.
+
+• `{i}quot <text>`
+    write quote on animated sticker.
 """
 
 from random import choice
-from plugins.stickertools import deEmojify
+
 from telethon.errors import ChatSendInlineForbiddenError
 
+from plugins.stickertools import deEmojify
 
 from . import *
 
@@ -111,9 +115,23 @@ async def nope(doit):
         ok = replied.message
     else:
         return await eor(
-                doit,
-                "`Sir please give some query to search and download it for you..!`",
-    )
+            doit,
+            "`Sir please give some query to search and download it for you..!`",
+        )
     sticcers = await doit.client.inline_query("Lybot", f"{(deEmojify(ok))}")
     await doit.reply(file=sticcers[0].document)
     await a.delete()
+
+
+@ultroid_cmd(pattern="quot ?(.*)")
+async def quote_(event):
+    IFUZI = event.pattern_match.group(1)
+    if not IFUZI:
+        return await eor(event, "`Give some text to make Quote..`")
+    EI_IR = await eor(event, "`Processing...`")
+    try:
+        RE_ZK = await event.client.inline_query("@QuotAfBot", IFUZI)
+        await event.reply(file=choice(RE_ZK).document)
+    except Exception as U_TG:
+        return await eor(EI_IR, str(U_TG))
+    await EI_IR.delete()
