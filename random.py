@@ -29,7 +29,8 @@ API_LIST = {
     "duck": "https://random-d.uk/api/random",
     "fox": "https://randomfox.ca/floof/",
     "funfact": "https://asli-fun-fact-api.herokuapp.com/",
-    "quote":"https://api.themotivate365.com/stoic-quote"
+    "quote":"https://api.themotivate365.com/stoic-quote",
+    "words":"https://random-word-api.herokuapp.com/word?number=5"
 }
 
 
@@ -55,6 +56,9 @@ async def random_magic(event):
         text = req["data"]["fact"]
     elif match == "quote":
         text = f"**{req['data']['quote']}**\n\n~ {req['data']['author']}"
+    elif match == "words":
+        text = "**• Random Words**\n\n"
+        text.join(f"- `{word}`\n" for word in req)
     if text and not file:
         return await eor(event, text)
     else:
