@@ -16,6 +16,10 @@
 • `{i}random fox`
 • `{i}random quote`
 • `{i}random funfact`
+• `{i}random food`
+• `{i}random word`
+• `{i}random words`
+• `{i}random car`
 """
 
 from . import async_searcher, ultroid_bot, eor, HNDLR
@@ -32,7 +36,7 @@ API_LIST = {
     "quote":"https://api.themotivate365.com/stoic-quote",
     "word":"https://random-words-api.vercel.app/word",
     "words":"https://random-word-api.herokuapp.com/word?number=5",
-    "food":" https://foodish-api.herokuapp.com/api/",
+    "food":"https://foodish-api.herokuapp.com/api/",
     "car":"https://forza-api.tk/"
 }
 
@@ -64,10 +68,9 @@ async def random_magic(event):
         text = f"**Random Word**\n- `{req['word']}` : `{req['definition']}`"
     elif match == "words":
         text = "**• Random Words**\n\n"
-        text.join(f"- `{word}`\n" for word in req)
-    
+        for word in text:
+           text += f"--`{word}`"
     if text and not file:
         return await eor(event, text)
-    else:
-        await event.reply(text, file=file)
-        await event.delete()
+    await event.reply(text, file=file)
+    await event.delete()
