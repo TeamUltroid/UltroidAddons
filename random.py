@@ -30,7 +30,9 @@ API_LIST = {
     "fox": "https://randomfox.ca/floof/",
     "funfact": "https://asli-fun-fact-api.herokuapp.com/",
     "quote":"https://api.themotivate365.com/stoic-quote",
-    "words":"https://random-word-api.herokuapp.com/word?number=5"
+    "word":"https://random-words-api.vercel.app/word",
+    "words":"https://random-word-api.herokuapp.com/word?number=5",
+    "food":" https://foodish-api.herokuapp.com/api/"
 }
 
 
@@ -50,15 +52,19 @@ async def random_magic(event):
         file = req["file"]
     elif match in ["dog", "duck"]:
         file = req["url"]
-    elif match == "fox":
+    elif match in ["fox", "food"]:
         file = req["image"]
     elif match == "funfact":
         text = req["data"]["fact"]
     elif match == "quote":
         text = f"**{req['data']['quote']}**\n\n~ {req['data']['author']}"
+    elif match == "word":
+        req = req[0]
+        text = f"**Random Word**\n- `{req['word']}` : `{req['definition']}`"
     elif match == "words":
         text = "**• Random Words**\n\n"
         text.join(f"- `{word}`\n" for word in req)
+    
     if text and not file:
         return await eor(event, text)
     else:
