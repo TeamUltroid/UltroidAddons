@@ -32,7 +32,8 @@ API_LIST = {
     "quote":"https://api.themotivate365.com/stoic-quote",
     "word":"https://random-words-api.vercel.app/word",
     "words":"https://random-word-api.herokuapp.com/word?number=5",
-    "food":" https://foodish-api.herokuapp.com/api/"
+    "food":" https://foodish-api.herokuapp.com/api/",
+    "car":"https://forza-api.tk/"
 }
 
 
@@ -52,7 +53,7 @@ async def random_magic(event):
         file = req["file"]
     elif match in ["dog", "duck"]:
         file = req["url"]
-    elif match in ["fox", "food"]:
+    elif match in ["car", "fox", "food"]:
         file = req["image"]
     elif match == "funfact":
         text = req["data"]["fact"]
