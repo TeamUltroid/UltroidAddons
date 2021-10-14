@@ -29,7 +29,7 @@ async def fnew_pik(event):
     match = _[0]
     limit = int(_[1])
   content = urlopen(f"https://www.freepik.com/search?format=search&page=1&query={match}")
-  reso = bs(a, "html.parser", from_encoding="utf-8")
+  reso = bs(content, "html.parser", from_encoding="utf-8")
   con = reso.find_all("img", src=re.compile("img.freepik.com"))
   if not con:
     return await eor(event, "No Results Found!")
