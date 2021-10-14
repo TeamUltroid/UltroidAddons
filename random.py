@@ -22,7 +22,7 @@
 • `{i}random car`
 """
 
-from . import async_searcher, ultroid_bot, eor, HNDLR
+from . import HNDLR, async_searcher, eor, ultroid_bot
 
 # These Api's are Collected From
 # ---- https://github.com/public-apis/public-apis
@@ -33,11 +33,11 @@ API_LIST = {
     "duck": "https://random-d.uk/api/random",
     "fox": "https://randomfox.ca/floof/",
     "funfact": "https://asli-fun-fact-api.herokuapp.com/",
-    "quote":"https://api.themotivate365.com/stoic-quote",
-    "word":"https://random-words-api.vercel.app/word",
-    "words":"https://random-word-api.herokuapp.com/word?number=5",
-    "food":"https://foodish-api.herokuapp.com/api/",
-    "car":"https://forza-api.tk/"
+    "quote": "https://api.themotivate365.com/stoic-quote",
+    "word": "https://random-words-api.vercel.app/word",
+    "words": "https://random-word-api.herokuapp.com/word?number=5",
+    "food": "https://foodish-api.herokuapp.com/api/",
+    "car": "https://forza-api.tk/",
 }
 
 
@@ -69,7 +69,7 @@ async def random_magic(event):
     elif match == "words":
         text = "**• Random Words**\n\n"
         for word in text:
-           text += f"--`{word}`"
+            text += f"--`{word}`"
     if text and not file:
         return await eor(event, text)
     await event.reply(text, file=file)
