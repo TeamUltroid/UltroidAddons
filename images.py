@@ -28,7 +28,7 @@ async def fnew_pik(event):
     if not match:
         return await eor(event, "`Give Something to Search!`")
     if " ; " in match:
-        _ = match.split(" ", maxsplit=1)
+        _ = match.split(" ; ", maxsplit=1)
         match = _[0]
         limit = int(_[1])
     content = urlopen(
@@ -52,7 +52,7 @@ async def snew_pik(event):
     if not match:
         return await eor(event, "`Give Something to Search!`")
     if " ; " in match:
-        _ = match.split(" ", maxsplit=1)
+        _ = match.split(" ; ", maxsplit=1)
         match = _[0]
         limit = int(_[1])
     content = urlopen(
