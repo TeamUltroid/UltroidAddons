@@ -11,13 +11,16 @@
 
 • `{i}freepik <query> ; limit`
     search images on freepik.
+
+• `{i}shutter <query> ; limit`
+    search images on shutterstock.
 """
 
 from random import shuffle
 from urllib.request import urlopen
-
+import os
 from bs4 import BeautifulSoup as bs
-
+from telethon.errors.rpcerrorlist import WebpageCurlFailedError
 from . import *
 
 
@@ -27,6 +30,7 @@ async def fnew_pik(event):
     limit = 5
     if not match:
         return await eor(event, "`Give Something to Search!`")
+    event = await eor(event, "`...`")
     if " ; " in match:
         _ = match.split(" ; ", maxsplit=1)
         match = _[0]
@@ -41,9 +45,18 @@ async def fnew_pik(event):
         return await eor(event, "No Results Found!")
     shuffle(con)
     lml = [a["src"] for a in con[:limit]]
-    await event.client.send_message(
-        event.chat_id, f"Uploaded {len(lml)} Images!", file=lml
-    )
+    try:
+        await event.client.send_message(
+            event.chat_id, f"Uploaded {len(lml)} Images!", file=lml
+        )
+    except WebpageCurlFailedError:
+        NaN = []
+        for _ in lml:
+           NaN.append(await download_file(_, check_filename("freepik.png")))
+           await event.client.send_message(
+            event.chat_id, f"Uploaded {len(NaN)} Images!", file=NaN
+            )
+        [os.remove(a) for a in NaN]
     await event.delete()
 
 @ultroid_cmd(pattern="shutter ?(.*)")
@@ -52,6 +65,7 @@ async def snew_pik(event):
     limit = 5
     if not match:
         return await eor(event, "`Give Something to Search!`")
+    event = await eor(event, "`...`")
     if " ; " in match:
         _ = match.split(" ; ", maxsplit=1)
         match = _[0]
@@ -65,7 +79,16 @@ async def snew_pik(event):
         return await eor(event, "No Results Found!")
     shuffle(con)
     lml = [a["src"] for a in con[:limit]]
-    await event.client.send_message(
-        event.chat_id, f"Uploaded {len(lml)} Images!", file=lml
-    )
+    try:
+        await event.client.send_message(
+            event.chat_id, f"Uploaded {len(lml)} Images!", file=lml
+        )
+    except WebpageCurlFailedError:
+        NaN = []
+        for _ in lml:
+           NaN.append(await download_file(_, check_filename("shutter.png")))
+           await event.client.send_message(
+            event.chat_id, f"Uploaded {len(NaN)} Images!", file=NaN
+            )
+        [os.remove(a) for a in NaN]
     await event.delete()
