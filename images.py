@@ -31,6 +31,7 @@ async def fnew_pik(event):
         _ = match.split(" ; ", maxsplit=1)
         match = _[0]
         limit = int(_[1])
+    match = match.replace(" ", "%20")
     content = urlopen(
         f"https://www.freepik.com/search?format=search&page=1&query={match}"
     )
