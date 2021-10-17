@@ -12,7 +12,7 @@
 """
 
 import requests as r
-from bs4 import BeautifulSoup as ba
+from bs4 import BeautifulSoup as bs
 
 from . import *
 
