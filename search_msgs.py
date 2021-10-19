@@ -41,7 +41,7 @@ async def searcher(e):
         limit=limit,
         reverse=bool(e.pattern_match.group(1))
     ):
-        text += f" [»» {msg.id}](t.me/c/{e.chat.id}/{msg.id})\n"
+        text += f" [»» {msg.id}](t.me/c/{e.chat_id}/{msg.id})\n"
         c += 1
 
     txt = (
