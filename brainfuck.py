@@ -11,11 +11,7 @@
     Brainfuck Interpreter with string or reply.
 """
 
-import logging
-
 from . import *
-
-logging.getLogger(__name__)
 
 def evaluate(commands):
     interpreter = BrainfuckInterpreter(commands)
@@ -30,7 +26,7 @@ __all__ = (
 
 class IOStream:
     def __init__(self, data=None):
-        self._buffer = data if data else ''
+        self._buffer = data or ''
 
     def __len__(self):
         return len(self._buffer)
@@ -55,8 +51,6 @@ class IncrementalByteCellArray:
         self.data_pointer = 0
 
     def __getitem__(self, item):
-        #logging.critical(f'Get cell: {self.data_pointer}')
-
         cell_amount = len(self.byte_cells)
         if item > cell_amount - 1:
             self.extend(item - cell_amount + 1)
@@ -64,8 +58,6 @@ class IncrementalByteCellArray:
         return self.byte_cells[item]
 
     def __setitem__(self, key: int, value: int):
-        #logging.critical(f'Set cell {key} to {value}')
-
         cell_amount = len(self.byte_cells)
         if key > cell_amount - 1:
             self.extend(key - cell_amount + 1)
@@ -80,7 +72,6 @@ class IncrementalByteCellArray:
 
     def extend(self, size: int):
         self.byte_cells += [0] * size
-        #logging.critical(f'Extended byte cells by {size}, new size: {len(self.byte_cells)}')
 
     def increment(self):
         new_val = (self.get() + 1) % 256
@@ -131,8 +122,6 @@ class BrainfuckInterpreter:
     def _interpret(self):
         instruction = self._commands[self.instruction_pointer]
 
-        #logging.critical(f'Instruction: {instruction} | Pos: {self.instruction_pointer}')
-
         if instruction == '>':
             self.cells.data_pointer += 1
         elif instruction == '<':
@@ -147,22 +136,13 @@ class BrainfuckInterpreter:
             self.cells.set(self.input.read(1))
         elif instruction == '[':
             if self.cells.get() == 0:
-                try:
-                    loop_end = self._look_forward()
-                except ValueError:
-                    #logging.critical(f'No closing bracket for loop found on index: {self.instruction_pointer}')
-                    raise
-
+                loop_end = self._look_forward()
                 self.instruction_pointer = loop_end
             else:
                 self._opening_bracket_indexes.append(self.instruction_pointer)
         elif instruction == ']':
             if self.cells.get() != 0:
-                try:
-                    opening_bracket_index = self._opening_bracket_indexes.pop(-1)
-                except IndexError:
-                    #logging.critical(f'No opening bracket for loop on index: {self.instruction_pointer}')
-                    raise
+                opening_bracket_index = self._opening_bracket_indexes.pop(-1)
 
                 self.instruction_pointer = opening_bracket_index - 1
             else:
@@ -190,25 +170,25 @@ def bf(text):
     pattern="bf",
 )
 async def _(event):        
-    input = event.text[4:]
-    if not input:
+    input_ = event.text[4:]
+    if not input_:
         if event.reply_to_msg_id:
             previous_message = await event.get_reply_message()
-            input = previous_message.message
+            input_ = previous_message.message
         else:
-            await eod(event, "Give me some text lol", time=5)
-    await eor(event, f"{bf(input)}")
+            return await eod(event, "Give me some text lol", time=5)
+    await eor(event, f"{bf(input_)}")
     
 
 @ultroid_cmd(
     pattern="rbf",
 )
 async def _(event):
-    input = event.text[5:]
-    if not input:
+    input_ = event.text[5:]
+    if not input_:
         if event.reply_to_msg_id:
             previous_message = await event.get_reply_message()
-            input = previous_message.message
+            input_ = previous_message.message
         else:
-            await eod(event, "Give me some text lol", time=5)
-    await eor(event, f"{evaluate(input)}")
+            return await eod(event, "Give me some text lol", time=5)
+    await eor(event, f"{evaluate(input_)}")
