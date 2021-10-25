@@ -386,7 +386,7 @@ async def tantxt(ult):
 @ultroid_cmd(pattern="linetext ?(.*)")
 async def linetxt(ult):
     args = ult.pattern_match.group(1)
-    if not args and args.is_reply:
+    if not args and ult.is_reply:
         get = await ult.get_reply_message()
         args = get.text
     if not args:
@@ -407,8 +407,7 @@ async def boxtxt(ult):
         get = await ult.get_reply_message()
         args = get.text
     if not args:
-        await ult.edit("What I am Supposed to boxify? Please Give Text Sir")
-        return
+        return await ult.edit("What I am Supposed to boxify? Please Give Text Sir")
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
@@ -424,8 +423,7 @@ async def bubbletxt(ult):
         get = await ult.get_reply_message()
         args = get.text
     if not args:
-        await ult.edit("What I am Supposed to bubblify? Please Give Text Sir")
-        return
+        return await ult.edit("What I am Supposed to bubblify? Please Give Text Sir")
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
@@ -441,8 +439,7 @@ async def cursive(ult):
         get = await ult.get_reply_message()
         args = get.text
     if not args:
-        await ult.edit("What I am Supposed to write in cursive? Please Give Text Sir")
-        return
+        return await ult.edit("What I am Supposed to write in cursive? Please Give Text Sir")
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
@@ -458,8 +455,7 @@ async def greektext(ult):
         get = await ult.get_reply_message()
         args = get.text
     if not args:
-        await ult.edit("What I am Supposed to greekify? Please Give Text Sir")
-        return
+        return await ult.edit("What I am Supposed to greekify? Please Give Text Sir")
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
@@ -472,7 +468,7 @@ async def greektext(ult):
 async def sorcerertext(ult):
 
     args = ult.pattern_match.group(1)
-    if not args:
+    if not args and ult.is_reply:
         get = await ult.get_reply_message()
         args = get.text
     if not args:
@@ -510,8 +506,7 @@ async def rusitext(ult):
         get = await ult.get_reply_message()
         args = get.text
     if not args:
-        await ult.edit("What I am Supposed to rusify? Please Give Text Sir")
-        return
+        return await ult.edit("What I am Supposed to rusify? Please Give Text Sir")
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
