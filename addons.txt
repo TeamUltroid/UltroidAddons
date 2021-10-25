@@ -3,6 +3,7 @@ covid
 gtts
 pokedex.py
 pyshorteners
+multiutility
 pyfiglet
 pyjokes
 speechrecognition
