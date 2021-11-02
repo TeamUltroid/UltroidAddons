@@ -25,5 +25,5 @@ async def hhhh(eve):
     msg = ""
     for key in data.keys():
         _key = key[0].upper() + key[1:]
-        msg += f"• **{_key.replace('_', ' ')}** : `{data[key]}`"
+        msg += f"• **{_key.replace('_', ' ')}** : `{data[key]}`\n"
     await eor(eve, msg)
