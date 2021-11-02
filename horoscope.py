@@ -19,7 +19,7 @@ async def hhhh(eve):
     match = eve.pattern_match.group(1)
     if not match:
         return await eor(eve, "`Provide your sign to get Your Horoscope..`")
-    data = await async_searcher("https://aztro.sameerkumar.website/?sign={match}&day=today", post=True, re_json=True)
+    data = await async_searcher(f"https://aztro.sameerkumar.website/?sign={match}&day=today", post=True, re_json=True)
     if data.get("message"):
         return await eor(eve, f"**ERROR :** `{data.get('message').split('.')[0]}`")
     msg = ""
