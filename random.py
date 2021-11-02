@@ -34,6 +34,7 @@ API_LIST = {
     "fox": "https://randomfox.ca/floof/",
     "funfact": "https://asli-fun-fact-api.herokuapp.com/",
     "quote": "https://api.themotivate365.com/stoic-quote",
+    "quotable":"http://api.quotable.io/random",
     "word": "https://random-words-api.vercel.app/word",
     "words": "https://random-word-api.herokuapp.com/word?number=5",
     "food": "https://foodish-api.herokuapp.com/api/",
@@ -63,6 +64,8 @@ async def random_magic(event):
         text = req["data"]["fact"]
     elif match == "quote":
         text = f"**{req['data']['quote']}**\n\n~ {req['data']['author']}"
+    elif match == "quotable":
+        text = f'`{req["content"]}`' + "~ `{req['author']}`"
     elif match == "word":
         req = req[0]
         text = f"**Random Word**\n- `{req['word']}` : `{req['definition']}`"
