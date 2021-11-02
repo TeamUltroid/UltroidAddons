@@ -9,7 +9,6 @@
 
 • `horo sign`
   `Get Horoscope for Today..`
-
 """
 
 from . import *
@@ -17,7 +16,7 @@ from . import *
 
 @ultroid_cmd(pattern="horo ?(.*)")
 async def hhhh(eve):
-    match = event.pattern_match.group(1)
+    match = eve.pattern_match.group(1)
     if not match:
         return await eor(eve, "`Provide your sign to get Your Horoscope..`")
     data = await async_searcher("https://aztro.sameerkumar.website/?sign={match}&day=today", post=True, re_json=True)
