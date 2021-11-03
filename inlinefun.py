@@ -126,6 +126,8 @@ async def nope(doit):
 @ultroid_cmd(pattern="quot ?(.*)")
 async def quote_(event):
     IFUZI = event.pattern_match.group(1)
+    if "quotly" in event.text:
+        return
     if not IFUZI:
         return await eor(event, "`Give some text to make Quote..`")
     EI_IR = await eor(event, "`Processing...`")
