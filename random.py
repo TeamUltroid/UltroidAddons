@@ -36,7 +36,7 @@ API_LIST = {
     "quote": "https://api.themotivate365.com/stoic-quote",
     "quotable":"http://api.quotable.io/random",
     "word": "https://random-words-api.vercel.app/word",
-    "words": "https://random-word-api.herokuapp.com/word?number=5",
+    "words": "https://random-word-api.herokuapp.com/word?number=10",
     "food": "https://foodish-api.herokuapp.com/api/",
     "car": "https://forza-api.tk/",
 }
@@ -71,7 +71,7 @@ async def random_magic(event):
         text = f"**Random Word**\n- `{req['word']}` : `{req['definition']}`"
     elif match == "words":
         text = "**• Random Words**\n\n"
-        for word in text:
+        for word in req:
             text += f"--`{word}`"
     if text and not file:
         return await eor(event, text)
