@@ -72,7 +72,7 @@ async def random_magic(event):
     elif match == "words":
         text = "**• Random Words**\n\n"
         for word in req:
-            text += f"--`{word}`"
+            text += f"--`{word}`\n"
     if text and not file:
         return await eor(event, text)
     await event.reply(text, file=file)
