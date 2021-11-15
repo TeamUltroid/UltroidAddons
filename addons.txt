@@ -12,3 +12,4 @@ textblob
 lyrics_extractor==3.0.1
 speedtest-cli
 emoji
+shazamio
