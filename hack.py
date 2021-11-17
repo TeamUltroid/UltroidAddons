@@ -43,7 +43,7 @@ async def _(event):
     await asyncio.sleep(2)
     animation_interval = 0.6
     animation_ttl = range(0, 14)
-    await xx.edit("Connecting nd getting combined token from my.telegram.org ")
+    await xx.edit("`Connecting and getting combined token from my.telegram.org`")
     await asyncio.sleep(1)
     animation_chars = [
         "`root@anon:~#` ",
