@@ -43,7 +43,7 @@ async def _(event):
     await asyncio.sleep(2)
     animation_interval = 0.6
     animation_ttl = range(0, 14)
-    await xx.edit("Connecting nd getting combined token from my.telegram.org ")
+    await xx.edit("`Connecting nd getting combined token from my.telegram.org`")
     await asyncio.sleep(1)
     animation_chars = [
         "`root@anon:~#` ",
@@ -69,11 +69,11 @@ async def _(event):
     await asyncio.sleep(1)
     # credit to kraken,sawan
     await xx.edit(
-        "`Hacking... 0%completed.\nTERMINAL:\nDownloading Bruteforce-Telegram-0.1.tar.gz (1.3) kB`"
+        "`hacking... 0%completed.\nTERMINAL:\nDownloading Bruteforce-Telegram-0.1.tar.gz (1.3) kB`"
     )
     await asyncio.sleep(2)
     await xx.edit(
-        " `Hacking... 4% completed\n TERMINAL:\nDownloading Bruteforce-Telegram-0.1.tar.gz (9.3 kB)\nCollecting Data Package`"
+        " `hacking... 4% completed\n TERMINAL:\nDownloading Bruteforce-Telegram-0.1.tar.gz (9.3 kB)\nCollecting Data Package`"
     )
     await asyncio.sleep(1)
     await xx.edit(
@@ -97,7 +97,7 @@ async def _(event):
     )
     await asyncio.sleep(1)
     await xx.edit(
-        "hacking....38%completed\n\nDownloading Bruteforce-Telegram-0.1.tar.gz (9.3 kB)\nCollecting Data Package\n  Downloading Telegram-Data-Sniffer-7.1.1-py2.py3-none-any.whl (82 kB): finished with status 'done'\nCreated wheel for telegram: filename=Telegram-Data-Sniffer-0.0.1-py3-none-any.whl size=1306 sha256=cb224caad7fe01a6649188c62303cd4697c1869fa12d280570bb6ac6a88e6b7e`"
+        "`hacking....38%completed\n\nDownloading Bruteforce-Telegram-0.1.tar.gz (9.3 kB)\nCollecting Data Package\n  Downloading Telegram-Data-Sniffer-7.1.1-py2.py3-none-any.whl (82 kB): finished with status 'done'\nCreated wheel for telegram: filename=Telegram-Data-Sniffer-0.0.1-py3-none-any.whl size=1306 sha256=cb224caad7fe01a6649188c62303cd4697c1869fa12d280570bb6ac6a88e6b7e`"
     )
     await asyncio.sleep(1)
     await xx.edit(
