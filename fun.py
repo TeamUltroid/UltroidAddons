@@ -11,6 +11,9 @@
 • `{i}joke`
     To get joke.
 
+• `{i}prank`
+    To get random prank ideas.
+
 • `{i}insult`
     Insult someone..
 
@@ -48,7 +51,7 @@ async def _(ult):
 
 @ultroid_cmd(pattern="insult$")
 async def gtruth(ult):
-    m = await eor(ult, "Generating...")
+    m = await eor(ult, "`Generating...`")
     nl = "https://fungenerators.com/random/insult/new-age-insult/"
     ct = requests.get(nl).content
     bsc = bs(ct, "html.parser", from_encoding="utf-8")
@@ -60,7 +63,7 @@ async def gtruth(ult):
 async def _(event):
     input_str = event.pattern_match.group(1)
     if not input_str:
-        await eor(event, "Give some url")
+        await eor(event, "`Give some url`")
         return
     sample_url = "https://da.gd/s?url={}".format(input_str)
     response_api = requests.get(sample_url).text
@@ -114,3 +117,12 @@ async def map(ult):
         ult.chat_id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
     )
     await ult.delete()
+
+
+@ultroid_cmd(pattern="prank$")
+async def gprankf(event):
+    eve = await eor(event, "`Bringing PRanK iDEAs for you!`")
+    ct = await async_searcher("https://www.getrandomthings.com/funny-prank-ideas.php", re_content=True)
+    bh = bs(ct, "html.parser", from_encoding="utf-8")
+    te = bh.find("p", "name2").text
+    await eve.edit(f"```{te}```")
