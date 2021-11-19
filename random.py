@@ -81,7 +81,8 @@ async def random_magic(event):
         file = SCRAP_LIST[match] + bsC.find("img", "featured-celebrity-image")["src"]
         name = bsC.find("div", "info").find("h1").text
         text = f"• **Name :** `{name}`\n"
-        text += f"  - __{bsC.find('p', 'fame').text.replace('\n','')}__\n\n"
+        desc = bsC.find('p', 'fame').text.replace('\n','')
+        text += f"  - __{desc}__\n\n"
         bd = bsC.find("p", "birth-dates").text.replace("\n","")
         text += f"• **Birth Dates :** {bd}\n"
         text += ("-"*10)
