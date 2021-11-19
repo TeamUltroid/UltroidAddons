@@ -20,6 +20,7 @@
 • `{i}random word`
 • `{i}random words`
 • `{i}random car`
+• `{i}random celebrity`
 """
 
 from . import HNDLR, async_searcher, eor, ultroid_bot
