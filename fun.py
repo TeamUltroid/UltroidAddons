@@ -11,9 +11,6 @@
 • `{i}joke`
     To get joke.
 
-• `{i}prank`
-    To get random prank ideas.
-
 • `{i}insult`
     Insult someone..
 
@@ -118,11 +115,3 @@ async def map(ult):
     )
     await ult.delete()
 
-
-@ultroid_cmd(pattern="prank$")
-async def gprankf(event):
-    eve = await eor(event, "`Bringing PRanK iDEAs for you!`")
-    ct = await async_searcher("https://www.getrandomthings.com/funny-prank-ideas.php", re_content=True)
-    bh = bs(ct, "html.parser", from_encoding="utf-8")
-    te = bh.find("p", "name2").text
-    await eve.edit(f"```{te}```")
