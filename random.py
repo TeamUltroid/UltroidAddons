@@ -23,7 +23,7 @@
 """
 
 from . import HNDLR, async_searcher, eor, ultroid_bot
-
+from bs4 import BeautifulSoup as bs
 # These Api's are Collected From
 # ---- https://github.com/public-apis/public-apis
 
@@ -41,19 +41,23 @@ API_LIST = {
     "car": "https://forza-api.tk/",
 }
 
+SCRAP_LIST = {"celebrity":"https://www.randomcelebritygenerator.com/"}
 
 @ultroid_cmd(pattern="random ?(.*)")
 async def random_magic(event):
     if "randomuser" in event.text:
         return
     match = event.pattern_match.group(1)
-    if not (match and match in API_LIST.keys()):
+    if not (match and match in [*list(API_LIST.keys()) *list(SCRAP_LIST.keys())]):
         return await eor(event, f"`Input Missing/Wrong..`\n`{HNDLR}help random`")
-    text, file = None, None
+    text, bsC, file = None, None, None
+    ret = match in SCRAP_LIST
     try:
-        req = await async_searcher(API_LIST[match], re_json=True)
+        req = await async_searcher(API_LIST.get(match) or SCRAP_LIST.get(match), re_json=not ret, re_content=ret)
     except Exception as er:
         return await eor(event, str(er))
+    if ret:
+        bsC = bs(req, "html.parser", from_encoding="utf-8")
     if match == "cat":
         file = req["file"]
     elif match in ["dog", "duck"]:
@@ -73,6 +77,14 @@ async def random_magic(event):
         text = "**• Random Words**\n\n"
         for word in req:
             text += f"--`{word}`\n"
+    elif match == "celebrity" and bsC:
+        file = SCRAP_LIST[match] + bsC.find("img", "featured-celebrity-image")["src"]
+        name = bsC.find("div", "info").find("h1").text
+        text = f"• **Name :** `{name}`\n"
+        text += f"  - __{bsC.find('p', 'fame').text}__\n\n"
+        bd = bsC.find("p", "birth-dates").text.replace("\n","")
+        text += f"• **Birth Dates :** {bd}\n"
+        text += ("_"*10)
     if text and not file:
         return await eor(event, text)
     await event.reply(text, file=file)
