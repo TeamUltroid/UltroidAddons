@@ -48,7 +48,7 @@ async def random_magic(event):
     if "randomuser" in event.text:
         return
     match = event.pattern_match.group(1)
-    if not (match and match in [*list(API_LIST.keys()) *list(SCRAP_LIST.keys())]):
+    if not (match and match in [*list(API_LIST.keys()), *list(SCRAP_LIST.keys())]):
         return await eor(event, f"`Input Missing/Wrong..`\n`{HNDLR}help random`")
     text, bsC, file = None, None, None
     ret = match in SCRAP_LIST
