@@ -1,5 +1,4 @@
 fonttools
-covid
 gtts
 pokedex.py
 pyshorteners
@@ -13,3 +12,4 @@ lyrics_extractor==3.0.1
 speedtest-cli
 emoji
 shazamio
+covid
