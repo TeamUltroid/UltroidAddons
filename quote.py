@@ -8,7 +8,7 @@
 """
 ✘ Commands Available -
 
-• `{i}q <reply>`
+• `{i}qbot <reply>`
     Make sticker quote without QuotlyBot
 """
 
@@ -442,7 +442,7 @@ async def replied_user(draw, tot, text, maxlength, title):
             space += textfont.getsize(letter)[0]
 
 
-@ultroid_cmd(pattern="q$")
+@ultroid_cmd(pattern="qbot$")
 async def _(event):
     reply = await event.get_reply_message()
     msg = reply.message
