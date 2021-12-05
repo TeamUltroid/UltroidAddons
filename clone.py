@@ -14,7 +14,6 @@
 
 • `{i}revert`
     Revert to your original identity
-
 """
 
 import html
@@ -33,28 +32,28 @@ async def _(event):
     eve = await eor(event, "`Processing...`")
     reply_message = await event.get_reply_message()
     whoiam = await event.client(GetFullUserRequest(ultroid_bot.uid))
-    if whoiam.about:
+    if whoiam.full_user.about:
         mybio = str(ultroid_bot.me.id) + "01"
-        udB.set(f"{mybio}", whoiam.about)  # saving bio for revert
-    udB.set(f"{ultroid_bot.uid}02", whoiam.user.first_name)
-    if whoiam.user.last_name:
-        udB.set(f"{ultroid_bot.uid}03", whoiam.user.last_name)
+        udB.set(f"{mybio}", whoiam.full_user.about)  # saving bio for revert
+    udB.set(f"{ultroid_bot.uid}02", whoiam.users[0].first_name)
+    if whoiam.users[0].last_name:
+        udB.set(f"{ultroid_bot.uid}03", whoiam.users[0].last_name)
     replied_user, error_i_a = await get_full_user(event)
     if replied_user is None:
         await eve.edit(str(error_i_a))
         return
-    user_id = replied_user.user.id
+    user_id = replied_user.users[0].id
     profile_pic = await event.client.download_profile_photo(user_id)
-    first_name = html.escape(replied_user.user.first_name)
+    first_name = html.escape(replied_user.users[0].first_name)
     if first_name is not None:
         first_name = first_name.replace("\u2060", "")
-    last_name = replied_user.user.last_name
+    last_name = replied_user.users[0].last_name
     if last_name is not None:
         last_name = html.escape(last_name)
         last_name = last_name.replace("\u2060", "")
     if last_name is None:
         last_name = "⁪⁬⁮⁮⁮"
-    user_bio = replied_user.about
+    user_bio = replied_user.full_user.about
     await event.client(UpdateProfileRequest(first_name=first_name))
     await event.client(UpdateProfileRequest(last_name=last_name))
     await event.client(UpdateProfileRequest(about=user_bio))
