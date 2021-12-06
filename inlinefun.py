@@ -34,7 +34,7 @@ from random import choice
 
 from telethon.errors import ChatSendInlineForbiddenError
 
-from plugins.stickertools import deEmojify
+from addons.stickertools import deEmojify
 
 from . import *
 
