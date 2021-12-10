@@ -24,5 +24,5 @@ async def bored_cmd(event):
   if content.get("participants"):
     m += f"\n**Participants Required:** `{content['participants']}`"
   if content.get("price"):
-    m += f"\n**Price:** `{content['Price']}`"
+    m += f"\n**Price:** `{content['price']}`"
   await msg.edit(m)
