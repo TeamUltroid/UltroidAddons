@@ -47,6 +47,11 @@ async def sticklet(event):
         font_file_ = glob("resources/fonts/*ttf")
         FONT_FILE = random.choice(font_file_)
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
+    for i in range(10):
+        if not draw.multiline_textsize(sticktext, font=font) > (512, 512):
+            break
+        fontsize = 100
+        font = ImageFont.truetype(FONT_FILE, size=fontsize)
     width, height = draw.multiline_textsize(sticktext, font=font)
     draw.multiline_text(
         ((512 - width) / 2, (512 - height) / 2), sticktext, font=font, fill=(R, G, B)
