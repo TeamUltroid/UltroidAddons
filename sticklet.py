@@ -16,10 +16,10 @@ import io
 import os
 import random
 import textwrap
-
+from glob import glob
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterDocument
-
+from telethon.errors.rpcerrorlist import BotMethodInvalidError
 from . import *
 
 
@@ -38,11 +38,14 @@ async def sticklet(event):
     image = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
     fontsize = 230
-    font_file_ = await event.client.get_messages(
-        entity="@fonthub", filter=InputMessagesFilterDocument, limit=None
-    )
-    nfont = random.choice(font_file_)
-    FONT_FILE = await event.client.download_media(nfont)
+    try:
+        font_file_ = await event.client.get_messages(
+            entity="@fonthub", filter=InputMessagesFilterDocument, limit=None
+        )
+        FONT_FILE = await random.choice(font_file_).download_media()
+    except BotMethodInvalidError:
+        font_file_ = glob("resources/fonts/*ttf")
+        FONT_FILE = random.choice(font_file_)
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
     while draw.multiline_textsize(sticktext, font=font) > (512, 512):
         fontsize = 100
@@ -52,7 +55,7 @@ async def sticklet(event):
         ((512 - width) / 2, (512 - height) / 2), sticktext, font=font, fill=(R, G, B)
     )
     image_stream = io.BytesIO()
-    image_stream.name = "leobrownlee.webp"
+    image_stream.name = "ult.webp"
     image.save(image_stream, "WebP")
     image_stream.seek(0)
     await a.delete()
