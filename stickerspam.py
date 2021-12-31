@@ -21,7 +21,7 @@ from telethon.utils import get_input_document
 from . import *
 
 
-@ultroid_cmd(pattern="sspam ?(.*)")
+@ultroid_cmd(pattern="sspam( (.*)|$)")
 async def _(e):
     match = e.pattern_match.group(1)
     x = await e.get_reply_message()

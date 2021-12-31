@@ -24,7 +24,7 @@ from . import *
 TE = f"API not found, Please get it from ocr.space and set\n\ncommand `{HNDLR}setredis OCR_API your-api-key`"
 
 
-@ultroid_cmd(pattern="ocr ?(.*)")
+@ultroid_cmd(pattern="ocr( (.*)|$)")
 async def ocrify(ult):
     if not ult.is_reply:
         return await eor(ult, "`Reply to Photo...`")

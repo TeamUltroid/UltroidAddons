@@ -19,7 +19,7 @@ import asyncio
 from . import *
 
 
-@ultroid_cmd(pattern="type ?(.*)", fullsudo=True)
+@ultroid_cmd(pattern="type( (.*)|$)", fullsudo=True)
 async def _(event):
     input_str = event.pattern_match.group(1)
     if not input_str:

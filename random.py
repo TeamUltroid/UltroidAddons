@@ -44,7 +44,7 @@ API_LIST = {
 
 SCRAP_LIST = {"celebrity":"https://www.randomcelebritygenerator.com/"}
 
-@ultroid_cmd(pattern="random ?(.*)")
+@ultroid_cmd(pattern="random( (.*)|$)")
 async def random_magic(event):
     if "randomuser" in event.text:
         return

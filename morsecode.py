@@ -16,7 +16,7 @@
 
 from . import ultroid_cmd, async_searcher, eor
 
-@ultroid_cmd(pattern="mencode ?(.*)")
+@ultroid_cmd(pattern="mencode( (.*)|$)")
 async def mencode(event):
     msg = await eor(event, "`Processing...`")
     text = event.pattern_match.group(1)
@@ -26,7 +26,7 @@ async def mencode(event):
     encoded = await async_searcher(base_url, re_content=False)
     await msg.edit("**Encoded.**\n\n**Morse Code:** `{}`".format(encoded))
     
-@ultroid_cmd(pattern="mdecode ?(.*)")
+@ultroid_cmd(pattern="mdecode( (.*)|$)")
 async def mencode(event):
     msg = await eor(event, "`Processing...`")
     text = event.pattern_match.group(1)

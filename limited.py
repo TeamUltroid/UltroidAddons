@@ -14,7 +14,7 @@
 from . import *
 
 
-@ultroid_cmd(pattern="limited ?(.*)")
+@ultroid_cmd(pattern="limited( (.*)|$)")
 async def _(e):
     match = e.pattern_match.group(1)
     msg = await eor(e, "checking if account is limited or not...")

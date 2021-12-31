@@ -17,7 +17,7 @@ INLOCK = "`Seems like inline messages aren't allowed here`"
 
 
 @ultroid_cmd(
-    pattern="manga ?(.*)",
+    pattern="manga( (.*)|$)",
 )
 async def manga(ult):
     msg = await eor(ult, "`Searching ...`")

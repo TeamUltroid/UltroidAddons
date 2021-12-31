@@ -14,7 +14,7 @@ from . import *
 """
 
 
-@ultroid_cmd(pattern="tscan ?(.*)")
+@ultroid_cmd(pattern="tscan( (.*)|$)")
 async def tscan(e):
     mat = e.pattern_match.group(1)
     if e.is_reply and not mat:

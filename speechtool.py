@@ -33,7 +33,7 @@ reco = sr.Recognizer()
 
 
 @ultroid_cmd(
-    pattern="tts ?(.*)",
+    pattern="tts( (.*)|$)",
 )
 async def _(event):
     input_str = event.pattern_match.group(1)

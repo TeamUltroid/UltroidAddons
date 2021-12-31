@@ -23,7 +23,7 @@ from bs4 import BeautifulSoup as bs
 from . import *
 
 
-@ultroid_cmd(pattern="icon ?(.*)")
+@ultroid_cmd(pattern="icon( (.*)|$)")
 async def www(e):
     a = e.pattern_match.group(1)
     if not a:

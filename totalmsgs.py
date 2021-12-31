@@ -14,7 +14,7 @@ from telethon.utils import get_display_name
 from . import *
 
 
-@ultroid_cmd(pattern="totalmsgs ?(.*)")
+@ultroid_cmd(pattern="totalmsgs( (.*)|$)")
 async def _(e):
     match = e.pattern_match.group(1)
     if match:

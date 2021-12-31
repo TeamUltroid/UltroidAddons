@@ -31,7 +31,7 @@ from PIL import Image, ImageDraw, ImageFont
 from . import *
 
 
-@ultroid_cmd(pattern="mmf ?(.*)")
+@ultroid_cmd(pattern="mmf( (.*)|$)")
 async def ultd(event):
     ureply = await event.get_reply_message()
     msg = event.pattern_match.group(1)
@@ -183,7 +183,7 @@ async def draw_meme_text(image_path, msg):
     return imag
 
 
-@ultroid_cmd(pattern="mms ?(.*)")
+@ultroid_cmd(pattern="mms( (.*)|$)")
 async def mms(event):
     ureply = await event.get_reply_message()
     msg = event.pattern_match.group(1)

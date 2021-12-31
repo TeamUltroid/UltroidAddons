@@ -56,7 +56,7 @@ async def gtruth(ult):
     await m.edit(f"{cm}")
 
 
-@ultroid_cmd(pattern="url ?(.*)")
+@ultroid_cmd(pattern="url( (.*)|$)")
 async def _(event):
     input_str = event.pattern_match.group(1)
     if not input_str:
