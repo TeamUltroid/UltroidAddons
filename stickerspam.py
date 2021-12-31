@@ -29,16 +29,16 @@ async def _(e):
     sset = await e.client(
         GetStickerSetRequest(
             InputStickerSetID(
-                id=set.stickerset.id,
-                access_hash=set.stickerset.access_hash,
-            )
+                id=set.stickerset.id, access_hash=set.stickerset.access_hash
+            ),
+            hash=0,
         )
     )
     pack = sset.set.short_name
     docs = [
         get_input_document(x)
         for x in (
-            await e.client(GetStickerSetRequest(InputStickerSetShortName(pack)))
+            await e.client(GetStickerSetRequest(InputStickerSetShortName(pack), hash=0))
         ).documents
     ]
     for xx in docs:
