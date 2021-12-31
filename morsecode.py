@@ -9,26 +9,28 @@
 
 • `{i}mencode <text>`
    Encode the given text to Morse Code.
-   
+
 • `{i}mdecode <text>`
    Decode the given text from Morse Code.
 """
 
-from . import ultroid_cmd, async_searcher, eor
+from . import async_searcher, ultroid_cmd
+
 
 @ultroid_cmd(pattern="mencode( (.*)|$)")
 async def mencode(event):
-    msg = await event.eor( "`Processing...`")
+    msg = await event.eor("`Processing...`")
     text = event.pattern_match.group(1)
     if not text:
         return msg.edit("Please give a text!")
     base_url = "https://apis.xditya.me/morse/encode?text=" + text
     encoded = await async_searcher(base_url, re_content=False)
     await msg.edit("**Encoded.**\n\n**Morse Code:** `{}`".format(encoded))
-    
+
+
 @ultroid_cmd(pattern="mdecode( (.*)|$)")
 async def mencode(event):
-    msg = await event.eor( "`Processing...`")
+    msg = await event.eor("`Processing...`")
     text = event.pattern_match.group(1)
     if not text:
         return await msg.edit("Please give a text!")

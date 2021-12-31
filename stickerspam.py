@@ -14,6 +14,7 @@
 """
 
 import asyncio
+
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetID, InputStickerSetShortName
 from telethon.utils import get_input_document
@@ -51,4 +52,3 @@ async def _(e):
         if match:
             await asyncio.sleep(match)
         await e.respond(file=xx)
-

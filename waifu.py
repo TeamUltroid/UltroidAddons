@@ -8,6 +8,7 @@
 """
 
 import re
+
 from . import *
 
 EMOJI_PATTERN = re.compile(
@@ -25,6 +26,7 @@ EMOJI_PATTERN = re.compile(
     "\U00002702-\U000027B0"  # Dingbats
     "]+",
 )
+
 
 def deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""

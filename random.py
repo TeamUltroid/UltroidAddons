@@ -23,8 +23,10 @@
 • `{i}random celebrity`
 """
 
-from . import HNDLR, async_searcher, eor, ultroid_bot
 from bs4 import BeautifulSoup as bs
+
+from . import HNDLR, async_searcher
+
 # These Api's are Collected From
 # ---- https://github.com/public-apis/public-apis
 
@@ -35,14 +37,15 @@ API_LIST = {
     "fox": "https://randomfox.ca/floof/",
     "funfact": "https://asli-fun-fact-api.herokuapp.com/",
     "quote": "https://api.themotivate365.com/stoic-quote",
-    "quotable":"http://api.quotable.io/random",
+    "quotable": "http://api.quotable.io/random",
     "word": "https://random-words-api.vercel.app/word",
     "words": "https://random-word-api.herokuapp.com/word?number=10",
     "food": "https://foodish-api.herokuapp.com/api/",
     "car": "https://forza-api.tk/",
 }
 
-SCRAP_LIST = {"celebrity":"https://www.randomcelebritygenerator.com/"}
+SCRAP_LIST = {"celebrity": "https://www.randomcelebritygenerator.com/"}
+
 
 @ultroid_cmd(pattern="random( (.*)|$)")
 async def random_magic(event):
@@ -50,13 +53,17 @@ async def random_magic(event):
         return
     match = event.pattern_match.group(1)
     if not (match and match in [*list(API_LIST.keys()), *list(SCRAP_LIST.keys())]):
-        return await event.eor( f"`Input Missing/Wrong..`\n`{HNDLR}help random`")
+        return await event.eor(f"`Input Missing/Wrong..`\n`{HNDLR}help random`")
     text, bsC, file = None, None, None
     ret = match in SCRAP_LIST
     try:
-        req = await async_searcher(API_LIST.get(match) or SCRAP_LIST.get(match), re_json=not ret, re_content=ret)
+        req = await async_searcher(
+            API_LIST.get(match) or SCRAP_LIST.get(match),
+            re_json=not ret,
+            re_content=ret,
+        )
     except Exception as er:
-        return await event.eor( str(er))
+        return await event.eor(str(er))
     if ret:
         bsC = bs(req, "html.parser", from_encoding="utf-8")
     if match == "cat":
@@ -82,12 +89,12 @@ async def random_magic(event):
         file = SCRAP_LIST[match] + bsC.find("img", "featured-celebrity-image")["src"]
         name = bsC.find("div", "info").find("h1").text
         text = f"• **Name :** `{name}`\n"
-        desc = bsC.find('p', 'fame').text.replace('\n','')
+        desc = bsC.find("p", "fame").text.replace("\n", "")
         text += f"  - __{desc}__\n\n"
-        bd = bsC.find("p", "birth-dates").text.replace("\n","")
+        bd = bsC.find("p", "birth-dates").text.replace("\n", "")
         text += f"• **Birth Dates :** {bd}\n"
-        text += ("-"*10)
+        text += "-" * 10
     if text and not file:
-        return await event.eor( text)
+        return await event.eor(text)
     await event.reply(text, file=file)
     await event.delete()

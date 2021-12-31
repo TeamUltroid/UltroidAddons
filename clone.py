@@ -19,8 +19,7 @@
 import html
 
 from telethon.tl.functions.account import UpdateProfileRequest
-from telethon.tl.functions.photos import (DeletePhotosRequest,
-                                          UploadProfilePhotoRequest)
+from telethon.tl.functions.photos import DeletePhotosRequest, UploadProfilePhotoRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
@@ -29,7 +28,7 @@ from . import *
 
 @ultroid_cmd(pattern="clone( (.*)|$)", fullsudo=True)
 async def _(event):
-    eve = await event.eor( "`Processing...`")
+    eve = await event.eor("`Processing...`")
     reply_message = await event.get_reply_message()
     whoiam = await event.client(GetFullUserRequest(ultroid_bot.uid))
     if whoiam.full_user.about:
@@ -89,7 +88,7 @@ async def _(event):
     await client(UpdateProfileRequest(about=bio))
     await client(UpdateProfileRequest(first_name=name))
     await client(UpdateProfileRequest(last_name=ok))
-    await event.eor( "Succesfully reverted to your account back !")
+    await event.eor("Succesfully reverted to your account back !")
     udB.delete(f"{ultroid_bot.uid}01")
     udB.delete(f"{ultroid_bot.uid}02")
     udB.delete(f"{ultroid_bot.uid}03")

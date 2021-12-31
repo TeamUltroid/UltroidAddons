@@ -27,8 +27,8 @@ TE = f"API not found, Please get it from ocr.space and set\n\ncommand `{HNDLR}se
 @ultroid_cmd(pattern="ocr( (.*)|$)")
 async def ocrify(ult):
     if not ult.is_reply:
-        return await ult.eor( "`Reply to Photo...`")
-    msg = await ult.eor( "`Processing..`")
+        return await ult.eor("`Reply to Photo...`")
+    msg = await ult.eor("`Processing..`")
     OAPI = udB.get("OCR_API")
     if not OAPI:
         return await msg.edit(TE)

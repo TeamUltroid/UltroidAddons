@@ -25,7 +25,7 @@ async def _(event):
         await event.client.send_file(event.chat_id, response["url"])
         await event.delete()
     except Exception:
-        await event.eor( "`Something went wrong LOL...`")
+        await event.eor("`Something went wrong LOL...`")
 
 
 @ultroid_cmd(pattern="wibu( (.*)|$)")
@@ -35,7 +35,7 @@ async def _(event):
         await event.client.send_file(event.chat_id, response["url"])
         await event.delete()
     except Exception:
-        await event.eor( "`Something went wrong LOL...`")
+        await event.eor("`Something went wrong LOL...`")
 
 
 @ultroid_cmd(pattern="chika( (.*)|$)")
@@ -45,4 +45,4 @@ async def _(event):
         await event.client.send_file(event.chat_id, response["url"])
         await event.delete()
     except Exception:
-        await event.eor( "`Something went wrong LOL...`")
+        await event.eor("`Something went wrong LOL...`")

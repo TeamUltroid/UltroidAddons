@@ -30,7 +30,7 @@ async def searcher(e):
         args, limit = args.split(":", 1)
     try:
         limit = int(limit)
-    except:
+    except BaseException:
         limit = 5
 
     limit = 99 if limit > 99 else limit

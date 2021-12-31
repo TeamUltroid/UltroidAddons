@@ -11,7 +11,6 @@
 
 import os
 import random
-import re
 
 import emoji
 from telethon.utils import get_input_document

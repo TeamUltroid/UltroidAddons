@@ -12,17 +12,6 @@
     Make sticker quote without QuotlyBot
 """
 
-import asyncio
-
-from telethon import events
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-
-from . import *
-
-
-# Oringinal Source from Nicegrill: https://github.com/erenmetesar/NiceGrill/
-# Ported to Ultroid
-
 
 import json
 import os
@@ -34,6 +23,12 @@ import emoji
 from fontTools.ttLib import TTFont
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from telethon.tl import functions, types
+
+from . import *
+
+# Oringinal Source from Nicegrill: https://github.com/erenmetesar/NiceGrill/
+# Ported to Ultroid
+
 
 COLORS = [
     "#F07975",

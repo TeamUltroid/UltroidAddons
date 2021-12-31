@@ -32,8 +32,6 @@
 
 from random import choice
 
-from telethon.errors import ChatSendInlineForbiddenError
-
 from addons.waifu import deEmojify
 
 from . import *
@@ -129,8 +127,8 @@ async def quote_(event):
     if "quotly" in event.text:
         return
     if not IFUZI:
-        return await event.eor( "`Give some text to make Quote..`")
-    EI_IR = await event.eor( "`Processing...`")
+        return await event.eor("`Give some text to make Quote..`")
+    EI_IR = await event.eor("`Processing...`")
     try:
         RE_ZK = await event.client.inline_query("@QuotAfBot", IFUZI)
         await event.reply(file=choice(RE_ZK).document)

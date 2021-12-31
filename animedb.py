@@ -9,7 +9,6 @@ Search animes and manga from anilist.co using @animedb_bot
     To get manga info
 """
 
-from telethon.errors import ChatSendInlineForbiddenError
 
 from . import *
 
@@ -20,7 +19,7 @@ INLOCK = "`Seems like inline messages aren't allowed here`"
     pattern="manga( (.*)|$)",
 )
 async def manga(ult):
-    msg = await ult.eor( "`Searching ...`")
+    msg = await ult.eor("`Searching ...`")
     keyword = ult.pattern_match.group(1)
     if keyword is None:
         return await msg.edit("`Provide a Keyword to search`")

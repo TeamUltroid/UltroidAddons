@@ -23,7 +23,6 @@
 """
 
 import asyncio
-import os
 
 from . import *
 

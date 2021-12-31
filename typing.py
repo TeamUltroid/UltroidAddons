@@ -23,9 +23,9 @@ from . import *
 async def _(event):
     input_str = event.pattern_match.group(1)
     if not input_str:
-        return await event.eor( "Give me something to type !")
+        return await event.eor("Give me something to type !")
     shiiinabot = "\u2060" * 602
-    okla = await event.eor( shiiinabot)
+    okla = await event.eor(shiiinabot)
     typing_symbol = "|"
     previous_text = ""
     await okla.edit(typing_symbol)

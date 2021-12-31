@@ -4,7 +4,7 @@
 ✘ Commands Available -
 • `{i}totalmsgs`
     Returns your total msg count in current chat
-    
+
 • `{i}totalmsgs [username]/<reply>`
     Returns total msg count of user in current chat
 """

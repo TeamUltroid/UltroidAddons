@@ -18,16 +18,12 @@
 """
 
 
-import json
-import os
 import random
-import time
 
 from lyrics_extractor import SongLyrics as sl
 from lyrics_extractor.lyrics import LyricScraperException as LyError
 from telethon.errors.rpcerrorlist import UserAlreadyParticipantError
 from telethon.tl.functions.messages import ImportChatInviteRequest
-from telethon.tl.types import DocumentAttributeAudio
 from telethon.tl.types import InputMessagesFilterMusic as filtermus
 
 from . import *
@@ -36,9 +32,9 @@ from . import *
 @ultroid_cmd(pattern=r"lyrics( (.*)|$)")
 async def original(event):
     if not event.pattern_match.group(1):
-        return await event.eor( "give query to search.")
+        return await event.eor("give query to search.")
     noob = event.pattern_match.group(1)
-    ab = await event.eor( "Getting lyrics..")
+    ab = await event.eor("Getting lyrics..")
     dc = random.randrange(1, 3)
     if dc == 1:
         danish = "AIzaSyAyDBsY3WRtB5YPC6aB_w8JAy6ZdXNc6FU"
@@ -72,8 +68,8 @@ async def _(event):
         )
     args = event.pattern_match.group(1)
     if not args:
-        return await event.eor( "`Enter song name`")
-    okla = await event.eor( "processing...")
+        return await event.eor("`Enter song name`")
+    okla = await event.eor("processing...")
     chat = -1001271479322
     current_chat = event.chat_id
     try:
