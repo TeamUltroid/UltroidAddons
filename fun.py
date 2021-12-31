@@ -60,7 +60,7 @@ async def gtruth(ult):
 async def _(event):
     input_str = event.pattern_match.group(1)
     if not input_str:
-        await eor(event, "`Give some url`")
+        await event.eor( "`Give some url`")
         return
     sample_url = "https://da.gd/s?url={}".format(input_str)
     response_api = requests.get(sample_url).text
@@ -72,18 +72,18 @@ async def _(event):
             ),
         )
     else:
-        await eor(event, "`Something went wrong. Please try again Later.`")
+        await event.eor( "`Something went wrong. Please try again Later.`")
 
 
 @ultroid_cmd(pattern="decide$")
 async def _(event):
-    hm = await eor(event, "`Deciding`")
+    hm = await event.eor( "`Deciding`")
     r = requests.get("https://yesno.wtf/api").json()
     try:
         await event.reply(r["answer"], file=r["image"])
         await hm.delete()
     except ChatSendMediaForbiddenError:
-        await eor(event, r["answer"])
+        await event.eor( r["answer"])
 
 
 @ultroid_cmd(pattern="xo$")

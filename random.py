@@ -50,13 +50,13 @@ async def random_magic(event):
         return
     match = event.pattern_match.group(1)
     if not (match and match in [*list(API_LIST.keys()), *list(SCRAP_LIST.keys())]):
-        return await eor(event, f"`Input Missing/Wrong..`\n`{HNDLR}help random`")
+        return await event.eor( f"`Input Missing/Wrong..`\n`{HNDLR}help random`")
     text, bsC, file = None, None, None
     ret = match in SCRAP_LIST
     try:
         req = await async_searcher(API_LIST.get(match) or SCRAP_LIST.get(match), re_json=not ret, re_content=ret)
     except Exception as er:
-        return await eor(event, str(er))
+        return await event.eor( str(er))
     if ret:
         bsC = bs(req, "html.parser", from_encoding="utf-8")
     if match == "cat":
@@ -88,6 +88,6 @@ async def random_magic(event):
         text += f"• **Birth Dates :** {bd}\n"
         text += ("-"*10)
     if text and not file:
-        return await eor(event, text)
+        return await event.eor( text)
     await event.reply(text, file=file)
     await event.delete()

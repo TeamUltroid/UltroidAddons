@@ -17,7 +17,7 @@ from . import *
 
 @ultroid_cmd(pattern="character( (.*)|$)")
 async def anime_char_search(event):
-    xx = await eor(event, get_string("com_1"))
+    xx = await event.eor( get_string("com_1"))
     char_name = event.pattern_match.group(1)
     if not char_name:
         await eod(xx, "`Enter the name of a character too please!`", time=5)

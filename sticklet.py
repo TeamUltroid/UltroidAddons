@@ -25,13 +25,13 @@ from . import *
 
 @ultroid_cmd(pattern="sticklet (.*)")
 async def sticklet(event):
-    a = await eor(event, "`Processing...`")
+    a = await event.eor( "`Processing...`")
     R = random.randint(0, 256)
     G = random.randint(0, 256)
     B = random.randint(0, 256)
     sticktext = event.pattern_match.group(1)
     if not sticktext:
-        return await eor(event, "`Give me some Text`")
+        return await event.eor( "`Give me some Text`")
     sticktext = textwrap.wrap(sticktext, width=10)
     # converts back the list to a string
     sticktext = "\n".join(sticktext)

@@ -24,8 +24,8 @@ shazam = Shazam()
 async def song_recog(event):
     reply = await event.get_reply_message()
     if not (reply and mediainfo(reply.media) == "audio"):
-        return await eor(event, get_string("whs_1"), time=5)
-    xx = await eor(event, get_string("com_5"))
+        return await event.eor( get_string("whs_1"), time=5)
+    xx = await event.eor( get_string("com_5"))
     path_to_song = "./temp/shaazam_cache/unknown.mp3"
     await reply.download_media(path_to_song)
     await xx.edit(get_string("whs_2"))

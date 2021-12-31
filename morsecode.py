@@ -18,7 +18,7 @@ from . import ultroid_cmd, async_searcher, eor
 
 @ultroid_cmd(pattern="mencode( (.*)|$)")
 async def mencode(event):
-    msg = await eor(event, "`Processing...`")
+    msg = await event.eor( "`Processing...`")
     text = event.pattern_match.group(1)
     if not text:
         return msg.edit("Please give a text!")
@@ -28,7 +28,7 @@ async def mencode(event):
     
 @ultroid_cmd(pattern="mdecode( (.*)|$)")
 async def mencode(event):
-    msg = await eor(event, "`Processing...`")
+    msg = await event.eor( "`Processing...`")
     text = event.pattern_match.group(1)
     if not text:
         return await msg.edit("Please give a text!")

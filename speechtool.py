@@ -45,7 +45,7 @@ async def _(event):
     elif "|" in input_str:
         lan, text = input_str.split("|")
     else:
-        await eor(event, "Invalid Syntax. Module stopping.")
+        await event.eor( "Invalid Syntax. Module stopping.")
         return
     text = text.strip()
     lan = lan.strip()
@@ -72,7 +72,7 @@ async def _(event):
         try:
             subprocess.check_output(command_to_execute, stderr=subprocess.STDOUT)
         except (subprocess.CalledProcessError, NameError, FileNotFoundError) as exc:
-            await eor(event, str(exc))
+            await event.eor( str(exc))
         else:
             os.remove(required_file_name)
             required_file_name = required_file_name + ".opus"
@@ -84,7 +84,7 @@ async def _(event):
         os.remove(required_file_name)
         await eod(event, "Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
     except Exception as e:
-        await eor(event, str(e))
+        await event.eor( str(e))
 
 
 @ultroid_cmd(pattern="stt")

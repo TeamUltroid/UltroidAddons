@@ -129,8 +129,8 @@ async def quote_(event):
     if "quotly" in event.text:
         return
     if not IFUZI:
-        return await eor(event, "`Give some text to make Quote..`")
-    EI_IR = await eor(event, "`Processing...`")
+        return await event.eor( "`Give some text to make Quote..`")
+    EI_IR = await event.eor( "`Processing...`")
     try:
         RE_ZK = await event.client.inline_query("@QuotAfBot", IFUZI)
         await event.reply(file=choice(RE_ZK).document)

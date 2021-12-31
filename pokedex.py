@@ -26,9 +26,9 @@ from . import *
 async def pokedex(event):
     pokemon = event.pattern_match.group(1).lower()
     if not pokemon:
-        await eor(event, "`Give a Pokemon Name`")
+        await event.eor( "`Give a Pokemon Name`")
         return
-    xx = await eor(event, "`Booting up the pokedex.......`")
+    xx = await event.eor( "`Booting up the pokedex.......`")
     move = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon}")
     rw = f"https://some-random-api.ml/pokedex?pokemon={pokemon}"
     w = requests.get(f"https://api.pokemontcg.io/v1/cards?name={pokemon}")
@@ -38,7 +38,7 @@ async def pokedex(event):
     try:
         name = a["name"]
     except Exception:
-        await eor(event, "`Be sure To give correct Name`")
+        await event.eor( "`Be sure To give correct Name`")
         return
     typ = a["type"]
     species = a["species"]
@@ -125,7 +125,7 @@ async def pokedex(event):
 async def pokecard(event):
     pokename = event.pattern_match.group(1).lower()
     if not pokename:
-        await eor(event, "`Give A Pokemon name`")
+        await event.eor( "`Give A Pokemon name`")
         return
     rw = f"https://api.pokemontcg.io/v1/cards?name={pokename}"
     r = requests.get(rw)
@@ -137,5 +137,5 @@ async def pokecard(event):
         )
         await event.delete()
     except BaseException:
-        await eor(event, "`Be sure To give correct Name`")
+        await event.eor( "`Be sure To give correct Name`")
         return

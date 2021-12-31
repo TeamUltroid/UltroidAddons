@@ -29,8 +29,8 @@ async def fnew_pik(event):
     match = event.pattern_match.group(1)
     limit = 5
     if not match:
-        return await eor(event, "`Give Something to Search!`")
-    event = await eor(event, "`...`")
+        return await event.eor( "`Give Something to Search!`")
+    event = await event.eor( "`...`")
     if " ; " in match:
         _ = match.split(" ; ", maxsplit=1)
         match = _[0]
@@ -42,7 +42,7 @@ async def fnew_pik(event):
     reso = bs(content, "html.parser", from_encoding="utf-8")
     con = reso.find_all("img", src=re.compile("img.freepik.com"))
     if not con:
-        return await eor(event, "No Results Found!")
+        return await event.eor( "No Results Found!")
     shuffle(con)
     lml = [a["src"] for a in con[:limit]]
     try:
@@ -64,8 +64,8 @@ async def snew_pik(event):
     match = event.pattern_match.group(1)
     limit = 5
     if not match:
-        return await eor(event, "`Give Something to Search!`")
-    event = await eor(event, "`...`")
+        return await event.eor( "`Give Something to Search!`")
+    event = await event.eor( "`...`")
     if " ; " in match:
         _ = match.split(" ; ", maxsplit=1)
         match = _[0]
@@ -76,7 +76,7 @@ async def snew_pik(event):
     reso = bs(content, "html.parser", from_encoding="utf-8")
     con = reso.find_all("img", src=re.compile("image.shutterstock.com"))
     if not con:
-        return await eor(event, "No Results Found!")
+        return await event.eor( "No Results Found!")
     shuffle(con)
     lml = [a["src"] for a in con[:limit]]
     try:

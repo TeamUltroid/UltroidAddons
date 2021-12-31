@@ -36,9 +36,9 @@ from . import *
 @ultroid_cmd(pattern=r"lyrics( (.*)|$)")
 async def original(event):
     if not event.pattern_match.group(1):
-        return await eor(event, "give query to search.")
+        return await event.eor( "give query to search.")
     noob = event.pattern_match.group(1)
-    ab = await eor(event, "Getting lyrics..")
+    ab = await event.eor( "Getting lyrics..")
     dc = random.randrange(1, 3)
     if dc == 1:
         danish = "AIzaSyAyDBsY3WRtB5YPC6aB_w8JAy6ZdXNc6FU"
@@ -72,8 +72,8 @@ async def _(event):
         )
     args = event.pattern_match.group(1)
     if not args:
-        return await eor(event, "`Enter song name`")
-    okla = await eor(event, "processing...")
+        return await event.eor( "`Enter song name`")
+    okla = await event.eor( "processing...")
     chat = -1001271479322
     current_chat = event.chat_id
     try:
