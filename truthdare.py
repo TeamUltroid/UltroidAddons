@@ -25,7 +25,7 @@ link = "https://fungenerators.com/random/truth-or-dare?option="
 
 @ultroid_cmd(pattern="truth$")
 async def gtruth(ult):
-    m = await eor(ult, "`Generating a Truth Statement.. `")
+    m = await ult.eor("`Generating a Truth Statement.. `")
     nl = link + "truth"
     ct = r.get(nl).content
     bsc = bs(ct, "html.parser", from_encoding="utf-8")
@@ -35,7 +35,7 @@ async def gtruth(ult):
 
 @ultroid_cmd(pattern="dare$")
 async def gtruth(ult):
-    m = await eor(ult, "`Generating a Dare Task.. `")
+    m = await ult.eor("`Generating a Dare Task.. `")
     nl = link + "dare"
     ct = r.get(nl).content
     bsc = bs(ct, "html.parser", from_encoding="utf-8")

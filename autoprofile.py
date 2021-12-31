@@ -35,7 +35,7 @@ async def autoname_(event):
     match = event.pattern_match.group(1)
     if match == "stop":
         udB.delete("AUTONAME")
-        await eor(event, "`AUTONAME has been Stopped !`")
+        await event.eor("`AUTONAME has been Stopped !`")
         return
     udB.set("AUTONAME", "True")
     await eod(event, "`Started AUTONAME`")
@@ -55,7 +55,7 @@ async def autoname_(event):
     match = event.pattern_match.group(1)
     if match == "stop":
         udB.delete("AUTOBIO")
-        await eor(event, "`AUTOBIO has been Stopped !`")
+        await event.eor("`AUTOBIO has been Stopped !`")
         return
     udB.set("AUTOBIO", "True")
     await eod(event, "`Started AUTOBIO`")

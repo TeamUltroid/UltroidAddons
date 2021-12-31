@@ -16,8 +16,10 @@ import io
 import os
 import random
 import textwrap
+from glob import glob
 
 from PIL import Image, ImageDraw, ImageFont
+from telethon.errors.rpcerrorlist import BotMethodInvalidError
 from telethon.tl.types import InputMessagesFilterDocument
 
 from . import *
@@ -25,26 +27,31 @@ from . import *
 
 @ultroid_cmd(pattern="sticklet (.*)")
 async def sticklet(event):
-    a = await eor(event, "`Processing...`")
+    a = await event.eor("`Processing...`")
     R = random.randint(0, 256)
     G = random.randint(0, 256)
     B = random.randint(0, 256)
     sticktext = event.pattern_match.group(1)
     if not sticktext:
-        return await eor(event, "`Give me some Text`")
+        return await event.eor("`Give me some Text`")
     sticktext = textwrap.wrap(sticktext, width=10)
     # converts back the list to a string
     sticktext = "\n".join(sticktext)
     image = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
     fontsize = 230
-    font_file_ = await event.client.get_messages(
-        entity="@fonthub", filter=InputMessagesFilterDocument, limit=None
-    )
-    nfont = random.choice(font_file_)
-    FONT_FILE = await event.client.download_media(nfont)
+    try:
+        font_file_ = await event.client.get_messages(
+            entity="@fonthub", filter=InputMessagesFilterDocument, limit=None
+        )
+        FONT_FILE = await random.choice(font_file_).download_media()
+    except BotMethodInvalidError:
+        font_file_ = glob("resources/fonts/*ttf")
+        FONT_FILE = random.choice(font_file_)
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
-    while draw.multiline_textsize(sticktext, font=font) > (512, 512):
+    for i in range(10):
+        if not draw.multiline_textsize(sticktext, font=font) > (512, 512):
+            break
         fontsize = 100
         font = ImageFont.truetype(FONT_FILE, size=fontsize)
     width, height = draw.multiline_textsize(sticktext, font=font)
@@ -52,7 +59,7 @@ async def sticklet(event):
         ((512 - width) / 2, (512 - height) / 2), sticktext, font=font, fill=(R, G, B)
     )
     image_stream = io.BytesIO()
-    image_stream.name = "leobrownlee.webp"
+    image_stream.name = "ult.webp"
     image.save(image_stream, "WebP")
     image_stream.seek(0)
     await a.delete()

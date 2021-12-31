@@ -43,12 +43,12 @@ from . import *
 
 @ultroid_cmd(pattern="joke$")
 async def _(ult):
-    await eor(ult, get_joke())
+    await ult.eor(get_joke())
 
 
 @ultroid_cmd(pattern="insult$")
 async def gtruth(ult):
-    m = await eor(ult, "Generating...")
+    m = await ult.eor("`Generating...`")
     nl = "https://fungenerators.com/random/insult/new-age-insult/"
     ct = requests.get(nl).content
     bsc = bs(ct, "html.parser", from_encoding="utf-8")
@@ -56,11 +56,11 @@ async def gtruth(ult):
     await m.edit(f"{cm}")
 
 
-@ultroid_cmd(pattern="url ?(.*)")
+@ultroid_cmd(pattern="url( (.*)|$)")
 async def _(event):
     input_str = event.pattern_match.group(1)
     if not input_str:
-        await eor(event, "Give some url")
+        await event.eor("`Give some url`")
         return
     sample_url = "https://da.gd/s?url={}".format(input_str)
     response_api = requests.get(sample_url).text
@@ -72,18 +72,18 @@ async def _(event):
             ),
         )
     else:
-        await eor(event, "`Something went wrong. Please try again Later.`")
+        await event.eor("`Something went wrong. Please try again Later.`")
 
 
 @ultroid_cmd(pattern="decide$")
 async def _(event):
-    hm = await eor(event, "`Deciding`")
+    hm = await event.eor("`Deciding`")
     r = requests.get("https://yesno.wtf/api").json()
     try:
         await event.reply(r["answer"], file=r["image"])
         await hm.delete()
     except ChatSendMediaForbiddenError:
-        await eor(event, r["answer"])
+        await event.eor(r["answer"])
 
 
 @ultroid_cmd(pattern="xo$")
@@ -108,7 +108,7 @@ async def word(ult):
 async def map(ult):
     get = ult.pattern_match.group(1)
     if not get:
-        return await eor(ult, "Use this command as `.gps <query>`")
+        return await ult.eor("Use this command as `.gps <query>`")
     gps = await ult.client.inline_query("openmap_bot", f"{get}")
     await gps[0].click(
         ult.chat_id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True

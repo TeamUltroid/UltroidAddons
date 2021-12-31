@@ -15,7 +15,7 @@ from . import *
 
 @ultroid_cmd(pattern="aniquote")
 async def _(ult):
-    u = await eor(ult, "...")
+    u = await ult.eor("...")
     try:
         resp = requests.get("https://animechan.vercel.app/api/random").json()
         results = f"**{resp['quote']}**\n"

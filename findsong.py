@@ -16,10 +16,10 @@ from . import *
 @ultroid_cmd(pattern="findsong$")
 async def _(event):
     if not event.reply_to_msg_id:
-        return await eor(event, "Reply to an audio message.")
+        return await event.eor("Reply to an audio message.")
     reply_message = await event.get_reply_message()
     chat = "@auddbot"
-    snku = await eor(event, "Identifying the song")
+    snku = await event.eor("Identifying the song")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message("/start")

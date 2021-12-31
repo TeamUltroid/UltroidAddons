@@ -20,7 +20,7 @@ import base64
 from . import *
 
 
-@ultroid_cmd(pattern="encode ?(.*)")
+@ultroid_cmd(pattern="encode( (.*)|$)")
 async def encod(e):
     match = e.pattern_match.group(1)
     if not match and e.is_reply:
@@ -35,7 +35,7 @@ async def encod(e):
     await eor(e, f"**=>> Encoded Text :** `{match}`\n\n**=>> OUTPUT :**\n`{atc}`")
 
 
-@ultroid_cmd(pattern="decode ?(.*)")
+@ultroid_cmd(pattern="decode( (.*)|$)")
 async def encod(e):
     match = e.pattern_match.group(1)
     if not match and e.is_reply:

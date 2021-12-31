@@ -23,7 +23,7 @@ from . import *
 async def _(event):
     animation_interval = 0.7
     animation_ttl = range(0, 11)
-    xx = await eor(event, "Installing..")
+    xx = await event.eor("Installing..")
     animation_chars = [
         "`Installing Files To Hacked Private Server...`",
         "`Target Selected.`",

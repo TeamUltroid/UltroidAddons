@@ -13,8 +13,9 @@
     Gets random quotes from QuoteFancy.com.
 """
 
-from quotefancy import get_quote
 from telethon.errors import ChatSendMediaForbiddenError
+
+from quotefancy import get_quote
 
 from . import *
 

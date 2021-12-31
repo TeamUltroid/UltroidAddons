@@ -24,7 +24,7 @@ async def coronish(event):
     try:
         country = okie[1]
     except IndexError:
-        await eor(event, "Give a country name to Search for it's Covid Cases!")
+        await event.eor("Give a country name to Search for it's Covid Cases!")
         return
     try:
         cases = covid.get_status_by_country_name((country).lower())
@@ -37,4 +37,4 @@ async def coronish(event):
             f"**Country:** **{country.capitalize()}**\n**Active:** {act}\n**Confirmed:** {conf}\n**Recovered:** {rec}\n**Deceased:** {dec}",
         )
     except ValueError:
-        await eor(event, f"It seems that Country {country} is invalid!")
+        await event.eor(f"It seems that Country {country} is invalid!")
