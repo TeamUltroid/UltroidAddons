@@ -1,24 +1,35 @@
-name: Replacer
+name: PyLint
 on:
   push:
-  workflow_dispatch:
+    paths:
+    - "**.py"
 jobs:
-  Replace:
+  PEP8:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Find and Replace
-        uses: jacobtomlinson/gha-find-replace@master
+      - name: Setup Python
+        uses: actions/setup-python@v1
         with:
-          find: 'eor(event,'
-          replace: 'event.eor('
-          regex: false
-          exclude: .github/**
+          python-version: 3.8
+      - name: Install Python lint libraries
+        run: pip install autopep8 autoflake isort black
+      - name: Check for showstoppers
+        run: |
+          autopep8 --verbose --in-place --recursive --aggressive --aggressive *.py
+      - name: Remove unused imports and variables
+        run: |
+          autoflake --in-place --recursive --remove-all-unused-imports --remove-unused-variables --ignore-init-module-imports *.py
+      - name: lint with isort and black
+        run: |
+          isort *.py
+          black --fast *.py
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: 'Replacer'
+          commit_message: 'pylint: auto fixes'
           commit_options: '--no-verify'
           repository: .
           commit_user_name: buddhhu
           commit_user_email: 48654350+buddhhu@users.noreply.github.com
           commit_author: Amit Sharma <48654350+buddhhu@users.noreply.github.com>
+          
