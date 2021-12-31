@@ -43,12 +43,12 @@ from . import *
 
 @ultroid_cmd(pattern="joke$")
 async def _(ult):
-    await eor(ult, get_joke())
+    await ult.eor( get_joke())
 
 
 @ultroid_cmd(pattern="insult$")
 async def gtruth(ult):
-    m = await eor(ult, "`Generating...`")
+    m = await ult.eor( "`Generating...`")
     nl = "https://fungenerators.com/random/insult/new-age-insult/"
     ct = requests.get(nl).content
     bsc = bs(ct, "html.parser", from_encoding="utf-8")
@@ -108,7 +108,7 @@ async def word(ult):
 async def map(ult):
     get = ult.pattern_match.group(1)
     if not get:
-        return await eor(ult, "Use this command as `.gps <query>`")
+        return await ult.eor( "Use this command as `.gps <query>`")
     gps = await ult.client.inline_query("openmap_bot", f"{get}")
     await gps[0].click(
         ult.chat_id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True

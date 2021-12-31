@@ -20,7 +20,7 @@ INLOCK = "`Seems like inline messages aren't allowed here`"
     pattern="manga( (.*)|$)",
 )
 async def manga(ult):
-    msg = await eor(ult, "`Searching ...`")
+    msg = await ult.eor( "`Searching ...`")
     keyword = ult.pattern_match.group(1)
     if keyword is None:
         return await msg.edit("`Provide a Keyword to search`")
