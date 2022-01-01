@@ -17,7 +17,7 @@ import jikanpy
 from . import *
 
 
-@ultroid_cmd(pattern="character( (.*)|$)")
+@ultroid_cmd(pattern="character ?(.*)")
 async def anime_char_search(event):
     xx = await event.eor(get_string("com_1"))
     char_name = event.pattern_match.group(1)

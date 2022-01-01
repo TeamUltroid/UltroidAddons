@@ -21,7 +21,7 @@ import speedtest
 from . import *
 
 
-@ultroid_cmd(pattern="test( (.*)|$)")
+@ultroid_cmd(pattern="test ?(.*)")
 async def _(event):
     input_str = event.pattern_match.group(1)
     as_text = True

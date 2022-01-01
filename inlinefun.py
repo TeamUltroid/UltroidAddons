@@ -37,7 +37,7 @@ from addons.waifu import deEmojify
 from . import *
 
 
-@ultroid_cmd(pattern="tweet( (.*)|$)")
+@ultroid_cmd(pattern="tweet ?(.*)")
 async def tweet(e):
     wai = await eor(e, "`Processing...`")
     text = e.pattern_match.group(1)
@@ -51,7 +51,7 @@ async def tweet(e):
         await eor(e, str(m))
 
 
-@ultroid_cmd(pattern="stic( (.*)|$)")
+@ultroid_cmd(pattern="stic ?(.*)")
 async def tweet(e):
     if len(e.text) > 5 and e.text[5] != " ":
         return
@@ -65,7 +65,7 @@ async def tweet(e):
     await wai.delete()
 
 
-@ultroid_cmd(pattern="gglax( (.*)|$)")
+@ultroid_cmd(pattern="gglax ?(.*)")
 async def gglax_sticker(e):
     wai = await eor(e, "`Processing...`")
     text = e.pattern_match.group(1)
@@ -79,7 +79,7 @@ async def gglax_sticker(e):
         await eor(e, str(m))
 
 
-@ultroid_cmd(pattern="frog( (.*)|$)")
+@ultroid_cmd(pattern="frog ?(.*)")
 async def honkasays(e):
     wai = await eor(e, "`Processing...`")
     text = e.pattern_match.group(1)
@@ -102,7 +102,7 @@ async def honkasays(e):
         await wai.edit(str(er))
 
 
-@ultroid_cmd(pattern="uta( (.*)|$)")
+@ultroid_cmd(pattern="uta ?(.*)")
 async def nope(doit):
     ok = doit.pattern_match.group(1)
     replied = await doit.get_reply_message()
@@ -121,7 +121,7 @@ async def nope(doit):
     await a.delete()
 
 
-@ultroid_cmd(pattern="quot( (.*)|$)")
+@ultroid_cmd(pattern="quot ?(.*)")
 async def quote_(event):
     IFUZI = event.pattern_match.group(1)
     if "quotly" in event.text:

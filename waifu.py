@@ -34,7 +34,7 @@ def deEmojify(inputString: str) -> str:
 
 
 @ultroid_cmd(
-    pattern="waifu( (.*)|$)",
+    pattern="waifu ?(.*)",
 )
 async def waifu(animu):
     xx = await eor(animu, get_string("com_1"))

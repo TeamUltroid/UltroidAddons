@@ -26,7 +26,7 @@ from telethon.errors.rpcerrorlist import WebpageCurlFailedError
 from . import *
 
 
-@ultroid_cmd(pattern="freepik( (.*)|$)")
+@ultroid_cmd(pattern="freepik ?(.*)")
 async def fnew_pik(event):
     match = event.pattern_match.group(1)
     limit = 5
@@ -62,7 +62,7 @@ async def fnew_pik(event):
     await event.delete()
 
 
-@ultroid_cmd(pattern="shutter( (.*)|$)")
+@ultroid_cmd(pattern="shutter ?(.*)")
 async def snew_pik(event):
     match = event.pattern_match.group(1)
     limit = 5

@@ -78,7 +78,7 @@ async def bigspam(e):
     await e.delete()
 
 
-@ultroid_cmd(pattern="delayspam( (.*)|$)")
+@ultroid_cmd(pattern="delayspam ?(.*)")
 async def delayspammer(e):
     try:
         args = e.text.split(" ", 3)

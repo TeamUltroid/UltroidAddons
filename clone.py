@@ -26,7 +26,7 @@ from telethon.tl.types import MessageEntityMentionName
 from . import *
 
 
-@ultroid_cmd(pattern="clone( (.*)|$)", fullsudo=True)
+@ultroid_cmd(pattern="clone ?(.*)", fullsudo=True)
 async def _(event):
     eve = await event.eor("`Processing...`")
     reply_message = await event.get_reply_message()
