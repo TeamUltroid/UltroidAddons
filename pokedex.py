@@ -23,7 +23,7 @@ from pokedex import pokedex as badhiya
 from . import *
 
 
-@ultroid_cmd(pattern="pokemon( (.*)|$)")
+@ultroid_cmd(pattern="pokemon ?(.*)")
 async def pokedex(event):
     pokemon = event.pattern_match.group(1).lower()
     if not pokemon:
@@ -122,7 +122,7 @@ async def pokedex(event):
     await xx.delete()
 
 
-@ultroid_cmd(pattern="pokecard( (.*)|$)")
+@ultroid_cmd(pattern="pokecard ?(.*)")
 async def pokecard(event):
     pokename = event.pattern_match.group(1).lower()
     if not pokename:

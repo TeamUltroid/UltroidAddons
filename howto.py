@@ -22,7 +22,7 @@ import requests
 from . import *
 
 
-@ultroid_cmd(pattern="htg( (.*)|$)")
+@ultroid_cmd(pattern="htg ?(.*)")
 async def _(e):
     text = e.pattern_match.group(1)
     if not text:
@@ -37,7 +37,7 @@ async def _(e):
         await eod(e, "`something is wrong. please try again later.`")
 
 
-@ultroid_cmd(pattern="htd( (.*)|$)")
+@ultroid_cmd(pattern="htd ?(.*)")
 async def _(e):
     text = e.pattern_match.group(1)
     if not text:

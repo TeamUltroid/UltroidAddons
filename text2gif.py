@@ -24,7 +24,7 @@ def remove_emoji(string):
     return emoji.get_emoji_regexp().sub("", string)
 
 
-@ultroid_cmd(pattern="t2g( (.*)|$)")
+@ultroid_cmd(pattern="t2g ?(.*)")
 async def t2g(e):
     eris = await eor(e, "`...`")
     input_args = e.pattern_match.group(1)

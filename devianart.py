@@ -21,7 +21,7 @@ from bs4 import BeautifulSoup as bs
 from . import *
 
 
-@ultroid_cmd(pattern="devian( (.*)|$)")
+@ultroid_cmd(pattern="devian ?(.*)")
 async def downakd(e):
     match = e.pattern_match.group(1)
     if not match:
