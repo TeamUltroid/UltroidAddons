@@ -18,7 +18,7 @@ import requests
 from . import *
 
 
-@ultroid_cmd(pattern="asupan( (.*)|$)")
+@ultroid_cmd(pattern="asupan ?(.*)")
 async def _(event):
     try:
         response = requests.get("https://api-tede.herokuapp.com/api/asupan/ptl").json()
@@ -28,7 +28,7 @@ async def _(event):
         await event.eor("`Something went wrong LOL...`")
 
 
-@ultroid_cmd(pattern="wibu( (.*)|$)")
+@ultroid_cmd(pattern="wibu ?(.*)")
 async def _(event):
     try:
         response = requests.get("https://api-tede.herokuapp.com/api/asupan/wibu").json()
@@ -38,7 +38,7 @@ async def _(event):
         await event.eor("`Something went wrong LOL...`")
 
 
-@ultroid_cmd(pattern="chika( (.*)|$)")
+@ultroid_cmd(pattern="chika ?(.*)")
 async def _(event):
     try:
         response = requests.get("https://api-tede.herokuapp.com/api/chika").json()
