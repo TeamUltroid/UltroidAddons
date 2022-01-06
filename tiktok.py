@@ -43,7 +43,7 @@ async def dl_tiktok(ult):
         scr, capt = await tiktok_download(match)
         if not scr:
             return await msg.eor("`Video Download Failed!..`", time=8)
-        await ult.client.send_message(ult.chat_id, capt, file=scr, reply_to=event.reply_to_msg_id)
+        await ult.client.send_message(ult.chat_id, capt, file=scr, reply_to=ult.reply_to_msg_id)
         await msg.delete()
     except Exception as er:
         LOGS.exception(er)
