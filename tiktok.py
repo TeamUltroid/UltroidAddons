@@ -33,7 +33,7 @@ async def tiktok_download(ult):
     return Data.get("video", {}).get("downloadAddr"), Capt
 
 
-@ultroid_cmd(pattern="tikdl( (.*)|$")
+@ultroid_cmd(pattern="tikdl( (.*)|$)")
 async def dl_tiktok(ult):
     match = ult.pattern_match.group(1).strip()
     if not match:
