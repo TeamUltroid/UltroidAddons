@@ -21,7 +21,7 @@ async def tiktok_download(ult):
     So = Soup(get_, "html.parser", from_encoding="utf-8")
     Co = json_parser(So.find("script",id="sigi-persisted-data").text[21:][:-515])
     Item = Co["ItemModule"]
-    first_item = list(Item.items())[0]
+    first_item = list(Item.keys())[0]
     Data = Item[first_item]
     nick_name = Data.get("nickname", "")
     if Data.get("desc"):
