@@ -15,7 +15,8 @@ from github3 import create_gist
 
 @ultroid_cmd(pattern="gist( (.*)|$)", manager=True, allow_all=True)
 async def _(event):
-    # creating anonymous gist , i will add document support soon
+    # Todo - @Kaif_00z
+    # add document support
     try:
         input_str = event.text.split(maxsplit=1)[1]
     except IndexError:
@@ -40,8 +41,7 @@ async def _(event):
             }
         }
         gist = create_gist("ultroid", file)
-        link = gist.html_url
-        reply_text = f"• **Pasted to Gist :** [gist]({link})"
+        reply_text = f"• **Pasted to Gist :** [gist]({gist.html_url})"
         await xx.eor(reply_text)
     except Exception as ul:
-        LOGS.info(str(ul))
+        LOGS.exception(ul)
