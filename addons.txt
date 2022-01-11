@@ -2,6 +2,7 @@ covid
 emoji
 fonttools
 gtts
+github3
 jikanpy
 lyrics_extractor==3.0.1
 pokedex.py
