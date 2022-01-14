@@ -49,6 +49,8 @@ async def fastOnOff(event):
     xx = await event.eor("`...`")
     get_ = udB.get_key("FASTLY")
     if not get_:
+        if not udB.get_key("OCR_API"):
+            return await xx.edit("`OCR_API` is missing.\nAdd it before using this..")
         udB.set_key("FASTLY", True)
         ultroid_bot.add_handler(fastly_bot, events.NewMessage(incoming=True, from_users=[1806208310, 1983714367]))
         return await xx.edit("`Auto Fastly Response Activated`")
