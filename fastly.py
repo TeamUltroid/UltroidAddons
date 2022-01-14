@@ -14,10 +14,10 @@ Fasly Bot Cheat.
 The bot will try to auto reply first to the messages by @FastlyWriteBot and @FastlyWriteCloneBot.
 """
 
-from . import async_searcher
 from telegraph import upload_file
 from telethon import events
-from . import udB, LOGS, ultroid_bot, ultroid_cmd
+from . import udB, LOGS, ultroid_bot, ultroid_cmd, async_searcher
+from os import remove
 
 base_url = "https://api.ocr.space/parse/imageurl?apikey={api}&url={tgraph}"
 
@@ -42,6 +42,10 @@ async def fastly_bot(event):
             await event.reply(txt)
         except Exception as er:
             LOGS.exception(er)
+    try:
+        remove(med)
+    except Exception as e:
+        LOGS.exception(e)
 
 
 @ultroid_cmd(pattern="fastly$")
