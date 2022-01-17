@@ -10,6 +10,9 @@
 
 • `{i}tikdl url`
    `Download url from tiktok.`
+
+• Note : Will work for Url in format
+    `https://tiktok.com/@username/video/some_id`
 """
 
 from . import ultroid_cmd, async_searcher, json_parser, LOGS
