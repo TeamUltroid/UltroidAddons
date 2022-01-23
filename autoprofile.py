@@ -40,7 +40,7 @@ async def autoname_(event):
     udB.set_key("AUTONAME", "True")
     await eod(event, "`Started AUTONAME`")
     while True:
-        getn = udB.get("AUTONAME")
+        getn = udB.get_key("AUTONAME")
         if not getn:
             return
         DM = time.strftime("%d-%m-%y")
@@ -67,7 +67,7 @@ async def autoname_(event):
         "Intelligent !",
     ]
     while True:
-        getn = udB.get("AUTOBIO")
+        getn = udB.get_key("AUTOBIO")
         if not getn:
             return
         BIOMSG = random.choice(BIOS)

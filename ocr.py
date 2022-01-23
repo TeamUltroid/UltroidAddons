@@ -29,7 +29,7 @@ async def ocrify(ult):
     if not ult.is_reply:
         return await ult.eor("`Reply to Photo...`")
     msg = await ult.eor("`Processing..`")
-    OAPI = udB.get("OCR_API")
+    OAPI = udB.get_key("OCR_API")
     if not OAPI:
         return await msg.edit(TE)
     pat = ult.pattern_match.group(1)

@@ -71,11 +71,11 @@ async def _(event):
     ok = ""
     mybio = str(ultroid_bot.me.id) + "01"
     bio = "Error : Bio Lost"
-    chc = udB.get(mybio)
+    chc = udB.get_key(mybio)
     if chc:
         bio = chc
-    fname = udB.get(f"{ultroid_bot.uid}02")
-    lname = udB.get(f"{ultroid_bot.uid}03")
+    fname = udB.get_key(f"{ultroid_bot.uid}02")
+    lname = udB.get_key(f"{ultroid_bot.uid}03")
     if fname:
         name = fname
     if lname:
