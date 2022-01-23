@@ -89,9 +89,9 @@ async def _(event):
     await client(UpdateProfileRequest(first_name=name))
     await client(UpdateProfileRequest(last_name=ok))
     await event.eor("Succesfully reverted to your account back !")
-    udB.delete(f"{ultroid_bot.uid}01")
-    udB.delete(f"{ultroid_bot.uid}02")
-    udB.delete(f"{ultroid_bot.uid}03")
+    udB.del_key(f"{ultroid_bot.uid}01")
+    udB.del_key(f"{ultroid_bot.uid}02")
+    udB.del_key(f"{ultroid_bot.uid}03")
 
 
 async def get_full_user(event):

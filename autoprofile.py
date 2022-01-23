@@ -34,7 +34,7 @@ from . import *
 async def autoname_(event):
     match = event.pattern_match.group(1)
     if match == "stop":
-        udB.delete("AUTONAME")
+        udB.del_key("AUTONAME")
         await event.eor("`AUTONAME has been Stopped !`")
         return
     udB.set_key("AUTONAME", "True")
@@ -54,7 +54,7 @@ async def autoname_(event):
 async def autoname_(event):
     match = event.pattern_match.group(1)
     if match == "stop":
-        udB.delete("AUTOBIO")
+        udB.del_key("AUTOBIO")
         await event.eor("`AUTOBIO has been Stopped !`")
         return
     udB.set_key("AUTOBIO", "True")
