@@ -10,9 +10,9 @@ Fasly Bot Cheat.
 
 • `{i}fastly` - On/Off command. 
 
-• Also Required : `OCR_API`. Add it using the command .setdb OCR_API [api_key]
+• Also Required : `OCR_API`. Add it using the command `.setdb OCR_API api_key`
 • To get the API visit 'https://ocr.space/ocrapi'
-The bot will try to auto reply first to the messages by @FastlyWriteBot and @FastlyWriteCloneBot and then @FastlyWriteClone2Bot.
+The bot will try to auto reply first to the messages by @FastlyWriteBot, @FastlyWriteCloneBot and @FastlyWriteClone2Bot.
 """
 
 from telegraph import upload_file
