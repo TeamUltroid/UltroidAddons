@@ -33,10 +33,10 @@ async def _(event):
     whoiam = await event.client(GetFullUserRequest(ultroid_bot.uid))
     if whoiam.full_user.about:
         mybio = str(ultroid_bot.me.id) + "01"
-        udB.set(f"{mybio}", whoiam.full_user.about)  # saving bio for revert
-    udB.set(f"{ultroid_bot.uid}02", whoiam.users[0].first_name)
+        udB.set_key(f"{mybio}", whoiam.full_user.about)  # saving bio for revert
+    udB.set_key(f"{ultroid_bot.uid}02", whoiam.users[0].first_name)
     if whoiam.users[0].last_name:
-        udB.set(f"{ultroid_bot.uid}03", whoiam.users[0].last_name)
+        udB.set_key(f"{ultroid_bot.uid}03", whoiam.users[0].last_name)
     replied_user, error_i_a = await get_full_user(event)
     if replied_user is None:
         await eve.edit(str(error_i_a))

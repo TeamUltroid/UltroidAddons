@@ -37,7 +37,7 @@ async def autoname_(event):
         udB.delete("AUTONAME")
         await event.eor("`AUTONAME has been Stopped !`")
         return
-    udB.set("AUTONAME", "True")
+    udB.set_key("AUTONAME", "True")
     await eod(event, "`Started AUTONAME`")
     while True:
         getn = udB.get("AUTONAME")
@@ -57,7 +57,7 @@ async def autoname_(event):
         udB.delete("AUTOBIO")
         await event.eor("`AUTOBIO has been Stopped !`")
         return
-    udB.set("AUTOBIO", "True")
+    udB.set_key("AUTOBIO", "True")
     await eod(event, "`Started AUTOBIO`")
     BIOS = [
         "Busy Today !",
