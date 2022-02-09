@@ -37,7 +37,7 @@ async def fastly_bot(event):
         txt = out["ParsedResults"][0]["ParsedText"]
     except (KeyError, IndexError):
         return
-    txt = txt.replace("By@FastlyWriteBot", "").replace("\n", "").replace("\r", "")
+    txt = txt.split("By@")[0].replace("\n", "").replace("\r", "")
     if txt:
         try:
             await event.reply(txt)
