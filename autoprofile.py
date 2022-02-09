@@ -34,13 +34,13 @@ from . import *
 async def autoname_(event):
     match = event.pattern_match.group(1)
     if match == "stop":
-        udB.delete("AUTONAME")
+        udB.del_key("AUTONAME")
         await event.eor("`AUTONAME has been Stopped !`")
         return
-    udB.set("AUTONAME", "True")
+    udB.set_key("AUTONAME", "True")
     await eod(event, "`Started AUTONAME`")
     while True:
-        getn = udB.get("AUTONAME")
+        getn = udB.get_key("AUTONAME")
         if not getn:
             return
         DM = time.strftime("%d-%m-%y")
@@ -54,10 +54,10 @@ async def autoname_(event):
 async def autoname_(event):
     match = event.pattern_match.group(1)
     if match == "stop":
-        udB.delete("AUTOBIO")
+        udB.del_key("AUTOBIO")
         await event.eor("`AUTOBIO has been Stopped !`")
         return
-    udB.set("AUTOBIO", "True")
+    udB.set_key("AUTOBIO", "True")
     await eod(event, "`Started AUTOBIO`")
     BIOS = [
         "Busy Today !",
@@ -67,7 +67,7 @@ async def autoname_(event):
         "Intelligent !",
     ]
     while True:
-        getn = udB.get("AUTOBIO")
+        getn = udB.get_key("AUTOBIO")
         if not getn:
             return
         BIOMSG = random.choice(BIOS)
