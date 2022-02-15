@@ -38,13 +38,13 @@ async def original(event):
     dc = random.randrange(1, 3)
     if dc == 1:
         danish = "AIzaSyAyDBsY3WRtB5YPC6aB_w8JAy6ZdXNc6FU"
-    if dc == 2:
+    elif dc == 2:
         danish = "AIzaSyBF0zxLlYlPMp9xwMQqVKCQRq8DgdrLXsg"
-    if dc == 3:
+    else:
         danish = "AIzaSyDdOKnwnPwVIQ_lbH5sYE4FoXjAKIQV0DQ"
-    extract_lyrics = sl(f"{danish}", "15b9fb6193efd5d90")
+    extract_lyrics = sl(danish, "15b9fb6193efd5d90")
     try:
-        sh1vm = extract_lyrics.get_lyrics(f"{noob}")
+        sh1vm = await extract_lyrics.get_lyrics(noob)
     except LyError:
         return await eod(event, "No Results Found")
     a7ul = sh1vm["lyrics"]
