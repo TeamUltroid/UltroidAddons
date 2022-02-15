@@ -3,7 +3,7 @@ emoji
 fonttools
 gtts
 jikanpy
-lyrics_extractor==3.0.1
+git+https://github.com/New-dev0/AsyncLyricsExtractor.git
 pokedex.py
 pyfiglet
 pyjokes
