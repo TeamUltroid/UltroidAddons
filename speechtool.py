@@ -31,13 +31,10 @@ from datetime import datetime
 import speech_recognition as sr
 from gtts import gTTS
 
-from . import *
-
-from ..core.managers import edit_delete, edit_or_reply
-from . import deEmojify, reply_id
+import edit_delete, edit_or_reply
+import deEmojify, reply_id
 
 reco = sr.Recognizer()
-
 
 @ultroid_cmd(
     pattern="tts(?:\s|$)([\s\S]*)",
