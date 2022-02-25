@@ -19,6 +19,11 @@
   `Note - Sometimes Not 100% Accurate`
 """
 
+""" Google Text to Speech
+Available Commands:
+.tts LanguageCode as reply to a message
+.tts LangaugeCode | text to speak"""
+
 import os
 import subprocess
 from datetime import datetime
@@ -28,11 +33,14 @@ from gtts import gTTS
 
 from . import *
 
+from ..core.managers import edit_delete, edit_or_reply
+from . import deEmojify, reply_id
+
 reco = sr.Recognizer()
 
 
 @ultroid_cmd(
-    pattern="tts ?(.*)",
+    pattern="tts(?:\s|$)([\s\S]*)",
 )
 async def _(event):
     input_str = event.pattern_match.group(1)
@@ -81,7 +89,7 @@ async def _(event):
             file=required_file_name,
         )
         os.remove(required_file_name)
-        await eod(event, "Processed {} ({}) in {} seconds!".format(text[0:97], lan, ms))
+        await eod(event, "`Processed text {} into voice in {} seconds!`".format(text[0:20], ms))
     except Exception as e:
         await event.eor(str(e))
 
