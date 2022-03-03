@@ -9,8 +9,10 @@
 """
 ✘ Commands Available
 
-• `{i}imgwhale <Optional<apiKey>>`
+• `{i}imgwhale`
     Upload image to https://ImgWhale.xyz !
+
+- Optionally, You can add your ImgWhale API Key in `IMGWHALE_KEY` database var.
 """
 from . import *
 
@@ -28,10 +30,8 @@ async def imgwhale(event):
     else:
         return await msg.edit("`Reply to Image...`")
     api_key = udB.get_key("IMGWHALE_KEY")
-    json = {}
-    if api_key:
-        json.update({"key":api_key})
-    post = await async_searcher("https://imgwhale.xyz/new", post=True, data={'image': open(file, 'rb')} ,json=json, re_json=True)
+    extra = f"?key={api_key}" if api_key else ""
+    post = await async_searcher(f"https://imgwhale.xyz/new{extra}", post=True, data={'image': open(file, 'rb')}, re_json=True)
     if post.get("error"):
         return await msg.edit(post["message"])
-    await msg.edit(f"Successfully Uploaded to [ImhWhale](https://imgwhale.xyz/{post['fileId']})")
+    await msg.edit(f"Successfully Uploaded to [ImgWhale](https://imgwhale.xyz/{post['fileId']})")
