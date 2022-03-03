@@ -14,6 +14,8 @@
 
 - Optionally, You can add your ImgWhale API Key in `IMGWHALE_KEY` database var.
 """
+
+from os import remove
 from . import *
 
 
@@ -31,7 +33,16 @@ async def imgwhale(event):
         return await msg.edit("`Reply to Image...`")
     api_key = udB.get_key("IMGWHALE_KEY")
     extra = f"?key={api_key}" if api_key else ""
-    post = await async_searcher(f"https://imgwhale.xyz/new{extra}", post=True, data={'image': open(file, 'rb')}, re_json=True)
+    post = await async_searcher(
+        f"https://imgwhale.xyz/new{extra}",
+        post=True,
+        data={"image": open(file, "rb")},
+        re_json=True,
+    )
     if post.get("error"):
         return await msg.edit(post["message"])
-    await msg.edit(f"Successfully Uploaded to [ImgWhale](https://imgwhale.xyz/{post['fileId']})")
+    await msg.edit(
+        f"Successfully Uploaded to [ImgWhale](https://imgwhale.xyz/{post['fileId']})!",
+        link_preview=True,
+    )
+    remove(file)

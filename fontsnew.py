@@ -439,7 +439,9 @@ async def cursive(ult):
         get = await ult.get_reply_message()
         args = get.text
     if not args:
-        return await ult.edit("What I am Supposed to write in cursive? Please Give Text Sir")
+        return await ult.edit(
+            "What I am Supposed to write in cursive? Please Give Text Sir"
+        )
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:

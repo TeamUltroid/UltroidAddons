@@ -13,6 +13,7 @@
 
 from . import *
 
+
 def evaluate(commands):
     interpreter = BrainfuckInterpreter(commands)
     while interpreter.available():
@@ -20,13 +21,13 @@ def evaluate(commands):
 
     return interpreter.output.read()
 
-__all__ = (
-    'BrainfuckInterpreter'
-)
+
+__all__ = "BrainfuckInterpreter"
+
 
 class IOStream:
     def __init__(self, data=None):
-        self._buffer = data or ''
+        self._buffer = data or ""
 
     def __len__(self):
         return len(self._buffer)
@@ -34,7 +35,7 @@ class IOStream:
     def read(self, length=None):
         if not length:
             data = self._buffer
-            self._buffer = ''
+            self._buffer = ""
         else:
             data = self._buffer[:length]
             self._buffer = self._buffer[length:]
@@ -104,14 +105,14 @@ class BrainfuckInterpreter:
         self._opening_bracket_indexes = []
 
     def _look_forward(self):
-        remaining_commands = self._commands[self.instruction_pointer:]
+        remaining_commands = self._commands[self.instruction_pointer :]
         loop_counter = 0
         index = self.instruction_pointer
 
         for command in remaining_commands:
-            if command == '[':
+            if command == "[":
                 loop_counter += 1
-            elif command == ']':
+            elif command == "]":
                 loop_counter -= 1
 
             if loop_counter == 0:
@@ -122,25 +123,25 @@ class BrainfuckInterpreter:
     def _interpret(self):
         instruction = self._commands[self.instruction_pointer]
 
-        if instruction == '>':
+        if instruction == ">":
             self.cells.data_pointer += 1
-        elif instruction == '<':
+        elif instruction == "<":
             self.cells.data_pointer -= 1
-        elif instruction == '+':
+        elif instruction == "+":
             self.cells.increment()
-        elif instruction == '-':
+        elif instruction == "-":
             self.cells.decrement()
-        elif instruction == '.':
+        elif instruction == ".":
             self.output.write(chr(self.cells.get()))
-        elif instruction == ',':
+        elif instruction == ",":
             self.cells.set(self.input.read(1))
-        elif instruction == '[':
+        elif instruction == "[":
             if self.cells.get() == 0:
                 loop_end = self._look_forward()
                 self.instruction_pointer = loop_end
             else:
                 self._opening_bracket_indexes.append(self.instruction_pointer)
-        elif instruction == ']':
+        elif instruction == "]":
             if self.cells.get() != 0:
                 opening_bracket_index = self._opening_bracket_indexes.pop(-1)
 
@@ -160,16 +161,22 @@ class BrainfuckInterpreter:
 
 
 def bf(text):
-  items = []
-  for c in text:
-     items.append('[-]>[-]<' + ('+' * (ord(c) // 10)) + '[>++++++++++<-]>' + ('+' * (ord(c) % 10)) + '.<')
-  return ''.join(items)
+    items = []
+    for c in text:
+        items.append(
+            "[-]>[-]<"
+            + ("+" * (ord(c) // 10))
+            + "[>++++++++++<-]>"
+            + ("+" * (ord(c) % 10))
+            + ".<"
+        )
+    return "".join(items)
 
 
 @ultroid_cmd(
     pattern="bf",
 )
-async def _(event):        
+async def _(event):
     input_ = event.text[4:]
     if not input_:
         if event.reply_to_msg_id:
@@ -178,7 +185,7 @@ async def _(event):
         else:
             return await eod(event, "Give me some text lol", time=5)
     await eor(event, f"{bf(input_)}")
-    
+
 
 @ultroid_cmd(
     pattern="rbf",
