@@ -40,7 +40,7 @@ async def fastly_bot(event):
     txt = txt.split("By@")[0].replace("\n", "").replace("\r", "")
     if txt:
         try:
-            await event.reply(txt)
+            await event.reply(txt.capitalize())
         except Exception as er:
             LOGS.exception(er)
     try:
