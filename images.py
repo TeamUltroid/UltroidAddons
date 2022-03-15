@@ -58,7 +58,8 @@ async def fnew_pik(event):
             await event.client.send_message(
                 event.chat_id, f"Uploaded {len(NaN)} Images!", file=NaN
             )
-        [os.remove(a) for a in NaN]
+        for a in NaN:
+            os.remove(a)
     await event.delete()
 
 
@@ -91,5 +92,6 @@ async def snew_pik(event):
             await event.client.send_message(
                 event.chat_id, f"Uploaded {len(NaN)} Images!", file=NaN
             )
-        [os.remove(a) for a in NaN]
+        for a in NaN:
+            os.remove(a)
     await event.delete()
