@@ -30,6 +30,6 @@ async def quotefancy(e):
         await mes.delete()
     except ChatSendMediaForbiddenError:
         quote = get_quote("text")
-        await eor(e, f"`{quote}`")
+        await eor(mes, f"`{quote}`")
     except Exception as err:
-        await eor(err, f"**ERROR** - {str(e)}")
+        await eor(mes, f"**ERROR** - {err}")
