@@ -24,7 +24,7 @@ async def harpia(e):
         lst = sed.split(" ", 1)
         lmt = int(lst[0]) + 1
         pist = lst[1].split(";")
-        pist[1]
+        _ = pist[1]
     except IndexError:
         return eod(e, f"Check Example : `{HNDLR}help {wreplace}`")
     async for x in e.client.iter_messages(
