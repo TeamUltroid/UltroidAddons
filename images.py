@@ -11,9 +11,6 @@
 
 • `{i}freepik <query> ; limit`
     search images on freepik.
-
-• `{i}shutter <query> ; limit`
-    search images on shutterstock.
 """
 
 import os
@@ -58,40 +55,6 @@ async def fnew_pik(event):
         await event.client.send_message(
             event.chat_id, f"Uploaded {len(NaN)} Images!", file=NaN
         )
-        for a in NaN:
-            os.remove(a)
-    await event.delete()
-
-
-@ultroid_cmd(pattern="shutter ?(.*)")
-async def snew_pik(event):
-    match = event.pattern_match.group(1)
-    limit = 5
-    if not match:
-        return await event.eor("`Give Something to Search!`")
-    event = await event.eor("`...`")
-    if " ; " in match:
-        _ = match.split(" ; ", maxsplit=1)
-        match = _[0]
-        limit = int(_[1])
-    content = urlopen(f"https://www.shutterstock.com/search/{match.replace(' ', '+')}")
-    reso = bs(content, "html.parser", from_encoding="utf-8")
-    con = reso.find_all("img", src=re.compile("/image-vector"))
-    if not con:
-        return await event.eor("No Results Found!")
-    shuffle(con)
-    lml = [a["src"] for a in con[:limit]]
-    try:
-        await event.client.send_message(
-            event.chat_id, f"Uploaded {len(lml)} Images!", file=lml
-        )
-    except WebpageCurlFailedError:
-        NaN = []
-        for _ in lml:
-            NaN.append(await download_file(_, check_filename("shutter.png")))
-            await event.client.send_message(
-                event.chat_id, f"Uploaded {len(NaN)} Images!", file=NaN
-            )
         for a in NaN:
             os.remove(a)
     await event.delete()
