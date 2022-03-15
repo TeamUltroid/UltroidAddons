@@ -353,7 +353,7 @@ async def get_entity(msg):
     return bold, mono, italic, link
 
 
-async def doctype(name, size, type, canvas):
+async def doctype(name, size, _type, canvas):
     font = ImageFont.truetype("resources/fonts/Roboto-Medium.ttf", 38)
     doc = Image.new("RGBA", (130, 130), (29, 29, 29, 255))
     draw = ImageDraw.Draw(doc)
@@ -364,7 +364,7 @@ async def doctype(name, size, type, canvas):
     canvas.paste(doc, (160, 23))
     draw2 = ImageDraw.Draw(canvas)
     draw2.text((320, 40), name, font=font, fill="white")
-    draw2.text((320, 97), size + type, font=font, fill="#AAAAAA")
+    draw2.text((320, 97), size + _type, font=font, fill="#AAAAAA")
     return canvas
 
 
