@@ -55,9 +55,9 @@ async def fnew_pik(event):
         NaN = []
         for _ in lml:
             NaN.append(await download_file(_, check_filename("freepik.png")))
-            await event.client.send_message(
-                event.chat_id, f"Uploaded {len(NaN)} Images!", file=NaN
-            )
+        await event.client.send_message(
+            event.chat_id, f"Uploaded {len(NaN)} Images!", file=NaN
+        )
         for a in NaN:
             os.remove(a)
     await event.delete()
