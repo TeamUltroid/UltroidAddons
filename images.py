@@ -21,7 +21,7 @@ from random import shuffle
 from urllib.request import urlopen
 
 from bs4 import BeautifulSoup as bs
-from telethon.errors.rpcerrorlist import WebpageCurlFailedError
+from telethon.errors.rpcerrorlist import WebpageCurlFailedError, MediaInvalidEror
 
 from . import *
 
@@ -51,7 +51,7 @@ async def fnew_pik(event):
         await event.client.send_message(
             event.chat_id, f"Uploaded {len(lml)} Images!", file=lml
         )
-    except WebpageCurlFailedError:
+    except (WebpageCurlFailedError, MediaInvalidError):
         NaN = []
         for _ in lml:
             NaN.append(await download_file(_, check_filename("freepik.png")))
@@ -76,7 +76,7 @@ async def snew_pik(event):
         limit = int(_[1])
     content = urlopen(f"https://www.shutterstock.com/search/{match.replace(' ', '+')}")
     reso = bs(content, "html.parser", from_encoding="utf-8")
-    con = reso.find_all("img", src=re.compile("image.shutterstock.com"))
+    con = reso.find_all("img", src=re.compile("/image-vector"))
     if not con:
         return await event.eor("No Results Found!")
     shuffle(con)
