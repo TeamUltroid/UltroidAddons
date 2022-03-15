@@ -105,7 +105,7 @@ async def word(ult):
 
 
 @ultroid_cmd(pattern="gps (.*)")
-async def map(ult):
+async def _map(ult):
     get = ult.pattern_match.group(1)
     if not get:
         return await ult.eor("Use this command as `.gps <query>`")

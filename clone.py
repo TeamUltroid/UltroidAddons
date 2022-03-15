@@ -5,7 +5,6 @@
 # PLease read the GNU Affero General Public License in
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
-
 """
 ✘ Commands Available
 
@@ -57,7 +56,7 @@ async def _(event):
     await event.client(UpdateProfileRequest(last_name=last_name))
     await event.client(UpdateProfileRequest(about=user_bio))
     if profile_pic:
-        pfile = await event.client.upload_file(profile_pic)  # pylint:disable=E060
+        pfile = await event.client.upload_file(profile_pic)
         await event.client(UploadProfilePhotoRequest(pfile))
     await eve.delete()
     await event.client.send_message(
@@ -105,11 +104,10 @@ async def get_full_user(event):
                 )
             )
             return replied_user, None
-        else:
-            replied_user = await event.client(
-                GetFullUserRequest(previous_message.sender_id)
-            )
-            return replied_user, None
+        replied_user = await event.client(
+            GetFullUserRequest(previous_message.sender_id)
+        )
+        return replied_user, None
     else:
         input_str = None
         try:
@@ -123,14 +121,13 @@ async def get_full_user(event):
                 user_id = probable_user_mention_entity.user_id
                 replied_user = await event.client(GetFullUserRequest(user_id))
                 return replied_user, None
-            else:
-                try:
-                    user_object = await event.client.get_entity(input_str)
-                    user_id = user_object.id
-                    replied_user = await event.client(GetFullUserRequest(user_id))
-                    return replied_user, None
-                except Exception as e:
-                    return None, e
+            try:
+                user_object = await event.client.get_entity(input_str)
+                user_id = user_object.id
+                replied_user = await event.client(GetFullUserRequest(user_id))
+                return replied_user, None
+            except Exception as e:
+                return None, e
         elif event.is_private:
             try:
                 user_id = event.chat_id
