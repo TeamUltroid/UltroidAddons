@@ -105,11 +105,10 @@ async def get_full_user(event):
                 )
             )
             return replied_user, None
-        else:
-            replied_user = await event.client(
-                GetFullUserRequest(previous_message.sender_id)
-            )
-            return replied_user, None
+        replied_user = await event.client(
+            GetFullUserRequest(previous_message.sender_id)
+        )
+        return replied_user, None
     else:
         input_str = None
         try:
@@ -123,14 +122,13 @@ async def get_full_user(event):
                 user_id = probable_user_mention_entity.user_id
                 replied_user = await event.client(GetFullUserRequest(user_id))
                 return replied_user, None
-            else:
-                try:
-                    user_object = await event.client.get_entity(input_str)
-                    user_id = user_object.id
-                    replied_user = await event.client(GetFullUserRequest(user_id))
-                    return replied_user, None
-                except Exception as e:
-                    return None, e
+            try:
+                user_object = await event.client.get_entity(input_str)
+                user_id = user_object.id
+                replied_user = await event.client(GetFullUserRequest(user_id))
+                return replied_user, None
+            except Exception as e:
+                return None, e
         elif event.is_private:
             try:
                 user_id = event.chat_id
