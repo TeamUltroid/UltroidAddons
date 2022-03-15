@@ -28,5 +28,5 @@ async def wiki(e):
         mk = wikipedia.summary(srch)
         te = f"**Search Query :** {srch}\n\n**Results :** {mk}"
         await msg.edit(te)
-    except Exception as e:
-        await msg.edit(f"**ERROR** : {str(e)}")
+    except Exception as err:
+        await msg.edit(f"**ERROR** : {str(err)}")
