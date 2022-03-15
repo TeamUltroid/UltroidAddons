@@ -31,5 +31,5 @@ async def quotefancy(e):
     except ChatSendMediaForbiddenError:
         quote = get_quote("text")
         await eor(e, f"`{quote}`")
-    except Exception as e:
-        await eor(e, f"**ERROR** - {str(e)}")
+    except Exception as err:
+        await eor(err, f"**ERROR** - {str(e)}")
