@@ -148,7 +148,6 @@ async def process(msg, user, client, reply, replied=None):
         replname = "" if not replied.sender.last_name else replied.sender.last_name
         fname = "" if not replied.sender.first_name else replied.sender.first_name
         reptot = fname + " " + replname
-        font2.getsize(reptot)[0]
         if reply.sticker:
             sticker = await reply.download_media()
             stimg = Image.open(sticker)
@@ -393,11 +392,10 @@ async def emoji_fetch(emoji):
         return await transparent(
             urllib.request.urlretrieve(img, "resources/emoji.png")[0]
         )
-    else:
-        img = emojis["⛔"]
-        return await transparent(
-            urllib.request.urlretrieve(img, "resources/emoji.png")[0]
-        )
+    img = emojis["⛔"]
+    return await transparent(
+        urllib.request.urlretrieve(img, "resources/emoji.png")[0]
+    )
 
 
 async def transparent(emoji):
