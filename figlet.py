@@ -341,7 +341,6 @@ CMD_SET = {
     "skateord": "skateord",
     "skateroc": "skateroc",
     "sketchs": "sketch_s",
-    "slant": "slant",
     "slide": "slide",
     "slscript": "slscript",
     "sm": "sm______",
