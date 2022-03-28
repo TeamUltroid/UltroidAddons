@@ -44,7 +44,7 @@ async def tweet(e):
     if not text:
         return await wai.edit("`Give me Some Text !`")
     try:
-        results = await e.client.inline_query("twitterstatusbot", text)
+        results = await e.client.inline_query("@twitterstatusbot", text)
         await e.reply("New Tweet", file=results[0].document)
         await wai.delete()
     except Exception as m:
