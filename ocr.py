@@ -21,7 +21,7 @@ from telegraph import upload_file as uf
 
 from . import *
 
-TE = f"API not found, Please get it from ocr.space and set\n\ncommand `{HNDLR}setredis OCR_API your-api-key`"
+TE = f"API not found, Please get it from ocr.space and set\n\ncommand `{HNDLR}setdb OCR_API your-api-key`"
 
 
 @ultroid_cmd(pattern="ocr ?(.*)")
