@@ -18,6 +18,9 @@ import psutil , os, signal
 
 @ultroid_cmd(pattern="pkill ?(.*)")
 async def _(event):
+    is_enable_pkill = udB.get_key("P_KILL")
+    if not is_enable_pkill:
+        return await event.eor("**If You Don't Know What You Are Doing So Go Back.\nIf You Want to Enable This Feture do** `.setdb P_KILL True`")
     pname = event.pattern_match.group(1)
     if not pname:
         return await event.eor("`Give Any Proccess Name To Kill it`")
