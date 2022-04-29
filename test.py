@@ -10,7 +10,7 @@
 ✘ Commands Available -
 
 • `{i}test`
-    Test Ur Heroku Server Speed.
+    Test Your Server Speed.
 
 """
 
