@@ -10,7 +10,7 @@
 ✘ Commands Available -
 
 • `{i}test`
-    Test Ur Heroku Server Speed.
+    Test Your Server Speed.
 
 """
 
@@ -24,20 +24,17 @@ from . import *
 @ultroid_cmd(pattern="test ?(.*)")
 async def _(event):
     input_str = event.pattern_match.group(1)
-    as_text = True
-    as_document = False
+    as_document = None
     if input_str == "image":
         as_document = False
     elif input_str == "file":
         as_document = True
-    elif input_str == "text":
-        as_text = True
     xx = await event.eor("`Calculating ur Ultroid Server Speed. Please wait!`")
     start = datetime.now()
     s = speedtest.Speedtest()
     s.get_best_server()
     s.download()
-    s.upload()  # dchehe
+    s.upload()
     end = datetime.now()
     ms = (end - start).seconds
     response = s.results.dict()
@@ -50,10 +47,10 @@ async def _(event):
     reply_msg_id = event.message.id
     if event.reply_to_msg_id:
         reply_msg_id = event.reply_to_msg_id
-    try:  # heheh
+    try:
         response = s.results.share()
         speedtest_image = response
-        if as_text:
+        if as_document is None:
             await xx.edit(
                 """`Ultroid Server Speed in {} sec`
 
@@ -63,8 +60,8 @@ async def _(event):
 `Internet Service Provider: {}`
 `ISP Rating: {}`""".format(
                     ms,
-                    convert_from_bytes(download_speed),
-                    convert_from_bytes(upload_speed),
+                    humanbytes(download_speed),
+                    humanbytes(upload_speed),
                     ping_time,
                     i_s_p,
                     i_s_p_rating,
@@ -73,7 +70,7 @@ async def _(event):
         else:
             await event.client.send_file(
                 event.chat_id,
-                speedtest_image,  # heeehe
+                speedtest_image,
                 caption="**SpeedTest** completed in {} seconds".format(ms),
                 force_document=as_document,
                 reply_to=reply_msg_id,
@@ -91,19 +88,9 @@ Ping: {}
 __With the Following ERRORs__
 {}""".format(
                 ms,
-                convert_from_bytes(download_speed),
-                convert_from_bytes(upload_speed),
+                humanbytes(download_speed),
+                humanbytes(upload_speed),
                 ping_time,
                 str(exc),
             )
         )
-
-
-def convert_from_bytes(size):
-    power = 2**10
-    n = 0
-    units = {0: "", 1: "kilobytes", 2: "megabytes", 3: "gigabytes", 4: "terabytes"}
-    while size > power:
-        size /= power
-        n += 1
-    return f"{round(size, 2)} {units[n]}"
