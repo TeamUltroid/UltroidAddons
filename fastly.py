@@ -12,7 +12,7 @@ Fasly Bot Cheat.
 
 • Also Required : `OCR_API`. Add it using the command `.setdb OCR_API api_key`
 • To get the API visit 'https://ocr.space/ocrapi'
-The bot will try to auto reply first to the messages by @FastlyWriteBot, @FastlyWriteCloneBot and @FastlyWriteClone2Bot.
+The bot will try to auto reply first to the messages by @FastlyWriteBot, @FastlyWriteCloneBot, @FastlyWriteClone2Bot and @FastlyWriteClone3Bot.
 """
 
 from telegraph import upload_file
@@ -60,7 +60,7 @@ async def fastOnOff(event):
         ultroid_bot.add_handler(
             fastly_bot,
             events.NewMessage(
-                incoming=True, from_users=[1806208310, 1983714367, 1877720720]
+                incoming=True, from_users=[1806208310, 1983714367, 1877720720, 5082828445]
             ),
         )
         return await xx.edit("`Auto Fastly Response Activated`")
@@ -72,6 +72,6 @@ if udB.get_key("FASTLY"):
     ultroid_bot.add_handler(
         fastly_bot,
         events.NewMessage(
-            incoming=True, from_users=[1806208310, 1983714367, 1877720720]
+            incoming=True, from_users=[1806208310, 1983714367, 1877720720, 5082828445]
         ),
     )
