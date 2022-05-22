@@ -469,8 +469,13 @@ async def figlet(event):
         All = list(CMD_SET.keys())
         Text = "**List of Figlet Fonts :**\n\n"
         while All:
-            Text += "•" + " ".join(All[:3]) + "\n"
-            All = All[3:]
+            c = 3
+            Text += "• " + " ".join(f"`{All[:3]}`)
+            while (Text.split("\n")[-1] < 32):
+                c += 1
+                Text += f"`{All[c]}`"
+            Text += "\n"
+            All = All[c:]
         await event.eor(Text)
         return
     if "|" in input_str:
