@@ -470,7 +470,7 @@ async def figlet(event):
         Text = "**List of Figlet Fonts :**\n\n"
         while All:
             c = 3
-            Nline = "• " + " ".join(f"`{All[:3]}`)
+            Nline = "• " + " ".join(f"`{All[:3]}`")
             while (len(Nline) < 32):
                 c += 1
                 Nline += f" `{All[c]}`"
