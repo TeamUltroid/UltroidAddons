@@ -462,7 +462,7 @@ CMD_SET = {
 
 @ultroid_cmd(pattern="figlet( ?(.*)|$)")
 async def figlet(event):
-    input_str = event.pattern_match.group(1)
+    input_str = event.pattern_match.group(1).strip()
     if not input_str:
         return await event.eor("`Provide some text to make figlet...`")
     if input_str == "list":
