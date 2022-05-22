@@ -22,7 +22,7 @@ from . import *
 
 @ultroid_cmd(pattern="qfancy$")
 async def quotefancy(e):
-    mes = await eor(e, "`Processing...`")
+    mes = await e.eor(get_string("com_1"))
     img = get_quote("img", download=True)
     try:
         await e.client.send_file(e.chat_id, img)

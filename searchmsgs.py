@@ -19,7 +19,7 @@
 
 @ultroid_cmd(pattern="search( -r|) ?(.*)")
 async def searcher(e):
-    eris = await eor(e, "`Working..`")
+    eris = await e.eor("`Working..`")
     args = e.pattern_match.group(2)
     limit = 5
     if not args or len(args) < 2:

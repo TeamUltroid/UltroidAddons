@@ -26,6 +26,6 @@ async def _(e):
     try:
         a = await e.client.get_messages(e.chat_id, limit=0, from_user=user)
     except Exception as er:
-        return await eor(e, str(er))
+        return await e.eor(str(er))
     user = await e.client.get_entity(user)
-    await eor(e, f"Total msgs of `{get_display_name(user)}` here = {a.total}")
+    await e.eor(f"Total msgs of `{get_display_name(user)}` here = {a.total}")

@@ -17,36 +17,22 @@
 """
 
 
-import requests
-
-from . import *
+from . import ultroid_cmd, async_searcher
 
 
-@ultroid_cmd(pattern="htg ?(.*)")
+API = {"g": "lmgtfy.com/?q={}%26iie=1", "d": "lmddgtfy.net/?q={}"}
+
+
+@ultroid_cmd(pattern="ht(g|d)( ?(.*)|$)")
 async def _(e):
-    text = e.pattern_match.group(1)
+    key = e.pattern_match.group(1)
+    text = e.pattern_match.group(2)
     if not text:
-        return await eod(e, "`Give some text`")
-    url = "https://da.gd/s?url=https://lmgtfy.com/?q={}%26iie=1".format(
-        text.replace(" ", "+")
-    )
-    response = requests.get(url).text
+        return await e.eor("`Give some text`", time=5)
+    url = "https://da.gd/s?url=https://" + API[key].format(text.replace(" ", "+"))
+    response = await async_searcher(url)
     if response:
-        await eor(e, "[{}]({})\n`Thank me Later 🙃` ".format(text, response.rstrip()))
-    else:
-        await eod(e, "`something is wrong. please try again later.`")
-
-
-@ultroid_cmd(pattern="htd ?(.*)")
-async def _(e):
-    text = e.pattern_match.group(1)
-    if not text:
-        return await eod(e, "`Give some text`")
-    url = "https://da.gd/s?url=https://lmddgtfy.net/?q={}".format(
-        text.replace(" ", "+")
-    )
-    response = requests.get(url).text
-    if response:
-        await eor(e, "[{}]({})\n`Thank me Later 🙃` ".format(text, response.rstrip()))
-    else:
-        await eod(e, "`something is wrong. please try again later.`")
+        return await e.eor(
+            "[{}]({})\n`Thank me Later 🙃` ".format(text, response.rstrip()), time=8
+        )
+    await e.eor("`something is wrong. please try again later.`")

@@ -17,22 +17,21 @@
 import os
 import random
 
-import requests
 from bs4 import BeautifulSoup as bs
 
-from . import *
+from . import LOGS, ultroid_cmd, download_file, async_searcher, get_string
 
 
 @ultroid_cmd(pattern="icon ?(.*)")
 async def www(e):
     a = e.pattern_match.group(1)
     if not a:
-        return await eor(e, "Give some Text to Get Icon from Flaticon.com")
-    tt = await eor(e, "`Processing...`")
+        return await e.eor("Give some Text to Get Icon from Flaticon.com")
+    tt = await e.eor(get_string("com_1"))
     query = a.replace(" ", "%20")
     try:
         link = f"https://www.flaticon.com/search?word={query}"
-        ge = requests.get(link).content
+        ge = await async_searcher(link)
         cl = bs(ge, "lxml", from_encoding="utf-8")
         results = cl.find_all(
             "img", src="https://media.flaticon.com/dist/min/img/loader.gif"

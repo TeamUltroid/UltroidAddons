@@ -28,11 +28,11 @@ async def encod(e):
         if gt.text:
             match = gt.text
     if not (match or e.is_reply):
-        return await eor(e, "`Give me Something to Encode..`")
+        return await e.eor("`Give me Something to Encode..`")
     byt = match.encode("ascii")
     et = base64.b64encode(byt)
     atc = et.decode("ascii")
-    await eor(e, f"**=>> Encoded Text :** `{match}`\n\n**=>> OUTPUT :**\n`{atc}`")
+    await e.eor(f"**=>> Encoded Text :** `{match}`\n\n**=>> OUTPUT :**\n`{atc}`")
 
 
 @ultroid_cmd(pattern="decode ?(.*)")
@@ -43,11 +43,11 @@ async def encod(e):
         if gt.text:
             match = gt.text
     if not (match or e.is_reply):
-        return await eor(e, "`Give me Something to Decode..`")
+        return await e.eor("`Give me Something to Decode..`")
     byt = match.encode("ascii")
     try:
         et = base64.b64decode(byt)
         atc = et.decode("ascii")
-        await eor(e, f"**=>> Decoded Text :** `{match}`\n\n**=>> OUTPUT :**\n`{atc}`")
+        await e.eor(f"**=>> Decoded Text :** `{match}`\n\n**=>> OUTPUT :**\n`{atc}`")
     except Exception as p:
-        await eor(e, "**ERROR :** " + str(p))
+        await e.eor("**ERROR :** " + str(p))

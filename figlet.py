@@ -7,7 +7,7 @@
 
 import pyfiglet
 
-from . import *
+from . import ultroid_cmd, split_list
 
 CMD_SET = {
     "slant": "slant",
@@ -463,6 +463,7 @@ DataList = sorted(list(CMD_SET.keys()))
 Split = split_list(DataList, 42)
 offset = 0
 
+
 @ultroid_cmd(pattern="figlet( ?(.*)|$)")
 async def figlet(event):
     input_str = event.pattern_match.group(1).strip()
@@ -477,7 +478,7 @@ async def figlet(event):
         while All:
             c = 3
             Nline = "••  " + " ".join([f"`{a}`" for a in All[:3]])
-            while (c < len(All) and len(Nline) < 32):
+            while c < len(All) and len(Nline) < 32:
                 c += 1
                 Nline += f" `{All[c]}`"
             Text += Nline + "\n"

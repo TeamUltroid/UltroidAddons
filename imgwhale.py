@@ -21,7 +21,7 @@ from . import *
 
 @ultroid_cmd(pattern="imgwhale")
 async def imgwhale(event):
-    msg = await event.eor("`Processing...`")
+    msg = await event.eor(get_string("com_1"))
     reply = await event.get_reply_message()
     if not reply:
         return await msg.edit("`Reply to Image...`")

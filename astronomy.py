@@ -11,16 +11,15 @@
     Get Astronomy Picture of Day by NASA
 """
 
-import requests as r
 from bs4 import BeautifulSoup as bs
 
-from . import *
+from . import ultroid_cmd, async_searcher
 
 
 @ultroid_cmd(pattern="apod$")
 async def aposj(e):
     link = "https://apod.nasa.gov/apod/"
-    C = r.get(link).content
+    C = await async_searcher(link)
     m = bs(C, "html.parser", from_encoding="utf-8")
     try:
         try:

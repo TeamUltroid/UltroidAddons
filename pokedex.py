@@ -16,11 +16,9 @@
     Send Card of Pokemon.
 """
 
-import requests
-
 from pokedex import pokedex as badhiya
 
-from . import *
+from . import ultroid_cmd, async_searcher
 
 
 @ultroid_cmd(pattern="pokemon ?(.*)")
@@ -30,12 +28,14 @@ async def pokedex(event):
         await event.eor("`Give a Pokemon Name`")
         return
     xx = await event.eor("`Booting up the pokedex.......`")
-    move = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon}")
+    move = await async_searcher(
+        f"https://pokeapi.co/api/v2/pokemon/{pokemon}", re_json=True
+    )["moves"]
     rw = f"https://some-random-api.ml/pokedex?pokemon={pokemon}"
-    w = requests.get(f"https://api.pokemontcg.io/v1/cards?name={pokemon}")
-    lol = w.json()
-    r = requests.get(rw)
-    a = r.json()
+    lol = await async_searcher(
+        f"https://api.pokemontcg.io/v1/cards?name={pokemon}", re_json=True
+    )
+    a = await async_searcher(rw, re_json=True)
     try:
         name = a["name"]
     except Exception:
@@ -46,12 +46,12 @@ async def pokedex(event):
     abilities = a["abilities"]
     height = a["height"]
     weight = a["weight"]
-    esatge = r.json()["family"]["evolutionStage"]
+    esatge = a["family"]["evolutionStage"]
     try:
         weaknesses = lol["cards"][0]["weaknesses"][0]["type"]
     except BaseException:
         weaknesses = None
-    l = r.json()["family"]["evolutionLine"]
+    l = a["family"]["evolutionLine"]
     # ambiguous variable name 'l' flake8(E741)
     if not l:
         line = "None"
@@ -59,31 +59,31 @@ async def pokedex(event):
         line = ", ".join(map(str, l))
     gen = a["generation"]
     try:
-        move1 = move.json()["moves"][0]["move"]["name"]
+        move1 = move[0]["move"]["name"]
     except IndexError:
         move1 = None
     try:
-        move2 = move.json()["moves"][1]["move"]["name"]
+        move2 = move[1]["move"]["name"]
     except IndexError:
         move2 = None
     try:
-        move3 = move.json()["moves"][2]["move"]["name"]
+        move3 = move[2]["move"]["name"]
     except IndexError:
         move3 = None
     try:
-        move4 = move.json()["moves"][3]["move"]["name"]
+        move4 = move[3]["move"]["name"]
     except IndexError:
         move4 = None
     try:
-        move5 = move.json()["moves"][4]["move"]["name"]
+        move5 = move[4]["move"]["name"]
     except IndexError:
         move5 = None
     try:
-        move6 = move.json()["moves"][5]["move"]["name"]
+        move6 = move[5]["move"]["name"]
     except IndexError:
         move6 = None
     try:
-        move7 = move.json()["moves"][6]["move"]["name"]
+        move7 = move[6]["move"]["name"]
     except IndexError:
         move7 = None
     description = a["description"]
@@ -129,8 +129,7 @@ async def pokecard(event):
         await event.eor("`Give A Pokemon name`")
         return
     rw = f"https://api.pokemontcg.io/v1/cards?name={pokename}"
-    r = requests.get(rw)
-    a = r.json()
+    a = await async_searcher(rw, re_json=True)
     try:
         o = a["cards"][0]["imageUrlHiRes"]
         await event.client.send_file(

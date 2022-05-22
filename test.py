@@ -47,7 +47,7 @@ async def _(event):
     reply_msg_id = event.message.id
     if event.reply_to_msg_id:
         reply_msg_id = event.reply_to_msg_id
-    try: 
+    try:
         response = s.results.share()
         speedtest_image = response
         if as_document is None:
@@ -70,7 +70,7 @@ async def _(event):
         else:
             await event.client.send_file(
                 event.chat_id,
-                speedtest_image,  
+                speedtest_image,
                 caption="**SpeedTest** completed in {} seconds".format(ms),
                 force_document=as_document,
                 reply_to=reply_msg_id,

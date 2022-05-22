@@ -42,7 +42,7 @@ from pyjokes import get_joke
 from telethon.errors import ChatSendMediaForbiddenError
 from phlogo import generate
 
-from . import *
+from . import ultroid_cmd, get_string
 
 
 @ultroid_cmd(pattern="joke$")
@@ -69,8 +69,7 @@ async def _(event):
     sample_url = "https://da.gd/s?url={}".format(input_str)
     response_api = requests.get(sample_url).text
     if response_api:
-        await eor(
-            event,
+        await event.eor(
             "**Shortened url**==> {}\n**Given url**==> {}.".format(
                 response_api, input_str
             ),
@@ -98,6 +97,7 @@ async def xo(ult):
     )
     await ult.delete()
 
+
 @ultroid_cmd(pattern="phlogo( (.*)|$)")
 async def make_logog(ult):
     msg = await ult.eor(get_string("com_1"))
@@ -105,15 +105,17 @@ async def make_logog(ult):
     if not match:
         return await msg.edit(f"`Provide a name to make logo...`")
     first, last = "", ""
-    if len(match.split()) > 2:
-        first, last = match[:2]
+    if len(match.split()) >= 2:
+        first, last = match.split()[:2]
     else:
         last = match
     logo = generate(first, last)
     name = f"{ult.id}.png"
     logo.save(name)
-    await ult.client.send_message(ult.chat_id, file=name, reply_to=ult.reply_to_msg_id or ult.id)
-    os,remove(name)
+    await ult.client.send_message(
+        ult.chat_id, file=name, reply_to=ult.reply_to_msg_id or ult.id
+    )
+    os.remove(name)
 
 
 @ultroid_cmd(pattern="wordi$")

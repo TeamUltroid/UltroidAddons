@@ -27,11 +27,12 @@ base_url = "https://api.ocr.space/parse/imageurl?apikey={api}&url={tgraph}"
 BotList = [1806208310]
 
 if udB.get_key("FASTLY_CLONES"):
-     for i in udB.get_key("FASTLY_CLONES").split():
-         try:
-             BotList.append(int(i))
-         except TypeError:
-             LOGS.exception(f"Invalid Value in 'FASTLY_CLONES': {i}")
+    for i in udB.get_key("FASTLY_CLONES").split():
+        try:
+            BotList.append(int(i))
+        except TypeError:
+            LOGS.exception(f"Invalid Value in 'FASTLY_CLONES': {i}")
+
 
 async def fastly_bot(event):
     if not udB.get_key("FASTLY"):
@@ -69,9 +70,7 @@ async def fastOnOff(event):
         udB.set_key("FASTLY", True)
         ultroid_bot.add_handler(
             fastly_bot,
-            events.NewMessage(
-                incoming=True, from_users=BotList
-            ),
+            events.NewMessage(incoming=True, from_users=BotList),
         )
         return await xx.edit("`Auto Fastly Response Activated`")
     udB.del_key("FASTLY")
@@ -81,7 +80,5 @@ async def fastOnOff(event):
 if udB.get_key("FASTLY"):
     ultroid_bot.add_handler(
         fastly_bot,
-        events.NewMessage(
-            incoming=True, from_users=BotList
-        ),
+        events.NewMessage(incoming=True, from_users=BotList),
     )

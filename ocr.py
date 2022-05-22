@@ -41,7 +41,8 @@ async def ocrify(ult):
     tt = uf(dl)
     li = "https://telegra.ph" + tt[0]
     gr = await async_searcher(
-        f"https://api.ocr.space/parse/imageurl?apikey={OAPI}{atr}&url={li}", re_json=True
+        f"https://api.ocr.space/parse/imageurl?apikey={OAPI}{atr}&url={li}",
+        re_json=True,
     )
     trt = gr["ParsedResults"][0]["ParsedText"]
     await msg.edit(f"**🎉 OCR PORTAL\n\nRESULTS ~ ** `{trt}`")

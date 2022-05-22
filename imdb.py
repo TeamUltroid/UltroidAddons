@@ -13,7 +13,7 @@ from . import *
 
 @ultroid_cmd(pattern="imdb ?(.*)")
 async def imdb(e):
-    m = await eor(e, "`...`")
+    m = await e.eor("`...`")
     movie_name = e.pattern_match.group(1)
     if not movie_name:
         return await eor(m, "`Provide a movie name too`")

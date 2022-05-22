@@ -79,4 +79,4 @@ async def _(event):
             await ultroid_bot.send_file(current_chat, event, caption=event.message)
         await okla.delete()
     except Exception:
-        return await eor(okla, "`Song not found.`")
+        return await okla.eor("`Song not found.`")

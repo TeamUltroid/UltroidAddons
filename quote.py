@@ -392,9 +392,7 @@ async def emoji_fetch(emoji):
             urllib.request.urlretrieve(img, "resources/emoji.png")[0]
         )
     img = emojis["⛔"]
-    return await transparent(
-        urllib.request.urlretrieve(img, "resources/emoji.png")[0]
-    )
+    return await transparent(urllib.request.urlretrieve(img, "resources/emoji.png")[0])
 
 
 async def transparent(emoji):
