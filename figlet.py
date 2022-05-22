@@ -466,15 +466,15 @@ async def figlet(event):
     if not input_str:
         return await event.eor("`Provide some text to make figlet...`")
     if input_str == "list":
-        All = list(CMD_SET.keys())
+        All = sorted(list(CMD_SET.keys()))
         Text = "**List of Figlet Fonts :**\n\n"
         while All:
             c = 3
-            Text += "• " + " ".join(f"`{All[:3]}`)
-            while (Text.split("\n")[-1] < 32):
+            Nline = "• " + " ".join(f"`{All[:3]}`)
+            while (len(Nline) < 32):
                 c += 1
-                Text += f"`{All[c]}`"
-            Text += "\n"
+                Nline += f" `{All[c]}`"
+            Text += Nline + "\n"
             All = All[c:]
         await event.eor(Text)
         return
