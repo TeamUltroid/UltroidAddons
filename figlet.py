@@ -459,6 +459,9 @@ CMD_SET = {
     "zone7": "zone7___",
 }
 
+DataList = sorted(list(CMD_SET.values()))
+Split = split_list(DataList, 25)
+offset = 0
 
 @ultroid_cmd(pattern="figlet( ?(.*)|$)")
 async def figlet(event):
@@ -466,7 +469,10 @@ async def figlet(event):
     if not input_str:
         return await event.eor("`Provide some text to make figlet...`")
     if input_str == "list":
-        All = sorted(list(CMD_SET.keys()))
+        global offset
+        if offset == len(Split):
+            offset = 0
+        All = Split[offset]
         Text = "**List of Figlet Fonts :**\n\n"
         while All:
             c = 3
@@ -477,6 +483,7 @@ async def figlet(event):
             Text += Nline + "\n"
             All = All[c:]
         await event.eor(Text)
+        offset += 1
         return
     if "|" in input_str:
         text, cmd = input_str.split("|", maxsplit=1)
