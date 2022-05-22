@@ -12,11 +12,9 @@
 
 • `{i}ocr <language code><reply to a photo>`
     text recognition service.
-
 """
 
 
-import requests as r
 from telegraph import upload_file as uf
 
 from . import *
@@ -37,14 +35,13 @@ async def ocrify(ult):
     if not (repm.media and repm.media.photo):
         return await msg.edit("`Not a Photo..`")
     dl = await repm.download_media()
+    atr = ""
     if pat:
-        atr = f"&language={pat}&"
-    else:
-        atr = "&"
+        atr = f"&language={pat}"
     tt = uf(dl)
     li = "https://telegra.ph" + tt[0]
-    gr = r.get(
-        f"https://api.ocr.space/parse/imageurl?apikey={OAPI}{atr}url={li}"
-    ).json()
+    gr = await async_searcher(
+        f"https://api.ocr.space/parse/imageurl?apikey={OAPI}{atr}&url={li}", re_json=True
+    )
     trt = gr["ParsedResults"][0]["ParsedText"]
     await msg.edit(f"**🎉 OCR PORTAL\n\nRESULTS ~ ** `{trt}`")
