@@ -460,9 +460,19 @@ CMD_SET = {
 }
 
 
-@ultroid_cmd(pattern="figlet ?(.*)")
+@ultroid_cmd(pattern="figlet( ?(.*)|$)")
 async def figlet(event):
     input_str = event.pattern_match.group(1)
+    if not input_str:
+        return await event.eor("`Provide some text to make figlet...`")
+    if input_str == "list":
+        All = list(CMD_SET.keys())
+        Text = "**List of Figlet Fonts :**\n\n"
+        while All:
+            Text += "•" + " ".join(All[:3]) + "\n"
+            All = All[3:]
+        await event.eor(Text)
+        return
     if "|" in input_str:
         text, cmd = input_str.split("|", maxsplit=1)
     elif input_str is not None:
