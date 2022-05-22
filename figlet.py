@@ -477,7 +477,7 @@ async def figlet(event):
         while All:
             c = 3
             Nline = "• " + " ".join(f"`{All[:3]}`")
-            while (len(Nline) < 32):
+            while (c < len(All) and len(Nline) < 32):
                 c += 1
                 Nline += f" `{All[c]}`"
             Text += Nline + "\n"
