@@ -460,7 +460,7 @@ CMD_SET = {
 }
 
 DataList = sorted(list(CMD_SET.values()))
-Split = split_list(DataList, 25)
+Split = split_list(DataList, 42)
 offset = 0
 
 @ultroid_cmd(pattern="figlet( ?(.*)|$)")
@@ -476,7 +476,7 @@ async def figlet(event):
         Text = "**List of Figlet Fonts :**\n\n"
         while All:
             c = 3
-            Nline = "• " + " ".join(f"`{All[:3]}`")
+            Nline = "• " + " ".join([f"`{a}`" for a in All[:3]])
             while (c < len(All) and len(Nline) < 32):
                 c += 1
                 Nline += f" `{All[c]}`"
