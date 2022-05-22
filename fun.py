@@ -17,6 +17,9 @@
 • `{i}url <long url>`
     To get a shorten link of long link.
 
+• `{i}phlogo <first_name> <last_name>`
+    Make a phub based logo.
+
 • `{i}decide`
     Decide something.
 
@@ -31,12 +34,13 @@
 
 """
 
-import random
+import random, os
 
 import requests
 from bs4 import BeautifulSoup as bs
 from pyjokes import get_joke
 from telethon.errors import ChatSendMediaForbiddenError
+from phlogo import generate
 
 from . import *
 
@@ -93,6 +97,23 @@ async def xo(ult):
         ult.chat_id, reply_to=ult.reply_to_msg_id, silent=True, hide_via=True
     )
     await ult.delete()
+
+@ultroid_cmd(pattern="phlogo( (.*)|$)")
+async def make_logog(ult):
+    msg = await ult.eor(get_string("com_1"))
+    match = ult.pattern_match.group(1).strip()
+    if not match:
+        return await msg.edit(f"`Provide a name to make logo...`")
+    first, last = "", ""
+    if len(match.split()) > 2:
+        first, last = match[:2]
+    else:
+        last = match
+    logo = generate(first, last)
+    name = f"{ult.id}.png"
+    logo.save(name)
+    await ult.client.send_message(ult.chat_id, file=name, reply_to=ult.reply_to_msg_id or ult.id)
+    os,remove(name)
 
 
 @ultroid_cmd(pattern="wordi$")

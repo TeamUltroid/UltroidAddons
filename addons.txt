@@ -4,6 +4,7 @@ fonttools
 gtts
 jikanpy
 git+https://github.com/New-dev0/AsyncLyricsExtractor.git
+phlogo
 pokedex.py
 pyfiglet
 pyjokes
