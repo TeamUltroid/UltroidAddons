@@ -17,7 +17,7 @@
 
 import base64
 
-from . import *
+from . import ultroid_cmd
 
 
 @ultroid_cmd(pattern="encode ?(.*)")
