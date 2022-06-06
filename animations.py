@@ -43,4 +43,4 @@ async def _(event):
 
 @ultroid_cmd(pattern="fp$")
 async def a(e):
-    await eor(e, "🤦‍♂")
+    await e.eor("🤦‍♂")

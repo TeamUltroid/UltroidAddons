@@ -27,7 +27,7 @@ from . import *
 
 @ultroid_cmd(pattern="sticklet (.*)")
 async def sticklet(event):
-    a = await event.eor("`Processing...`")
+    a = await event.eor(get_string("com_1"))
     R = random.randint(0, 256)
     G = random.randint(0, 256)
     B = random.randint(0, 256)

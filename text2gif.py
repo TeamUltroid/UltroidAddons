@@ -26,7 +26,7 @@ def remove_emoji(string):
 
 @ultroid_cmd(pattern="t2g ?(.*)")
 async def t2g(e):
-    eris = await eor(e, "`...`")
+    eris = await e.eor("`...`")
     input_args = e.pattern_match.group(1)
     if not input_args:
         input_args = "No Text was Given :(("

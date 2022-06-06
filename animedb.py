@@ -5,6 +5,7 @@
 Search animes and manga from anilist.co using @animedb_bot
 
 ✘ Commands Available
+
 • `{i}manga <keyword>`
     To get manga info
 """

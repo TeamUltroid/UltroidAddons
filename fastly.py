@@ -12,7 +12,9 @@ Fasly Bot Cheat.
 
 • Also Required : `OCR_API`. Add it using the command `.setdb OCR_API api_key`
 • To get the API visit 'https://ocr.space/ocrapi'
-The bot will try to auto reply first to the messages by @FastlyWriteBot, @FastlyWriteCloneBot and @FastlyWriteClone2Bot.
+The bot will try to auto reply first to the messages by @FastlyWriteBot
+
+• Add User id of fastly clone to `FASTLY_CLONES` to allow this plugin work with them.
 """
 
 from telegraph import upload_file
@@ -21,6 +23,15 @@ from . import udB, LOGS, ultroid_bot, ultroid_cmd, async_searcher
 from os import remove
 
 base_url = "https://api.ocr.space/parse/imageurl?apikey={api}&url={tgraph}"
+
+BotList = [1806208310]
+
+if udB.get_key("FASTLY_CLONES"):
+    for i in udB.get_key("FASTLY_CLONES").split():
+        try:
+            BotList.append(int(i))
+        except TypeError:
+            LOGS.exception(f"Invalid Value in 'FASTLY_CLONES': {i}")
 
 
 async def fastly_bot(event):
@@ -59,9 +70,7 @@ async def fastOnOff(event):
         udB.set_key("FASTLY", True)
         ultroid_bot.add_handler(
             fastly_bot,
-            events.NewMessage(
-                incoming=True, from_users=[1806208310, 1983714367, 1877720720]
-            ),
+            events.NewMessage(incoming=True, from_users=BotList),
         )
         return await xx.edit("`Auto Fastly Response Activated`")
     udB.del_key("FASTLY")
@@ -71,7 +80,5 @@ async def fastOnOff(event):
 if udB.get_key("FASTLY"):
     ultroid_bot.add_handler(
         fastly_bot,
-        events.NewMessage(
-            incoming=True, from_users=[1806208310, 1983714367, 1877720720]
-        ),
+        events.NewMessage(incoming=True, from_users=BotList),
     )
