@@ -23,7 +23,7 @@ import emoji
 from fontTools.ttLib import TTFont
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from telethon.tl import functions, types
-
+from telethon.errors.rpcerrorlist import UserNotParticipantError
 from . import *
 
 # Oringinal Source from Nicegrill: https://github.com/erenmetesar/NiceGrill/
@@ -91,8 +91,10 @@ async def process(msg, user, client, reply, replied=None):
             title = details.participant.rank if details.participant.rank else "Creator"
         elif isinstance(details.participant, types.ChannelParticipantAdmin):
             title = details.participant.rank if details.participant.rank else "Admin"
-    except TypeError:
+    except (TypeError, UserNotParticipantError):
         pass
+    except Exception as er:
+        LOGS.exception(er)
     titlewidth = font2.getsize(title)[0]
 
     # Get user name
