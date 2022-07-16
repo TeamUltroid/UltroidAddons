@@ -8,7 +8,7 @@
 import re
 from bs4 import BeautifulSoup as bs
 from telethon.tl.types import InputWebDocument as wb
-from . import get_string, async_searcher, in_pattern
+from . import get_string, async_searcher, in_pattern, InlinePlugin
 
 # Inspired by @FindXDaBot
 
