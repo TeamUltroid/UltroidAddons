@@ -88,7 +88,10 @@ async def xo(ult):
 async def make_logog(ult):
     msg = await ult.eor(get_string("com_1"))
     match = ult.pattern_match.group(1).strip()
-    if not match:
+    reply = await ult.get_reply_message()
+    if not match and (reply and reply.text):
+        match = reply.text
+    else:
         return await msg.edit(f"`Provide a name to make logo...`")
     first, last = "", ""
     if len(match.split()) >= 2:
@@ -102,6 +105,7 @@ async def make_logog(ult):
         ult.chat_id, file=name, reply_to=ult.reply_to_msg_id or ult.id
     )
     os.remove(name)
+    await msg.delete()
 
 
 Bot = {"gps":"openmap_bot", "wordi":"wordibot"}
