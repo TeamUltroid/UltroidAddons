@@ -13,8 +13,6 @@ Search animes and manga from anilist.co using @animedb_bot
 
 from . import *
 
-INLOCK = "`Seems like inline messages aren't allowed here`"
-
 
 @ultroid_cmd(
     pattern="manga ?(.*)",
