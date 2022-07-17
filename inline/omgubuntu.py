@@ -8,7 +8,7 @@
 
 from telethon.tl.custom import Button
 from telethon.tl.types import InputWebDocument as wb
-from . import async_searcher, in_pattern, InlinePlugin
+from .. import async_searcher, in_pattern, InlinePlugin
 from bs4 import BeautifulSoup as bs
 
 _OMG = {}
