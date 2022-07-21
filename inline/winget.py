@@ -23,7 +23,7 @@ async def search_winget(event):
     out = []
     for on in ct["Packages"]:
         data = on["Latest"]
-        name = data["name"]
+        name = data["Name"]
         homep = data.get("Homepage")
         text = f"> **{name}**\n - {data['Description']}\n\n`winget install {on['Id']}`\n\n**Version:** `{data['Versions'][0]}`\n"
         text += "**Tags:**" + " #".join(data["Tags"])
