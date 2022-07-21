@@ -25,7 +25,7 @@ async def search_winget(event):
         data = on["Latest"]
         name = data["Name"]
         homep = data.get("Homepage")
-        text = f"> **{name}**\n - {data['Description']}\n\n`winget install {on['Id']}`\n\n**Version:** `{data['Versions'][0]}`\n"
+        text = f"> **{name}**\n - {data['Description']}\n\n`winget install {on['Id']}`\n\n**Version:** `{on['Versions'][0]}`\n"
         text += "**Tags:**" + " #".join(data["Tags"])
         if homep:
           text += f"\n\n{homep}"
