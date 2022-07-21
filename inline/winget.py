@@ -8,6 +8,7 @@
 import re
 from telethon.tl.types import InputWebDocument as wb
 from . import get_string, async_searcher, in_pattern, InlinePlugin, async_searcher
+from telethon.tl.custom import Button
 
 @in_pattern("winget", owner=True)
 async def search_winget(event):
@@ -26,16 +27,16 @@ async def search_winget(event):
         name = data["Name"]
         homep = data.get("Homepage")
         text = f"> **{name}**\n - {data['Description']}\n\n`winget install {on['Id']}`\n\n**Version:** `{on['Versions'][0]}`\n"
-        text += "**Tags:**" + " #".join(data["Tags"])
+        text += "**Tags:**" + " ".join([f"#{_}" for _ in data["Tags"])
         if homep:
           text += f"\n\n{homep}"
         out.append(
             await event.builder.article(
-                title=name, description=data["Description"], url=homep, text=text
+                title=name, description=data["Description"], url=homep, text=text, buttons=Button.switch_inline("Search Again", "winget", same_peer=True)
             )
         )
     uppar = "|> Winget Results" if out else "No Results Found :("
-    await event.answer(out, switch_pm=uppar, switch_pm_param="start")
+    await event.answer(out, switch_pm=uppar, switch_pm_param="start", cache_time=3000)
 
 
 InlinePlugin.update({"Search Winget": "winget telegram"})
