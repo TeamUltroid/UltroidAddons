@@ -7,7 +7,7 @@
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 from telethon.tl.types import InputWebDocument as wb
-from telethon.tl import Button
+from telethon.tl.custom import Button
 from . import in_pattern, InlinePlugin, async_searcher
 
 _koo_ = {}
