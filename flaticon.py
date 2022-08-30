@@ -11,7 +11,6 @@
 
 • `{i}icon <query>`
     Icon search from flaticon.com and uploading as sticker.
-
 """
 
 import os
@@ -32,7 +31,7 @@ async def www(e):
     try:
         link = f"https://www.flaticon.com/search?word={query}"
         ge = await async_searcher(link)
-        cl = bs(ge, "lxml", from_encoding="utf-8")
+        cl = bs(ge, "html.parser", from_encoding="utf-8")
         results = cl.find_all(
             "img", src="https://media.flaticon.com/dist/min/img/loader.gif"
         )

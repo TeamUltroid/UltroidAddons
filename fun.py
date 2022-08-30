@@ -31,12 +31,14 @@
 """
 
 import random, os
+
+import requests
 from bs4 import BeautifulSoup as bs
 from pyjokes import get_joke
 from telethon.errors import ChatSendMediaForbiddenError
 from phlogo import generate
 
-from . import ultroid_cmd, get_string, async_searcher, HNDLR
+from . import ultroid_cmd, get_string, HNDLR, async_searcher
 
 
 @ultroid_cmd(pattern="joke$")
@@ -86,10 +88,10 @@ async def xo(ult):
 async def make_logog(ult):
     msg = await ult.eor(get_string("com_1"))
     match = ult.pattern_match.group(1).strip()
-    if ult.is_reply:
-        reply = await ult.get_reply_message()
+    reply = await ult.get_reply_message()
+    if not match and (reply and reply.text):
         match = reply.text
-    if not match:
+    else:
         return await msg.edit(f"`Provide a name to make logo...`")
     first, last = "", ""
     if len(match.split()) >= 2:

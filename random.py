@@ -25,7 +25,7 @@
 
 from bs4 import BeautifulSoup as bs
 
-from . import HNDLR, async_searcher
+from . import HNDLR, async_searcher, ultroid_cmd
 
 # These Api's are Collected From
 # ---- https://github.com/public-apis/public-apis

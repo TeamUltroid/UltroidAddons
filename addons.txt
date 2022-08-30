@@ -2,11 +2,13 @@ covid
 emoji
 fonttools
 gtts
+gingerit
 jikanpy
 git+https://github.com/New-dev0/AsyncLyricsExtractor.git
 phlogo
 pokedex.py
 pyfiglet
+pygments
 pyjokes
 quotefancy
 shazamio
