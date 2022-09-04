@@ -40,14 +40,8 @@ async def sticklet(event):
     image = Image.new("RGBA", (512, 512), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
     fontsize = 230
-    try:
-        font_file_ = await event.client.get_messages(
-            entity="@fonthub", filter=InputMessagesFilterDocument, limit=None
-        )
-        FONT_FILE = await random.choice(font_file_).download_media()
-    except BotMethodInvalidError:
-        font_file_ = glob("resources/fonts/*ttf")
-        FONT_FILE = random.choice(font_file_)
+    font_file_ = glob("resources/fonts/*ttf")
+    FONT_FILE = random.choice(font_file_)
     font = ImageFont.truetype(FONT_FILE, size=fontsize)
     for i in range(10):
         if not draw.multiline_textsize(sticktext, font=font) > (512, 512):
@@ -59,7 +53,7 @@ async def sticklet(event):
         ((512 - width) / 2, (512 - height) / 2), sticktext, font=font, fill=(R, G, B)
     )
     image_stream = io.BytesIO()
-    image_stream.name = "ult.webp"
+    image_stream.name = check_filename("ult.webp")
     image.save(image_stream, "WebP")
     image_stream.seek(0)
     await a.delete()
@@ -69,4 +63,3 @@ async def sticklet(event):
         file=image_stream,
         reply_to=event.message.reply_to_msg_id,
     )
-    os.remove(FONT_FILE)
