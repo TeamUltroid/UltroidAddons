@@ -24,7 +24,7 @@ async def search_npm(event):
         url = package["links"]["npm"]
         title = package["name"]
         keys = package ["keywords"]
-        text = f"**[{title}]({package['links']['homepage']})\n{package['description']}**\n"
+        text = f"**[{title}]({package['links'].get('homepage', '')})\n{package['description']}**\n"
         text += f"**Version:** `{package['version']}`\n"
         text += f"**Keywords:** `{','.join(keys)}`"
         res.append(await event.builder.article(
@@ -37,6 +37,6 @@ async def search_npm(event):
                 Button.switch_inline("Search again", query=event.text, same_peer=True),
             ],
         ))
-    await event.answer(res, cache_time=5000, switch_pm="NPM Search", switch_pm_param="start")
+    await event.answer(res, switch_pm="NPM Search", switch_pm_param="start")
 
 InlinePlugin.update({"Npm Search": "npm"})
