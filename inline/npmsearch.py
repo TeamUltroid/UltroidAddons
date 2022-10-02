@@ -23,7 +23,7 @@ async def search_npm(event):
         package = obj["package"]
         url = package["links"]["npm"]
         title = package["name"]
-        keys = package ["keywords"]
+        keys = package.get("keywords", [])
         text = f"**[{title}]({package['links'].get('homepage', '')})\n{package['description']}**\n"
         text += f"**Version:** `{package['version']}`\n"
         text += f"**Keywords:** `{','.join(keys)}`"
