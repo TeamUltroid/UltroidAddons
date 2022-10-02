@@ -37,6 +37,6 @@ async def search_npm(event):
                 Button.switch_inline("Search again", query=event.text, same_peer=True),
             ],
         ))
-    await ult.answer(res, cache_time=5000, switch_pm="NPM Search", switch_pm_param="start")
+    await event.answer(res, cache_time=5000, switch_pm="NPM Search", switch_pm_param="start")
 
 InlinePlugin.update({"Npm Search": "npm"})
