@@ -17,7 +17,7 @@ async def search_npm(event):
     except IndexError:
         return await event.answer([], switch_pm="Enter query to search", switch_pm_param="start"
         )
-    data = await async_searcher("https://registry.npmjs.com/-/v1/search?text={query.replace(' ','+')}&size=7", re_json=True)
+    data = await async_searcher(f"https://registry.npmjs.com/-/v1/search?text={query.replace(' ','+')}&size=7", re_json=True)
     res = []
     for obj in data["objects"]:
         package = obj["package"]
@@ -25,8 +25,8 @@ async def search_npm(event):
         title = package["name"]
         keys = package ["keywords"]
         text = f"**[{title}]({package['links']['homepage']})\n{package['description']}**\n"
-        text += "**Version:** `{package['version']}`\n"
-        text += "**Keywords:** `{','.join(keys)}`"
+        text += f"**Version:** `{package['version']}`\n"
+        text += f"**Keywords:** `{','.join(keys)}`"
         res.append(await event.builder.article(
             title=title,
             text=text,
