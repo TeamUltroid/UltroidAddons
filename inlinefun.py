@@ -39,7 +39,7 @@ from . import ultroid_cmd, get_string
 
 @ultroid_cmd(pattern="tweet ?(.*)")
 async def tweet(e):
-    wai = await e.eor()
+    wai = await e.eor(get_string("com_1"))
     text = e.pattern_match.group(1)
     if not text:
         return await wai.edit("`Give me Some Text !`")
