@@ -11,9 +11,6 @@
 • `{i}joke`
     To get joke.
 
-• `{i}url <long url>`
-    To get a shorten link of long link.
-
 • `{i}phlogo <first_name> <last_name>`
     Make a phub based logo.
 
@@ -32,7 +29,6 @@
 
 import random, os
 
-import requests
 from bs4 import BeautifulSoup as bs
 from pyjokes import get_joke
 from telethon.errors import ChatSendMediaForbiddenError
@@ -44,24 +40,6 @@ from . import ultroid_cmd, get_string, HNDLR, async_searcher
 @ultroid_cmd(pattern="joke$")
 async def _(ult):
     await ult.eor(get_joke())
-
-
-@ultroid_cmd(pattern="url ?(.*)")
-async def _(event):
-    input_str = event.pattern_match.group(1)
-    if not input_str:
-        await event.eor("`Give some url`")
-        return
-    sample_url = "https://da.gd/s?url={}".format(input_str)
-    response_api = requests.get(sample_url).text
-    if response_api:
-        await event.eor(
-            "**Shortened url**==> {}\n**Given url**==> {}.".format(
-                response_api, input_str
-            ),
-        )
-    else:
-        await event.eor("`Something went wrong. Please try again Later.`")
 
 
 @ultroid_cmd(pattern="decide$")
