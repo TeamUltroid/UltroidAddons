@@ -24,19 +24,19 @@ async def xda_dev(event):
     le = "https://www.xda-developers.com/search/?q=" + query.replace(" ", "+")
     ct = await async_searcher(le, re_content=True)
     ml = bs(ct, "html.parser", from_encoding="utf-8")
-    ml = ml.find_all("div", re.compile("layout_post_"), id=re.compile("post-"))
+    ml = ml.find_all("article", re.compile("browse-clip"))
     out = []
     for on in ml:
-        data = on.find_all("img", "xda_image")[0]
-        title = data["alt"]
-        thumb = data["src"]
-        hre = on.find_all("div", "item_content")[0].find("h4").find("a")["href"]
-        desc = on.find_all("div", "item_meta clearfix")[0].text
-        thumb = wb(thumb, 0, "image/jpeg", [])
-        text = f"[{title}]({hre})"
+        thumb = on.find_all("source")[-1].get("srcset")
+        title = on.find("h3", "bc-title")
+        href = "https://www.xda-developers.com" + title.find("a").get("href")
+        desc = on.find("p", "bc-excerpt").text
+        title = title.text
+        thumb = wb(thumb, 0, "image/jpeg", []).
+        text = f"[{title}]({href})"
         out.append(
             await event.builder.article(
-                title=title, description=desc, url=hre, thumb=thumb, text=text
+                title=title, description=desc, url=href, thumb=thumb, text=text
             )
         )
     uppar = "|| XDA Search Results ||" if out else "No Results Found :("
