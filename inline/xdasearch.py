@@ -32,7 +32,7 @@ async def xda_dev(event):
         href = "https://www.xda-developers.com" + title.find("a").get("href")
         desc = on.find("p", "bc-excerpt").text
         title = title.text
-        thumb = wb(thumb, 0, "image/jpeg", []).
+        thumb = wb(thumb, 0, "image/jpeg", [])
         text = f"[{title}]({href})"
         out.append(
             await event.builder.article(
