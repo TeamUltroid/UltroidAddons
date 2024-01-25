@@ -16,3 +16,6 @@ speechrecognition
 speedtest-cli
 textblob
 wikipedia
+openai==0.28.0
+speedtest-cli
+pillow==9.5.0

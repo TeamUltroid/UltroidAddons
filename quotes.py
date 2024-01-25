@@ -1,4 +1,3 @@
-#
 # Ultroid - UserBot
 #
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
@@ -6,7 +5,13 @@
 # <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 """
-✘ Commands Available -
+✘ Commands Available
+
+• `{i}qfancy`
+    Gets random quotes from QuoteFancy.com.
+
+• `{i}qran`
+    Gets random quotes from quotable.io.
 
 • `{i}qbot <reply>`
     Make sticker quote without QuotlyBot
@@ -16,19 +21,23 @@
 import json
 import os
 import random
+import requests
 import textwrap
 import urllib
-
 import emoji
+
+from quotefancy import get_quote
 from fontTools.ttLib import TTFont
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+
 from telethon.tl import functions, types
+from telethon.errors import ChatSendMediaForbiddenError
 from telethon.errors.rpcerrorlist import UserNotParticipantError
+
 from . import *
 
 # Oringinal Source from Nicegrill: https://github.com/erenmetesar/NiceGrill/
-# Ported to Ultroid
-
+# Updated by @TrueSaiyan
 
 COLORS = [
     "#F07975",
@@ -40,6 +49,25 @@ COLORS = [
     "#BCB3F9",
     "#E181AC",
 ]
+
+
+class QuoteRandom:
+    endpoint_url = "https://api.quotable.io"
+
+    def __init__(self):
+        pass
+
+    def get_results(self, parameter: str = "/quotes/random", check_for: bool = None):
+        api_url = self.endpoint_url
+        response = requests.get(api_url + parameter)
+        if response.status_code != 200:
+            return f"Error status {response.status_code}"
+        results = response.json()
+        if check_for:
+            for x in results:
+                return x
+        else:
+            return results
 
 
 async def process(msg, user, client, reply, replied=None):
@@ -434,8 +462,11 @@ async def replied_user(draw, tot, text, maxlength, title):
             space += textfont.getsize(letter)[0]
 
 
-@ultroid_cmd(pattern="qbot$")
+@ultroid_cmd(pattern="qbot")
 async def _(event):
+    await event.edit("Making sticker")
+    await asyncio.sleep(4)
+    await event.delete()
     reply = await event.get_reply_message()
     msg = reply.message
     repliedreply = await reply.get_reply_message()
@@ -448,3 +479,44 @@ async def _(event):
         event.chat_id, "sticker.webp", reply_to=event.reply_to_msg_id
     )
     os.remove("sticker.webp")
+
+
+@ultroid_cmd(pattern="qfancy")
+async def quotefancy(e):
+    mes = await e.eor(get_string("com_1"))
+    img = get_quote("img", download=True)
+    try:
+        await e.client.send_file(e.chat_id, img)
+        os.remove(img)
+        await mes.delete()
+    except ChatSendMediaForbiddenError:
+        quote = get_quote("text")
+        await eor(mes, f"`{quote}`")
+    except Exception as err:
+        await eor(mes, f"**ERROR** - {err}")
+
+
+@ultroid_cmd(
+    pattern="qran",
+)
+async def handle_gpt(message):
+    reply = await message.edit("Getting response")
+    
+    quote_random = QuoteRandom()
+    quote_data = quote_random.get_results()
+    
+    if isinstance(quote_data, list) and quote_data:
+        # If the result is a list, take the first item
+        quote_data = quote_data[0]
+    
+    quote = quote_data.get("content", "")
+    author = quote_data.get("author", "")
+    tags = quote_data.get("tags", [])
+    
+    tag_str = "\n~ ".join(tags)
+    reply = (
+        f"**Quote**:\n~ __{quote}__\n\n"
+        f"**Origin**:\n~ __{author}__\n"
+        f"**Tags**:\n➜ __{tag_str}__\n"
+    )
+    await message.edit(reply)

@@ -16,109 +16,115 @@
     Send Card of Pokemon.
 """
 
+import aiohttp
 from pokedex import pokedex as badhiya
-
 from . import ultroid_cmd, async_searcher
 
 
 @ultroid_cmd(pattern="pokemon ?(.*)")
 async def pokedex(event):
-    pokemon = event.pattern_match.group(1).lower()
-    if not pokemon:
-        await event.eor("`Give a Pokemon Name`")
-        return
-    xx = await event.eor("`Booting up the pokedex.......`")
-    move = await async_searcher(
-        f"https://pokeapi.co/api/v2/pokemon/{pokemon}", re_json=True
-    )["moves"]
-    rw = f"https://some-random-api.ml/pokedex?pokemon={pokemon}"
-    lol = await async_searcher(
-        f"https://api.pokemontcg.io/v1/cards?name={pokemon}", re_json=True
-    )
-    a = await async_searcher(rw, re_json=True)
+    input_param = event.pattern_match.group(1).lower()
+
+    # Check if the input is numeric or a string
+    if input_param.isdigit():
+        # If numeric, treat it as a Pokémon number
+        url = f"https://pokeapi.co/api/v2/pokemon/{input_param}"
+    else:
+        # If a string, treat it as a Pokémon name
+        url = f"https://pokeapi.co/api/v2/pokemon/{input_param.lower()}"
+
+    xx = await event.eor("`Booting up the Pokédex........`")
+
+    # Get Pokemon details
     try:
-        name = a["name"]
-    except Exception:
-        await event.eor("`Be sure To give correct Name`")
+        result = await async_searcher(url, re_json=True)
+        species_result = await async_searcher(f"https://pokeapi.co/api/v2/pokemon-species/{input_param}", re_json=True)
+    except KeyError:
+        await event.eor("`Error getting Pokémon details. Please check the input or make sure the Pokémon exists in the Pokédex.`")
         return
-    typ = a["type"]
-    species = a["species"]
-    abilities = a["abilities"]
-    height = a["height"]
-    weight = a["weight"]
-    esatge = a["family"]["evolutionStage"]
+    except aiohttp.client_exceptions.ContentTypeError:
+        await event.eor("`Pokémon not found in the Pokédex.`")
+        return
+
+    try:
+        name = result["name"]
+        types = [type_info["type"]["name"]
+                 for type_info in result.get("types", [])]
+        abilities = [ability_info["ability"]["name"]
+                     for ability_info in result.get("abilities", [])]
+        # Convert height from decimeters to meters
+        height = result.get("height", "Not available") / 10
+        # Convert weight from hectograms to kilograms
+        weight = result.get("weight", "Not available") / 10
+        stats = result.get("stats", [])
+        moves = result.get("moves", [])
+        description = species_result.get(
+            "flavor_text_entries", [])[0].get(
+            "flavor_text", "Not available")
+        sprite_url = result.get("sprites", {}).get("front_default")
+    except KeyError:
+        await event.eor("`Error getting Pokémon details. Please check the input.`")
+        return
+
+    # Additional details
+    evolution_line = "None"
+    generation = "Not available"
+
+    # Check if species_result is not None and contains necessary properties
+    if species_result and species_result.get(
+            "evolves_from_species") and "name" in species_result["evolves_from_species"]:
+        evolution_line = species_result["evolves_from_species"]["name"]
+
+    # Get generation information
+    if species_result and "generation" in species_result:
+        generation_url = species_result["generation"]["url"]
+        generation_result = await async_searcher(generation_url, re_json=True)
+        generation = generation_result.get("name", "Not available")
+
+    # Prepare moves
+    move_names = [move_info["move"]["name"]
+                  for move_info in moves[:7]]  # Get the first 7 moves
+
+    while len(move_names) < 7:
+        move_names.append("Not available")
+
+    # Prepare stats
+    stat_values = {stat["stat"]["name"]: stat["base_stat"] for stat in stats}
+
+    # Prepare abilities
+    abilities_str = ", ".join(abilities) if abilities else "Not available"
+
+    # Get weaknesses using the additional API request
+    lol = await async_searcher(f"https://api.pokemontcg.io/v1/cards?name={name}", re_json=True)
     try:
         weaknesses = lol["cards"][0]["weaknesses"][0]["type"]
-    except BaseException:
-        weaknesses = None
-    l = a["family"]["evolutionLine"]
-    # ambiguous variable name 'l' flake8(E741)
-    if not l:
-        line = "None"
-    else:
-        line = ", ".join(map(str, l))
-    gen = a["generation"]
-    try:
-        move1 = move[0]["move"]["name"]
-    except IndexError:
-        move1 = None
-    try:
-        move2 = move[1]["move"]["name"]
-    except IndexError:
-        move2 = None
-    try:
-        move3 = move[2]["move"]["name"]
-    except IndexError:
-        move3 = None
-    try:
-        move4 = move[3]["move"]["name"]
-    except IndexError:
-        move4 = None
-    try:
-        move5 = move[4]["move"]["name"]
-    except IndexError:
-        move5 = None
-    try:
-        move6 = move[5]["move"]["name"]
-    except IndexError:
-        move6 = None
-    try:
-        move7 = move[6]["move"]["name"]
-    except IndexError:
-        move7 = None
-    description = a["description"]
-    typ = ", ".join(map(str, typ))
-    Stats = a["stats"]
-    species = ", ".join(map(str, species))
-    abilities = ", ".join(map(str, abilities))
-    poli = badhiya.Pokedex()
-    pname = poli.get_pokemon_by_name(pokemon)
-    pokemon = pname[0]
-    lst = pokemon.get("sprite")
+    except (KeyError, IndexError):
+        weaknesses = "Not available"
+
     cap = f"""
-
 **NAME** : `{name}`
-**TYPE** : `{typ}`
-**SPECIES** : `{species}`
-**Evolution Line** : `{line}`
-**Evolution Stage** : `{esatge}`
-**Generation** : `{gen}`
-**ABILITIES** : `{abilities}`
-**WEAKNESSES** :`{weaknesses}`
-**HEIGHT** : `{height}`
-**WEIGHT** : `{weight}`
+**TYPE** : `{', '.join(types)}`
+**SPECIES** : `{species_result.get("name", "Not available")}`
+**Evolution Line** : `{evolution_line}`
+**Generation** : `{generation}`
+**ABILITIES** : `{abilities_str}`
+**WEAKNESSES** : `{weaknesses}`
+**WEIGHT** : `{weight}` kilograms
+**HEIGHT** : `{height}` meters
 
-    **Stats**                               **Moves**
-**Hp**      : `{Stats['hp']}`               `(1){move1}`
-**Attack**  : `{Stats['attack']}`           `(2){move2}`
-**Defense** : `{Stats['defense']}`          `(3){move3}`
-**Sp_atk**  : `{Stats['sp_atk']}`           `(4){move4}`
-**Sp_def**  : `{Stats['sp_def']}`           `(5){move5}`
-**Speed**   : `{Stats['speed']}`            `(6){move6}`
-**Total**   : `{Stats['total']}`            `(7){move7}`
+**Stats**                               **Moves**
+**Hp**      : `{stat_values.get('hp', "Not available")}`              `(1){move_names[0]}`
+**Attack**  : `{stat_values.get('attack', "Not available")}`           `(2){move_names[1]}`
+**Defense** : `{stat_values.get('defense', "Not available")}`         `(3){move_names[2]}`
+**Sp_atk**  : `{stat_values.get('special-attack', "Not available")}`           `(4){move_names[3]}`
+**Sp_def**  : `{stat_values.get('special-defense', "Not available")}`           `(5){move_names[4]}`
+**Speed**   : `{stat_values.get('speed', "Not available")}`           `(6){move_names[5]}`
+**Total**   : `{sum(stat_values.values())}`          `(7){move_names[6]}`
 **DESCRIPTION** : `{description}`
-  """
-    await event.client.send_file(event.chat_id, lst, caption=cap)
+"""
+
+    # Send file and caption
+    await event.client.send_file(event.chat_id, sprite_url, caption=cap)
     await xx.delete()
 
 
