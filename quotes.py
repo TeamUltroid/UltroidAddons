@@ -21,12 +21,12 @@
 import json
 import os
 import random
+import requests
 import textwrap
 import urllib
 import emoji
 
 from quotefancy import get_quote
-from RyuzakiLib.quote import QuoteRandom
 from fontTools.ttLib import TTFont
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
@@ -49,6 +49,25 @@ COLORS = [
     "#BCB3F9",
     "#E181AC",
 ]
+
+
+class QuoteRandom:
+    endpoint_url = "https://api.quotable.io"
+
+    def __init__(self):
+        pass
+
+    def get_results(self, parameter: str = "/quotes/random", check_for: bool = None):
+        api_url = self.endpoint_url
+        response = requests.get(api_url + parameter)
+        if response.status_code != 200:
+            return f"Error status {response.status_code}"
+        results = response.json()
+        if check_for:
+            for x in results:
+                return x
+        else:
+            return results
 
 
 async def process(msg, user, client, reply, replied=None):
