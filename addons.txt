@@ -16,3 +16,5 @@ speechrecognition
 speedtest-cli
 textblob
 wikipedia
+openai
+speedtest-cli
