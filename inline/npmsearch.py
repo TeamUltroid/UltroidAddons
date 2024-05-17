@@ -15,8 +15,9 @@ async def search_npm(event):
     try:
         query = event.text.split(maxsplit=1)[1]
     except IndexError:
-        return await event.answer([], switch_pm="Enter query to search", switch_pm_param="start"
+        await event.answer([], switch_pm="Enter query to search", switch_pm_param="start"
         )
+        return
     data = await async_searcher(f"https://registry.npmjs.com/-/v1/search?text={query.replace(' ','+')}&size=7", re_json=True)
     res = []
     for obj in data["objects"]:
