@@ -16,11 +16,12 @@ async def gh_feeds(ult):
     try:
         username = ult.text.split(maxsplit=1)[1]
     except IndexError:
-        return await ult.answer(
+        await ult.answer(
             [],
             switch_pm="Enter Github Username to see feeds...",
             switch_pm_param="start",
         )
+        return
     if not username.endswith("."):
         return await ult.answer(
             [], switch_pm="End your query with . to search...", switch_pm_param="start"
