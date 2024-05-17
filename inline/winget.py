@@ -16,9 +16,10 @@ async def search_winget(event):
     try:
         query = QUERY[1]
     except IndexError:
-        return await event.answer(
+        await event.answer(
             [], switch_pm=get_string("instu_3"), switch_pm_param="start"
         )
+        return
     le = "https://api.winget.run/v2/packages?ensureContains=true&partialMatch=true&take=20&query=" + query.replace(" ", "+")
     ct = await async_searcher(le, re_json=True)
     out = []
