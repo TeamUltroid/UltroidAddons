@@ -18,7 +18,8 @@ from bs4 import BeautifulSoup as bs
 try:
     from markdownify import markdownify as md
 except ImportError:
-    system("pip3 install -q markdownify")
+    os.system("pip3 install -q markdownify")
+    from markdownify import markdownify as md
 
 from telethon import Button
 from telethon.tl.alltlobjects import LAYER, tlobjects
