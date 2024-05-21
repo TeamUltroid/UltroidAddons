@@ -19,6 +19,7 @@ try:
     from markdownify import markdownify as md
 except ImportError:
     os.system("pip3 install -q markdownify")
+    from markdownify import markdownify as md
 
 from telethon import Button
 from telethon.tl.alltlobjects import LAYER, tlobjects
