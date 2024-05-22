@@ -18,9 +18,10 @@ async def xda_dev(event):
     try:
         query = QUERY[1]
     except IndexError:
-        return await event.answer(
+        await event.answer(
             [], switch_pm=get_string("instu_3"), switch_pm_param="start"
         )
+        return
     le = "https://www.xda-developers.com/search/" + query.replace(" ", "+")
     ct = await async_searcher(le, re_content=True)
     ml = bs(ct, "html.parser", from_encoding="utf-8")
