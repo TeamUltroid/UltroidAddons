@@ -14,8 +14,8 @@
 • `{i}revert`
     Revert to your original identity
 """
-
 import html
+import os
 
 from telethon.tl.functions.account import UpdateProfileRequest
 from telethon.tl.functions.photos import DeletePhotosRequest, UploadProfilePhotoRequest
@@ -27,12 +27,13 @@ from . import *
 
 @ultroid_cmd(pattern="clone ?(.*)", fullsudo=True)
 async def _(event):
-    eve = await event.eor("`Processing...`")
+    eve = await event.eor("Processing...")
     reply_message = await event.get_reply_message()
     whoiam = await event.client(GetFullUserRequest(ultroid_bot.uid))
     if whoiam.full_user.about:
-        mybio = str(ultroid_bot.me.id) + "01"
-        udB.set_key(f"{mybio}", whoiam.full_user.about)  # saving bio for revert
+        mybio = f"{str(ultroid_bot.me.id)}01"
+        # saving bio for revert
+        udB.set_key(f"{mybio}", whoiam.full_user.about)
     udB.set_key(f"{ultroid_bot.uid}02", whoiam.users[0].first_name)
     if whoiam.users[0].last_name:
         udB.set_key(f"{ultroid_bot.uid}03", whoiam.users[0].last_name)
@@ -57,28 +58,24 @@ async def _(event):
     await event.client(UpdateProfileRequest(about=user_bio))
     if profile_pic:
         pfile = await event.client.upload_file(profile_pic)
-        await event.client(UploadProfilePhotoRequest(pfile))
+        await event.client(UploadProfilePhotoRequest(file=pfile))
+        os.remove(profile_pic)
     await eve.delete()
     await event.client.send_message(
-        event.chat_id, f"**I am `{first_name}` from now...**", reply_to=reply_message
+        event.chat_id, f"I am {first_name} from now...", reply_to=reply_message
     )
 
 
 @ultroid_cmd(pattern="revert$")
 async def _(event):
     name = OWNER_NAME
-    ok = ""
-    mybio = str(ultroid_bot.me.id) + "01"
-    bio = "Error : Bio Lost"
-    chc = udB.get_key(mybio)
-    if chc:
-        bio = chc
+    mybio = f"{str(ultroid_bot.me.id)}01"
+    bio = chc if (chc := udB.get_key(mybio)) else "Error : Bio Lost"
     fname = udB.get_key(f"{ultroid_bot.uid}02")
     lname = udB.get_key(f"{ultroid_bot.uid}03")
     if fname:
         name = fname
-    if lname:
-        ok = lname
+    ok = lname if lname else ""
     n = 1
     client = event.client
     await client(
