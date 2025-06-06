@@ -8,7 +8,13 @@
 
 from telethon.tl.types import InputWebDocument as wb
 from telethon.tl.custom import Button
-from . import in_pattern, InlinePlugin, async_searcher
+from . import in_pattern, InlinePlugin, async_searcher, asst
+
+__doc__ = f"""
+✘ Commands Available -
+• `@{asst.username} koo <query>`
+    Searches for the query on Koo and returns the results.
+"""
 
 _koo_ = {}
 

@@ -19,7 +19,15 @@ except ImportError:
 
 from telethon.tl.types import InputWebDocument as wb
 
-from . import LOGS, callback, in_pattern, udB, async_searcher
+from . import LOGS, callback, in_pattern, udB, async_searcher, asst
+
+__doc__ = f"""
+✘ Commands Available -
+• `@{asst.username} imdb <movie_name>`
+    Searches for the movie on IMDb and returns the results.
+• `@{asst.username} imdb <movie_name> y=<year>`
+    Searches for the movie on IMDb by year and returns the results.
+"""
 
 # Define your OMDB API key
 OMDB_API_KEY = udB.get_key("OMDb_API")  #OpenMovies Database get free key from http://www.omdbapi.com/ with 1000 dailiy uses

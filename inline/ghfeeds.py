@@ -7,9 +7,15 @@
 
 
 from telethon.tl.custom import Button
-from . import in_pattern, InlinePlugin, async_searcher
+from . import in_pattern, InlinePlugin, async_searcher, asst
 from telethon.tl.types import InputWebDocument
 
+__doc__ = f"""
+✘ Commands Available -
+• `@{asst.username} gh <username>.`
+    Searches for the Github username and returns the latest feeds.
+    End your query with a dot (.) to search.
+"""
 
 @in_pattern("gh", owner=True)
 async def gh_feeds(ult):

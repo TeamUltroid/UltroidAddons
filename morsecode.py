@@ -16,7 +16,6 @@
 
 from . import async_searcher, ultroid_cmd, get_string
 
-
 @ultroid_cmd(pattern="mencode ?(.*)")
 async def mencode(event):
     msg = await event.eor(get_string("com_1"))

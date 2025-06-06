@@ -27,6 +27,12 @@ from telethon.tl.types import DocumentAttributeAudio as Audio
 from telethon.tl.types import InputWebDocument as wb
 from telethon.tl.types import MessageEntityTextUrl
 
+__doc__ = f"""
+✘ Commands Available -
+• `@{asst.username} pypi <package_name>`
+    Searches for the package on PyPI and returns the results.
+"""
+
 hash_to_url = {}
 
 

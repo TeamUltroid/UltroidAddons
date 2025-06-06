@@ -7,7 +7,13 @@
 
 import re
 from telethon.tl.types import InputWebDocument as wb
-from . import get_string, async_searcher, in_pattern, InlinePlugin, async_searcher
+from . import get_string, async_searcher, in_pattern, InlinePlugin, async_searcher, asst
+
+__doc__ = f"""
+✘ Commands Available -
+• `@{asst.username} winget <query>`
+    Searches for the query on Winget and returns the results.
+"""
 from telethon.tl.custom import Button
 
 @in_pattern("winget", owner=True)

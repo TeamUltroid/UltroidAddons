@@ -7,7 +7,13 @@
 
 from telethon.tl.types import InputWebDocument as wb
 from telethon.tl.custom import Button
-from . import in_pattern, InlinePlugin, async_searcher
+from . import in_pattern, InlinePlugin, async_searcher, asst
+
+__doc__ = f"""
+✘ Commands Available -
+• `@{asst.username} npm <package_name>`
+    Searches for the package on NPM and returns the results.
+"""
 
 
 @in_pattern("npm")
