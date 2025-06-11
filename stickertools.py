@@ -48,7 +48,6 @@ from telethon.tl.types import (
 from telethon.utils import get_input_document
 
 from . import (
-    KANGING_STR,
     LOGS,
     asst,
     async_searcher,

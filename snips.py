@@ -25,11 +25,38 @@ from . import upload_file as uf
 from telethon.utils import pack_bot_file_id
 
 from pyUltroid._misc import sudoers
-from pyUltroid.dB.snips_db import add_snip, get_snips, list_snip, rem_snip
 from pyUltroid.fns.tools import create_tl_btn, format_btn, get_msg_button
 
 from . import events, get_string, mediainfo, udB, ultroid_bot, ultroid_cmd
 from ._inline import something
+
+# Functions moved from snips_db.py
+def get_all_snips():
+    return udB.get_key("SNIP") or {}
+
+
+def add_snip(word, msg, media, button):
+    ok = get_all_snips()
+    ok.update({word: {"msg": msg, "media": media, "button": button}})
+    udB.set_key("SNIP", ok)
+
+
+def rem_snip(word):
+    ok = get_all_snips()
+    if ok.get(word):
+        ok.pop(word)
+        udB.set_key("SNIP", ok)
+
+
+def get_snips(word):
+    ok = get_all_snips()
+    if ok.get(word):
+        return ok[word]
+    return False
+
+
+def list_snip():
+    return "".join(f"👉 ${z}\n" for z in get_all_snips())
 
 
 @ultroid_cmd(pattern="addsnip( (.*)|$)")

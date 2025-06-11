@@ -15,10 +15,33 @@ import re
 from telethon.events import NewMessage as NewMsg
 
 from pyUltroid.dB import DEVLIST
-from pyUltroid.dB.antiflood_db import get_flood, get_flood_limit, rem_flood, set_flood
 from pyUltroid.fns.admins import admin_check
 
-from . import Button, Redis, asst, callback, eod, get_string, ultroid_bot, ultroid_cmd
+from . import Button, Redis, asst, callback, eod, get_string, udB, ultroid_bot, ultroid_cmd
+
+# Functions moved from antiflood_db.py
+def get_flood():
+    return udB.get_key("ANTIFLOOD") or {}
+
+
+def set_flood(chat_id, limit):
+    omk = get_flood()
+    omk.update({chat_id: limit})
+    return udB.set_key("ANTIFLOOD", omk)
+
+
+def get_flood_limit(chat_id):
+    omk = get_flood()
+    if chat_id in omk.keys():
+        return omk[chat_id]
+
+
+def rem_flood(chat_id):
+    omk = get_flood()
+    if chat_id in omk.keys():
+        del omk[chat_id]
+        return udB.set_key("ANTIFLOOD", omk)
+
 
 _check_flood = {}
 

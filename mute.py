@@ -29,10 +29,35 @@
 from telethon import events
 from telethon.utils import get_display_name
 
-from pyUltroid.dB.mute_db import is_muted, mute, unmute
 from pyUltroid.fns.admins import ban_time
 
-from . import asst, eod, get_string, inline_mention, ultroid_bot, ultroid_cmd
+from . import asst, eod, get_string, inline_mention, udB, ultroid_bot, ultroid_cmd
+
+# Functions moved from mute_db.py
+def get_muted():
+    return udB.get_key("MUTE") or {}
+
+
+def mute(chat, id):
+    ok = get_muted()
+    if ok.get(chat):
+        if id not in ok[chat]:
+            ok[chat].append(id)
+    else:
+        ok.update({chat: [id]})
+    return udB.set_key("MUTE", ok)
+
+
+def unmute(chat, id):
+    ok = get_muted()
+    if ok.get(chat) and id in ok[chat]:
+        ok[chat].remove(id)
+    return udB.set_key("MUTE", ok)
+
+
+def is_muted(chat, id):
+    ok = get_muted()
+    return bool(ok.get(chat) and id in ok[chat])
 
 
 @ultroid_bot.on(events.NewMessage(incoming=True))

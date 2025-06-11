@@ -23,9 +23,50 @@ try:
 except ImportError:
     detector = None
     LOGS.error("nsfwfilter: 'Profanitydetector' not installed!")
-from pyUltroid.dB.nsfw_db import is_nsfw, nsfw_chat, rem_nsfw
-
+    
 from . import HNDLR, async_searcher, eor, events, udB, ultroid_bot, ultroid_cmd
+
+# Functions moved from nsfw_db.py
+def get_stuff(key="NSFW"):
+    return udB.get_key(key) or {}
+
+
+def nsfw_chat(chat, action):
+    x = get_stuff()
+    x.update({chat: action})
+    return udB.set_key("NSFW", x)
+
+
+def rem_nsfw(chat):
+    x = get_stuff()
+    if x.get(chat):
+        x.pop(chat)
+        return udB.set_key("NSFW", x)
+
+
+def is_nsfw(chat):
+    x = get_stuff()
+    if x.get(chat):
+        return x[chat]
+
+
+def profan_chat(chat, action):
+    x = get_stuff("PROFANITY")
+    x.update({chat: action})
+    return udB.set_key("PROFANITY", x)
+
+
+def rem_profan(chat):
+    x = get_stuff("PROFANITY")
+    if x.get(chat):
+        x.pop(chat)
+        return udB.set_key("PROFANITY", x)
+
+
+def is_profan(chat):
+    x = get_stuff("PROFANITY")
+    if x.get(chat):
+        return x[chat]
 
 
 @ultroid_cmd(pattern="addnsfw( (.*)|$)", admins_only=True)

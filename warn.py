@@ -24,9 +24,38 @@
 
 """
 
-from pyUltroid.dB.warn_db import add_warn, reset_warn, warns
-
 from . import eor, get_string, inline_mention, udB, ultroid_cmd
+
+# Functions moved from warn_db.py
+def get_stuff():
+    return udB.get_key("WARNS") or {}
+
+
+def add_warn(chat, user, count, reason):
+    x = get_stuff()
+    try:
+        x[chat].update({user: [count, reason]})
+    except BaseException:
+        x.update({chat: {user: [count, reason]}})
+    return udB.set_key("WARNS", x)
+
+
+def warns(chat, user):
+    x = get_stuff()
+    try:
+        count, reason = x[chat][user][0], x[chat][user][1]
+        return count, reason
+    except BaseException:
+        return 0, None
+
+
+def reset_warn(chat, user):
+    x = get_stuff()
+    try:
+        x[chat].pop(user)
+        return udB.set_key("WARNS", x)
+    except BaseException:
+        return
 
 
 @ultroid_cmd(

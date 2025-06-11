@@ -35,21 +35,69 @@ import os
 from . import upload_file as uf
 from telethon.utils import pack_bot_file_id
 
-from pyUltroid.dB.greetings_db import (
-    add_goodbye,
-    add_thanks,
-    add_welcome,
-    delete_goodbye,
-    delete_welcome,
-    get_goodbye,
-    get_welcome,
-    must_thank,
-    remove_thanks,
-)
 from pyUltroid.fns.tools import create_tl_btn, format_btn, get_msg_button
 
-from . import HNDLR, eor, get_string, mediainfo, ultroid_cmd
+from . import HNDLR, eor, get_string, mediainfo, udB, ultroid_cmd
 from ._inline import something
+
+# Functions moved from greetings_db.py
+def get_stuff(key=None):
+    return udB.get_key(key) or {}
+
+
+def add_welcome(chat, msg, media, button):
+    ok = get_stuff("WELCOME")
+    ok.update({chat: {"welcome": msg, "media": media, "button": button}})
+    return udB.set_key("WELCOME", ok)
+
+
+def get_welcome(chat):
+    ok = get_stuff("WELCOME")
+    return ok.get(chat)
+
+
+def delete_welcome(chat):
+    ok = get_stuff("WELCOME")
+    if ok.get(chat):
+        ok.pop(chat)
+        return udB.set_key("WELCOME", ok)
+
+
+def add_goodbye(chat, msg, media, button):
+    ok = get_stuff("GOODBYE")
+    ok.update({chat: {"goodbye": msg, "media": media, "button": button}})
+    return udB.set_key("GOODBYE", ok)
+
+
+def get_goodbye(chat):
+    ok = get_stuff("GOODBYE")
+    return ok.get(chat)
+
+
+def delete_goodbye(chat):
+    ok = get_stuff("GOODBYE")
+    if ok.get(chat):
+        ok.pop(chat)
+        return udB.set_key("GOODBYE", ok)
+
+
+def add_thanks(chat):
+    x = get_stuff("THANK_MEMBERS")
+    x.update({chat: True})
+    return udB.set_key("THANK_MEMBERS", x)
+
+
+def remove_thanks(chat):
+    x = get_stuff("THANK_MEMBERS")
+    if x.get(chat):
+        x.pop(chat)
+        return udB.set_key("THANK_MEMBERS", x)
+
+
+def must_thank(chat):
+    x = get_stuff("THANK_MEMBERS")
+    return x.get(chat)
+
 
 Note = "\n\nNote: `{mention}`, `{group}`, `{count}`, `{name}`, `{fullname}`, `{username}`, `{userid}` can be used as formatting parameters.\n\n"
 
