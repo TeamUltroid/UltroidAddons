@@ -11,7 +11,7 @@ __doc__ = get_help("help_echo")
 
 from telethon.utils import get_display_name
 
-from . import events, udB, ultroid_bot, ultroid_cmd
+from . import events, udB, ultroid_bot, ultroid_cmd, LOGS, types
 
 # Functions moved from echo_db.py
 def get_stuff():
@@ -128,3 +128,18 @@ async def samereply(e):
                 print(er)
         if e.media:
             await e.client.send_file(e.chat_id, e.media, reply_to=e.id)
+
+
+# Add a separate handler for echo replies
+async def echo_handler(e):
+    sender = await e.get_sender()
+    if not isinstance(sender, types.User) or sender.bot:
+        return
+    if check_echo(e.chat_id, e.sender_id):
+        try:
+            await e.respond(e.message)
+        except Exception as er:
+            LOGS.exception(er)
+
+# Register the handler
+ultroid_bot.add_handler(echo_handler, events.NewMessage(incoming=True))

@@ -31,14 +31,16 @@
     Send a thank you sticker on hitting a members count of 100*x in your groups.
 """
 import os
+import asyncio
 
 from . import upload_file as uf
-from telethon.utils import pack_bot_file_id
+from telethon.utils import pack_bot_file_id, get_display_name
 
 from pyUltroid.fns.tools import create_tl_btn, format_btn, get_msg_button
+from pyUltroid.dB import stickers
+from pyUltroid.fns.helper import inline_mention
 
-from . import HNDLR, eor, get_string, mediainfo, udB, ultroid_cmd
-from ._inline import something
+from . import HNDLR, eor, get_string, mediainfo, udB, ultroid_cmd, events, ultroid_bot, something
 
 # Functions moved from greetings_db.py
 def get_stuff(key=None):
@@ -247,3 +249,106 @@ async def thank_set(event):
         event,
         f"**Done! Thank you members has been turned** `{type_.lower()}` **for this chat**!",
     )
+
+# Add handlers for welcome and goodbye messages
+async def welcome_handler(ult):
+    if not (ult.user_joined or ult.user_added):
+        return
+    if get_welcome(ult.chat_id):
+        user = await ult.get_user()
+        chat = await ult.get_chat()
+        title = chat.title or "this chat"
+        count = (
+            chat.participants_count
+            or (await ult.client.get_participants(chat, limit=0)).total
+        )
+        mention = inline_mention(user)
+        name = user.first_name
+        fullname = get_display_name(user)
+        uu = user.username
+        username = f"@{uu}" if uu else mention
+        userid = user.id
+        wel = get_welcome(ult.chat_id)
+        msgg = wel["welcome"]
+        med = wel["media"] or None
+        msg = None
+        if msgg:
+            msg = msgg.format(
+                mention=mention,
+                group=title,
+                count=count,
+                name=name,
+                fullname=fullname,
+                username=username,
+                userid=userid,
+            )
+        if wel.get("button"):
+            btn = create_tl_btn(wel["button"])
+            await something(ult, msg, med, btn)
+        elif msg:
+            send = await ult.reply(
+                msg,
+                file=med,
+            )
+            await asyncio.sleep(150)
+            await send.delete()
+        else:
+            await ult.reply(file=med)
+
+async def goodbye_handler(ult):
+    if not (ult.user_left or ult.user_kicked):
+        return
+    if get_goodbye(ult.chat_id):
+        user = await ult.get_user()
+        chat = await ult.get_chat()
+        title = chat.title or "this chat"
+        count = (
+            chat.participants_count
+            or (await ult.client.get_participants(chat, limit=0)).total
+        )
+        mention = inline_mention(user)
+        name = user.first_name
+        fullname = get_display_name(user)
+        uu = user.username
+        username = f"@{uu}" if uu else mention
+        userid = user.id
+        wel = get_goodbye(ult.chat_id)
+        msgg = wel["goodbye"]
+        med = wel["media"]
+        msg = None
+        if msgg:
+            msg = msgg.format(
+                mention=mention,
+                group=title,
+                count=count,
+                name=name,
+                fullname=fullname,
+                username=username,
+                userid=userid,
+            )
+        if wel.get("button"):
+            btn = create_tl_btn(wel["button"])
+            await something(ult, msg, med, btn)
+        elif msg:
+            send = await ult.reply(
+                msg,
+                file=med,
+            )
+            await asyncio.sleep(150)
+            await send.delete()
+        else:
+            await ult.reply(file=med)
+
+# Thank members handler
+async def thank_members_handler(ult):
+    if must_thank(ult.chat_id):
+        chat_count = (await ult.client.get_participants(ult.chat_id, limit=0)).total
+        if chat_count % 100 == 0:
+            stik_id = chat_count / 100 - 1
+            sticker = stickers[stik_id]
+            await ult.respond(file=sticker)
+
+# Register handlers
+ultroid_bot.add_handler(welcome_handler, events.ChatAction())
+ultroid_bot.add_handler(goodbye_handler, events.ChatAction())
+ultroid_bot.add_handler(thank_members_handler, events.ChatAction())

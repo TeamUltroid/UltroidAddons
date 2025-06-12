@@ -24,7 +24,7 @@ except ImportError:
     detector = None
     LOGS.error("nsfwfilter: 'Profanitydetector' not installed!")
     
-from . import HNDLR, async_searcher, eor, events, udB, ultroid_bot, ultroid_cmd
+from . import HNDLR, async_searcher, eor, events, udB, ultroid_bot, ultroid_cmd, types
 
 # Functions moved from nsfw_db.py
 def get_stuff(key="NSFW"):
@@ -186,5 +186,21 @@ async def nsfw_check(e):
                 )
 
 
+# Add a handler for profanity detection
+async def profanity_handler(e):
+    chat = await e.get_chat()
+    sender = await e.get_sender()
+    if not isinstance(sender, types.User) or sender.bot:
+        return
+    if detector and is_profan(e.chat_id) and e.text:
+        x, y = detector(e.text)
+        if y:
+            await e.delete()
+
+
+# Register both handlers
 if udB.get_key("NSFW"):
     ultroid_bot.add_handler(nsfw_check, events.NewMessage(incoming=True))
+
+if udB.get_key("PROFANITY"):
+    ultroid_bot.add_handler(profanity_handler, events.NewMessage(incoming=True))

@@ -9,10 +9,11 @@ from . import get_help
 
 __doc__ = get_help("help_chatbot")
 
+import asyncio
 
 from pyUltroid.fns.tools import get_chatbot_reply
 
-from . import LOGS, eod, get_string, inline_mention, udB, ultroid_cmd
+from . import LOGS, eod, get_string, inline_mention, udB, ultroid_cmd, ultroid_bot, events
 
 
 @ultroid_cmd(pattern="repai")
@@ -87,3 +88,18 @@ async def chat_bot_fn(event, type_):
                 del key[chat]
     udB.set_key("CHATBOT_USERS", key)
     await event.eor(f"**ChatBot:**\n{type_}ed {inline_mention(user_)}")
+
+
+
+@ultroid_bot.on(events.NewMessage(incoming=True))
+async def chatBot_replies(e):
+    sender = await e.get_sender()
+    if sender.bot:
+        return
+    key = udB.get_key("CHATBOT_USERS") or {}
+    if e.text and key.get(e.chat_id) and sender.id in key[e.chat_id]:
+        msg = await get_chatbot_reply(e.message.message)
+        if msg:
+            sleep = udB.get_key("CHATBOT_SLEEP") or 1.5
+            await asyncio.sleep(sleep)
+            await e.reply(msg)

@@ -12,7 +12,7 @@ __doc__ = get_help("help_cleanaction")
 
 from telethon.utils import get_display_name
 
-from . import get_string, udB, ultroid_cmd
+from . import get_string, udB, ultroid_cmd, events, ultroid_bot
 
 
 @ultroid_cmd(pattern="addclean$", admins_only=True)
@@ -46,3 +46,15 @@ async def _(e):
             o += f"{x} {title}\n"
         return await e.eor(o)
     await e.eor(get_string("clan_4"), time=5)
+
+# Add chat action handler for clean action
+async def clean_action(event):
+    key = udB.get_key("CLEANCHAT") or []
+    if event.chat_id in key:
+        try:
+            await event.delete()
+        except BaseException:
+            pass
+
+# Register the handler
+ultroid_bot.add_handler(clean_action, events.ChatAction())
