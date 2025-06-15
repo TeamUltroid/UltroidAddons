@@ -60,8 +60,8 @@ from . import (
     udB,
     ultroid_bot,
     ultroid_cmd,
+    something,
 )
-from ._inline import something
 
 def list_gbanned():
     return udB.get_key("GBAN") or {}

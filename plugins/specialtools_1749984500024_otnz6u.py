@@ -57,7 +57,6 @@ from . import (
     ultroid_cmd,
     uploader,
 )
-from .beautify import all_col
 
 File = []
 scraper = create_scraper()
@@ -378,6 +377,13 @@ async def quott_(event):
         else:
             match = match[0]
     if match == "random":
+        _colorspath = "resources/colorlist.txt"
+
+        if os.path.exists(_colorspath):
+            with open(_colorspath, "r") as f:
+                all_col = f.read().split()
+        else:
+            all_col = []
         match = choice(all_col)
     try:
         file = await quotly.create_quotly(

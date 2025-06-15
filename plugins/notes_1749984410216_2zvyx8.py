@@ -27,8 +27,7 @@ from telethon.utils import pack_bot_file_id
 
 from pyUltroid.fns.tools import create_tl_btn, format_btn, get_msg_button
 
-from . import events, get_string, mediainfo, udB, ultroid_bot, ultroid_cmd
-from ._inline import something
+from . import events, get_string, mediainfo, udB, ultroid_bot, ultroid_cmd, something
 
 # Functions moved from notes_db.py
 def get_stuff():

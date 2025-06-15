@@ -17,8 +17,7 @@ from telethon.utils import get_display_name
 
 from pyUltroid.fns.tools import create_tl_btn, format_btn, get_msg_button
 
-from . import events, get_string, mediainfo, udB, ultroid_bot, ultroid_cmd, upload_file
-from ._inline import something
+from . import events, get_string, mediainfo, udB, ultroid_bot, ultroid_cmd, upload_file, something
 
 # Functions moved from filter_db.py
 def get_stuff():
