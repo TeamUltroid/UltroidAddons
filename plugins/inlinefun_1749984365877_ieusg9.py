@@ -32,9 +32,7 @@
 
 from random import choice
 
-from addons_copy.waifu import deEmojify
-
-from . import ultroid_cmd, get_string
+from . import ultroid_cmd, get_string, deEmojify
 
 
 @ultroid_cmd(pattern="tweet ?(.*)")

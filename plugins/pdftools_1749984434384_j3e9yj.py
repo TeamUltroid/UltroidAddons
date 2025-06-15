@@ -25,6 +25,7 @@
 • `{i}pdsend `
     Merge & send the pdf, collected from .pdsave.
 """
+
 import glob
 import os
 import shutil
