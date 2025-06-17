@@ -8,7 +8,13 @@
 
 from telethon.tl.types import InputWebDocument as wb
 from telethon.tl.custom import Button
-from . import in_pattern, InlinePlugin, async_searcher
+from . import in_pattern, InlinePlugin, async_searcher, asst
+
+__doc__ = f"""
+✘ Commands Available -
+• `@{asst.username} koo <query>`
+    Searches for the query on Koo and returns the results.
+"""
 
 _koo_ = {}
 
@@ -20,9 +26,10 @@ async def koo_search(ult):
         match = ult.text.split(maxsplit=1)[1].lower()
         match_ = match
     except IndexError:
-        return await ult.answer(
+        await ult.answer(
             [], switch_pm="Enter Query to Search..", switch_pm_param="start"
         )
+        return
     if _koo_.get(match):
         return await ult.answer(
             _koo_[match], switch_pm="• Koo Search •", switch_pm_param="start"

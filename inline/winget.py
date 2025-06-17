@@ -7,7 +7,13 @@
 
 import re
 from telethon.tl.types import InputWebDocument as wb
-from . import get_string, async_searcher, in_pattern, InlinePlugin, async_searcher
+from . import get_string, async_searcher, in_pattern, InlinePlugin, async_searcher, asst
+
+__doc__ = f"""
+✘ Commands Available -
+• `@{asst.username} winget <query>`
+    Searches for the query on Winget and returns the results.
+"""
 from telethon.tl.custom import Button
 
 @in_pattern("winget", owner=True)
@@ -16,9 +22,10 @@ async def search_winget(event):
     try:
         query = QUERY[1]
     except IndexError:
-        return await event.answer(
+        await event.answer(
             [], switch_pm=get_string("instu_3"), switch_pm_param="start"
         )
+        return
     le = "https://api.winget.run/v2/packages?ensureContains=true&partialMatch=true&take=20&query=" + query.replace(" ", "+")
     ct = await async_searcher(le, re_json=True)
     out = []

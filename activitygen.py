@@ -19,11 +19,11 @@ from . import async_searcher, ultroid_cmd
 async def bored_cmd(event):
     msg = await event.eor("`Generating an Activity for You!`")
     content = await async_searcher(
-        "https://www.boredapi.com/api/activity", re_json=True
+        "https://bored-api.appbrewery.com/random", re_json=True
     )
     m = f"**Activity:** `{content['activity']}`"
     if content.get("link"):
-        m += f"**Read More:** {content['link']}"
+        m += f"\n**Read More:** {content['link']}"
     if content.get("participants"):
         m += f"\n**Participants Required:** `{content['participants']}`"
     if content.get("price"):

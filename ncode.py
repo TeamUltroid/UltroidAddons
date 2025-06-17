@@ -12,7 +12,7 @@
    Use - Paste the contents of file and send as pic.
 """
 
-import pygments
+import os, pygments
 from pygments.formatters import ImageFormatter
 from pygments.lexers import Python3Lexer
 from . import ultroid_cmd, check_filename
@@ -35,7 +35,7 @@ async def coder_print(event):
     pygments.highlight(
         c,
         Python3Lexer(),
-        ImageFormatter(line_numbers=True),
+        ImageFormatter(line_numbers=True, font_name="./resources/fonts/DroidSansMono.ttf"),
         check_filename("result.png"),
     )
     res = await event.client.send_message(
@@ -51,4 +51,3 @@ async def coder_print(event):
     if a:
         os.remove(a)
     os.remove("result.png")
-

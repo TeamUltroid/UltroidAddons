@@ -21,6 +21,7 @@
 """
 
 from bs4 import BeautifulSoup as bs
+import re
 
 from . import HNDLR, async_searcher, ultroid_cmd
 
@@ -35,13 +36,15 @@ API_LIST = {
 #   "funfact": "https://asli-fun-fact-api.herokuapp.com/",
     "quote": "https://api.themotivate365.com/stoic-quote",
     "quotable": "http://api.quotable.io/random",
-    "word": "https://random-words-api.vercel.app/word",
 #   "words": "https://random-word-api.herokuapp.com/word?number=10",
 #   "food": "https://foodish-api.herokuapp.com/api/",
     "car": "https://forza-api.tk/",
 }
 
-SCRAP_LIST = {"celebrity": "https://www.randomcelebritygenerator.com/"}
+SCRAP_LIST = {
+    "celebrity": "https://www.randomcelebritygenerator.com/",
+    "word": "https://randomword.com/",
+}
 
 
 @ultroid_cmd(pattern="random ?(.*)")
@@ -76,8 +79,10 @@ async def random_magic(event):
     elif match == "quotable":
         text = f'`{req["content"]}`' + "~ `{req['author']}`"
     elif match == "word":
-        req = req[0]
-        text = f"**Random Word**\n- `{req['word']}` : `{req['definition']}`"
+        req = req.decode("utf-8")
+        word = re.search(r'<div id="random_word">([^<]+)</div>', req).group(1)
+        definition = re.search(r'<div id="random_word_definition">([^<]*)</div>', req).group(1)
+        text = f"**Random Word**\n- `{word}` : `{definition}`"
     elif match == "words":
         text = "**• Random Words**\n\n"
         for word in req:

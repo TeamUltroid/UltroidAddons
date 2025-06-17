@@ -7,20 +7,27 @@
 
 
 from telethon.tl.custom import Button
-from . import in_pattern, InlinePlugin, async_searcher
+from . import in_pattern, InlinePlugin, async_searcher, asst
 from telethon.tl.types import InputWebDocument
 
+__doc__ = f"""
+✘ Commands Available -
+• `@{asst.username} gh <username>.`
+    Searches for the Github username and returns the latest feeds.
+    End your query with a dot (.) to search.
+"""
 
 @in_pattern("gh", owner=True)
 async def gh_feeds(ult):
     try:
         username = ult.text.split(maxsplit=1)[1]
     except IndexError:
-        return await ult.answer(
+        await ult.answer(
             [],
             switch_pm="Enter Github Username to see feeds...",
             switch_pm_param="start",
         )
+        return
     if not username.endswith("."):
         return await ult.answer(
             [], switch_pm="End your query with . to search...", switch_pm_param="start"

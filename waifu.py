@@ -8,6 +8,7 @@
 """
 
 import re
+import random
 
 from . import *
 
@@ -27,11 +28,9 @@ EMOJI_PATTERN = re.compile(
     "]+",
 )
 
-
 def deEmojify(inputString: str) -> str:
     """Remove emojis and other non-safe characters from string"""
     return re.sub(EMOJI_PATTERN, "", inputString)
-
 
 @ultroid_cmd(
     pattern="waifu ?(.*)",
@@ -47,15 +46,19 @@ async def waifu(animu):
             await xx.edit(get_string("sts_1"))
             return
     waifus = [32, 33, 37, 40, 41, 42, 58, 20]
-    finalcall = "#" + (str(random.choice(waifus)))
-    sticcers = await animu.client.inline_query(
-        "stickerizerbot",
-        f"{finalcall}{(deEmojify(text))}",
-    )
-    await sticcers[0].click(
-        animu.chat_id,
-        reply_to=animu.reply_to_msg_id,
-        silent=bool(animu.is_reply),
-        hide_via=True,
-    )
-    await xx.delete()
+    finalcall = "#" + str(random.choice(waifus))
+    query = f"{finalcall}{deEmojify(text)}"
+    try:
+        sticcers = await animu.client.inline_query("stickerizerbot", query)
+        if not sticcers:
+            await xx.edit("No stickers found for the given query. Please try again.")
+            return
+        await sticcers[0].click(
+            animu.chat_id,
+            reply_to=animu.reply_to_msg_id,
+            silent=bool(animu.is_reply),
+            hide_via=True,
+        )
+        await xx.delete()
+    except Exception as e:
+        await xx.edit(f"Failed to fetch sticker: {str(e)}")

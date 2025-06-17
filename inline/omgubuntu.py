@@ -8,8 +8,14 @@
 
 from telethon.tl.custom import Button
 from telethon.tl.types import InputWebDocument as wb
-from .. import async_searcher, in_pattern, InlinePlugin
+from .. import async_searcher, in_pattern, InlinePlugin, asst
 from bs4 import BeautifulSoup as bs
+
+__doc__ = f"""
+✘ Commands Available -
+• `@{asst.username} omgu <query>`
+    Searches for the query on OMG Ubuntu and returns the results.
+"""
 
 _OMG = {}
 
@@ -18,9 +24,10 @@ async def omgubuntu(ult):
     try:
         match = ult.text.split(maxsplit=1)[1].lower()
     except IndexError:
-        return await ult.answer(
+        await ult.answer(
             [], switch_pm="Enter Query to search...", switch_pm_param="start"
         )
+        return
     if _OMG.get(match):
         return await ult.answer(
             _OMG[match], switch_pm="OMG Ubuntu Search :]", switch_pm_param="start"
