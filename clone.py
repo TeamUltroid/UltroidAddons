@@ -15,6 +15,7 @@
     Revert to your original identity
 """
 import html
+import io
 import os
 
 from telethon.tl.functions.account import UpdateProfileRequest
