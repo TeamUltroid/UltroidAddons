@@ -54,7 +54,8 @@ async def spammer(e):
             return await eod(e, "`Use bigspam cmd`")
     except BaseException:
         return await eod(e, "`Use in Proper Format`")
-    await asyncio.wait([e.respond(spam_message) for i in range(counter)])
+    tasks = [asyncio.create_task(e.respond(spam_message)) for _ in range(counter)]
+    await asyncio.wait(tasks)
     await e.delete()
 
 
