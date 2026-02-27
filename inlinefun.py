@@ -79,6 +79,20 @@ async def gglax_sticker(e):
         await e.eor(str(m))
 
 
+@ultroid_cmd(pattern="doge ?(.*)")
+async def doge_sticker(e):
+    wai = await e.eor(get_string("com_1"))
+    text = e.pattern_match.group(1)
+    if not text:
+        return await wai.edit("`Give me Some Text!`")
+    try:
+        results = await e.client.inline_query("dogememerbot", text)
+        await e.reply("@dogememerbot", file=choice(results).document)
+        await wai.delete()
+    except Exception as m:
+        await e.eor(str(m))
+
+
 @ultroid_cmd(pattern="frog ?(.*)")
 async def honkasays(e):
     wai = await e.eor(get_string("com_1"))
