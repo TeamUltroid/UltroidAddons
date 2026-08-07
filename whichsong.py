@@ -30,7 +30,7 @@ async def song_recog(event):
     await reply.download_media(path_to_song)
     await xx.edit(get_string("whs_2"))
     try:
-        res = await shazam.recognize_song(path_to_song)
+        res = await shazam.recognize(path_to_song)
     except Exception as e:
         return await eor(xx, str(e), time=10)
     remove(path_to_song)
